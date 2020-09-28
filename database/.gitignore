@@ -1,0 +1,5 @@
+*.sqlite
+*.sqlite-journal
+.env
+/public/storage
+composer.lock
