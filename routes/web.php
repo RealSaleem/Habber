@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// ADD A USER
+Route::get('/',function() {
     return view('welcome');
 });
+Route::get('users/create',function(){
+   return view('users/create');
+});
+Route::get('users/edit',function(){
+    return view('users/edit');
+ });
+ Route::get('users/show',function(){
+    return view('users/show');
+ });
