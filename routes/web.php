@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ADD A USER
+
 Route::get('/',function() {
-    return view('welcome');
+   return view('welcome');
 });
-Route::get('users/create',function(){
-   return view('users/create');
-});
-Route::get('users/edit',function(){
-    return view('users/edit');
- });
- Route::get('users/show',function(){
-    return view('users/show');
- });
+Route::resource('users','UserController');
+// Route::get('/users','UserController@index');
+// Route::get('/users/create','UserController@create');
+// Route::post('/users','UserController@Store');
+// Route::get('users/edit{id}','UserController@edit');
+
+

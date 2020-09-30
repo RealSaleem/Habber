@@ -1,69 +1,72 @@
- @extends('layouts.app')
- @section ( 'content' )
-<div class="container-fluid">
-        @if(Session::has('message'))
-            <div class="alert alert-success text-center" role="alert">
-                <strong>User Edited! &nbsp;</strong>{{Session::get('message')}}
-            </div>
-        @endif
-        <div class="widget-box">
-            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                <h5> Edit User Info </h5>
-            </div>
-            
+@extends('layouts.app')
+@section('content')
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Edit User</h2>
         </div>
-                    <div class="control-group">
-                        <label for="p_name" class="control-label">First Name</label>
-                        <div class="controls{{$errors->has('p_name')?' has-error':''}}">
-                            <input type="text" name="p_name" id="p_name" class="form-control" value="{{old('p_name')}}" title="" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_name')}}</span>
+    </div>
+    <div class="container-fluid">
+        @if(Session::has('success'))
+            <div class="alert alert-success text-center" role="alert">
+                <strong>User Edited! &nbsp;</strong>{{Session::get('success')}}
+            </div>
+        @endif 
+            
+        </div> 
+        <div class="col-md-12">
+        <div class="card">
+                <form  action="{{ action('UserController@update',[$user->id])}}" method="POST" encrypt="multipart/form-data" >   
+                {{ csrf_field() }}     
+                @method('PUT')
+                <input type="hidden" name="_method" value="PUT">     
+                <div class="card-body">
+                    <h4 class="card-title">Edit User Info</h4>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control"name="first_name"  value="{{ $user->first_name }}" placeholder="First Name Here">
+                            <span class="text-danger">{{$errors->first('first_name')}}</span>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label for="p_name" class="control-label">Last Name</label>
-                        <div class="controls{{$errors->has('p_name')?' has-error':''}}">
-                            <input type="text" name="p_name" id="p_name" class="form-control" value="{{old('p_name')}}" title="" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_name')}}</span>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}" placeholder="Last Name Here">
+                            <span class="text-danger">{{$errors->first('last_name')}}</span>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label for="p_email" class="control-label">Email</label>
-                        <div class="controls{{$errors->has('p_email')?' has-error':''}}">
-                            <input type="text" name="p_email" id="p_email" class="form-control" value="{{old('p_email')}}" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_email')}}</span>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password"  value="{{ $user->password }}"  placeholder="Password Here">
+                            <span class="text-danger">{{$errors->first('password')}}</span>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label for="p_password" class="control-label">Password</label>
-                        <div class="controls{{$errors->has('p_password')?' has-error':''}}">
-                            <input type="text"name="p_password" id="p_password" class="form-control"  value="{{old('p_password')}}"title="" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_password')}}</span>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="phone"  value="{{ $user->phone }}"  placeholder="Contact No Here">
+                            <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label for="p_contact" class="control-label">Contact No</label>
-                        <div class="controls{{$errors->has('p_contact')?' has-error':''}}">
-                            <div class="input-prepend"> <span class="add-on"></span>
-                                <input type="number" name="p_contact" id="p_contact" class="form-control" value="{{old('contact')}}" title="" required="required" style="width: 400px;"> 
-                                <span class="text-danger">{{$errors->first('p_contact')}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Profile Picture</label>
+                    <!-- <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Picture</label>
                         <div class="controls">
                             <input type="file" name="image" id="image"/>
                             <span class="text-danger">{{$errors->first('image')}}</span>
-                        </div>
+                        </div>  
+                        
+                    </div> -->
+
+                </div>
+                <div class="border-top">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-primary">UPDATE</button>
                     </div>
-                    <div class="control-group">
-                        <label for="" class="control-label"></label>
-                        <div class="controls">
-                            <button type="submit" class="btn btn-success">Edit User</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection
