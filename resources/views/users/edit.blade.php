@@ -16,7 +16,7 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-                <form  action="{{ action('UserController@update',[$user->id])}}" method="POST" encrypt="multipart/form-data" >   
+                <form  action="{{ action('UserController@update',[$user->id])}}" method="POST" enctype="multipart/form-data" >   
                 {{ csrf_field() }}     
                 @method('PUT')
                 <input type="hidden" name="_method" value="PUT">     
@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone"  value="{{ $user->phone }}"  placeholder="Contact No Here">
+                            <input type="text" class="form-control" name="phone"  value="{{$user->phone }}"  placeholder="Contact No Here">
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
@@ -54,11 +54,19 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Picture</label>
                         <div class="controls">
                             <input type="file" name="profile_pic" id="profile_pic"/>
-                            <span class="text-danger">{{$errors->first('image')}}</span>
+                            <span class="text-danger">{{$errors->first('profile_pic')}}</span>
+                            
+                            @if(isset($user->profile_pic))
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$user->profile_pic)}}" alt="no-image">
+                                </div>
+                            </div>
+                            @endif
                         </div>  
-                        
+                      
                     </div>
-
+                   
                 </div>
                 <div class="border-top">
                     <div class="card-body">

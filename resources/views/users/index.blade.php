@@ -31,7 +31,7 @@
             <td>{{$user->last_name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->phone}}</td>  
-             <td><img src="{{ url('storage/app/users/'.$user->profile_pic) }}" alt=""> </td>
+             <td><img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$user->profile_pic)}}" alt="no-image"> </td>
             
             <td>
                 <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -41,7 +42,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:8',
-            'phone' => 'required|numeric',  
+            'phone' => 'required|numeric|max:15',  
             'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
             
@@ -51,12 +52,12 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
-        $name = $request->profile_pic->getClientOriginalName();
-        $extension = $request->profile_pic->extension();
-        $request->profile_pic->storeAs('/public/users', $name.".".$extension);
-        $url = Storage::url('users/'.$name.".".$extension);
-            
-        $user->profile_pic = $url;
+        $user->role_id  = 1;
+        $file = $request->profile_pic;
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        $user->profile_pic = $filePath;
         $user->save();   
         return redirect('/users/create')->with('success', 'User successfully saved');
 
@@ -96,27 +97,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id) {
         $validatedData = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'password' => 'required|min:8',
-            'phone' => 'required|numeric',  
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'first_name' => 'sometimes|required',
+            'last_name' => 'sometimes|required',
+            'password' => 'sometimes|required|min:8',
+            'phone' => 'sometimes|required|numeric',  
+            'profile_pic' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-          if($request->hasFile('photo')) {
-
-            $image = $request->file('photo');
-            $fileName = time() . '.' . $image->getClientOriginalExtension();
-            
-            $img = Image::make($image->getRealPath());
-        }
-
+       
         $user = User::find($id);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
-        $user->save();
-        $user->update($request->all());
+        $user->role_id  = 1;
+        if($request->has('profile_pic')) 
+        {
+            $file = $request->profile_pic;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $user->profile_pic =  $filePath;
+        }
+        $user->save();   
         return back()->with('success', 'User updated sucessfully');
 
     }
