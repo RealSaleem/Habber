@@ -31,7 +31,7 @@
             <td>{{$user->last_name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->phone}}</td>  
-             <td><img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$user->profile_pic)}}" alt="no-image"> </td>
+             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/user/default.png') }}" alt=""> </td>
             
             <td>
                 <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
@@ -39,6 +39,12 @@
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
+                </button></a>
+                    <a href="{{url('users/'.$user->id.'/edit')}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>
+                
             </td>
         </tr>
         @endforeach
