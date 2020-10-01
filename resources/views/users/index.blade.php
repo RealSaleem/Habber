@@ -19,6 +19,7 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Contact</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                </thead>
@@ -29,7 +30,9 @@
             <td>{{$user->first_name}}</td>
             <td>{{$user->last_name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->phone}}</td>
+            <td>{{$user->phone}}</td>  
+             <td><img src="{{ url('storage/app/users/'.$user->profile_pic) }}" alt=""> </td>
+            
             <td>
                 <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
                   @csrf

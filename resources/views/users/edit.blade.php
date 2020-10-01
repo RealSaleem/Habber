@@ -50,14 +50,14 @@
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
-                    <!-- <div class="form-group row">
+                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Picture</label>
                         <div class="controls">
-                            <input type="file" name="image" id="image"/>
+                            <input type="file" name="profile_pic" id="profile_pic"/>
                             <span class="text-danger">{{$errors->first('image')}}</span>
                         </div>  
                         
-                    </div> -->
+                    </div>
 
                 </div>
                 <div class="border-top">
