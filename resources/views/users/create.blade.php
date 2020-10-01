@@ -69,6 +69,10 @@
                 </div>
                 <div class="border-top">
                     <div class="card-body">
+                    <a href="{{route('users.index')}}">
+                        <button type="button" class=" btn btn-danger">
+                            Cancel
+                        </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>

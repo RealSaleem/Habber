@@ -15,17 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 // ADD A USER
 
-Route::get('/',function() {
-   return view('welcome');
-});
-Route::resource('users','UserController');
-// Route::get('/users','UserController@index');
-// Route::get('/users/create','UserController@create');
-// Route::post('/users','UserController@Store');
-// Route::get('users/edit{id}','UserController@edit');
-
-
 
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
+Route::get('/',function() {
+   return view('welcome');
+})->middleware('auth');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+   Route::resource('users','UserController');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+
