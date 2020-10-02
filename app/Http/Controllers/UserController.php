@@ -136,5 +136,41 @@ class UserController extends Controller
     
         
     }
+
+    public function deactivateUser($id) {
+        $error = false;
+        try {
+            $user = User::findOrFail($id);
+            $user->status = false;
+            $user->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function activateUser($id) {
+        $error = false;
+        try {
+            $user = User::findOrFail($id);
+            $user->status = true;
+            $user->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
     
 }

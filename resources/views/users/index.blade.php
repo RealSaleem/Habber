@@ -19,6 +19,7 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Contact</th>
+                        <th>Status</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -31,6 +32,7 @@
             <td>{{$user->last_name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->phone}}</td>  
+            <td>{{$user->status == 1 ? "active" : "not active"}}</td>  
              <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/user/default.png') }}" alt=""> </td>
             
             <td>
@@ -44,6 +46,15 @@
                     <span class="fa fa-edit"></span>
                     Edit
                 </button></a>
+                @if($user->status == 1)
+                    <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">Deactivate</button></a>
+                @else
+                    <a>
+                        <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
+                            Activate
+                        </button>
+                    </a>
+                @endif
                 
             </td>
         </tr>
@@ -52,3 +63,41 @@
   </table>
 <div>
 @endsection
+@section('scripts')
+
+<script>
+function deactivateUser(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/user/deactivate') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('User Deactivated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function activateUser(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/user/activate') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('User Activated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+</script>
+@stop

@@ -23,6 +23,8 @@ Route::get('/',function() {
 })->middleware('auth');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('users','UserController');
+   Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');
+   Route::post('user/deactivate/{id}','UserController@deactivateUser')->name('deactivate_user');
 });
 
 
