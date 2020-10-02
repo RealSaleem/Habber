@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -52,7 +51,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
-        $user->role_id  = Role::ROLES['USER'];
         $file = $request->profile_pic;
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
@@ -109,7 +107,6 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
-        $user->role_id  = Role::ROLES['USER'];
         if($request->has('profile_pic')) 
         {
             $file = $request->profile_pic;

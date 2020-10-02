@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use DB;
-use App\Role;
+
 use Illuminate\Support\Facades\Hash;
 
 class RegisterRepository implements RepositoryInterface
@@ -34,9 +34,7 @@ class RegisterRepository implements RepositoryInterface
         $this->model->last_name = $data['last_name'];
         $this->model->email = $data['email'];
         $this->model->password = Hash::make($data['password']);
-        $this->model->status =  true;
-        $this->model->role_id = Role::ROLES['USER'];
-      
+        $this->model->status =  true;  
         if($this->model->save()) {
             $name = $data['first_name'] .' '.$data['last_name'];
             $email = $this->model->email;
