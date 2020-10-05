@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Repositories\RegisterRepository;
+use App\Repositories\Api\RegisterRepository;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Helpers\ApiHelper;
 use App\User;
@@ -22,7 +22,6 @@ class AuthController extends Controller
     public function __construct(User $model) {
         $this->model = new RegisterRepository($model);
     }
-
     public function login() {
         if (Auth::attempt([
             'email' => request('email'),

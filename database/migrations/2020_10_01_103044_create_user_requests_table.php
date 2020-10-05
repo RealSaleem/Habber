@@ -18,7 +18,8 @@ class CreateUserRequestsTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->string('author_name');
-            $table->string('image_path');
+            $table->enum('book_type',array('educational', 'random'))->nullable();
+            $table->string('image')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

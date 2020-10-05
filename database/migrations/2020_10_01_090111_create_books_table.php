@@ -27,7 +27,7 @@ class CreateBooksTable extends Migration
             $table->integer('business_id');
             $table->boolean('status')->default(false);
             $table->boolean('stock_status')->default(false);
-            $table->string('image_url');
+            $table->string('image');
             $table->timestamps();
         });
     }
