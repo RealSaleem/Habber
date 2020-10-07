@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function userRequests()
     {
-        return $this->hasMany('App\UserRequest');
+        return $this->hasMany(RequestForBook::class);
     }
 
     public function businesses()
