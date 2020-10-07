@@ -70,7 +70,18 @@ class BookmarkController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $bookmark = $this->model->show($id);
+            if(isset($bookmark)) {
+                return (new BookmarkResource($bookmark));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Bookmark Found!");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
     }
 
     /**

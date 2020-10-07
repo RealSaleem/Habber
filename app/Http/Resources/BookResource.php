@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\GenreResource;
 
 class BookResource extends JsonResource
 {
@@ -21,7 +22,7 @@ class BookResource extends JsonResource
             'isbn'  => $this->isbn,
             'description'   => $this->description ?? "",
             'cover_type'    => $this->cover_type ?? "",
-            'genre'  => $this->genres,
+            'genre'  => GenreResource::collection($this->genres),
             'price'    => $this->price ?? "",
             'total_pages'  => $this->total_pages,
             'quantity'  => $this->quantity,

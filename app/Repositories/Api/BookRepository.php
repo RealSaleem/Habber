@@ -1,6 +1,6 @@
 <?php
 namespace App\Repositories\Api;
-
+use App\Genre;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -51,6 +51,17 @@ class BookRepository implements RepositoryInterface {
         return $this->model->findOrFail($id);
     }
 
+    public function findByIsbn ($isbn) {
+        return $this->model->where('isbn',$isbn)->first();
+    }
+
+    public function relatedGenreBooks ($id) {
+
+        $ids = $this->model->find($id)->genres->pluck('id')->toArray();
+       $genres = Genre::with('books')->whereIn('id',$ids)->get();
+       return $genres[0]->books->except($id);
+       
+    }
     // Get the associated model
     public function getModel()
     {

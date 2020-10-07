@@ -67,7 +67,18 @@ class BookclubController extends Controller
      */
     public function show($id)
     {
-
+        try {
+            $BookClubs = $this->model->show($id);
+            if(isset($BookClubs)) {
+                return (new BookclubResource($BookClubs));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Club Found");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
     }
 
     /**

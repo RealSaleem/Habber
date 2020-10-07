@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
@@ -64,9 +65,20 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($isbn)
     {
-        //
+        try {
+            $books = $this->model->findByIsbn($isbn);
+            if(isset($books)) {
+                return (new BookResource($books));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Found!");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
     }
 
     /**
@@ -80,6 +92,21 @@ class BookController extends Controller
         //
     }
 
+    public function relatedBooks($id)
+    {
+        try {
+            $books = $this->model->relatedGenreBooks($id);
+            if(isset($books)) {
+                return (new BookCollection($books));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Found!");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
