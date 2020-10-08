@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use DB;
 use Hash;
+use Auth;
 
 class UserRepository implements RepositoryInterface
 {
@@ -75,5 +76,17 @@ class UserRepository implements RepositoryInterface
     {
         $data['password'] = Hash::make($data['password']);
         return $this->model->create($data);
+    }
+
+    public function createFavourite(array $data)
+    {
+        $data['user_id'] = Auth::user()->id;
+        return $this->model->create($data);
+    }
+
+    public function getUserFavourites() 
+    {
+        $favourites = $this->model->with(['books','bookmarks'])->where('user_id',Auth::user()->id)->get();
+        return $favourites;
     }
 }

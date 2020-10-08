@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(RequestForBook::class);
     }
 
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
     public function businesses()
     {
         return $this->hasOne('App\Business');

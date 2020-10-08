@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use DB;
+use App\Business;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterRepository implements RepositoryInterface
@@ -87,5 +88,24 @@ class RegisterRepository implements RepositoryInterface
 
     public function getAllUsers($order_by = 'id', $sort = 'asc') {
         return User::orderBy($order_by, $sort)->get();
+    }
+
+    public function createJoinRequest(array $data)
+    {
+        $this->model->first_name = $data['name'];
+        $this->model->email = $data['email'];
+        $this->model->status =  false;  
+        $this->model->phone = $data['phone'];
+        $this->model->joining_request = 1;
+        if($this->model->save()) {
+            $business = new Business();
+            $business->user_id = $this->model->id;
+            $business->name = $data['name'];
+            $business->business_type = $data['business_type'];
+            $business->product_type = $data['product_type'];
+            $business->details = $data['details'];
+            $business->save(); 
+        }
+        return $this->model;
     }
 }
