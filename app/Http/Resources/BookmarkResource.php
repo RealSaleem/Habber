@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookmarkResource extends JsonResource

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookmarkCollection;
+use App\Http\Resources\BookmarkResource;
 
 
 class BookmarkController extends Controller

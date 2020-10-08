@@ -58,8 +58,8 @@ class BookRepository implements RepositoryInterface {
     public function relatedGenreBooks ($id) {
 
         $ids = $this->model->find($id)->genres->pluck('id')->toArray();
-       $genres = Genre::with('books')->whereIn('id',$ids)->get();
-       return $genres[0]->books->except($id);
+        $genres = Genre::with('books')->whereIn('id',$ids)->get();
+        return $genres[0]->books->except($id);
        
     }
     // Get the associated model
