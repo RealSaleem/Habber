@@ -80,4 +80,20 @@ class BookRepository implements RepositoryInterface {
     {
         return $this->model->with($relations);
     }
+
+    public function bookSearch($data) {
+        return $this->model->orWhere('title', 'like', "%{$data}%")->orWhere('author_name','like',"%{$data}%")->get();
+    }
+
+    public function filterByGenre($data) {
+        if(is_array($data)) {
+            $genres = Genre::with('books')->whereIn('title',$data)->get();
+            return $genres[0]->books;
+        }
+        else {
+            $genres = Genre::with('books')->where('title',$data)->get();
+            return $genres[0]->books;
+        }
+       
+    }
 }

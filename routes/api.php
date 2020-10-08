@@ -22,10 +22,13 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('books', 'BookController@index');
         Route::get('books/{isbn}', 'BookController@show');
         Route::get('related/books/{id}', 'BookController@relatedBooks');
+        Route::any('books/search','BookController@searchBook')->name('search_book');
+        Route::any('books/filter','BookController@filterBook')->name('filter_book');
         Route::get('bookmarks', 'BookmarkController@index');
         Route::get('bookmarks/{id}', 'BookmarkController@show');
         Route::get('bookclubs', 'BookclubController@index');
         Route::get('bookclubs/{id}', 'BookclubController@index');
+       
     });
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {

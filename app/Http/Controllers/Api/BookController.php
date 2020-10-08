@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 use App\Book;
+use Validator;
 use App\Repositories\Api\BookRepository;
 use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
@@ -117,6 +118,43 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function searchBook(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'keyword' => 'required|string'
+        ]);
+        try {
+            $books = $this->model->bookSearch($request->keyword);
+            if(isset($books)) {
+                return (new BookCollection($books));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Found!");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
+    }
+
+    public function filterBook(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'genre' => 'required|array|between:1,3'
+        ]);
+        
+        try {
+            $books = $this->model->filterByGenre($request->genre);
+            if(isset($books)) {
+                return (new BookCollection($books));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Found!");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
     }
 
     /**
