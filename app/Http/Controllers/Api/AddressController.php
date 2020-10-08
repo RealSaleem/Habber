@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
-use Validator;
-use App\Repositories\Api\UserRepository;
+use App\Repositories\Api\AddressRepository;
 use App\Helpers\ApiHelper;
-use App\Favourite;
+use App\Address;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
-use App\Http\Resources\FavouriteCollection;
-use App\Http\Resources\FavouriteResource;
+use App\Http\Resources\AddressCollection;
+use App\Http\Resources\AddressResource;
 
 
-class FavouriteController extends Controller
+class AddressController extends Controller
 {
+
     protected $model;
-    
-    
-    public function __construct(Favourite $model) {
-        $this->model = new UserRepository($model);
+
+    public function __construct(Address $model) {
+        $this->model = new AddressRepository($model);
     }
     /**
      * Display a listing of the resource.
@@ -49,13 +48,7 @@ class FavouriteController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            $favourite = $this->model->createFavourite($request->all());
-            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Favourites Submitted Successfully');
-        }
-        catch(\Exception $e) {
-            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
-        }
+        //
     }
 
     /**
@@ -64,17 +57,30 @@ class FavouriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showUserAddresses($id)
     {
-        try{
-            $favourites = $this->model->getUserFavourites($id);
-            if(isset($favourites)) {
-                return (new FavouriteCollection($favourites));
+        try {
+            $address = $this->model->UserAddresses($id);
+            if(count($address) > 0 && count($address) < 2 ) {
+                return (new AddressResource($address));
+            }
+            elseif (count($address) > 1) {
+                return (new AddressResource($address));
             }
             else {
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'No favourites found!');
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'No Addresses found!');
             }
-           
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            $address = $this->model->show($id);
+            return (new AddressResource($address));
         }
         catch(\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
@@ -113,9 +119,9 @@ class FavouriteController extends Controller
     public function destroy($id)
     {
         try{
-            $favourites = $this->model->deleteFavourite($id);
-            if($favourites == true) {
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Favourites Deleted Successfully!');
+            $address = $this->model->delete($id);
+            if($address == true) {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Address Deleted Successfully!');
             }
         }
         catch(\Exception $e) {

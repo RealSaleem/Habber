@@ -32,6 +32,10 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('bookclubs/{id}', 'BookclubController@index');
         Route::post('favourites', 'FavouriteController@store');
         Route::get('favourites/{id}', 'FavouriteController@show');
+        Route::delete('favourites/{id}', 'FavouriteController@destroy');
+        Route::get('addresses/user/{id}', 'AddressController@showUserAddresses');
+        Route::delete('addresses/{id}', 'AddressController@destroy');
+        Route::get('addresses/{id}', 'AddressController@show');
        
     });
 });

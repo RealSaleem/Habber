@@ -89,4 +89,11 @@ class UserRepository implements RepositoryInterface
         $favourites = $this->model->with(['books','bookmarks'])->where('user_id',Auth::user()->id)->get();
         return $favourites;
     }
+
+    public function deleteFavourite($id) 
+    {
+        $favourites = $this->model->find($id);
+        $favourites->delete();
+        return true;
+    }
 }
