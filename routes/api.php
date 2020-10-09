@@ -36,6 +36,8 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('addresses/user/{id}', 'AddressController@showUserAddresses');
         Route::delete('addresses/{id}', 'AddressController@destroy');
         Route::get('addresses/{id}', 'AddressController@show');
+        Route::put('users/{id}', 'UserController@update');
+        Route::post('users/password', 'UserController@updatePassword');
        
     });
 });
