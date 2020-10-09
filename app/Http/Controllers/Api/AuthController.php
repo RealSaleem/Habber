@@ -35,7 +35,7 @@ class AuthController extends Controller
             if($user->status == true) {
                 $success['token'] = $user->createToken('token')->accessToken;
                 $success['id'] = $user->id;
-                $success['name'] = $user->name;
+                $success['name'] = $user->first_name.' '.$user->last_name;
                 $success['email'] = $user->email;
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'You are logged in',$success);
             }
