@@ -1,17 +1,12 @@
 <?php
-
-namespace App\Repositories;
-use App\Events\UserRegisteredEvent;
+namespace App\Repositories\Api;
+use App\Genre;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use DB;
 
-use Illuminate\Support\Facades\Hash;
 
-class RegisterRepository implements RepositoryInterface
-{
-    // model property on class instances
+class BookRepository implements RepositoryInterface {
     protected $model;
 
     // Constructor to bind model to repo
@@ -21,26 +16,15 @@ class RegisterRepository implements RepositoryInterface
         $this->model = $model;
     }
 
-    // Get all instances of model
     public function all($with)
     {
-        return $this->model->with($with)->get();
+        return $this->model->with($with)->where('status',true)->get();
     }
 
     // create a new record in the database
     public function create(array $data)
     {
-        $this->model->first_name = $data['first_name'];
-        $this->model->last_name = $data['last_name'];
-        $this->model->email = $data['email'];
-        $this->model->password = Hash::make($data['password']);
-        $this->model->status =  true;  
-        if($this->model->save()) {
-            $name = $data['first_name'] .' '.$data['last_name'];
-            $email = $this->model->email;
-            event(new UserRegisteredEvent($name, $email));
-        }
-        return $this->model;
+        return $this->model->create($data);
     }
     // Insert data in multiple rows
     public function createInArray(array $data, Model $model)
@@ -67,6 +51,17 @@ class RegisterRepository implements RepositoryInterface
         return $this->model->findOrFail($id);
     }
 
+    public function findByIsbn ($isbn) {
+        return $this->model->where('isbn',$isbn)->first();
+    }
+
+    public function relatedGenreBooks ($id) {
+
+        $ids = $this->model->find($id)->genres->pluck('id')->toArray();
+        $genres = Genre::with('books')->whereIn('id',$ids)->get();
+        return $genres[0]->books->except($id);
+       
+    }
     // Get the associated model
     public function getModel()
     {
@@ -86,7 +81,19 @@ class RegisterRepository implements RepositoryInterface
         return $this->model->with($relations);
     }
 
-    public function getAllUsers($order_by = 'id', $sort = 'asc') {
-        return User::orderBy($order_by, $sort)->get();
+    public function bookSearch($data) {
+        return $this->model->orWhere('title', 'like', "%{$data}%")->orWhere('author_name','like',"%{$data}%")->get();
+    }
+
+    public function filterByGenre($data) {
+        if(is_array($data)) {
+            $genres = Genre::with('books')->whereIn('title',$data)->get();
+            return $genres[0]->books;
+        }
+        else {
+            $genres = Genre::with('books')->where('title',$data)->get();
+            return $genres[0]->books;
+        }
+       
     }
 }

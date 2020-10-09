@@ -1,19 +1,14 @@
 <?php
-
-namespace App\Repositories;
+namespace App\Repositories\Api;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use DB;
-use Hash;
 
-class UserRepository implements RepositoryInterface
-{
-    // model property on class instances
+
+class BookmarkRepository implements RepositoryInterface {
     protected $model;
 
-    
     // Constructor to bind model to repo
     public function __construct(Model $model)
     {
@@ -21,19 +16,17 @@ class UserRepository implements RepositoryInterface
         $this->model = $model;
     }
 
-    // Get all instances of model
-    // public function all()
-    // {
-    //     return $this->model->get();
-    // }
-
-    public function getAllUsers($order_by = 'id', $sort = 'asc') {
-        return $this->model::orderBy($order_by, $sort)->get();
-    }
-    public function updateStatus($id,$data) {
-        return $this->model::where('id', $id)->updateOrCreate(['status' => 1]);
+    public function all($with)
+    {
+        return $this->model->with($with)->where('status',true)->get();
     }
 
+    // create a new record in the database
+    public function create(array $data)
+    {
+        return $this->model->create($data);
+    }
+    // Insert data in multiple rows
     public function createInArray(array $data, Model $model)
     {
         $this->model = $model;
@@ -55,7 +48,7 @@ class UserRepository implements RepositoryInterface
     // show the record with the given id
     public function show($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->find($id);
     }
 
     // Get the associated model
@@ -64,16 +57,16 @@ class UserRepository implements RepositoryInterface
         return $this->model;
     }
 
-    public function all($with)
+    // Set the associated model
+    public function setModel($model)
     {
-        return $this->model->with($with)->get();
+        $this->model = $model;
+        return $this;
     }
 
-
-    // create a new record in the database
-    public function create(array $data)
+    // Eager load database relationships
+    public function with($relations)
     {
-        $data['password'] = Hash::make($data['password']);
-        return $this->model->create($data);
+        return $this->model->with($relations);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserRequestsTable extends Migration
+class CreateFavouritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateUserRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_requests', function (Blueprint $table) {
+        Schema::create('favourites', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('title');
-            $table->string('author_name');
-            $table->enum('book_type',array('educational', 'random'))->nullable();
-            $table->string('image')->nullable();
-            $table->boolean('status')->default(0);
+            $table->integer('book_id')->nullable();
+            $table->integer('bookmark_id')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateUserRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_requests');
+        Schema::dropIfExists('favourites');
     }
 }
