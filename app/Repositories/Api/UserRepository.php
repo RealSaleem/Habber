@@ -5,8 +5,10 @@ namespace App\Repositories\Api;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use DB;
-use Hash;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class UserRepository implements RepositoryInterface
 {
@@ -41,11 +43,34 @@ class UserRepository implements RepositoryInterface
     }
 
     // update record in the database
-    public function update(array $data, Model $model)
+    public function update(array $data, $id)
     {
-        return $model->update($data);
+       
+        Storage::disk('user_profile')->deleteDirectory('users/' . $id);
+        $file = $data['profile_pic'];
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "users/".$id.'/' . $fileName . time() . "." . $file->getClientOriginalExtension();
+        $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
+        // $user->profile_pic = $filePath;
+
+        $user = $this->model->findOrFail($id);
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->profile_pic = $filePath;
+        if(isset($data['phone'])) {
+            $user->phone = $data['phone'];
+        }
+        $user->update();
+        return $user;
     }
 
+    public function passwordUpdate(array $data)
+    {
+        $user = $this->model->find(Auth::user()->id);
+        $user->password = Hash::make($data['password']);
+        $user->update();
+        return true;
+    }
     // remove record from the database
     public function delete(Model $model)
     {
@@ -75,5 +100,24 @@ class UserRepository implements RepositoryInterface
     {
         $data['password'] = Hash::make($data['password']);
         return $this->model->create($data);
+    }
+
+    public function createFavourite(array $data)
+    {
+        $data['user_id'] = Auth::user()->id;
+        return $this->model->create($data);
+    }
+
+    public function getUserFavourites() 
+    {
+        $favourites = $this->model->with(['books','bookmarks'])->where('user_id',Auth::user()->id)->get();
+        return $favourites;
+    }
+
+    public function deleteFavourite($id) 
+    {
+        $favourites = $this->model->find($id);
+        $favourites->delete();
+        return true;
     }
 }

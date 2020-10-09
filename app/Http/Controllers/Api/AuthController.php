@@ -5,11 +5,14 @@ use App\Repositories\Api\RegisterRepository;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Helpers\ApiHelper;
 use App\User;
+use App\ContactUs;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\Api\ContactUsRequest;
+use App\Http\Requests\Api\JoinUsRequest;
 use App\Http\Requests\Api\ForgetPasswordRequest;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
@@ -68,5 +71,25 @@ class AuthController extends Controller
 		return $response == Password::RESET_LINK_SENT
 			? ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Reset link sent to your email.')
 			: ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, 'Unable to send reset link');
+    }
+
+    public function ContactUs(ContactUsRequest $request) {
+        try{
+            $contactUs = ContactUs::create($request->all());
+            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Message Submitted Successfully');
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
+    }
+
+    public function createJoinUsRequest(JoinUsRequest $request) {
+        try{
+            $joinUs = $this->model->createJoinRequest($request->all());
+            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Request Submitted Successfully');
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
     }
 }

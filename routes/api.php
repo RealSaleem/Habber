@@ -17,6 +17,8 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('/register','AuthController@register');
     Route::post('/login','AuthController@login');
     Route::post('forgot-password', 'AuthController@forgotPassword');
+    Route::post('contactus', 'AuthController@ContactUs');
+    Route::post('joinus', 'AuthController@createJoinUsRequest');
     Route::group(['middleware'=>'auth:api'], function() {
         Route::post('request/book', 'UserRequestController@store');
         Route::get('books', 'BookController@index');
@@ -28,6 +30,14 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('bookmarks/{id}', 'BookmarkController@show');
         Route::get('bookclubs', 'BookclubController@index');
         Route::get('bookclubs/{id}', 'BookclubController@index');
+        Route::post('favourites', 'FavouriteController@store');
+        Route::get('favourites/{id}', 'FavouriteController@show');
+        Route::delete('favourites/{id}', 'FavouriteController@destroy');
+        Route::get('addresses/user/{id}', 'AddressController@showUserAddresses');
+        Route::delete('addresses/{id}', 'AddressController@destroy');
+        Route::get('addresses/{id}', 'AddressController@show');
+        Route::put('users/{id}', 'UserController@update');
+        Route::post('users/password', 'UserController@updatePassword');
        
     });
 });
