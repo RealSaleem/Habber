@@ -25,12 +25,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('users','UserController');
    Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');
    Route::post('user/deactivate/{id}','UserController@deactivateUser')->name('deactivate_user');
+   Route::resource('books','BooksController');
+   Route::resource('business','BusinessController');
+   Route::resource('bookmarks','BookmarksController');
+   Route::resource('bookclubs','BookClubController');     
+   Route::resource('genres','GenreController');
 });
 // ADD A BOOK
-Route::resource('books','BooksController');
-Route::resource('business','BusinessController');
-Route::resource('bookmarks','BookmarksController');
-Route::resource('bookclub','BookClubController');
-Route::resource('genre','GenreController');
+
 
 

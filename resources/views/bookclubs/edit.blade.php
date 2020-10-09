@@ -44,7 +44,7 @@
                     </div>
                 <div class="border-top">
                     <div class="card-body">
-                    <a href="{{route('bookclub.index')}}">
+                    <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>

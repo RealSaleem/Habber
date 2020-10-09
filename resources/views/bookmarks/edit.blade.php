@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> MakerName</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> Maker Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="maker_name" value="{{ $bookmark->maker_name }}">
                             <span class="text-danger">{{$errors->first('maker_name')}}</span>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark Id</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark ID</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="bookmark_id" value="{{ $bookmark->bookmark_id }}">
                             <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business Id  </label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business ID </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="business_id" value="{{ $bookmark->business_id }}">
                             <span class="text-danger">{{$errors->first('business_id')}}</span>

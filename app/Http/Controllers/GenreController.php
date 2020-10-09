@@ -15,7 +15,7 @@ class GenreController extends Controller
     {
         //
         $genre = Genre::all();
-        return view('genre.index', compact('genre'));
+        return view('genres.index', compact('genre'));
     }
 
     /**
@@ -27,7 +27,7 @@ class GenreController extends Controller
     {
         //
         $genre = Genre::all();
-        return view('genre.create', compact('genre'));
+        return view('genres.create', compact('genre'));
     }
     
 
@@ -73,7 +73,7 @@ class GenreController extends Controller
     {
         //
         $genre = Genre::findOrFail($id);
-        return view('genre.edit', compact('genre'));
+        return view('genres.edit', compact('genre'));
     }
 
     /**

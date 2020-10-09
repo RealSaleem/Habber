@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Business;
+use App\User;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
@@ -26,8 +27,8 @@ class BusinessController extends Controller
     public function create()
     {
         //
-        $business = Business::all();
-        return view('business.create',compact('business'));
+        $user = User::all();
+        return view('business.create',compact('user'));
     }
 
     /**
@@ -40,7 +41,7 @@ class BusinessController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'user_id' => 'required|numeric',
+            'user_id' => 'required',
             'name' => 'required',
             'business_type' => 'required',
             'product_type' => 'required',

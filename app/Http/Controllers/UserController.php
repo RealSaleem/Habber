@@ -41,7 +41,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:8',
-            'phone' => 'required|numeric|max:15',  
+            'phone' => 'required|numeric',  
             'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
             
@@ -57,7 +57,7 @@ class UserController extends Controller
         $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
         $user->profile_pic = $filePath;
         $user->save();   
-        return redirect('/users/create')->with('success', 'User successfully saved');
+        return back()->with('success', 'User successfully saved');
 
     }
     

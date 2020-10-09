@@ -17,42 +17,46 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/business') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{action('BusinessController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add Business Info</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">User ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">User ID</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="user_id" id="user_id"  placeholder="User ID">
+                        <select  class="form-control" name="user_id" id="user_id">
+                            @foreach($user as $u)
+                            <option value={{$u->id}} > {{$u->name}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('user_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Author Name Here">
+                            <input type="text" class="form-control" name="name" id="name" placeholder=" Name ">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Businesstype</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Business Type</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="business_type" id="business_type" placeholder="Business Here">
+                            <input type="text" class="form-control" name="business_type" id="business_type" placeholder="Business Type">
                             <span class="text-danger">{{$errors->first('business_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">ProductType</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Product Type</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="product_type" id="product_type" placeholder="Product Here">
+                            <input type="textarea" class="form-control" name="product_type" id="product_type" placeholder="Product Type">
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Details</label>
-                        <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="details" id="details" placeholder="Details Here">
+                        <div  class="col-sm-9">
+                         <textarea class="form-control" id="details" name="details" rows="4" cols="54" style="resize:none, " placeholder= "Details"  ></textarea>
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>
