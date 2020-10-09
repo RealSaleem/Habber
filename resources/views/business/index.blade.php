@@ -16,8 +16,8 @@
                     <tr>
                         <th>User ID</th>
                         <th>Name</th>
-                        <th>BusinessType</th>
-                        <th>ProductType</th>
+                        <th>Business Type</th>
+                        <th>Product Type</th>
                         <th>Details</th>
                         <th> Action</th>                  
                           </tr>

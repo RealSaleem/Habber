@@ -16,13 +16,13 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>MakerName</th>
+                        <th>Maker Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>BookmarkId</th>
+                        <th>Bookmark ID</th>
                         <th>Size</th>         
                         <th>Quantity </th>
-                        <th>BusinessId</th>
+                        <th>Business ID</th>
                         <th>Image</th>
                         <th> Action</th>  
                                      
@@ -48,7 +48,7 @@
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </td>
         </tr>
-        @endforeach            
+        @endforeach      
     </tbody>
   </table>
 <div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Bookmark;
+use App\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,8 +28,10 @@ class BookmarksController extends Controller
     public function create()
     {
         //
-        $bookmark = Bookmark::all();
-        return view('/bookmarks/create',compact('bookmark'));
+        
+            $business = Business::all();
+            return view('bookmarks.create',compact('business'));
+        
     }
 
     /**
@@ -45,10 +48,10 @@ class BookmarksController extends Controller
             'maker_name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'bookmark_id' => 'required|numeric',  
+            'bookmark_id' => 'required|numeric|unique:bookmarks',  
             'size' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'business_id' => 'required|numeric',
+            'business_id' => 'required',
             'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
             ]);
             $bookmark = new Bookmark();
@@ -61,11 +64,11 @@ class BookmarksController extends Controller
             $bookmark->quantity =$request->quantity;
             $bookmark->business_id = $request->business_id;
             $file = $request->image_url;
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "bookmarks/" . $fileName . time() . "." . $file->getClientOriginalExtension();
-        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $bookmark->image_url = $filePath; 
-        $bookmark->save();   
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "bookmarks/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $bookmark->image_url = $filePath; 
+            $bookmark->save();   
             return back()->with('success', 'Bookmark successfully saved');
        
     }
@@ -90,6 +93,7 @@ class BookmarksController extends Controller
     public function edit($id)
     {
         //
+      
         $bookmark = Bookmark::findOrFail($id);
         return view('bookmarks.edit', compact('bookmark'));
        
@@ -110,7 +114,7 @@ class BookmarksController extends Controller
             'maker_name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'bookmark_id' => 'required|numeric',  
+            'bookmark_id' => 'required|numeric|unique:bookmarks'.$id,  
             'size' => 'required|numeric',
             'quantity' => 'required|numeric',
             'business_id' => 'required|numeric',
@@ -126,13 +130,13 @@ class BookmarksController extends Controller
             $bookmark->quantity =$request->quantity;
             $bookmark->business_id = $request->business_id;
             if($request->has('image_url')) 
-        {
-            $file = $request->image_url;
-            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "bookmarks/" . $fileName . time() . "." . $file->getClientOriginalExtension();
-            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $bookmark->image_url =  $filePath;
-        }
+            {
+                $file = $request->image_url;
+                $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $filePath = "bookmarks/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+                $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+                $bookmark->image_url =  $filePath;
+            }
         $bookmark->save();   
             return back()->with('success', 'Bookmark successfully saved');
        

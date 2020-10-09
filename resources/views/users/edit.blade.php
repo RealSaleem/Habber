@@ -53,13 +53,12 @@
                      <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Picture</label>
                         <div class="controls">
-                            <input type="file" name="profile_pic" id="profile_pic"/>
+                            <input type="file" name="profile_pic" id="profile_pic">
                             <span class="text-danger">{{$errors->first('profile_pic')}}</span>
-                            
                             @if(isset($user->profile_pic))
                             <div class="form-group row">
                                 <div class="col-sm-9">
-                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$user->profile_pic)}}" alt="no-image">
+                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$user->profile_pic)}}" alt="image">
                                 </div>
                             </div>
                             @endif

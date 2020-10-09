@@ -15,17 +15,19 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Author-Name</th>
-                        <th>Cover-Type</th>
+                        <th>Author Name</th>
+                        <th>Cover Type</th>
                         <th>Description</th>
-                        <th>Book-langauge</th>
+                        <th>Book langauge</th>
                         <th>Price</th>
                         <th>Isbn</th>
-                        <th>Total-Page</th>
+                        <th>Total Page</th>
                         <th>Quantity</th>
-                        <th>Bunisess Id</th>
+                        <th>Business ID</th>
                         <th>Image Url</th>
+                        <th>Action</th>
                     </tr>
+
                </thead>
                <tbody>
                @foreach($book as $book)
@@ -42,8 +44,13 @@
             <td>{{$book->quantiy}}</td>
             <td>{{$book->business_id}}</td>
             <td>{{$book->image_url}}</td>   
-            <td>
-                
+             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image_url) ?  url('storage/'.$book->image_url) : url('storage/books/default.png') }}" alt=""> </td>
+             <td>
+             <form action="{{ action('BookController@destroy', [$book->id])}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger" type="submit">Delete</button>
+                </td>
         </tr>
         @endforeach            
     </tbody>

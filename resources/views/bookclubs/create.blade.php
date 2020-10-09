@@ -16,7 +16,7 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/bookclub') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{url('/bookclubs') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add BookClub Info</h4>
@@ -36,7 +36,7 @@
                     </div>
                 <div class="border-top">
                     <div class="card-body">
-                    <a href="{{route('bookclub.index')}}">
+                    <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>

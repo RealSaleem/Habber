@@ -16,7 +16,7 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/bookmarks') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{action('BookmarksController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add Bookmarks Info</h4>
@@ -28,68 +28,74 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> MakerName</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> Maker Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="maker_name" id="maker_name" placeholder=" Maker Name Here">
+                            <input type="text" class="form-control" name="maker_name" id="maker_name" placeholder=" Maker Name">
                             <span class="text-danger">{{$errors->first('maker_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Description</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="description" id="description" placeholder="Descriptiom Here">
+                            <input type="textarea" class="form-control" name="description" id="description" placeholder="Description">
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Price</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="price" id="price" placeholder="Price Here">
+                            <input type="text" class="form-control" name="price" id="price" placeholder="Price">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark Id</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark ID</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" id="bookmark_id" placeholder="Bookmark Id Here">
+                            <input type="text" class="form-control" name="bookmark_id" id="bookmark_id" placeholder="Bookmark Id ">
                             <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Size</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="size" id="size" placeholder="size">
+                            <input type="text" class="form-control" name="size" id="size" placeholder="Size">
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity Here">
+                            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity ">
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business Id    </label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business ID</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="business_id" id="business
-                            _id" placeholder="business Here">
+                        <select  class="form-control" name="business_id" id="business_id">
+                            @foreach($business as $b)
+                            <option value={{$b->id}} > {{$b->name}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('business_id')}}</span>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">StockStatus</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="stock_status" id="stock_status
-                            " placeholder="Stockstatus">
+                            " placeholder="Stock status">
                             <span class="text-danger">{{$errors->first('stock_status')}}</span>
                         </div>
-                        <div class="form-group row">
+                     </div>   
+                    <div class="form-group row">
                         <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image Url</label>
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url">
                             <span class="text-danger">{{$errors->first('image_url')}}</span>
                         </div>
+                    </div>
                 <div class="border-top">
                     <div class="card-body">
                     <a href="{{route('bookmarks.index')}}">

@@ -16,7 +16,7 @@ class BookClubController extends Controller
     {
         //
         $bookclub = BookClub::all();
-        return view('bookclub.index', compact('bookclub'));
+        return view('bookclubs.index', compact('bookclub'));
     }
 
     /**
@@ -28,7 +28,7 @@ class BookClubController extends Controller
     {
         //
         $bookclub = BookClub::all();
-        return view('bookclub.create',compact('bookclub'));
+        return view('bookclubs.create',compact('bookclub'));
 
     }
 
@@ -78,7 +78,7 @@ class BookClubController extends Controller
     {
         //
         $bookclub = BookClub::findOrFail($id);
-        return view('bookclub.edit', compact('bookclub'));
+        return view('bookclubs.edit', compact('bookclub'));
     }
 
     /**
@@ -106,7 +106,7 @@ class BookClubController extends Controller
             $bookclub->banner_image =  $filePath;
         }
         $bookclub->save();   
-        return back()->with('success', 'User updated sucessfully');
+        return back()->with('success', 'Bookclub updated sucessfully');
     }
 
     /**

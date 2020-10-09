@@ -36,14 +36,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Businesstype</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Business Type</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="business_type" value="{{ $business->business_type }}" placeholder="Business Here">
                             <span class="text-danger">{{$errors->first('business_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">ProductType</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Product Type</label>
                         <div class="col-sm-9">
                             <input type="textarea" class="form-control" name="product_type"value="{{ $business->product_type }}" placeholder="Product Here">
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
@@ -52,7 +52,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Details</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="details"value="{{ $business->details }}"placeholder="Details Here">
+                        <textarea class="form-control" id="details" name="details" rows="4" cols="54" style="resize:none," value="{{ $business->details }}"  ></textarea>
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>
