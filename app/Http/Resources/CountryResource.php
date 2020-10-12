@@ -3,9 +3,9 @@
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\CountryResource;
 
-class AddressResource extends JsonResource
+
+class CountryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,15 +17,11 @@ class AddressResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'address_name' => $this->address_name,
-            'address_line1' => $this->address_line1,
-            'address_line2' => $this->address_line2,
-            'country' => $this->countries->nicename,
-            'city' => $this->city,
-            'phone' => $this->phone,
-            'state' => $this->state,
-            'post_code' => $this->post_code,
-            'user_id' => $this->user_id,
+            'iso' => $this->iso,
+            'name' => $this->name,
+            'nicename' => $this->nicename,
+            'iso3' => $this->iso3,
+            'phonecode' => $this->phonecode,
         ];
     }
 
