@@ -30,12 +30,17 @@
             <td>{{$business->name}}</td>
             <td>{{$business->business_type}}</td>
             <td>{{$business->product_type}}</td>  
-            <td>{{$business->details}}</td>  
-             <td>
+            <td>{{$business->details}}</td>
+            <td>
              <form action="{{ action('BusinessController@destroy', [$business->id])}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
+                  </form>
+                    <a href="{{ action('BusinessController@edit', [$business->id])}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>
                 </td>
         </tr>
         @endforeach            
@@ -43,3 +48,14 @@
   </table>
 <div>
 @endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#zero_config').DataTable({
+        paging: true,
+       
+     });
+
+    })
+</script>
+@stop

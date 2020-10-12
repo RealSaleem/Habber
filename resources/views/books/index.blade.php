@@ -44,16 +44,30 @@
             <td>{{$book->quantiy}}</td>
             <td>{{$book->business_id}}</td>
             <td>{{$book->image_url}}</td>   
-             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image_url) ?  url('storage/'.$book->image_url) : url('storage/books/default.png') }}" alt=""> </td>
-             <td>
-             <form action="{{ action('BookController@destroy', [$book->id])}}" method="post">
+            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image_url) ?  url('storage/'.$book->image_url) : url('storage/books/default.png') }}" alt=""> </td>
+            <td>
+             <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
-                </td>
+                </form>
+                <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>
+            </td>
         </tr>
         @endforeach            
     </tbody>
   </table>
 <div>
 @endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#zero_config').DataTable({
+        paging: true,
+     });
+    })
+</script>
+@stop
