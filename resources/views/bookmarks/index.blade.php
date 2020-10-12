@@ -41,15 +41,29 @@
             <td>{{$bookmark->quantity}}</td>
             <td>{{$bookmark->business_id}}</td>  
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image_url) ?  url('storage/'.$bookmark->image_url) : url('storage/bookmarks/default.png') }}" alt=""> </td>
-             <td>
-             <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </td>
+            <td>
+                <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+                <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success">
+                <span class="fa fa-edit"></span>
+                Edit</button></a>                                 
+            </td>       
+                                 
         </tr>
         @endforeach      
     </tbody>
   </table>
 <div>
 @endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#zero_config').DataTable({
+        paging: true,
+     });
+    })
+</script>
+@stop

@@ -28,6 +28,11 @@
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
+                  </form>
+                <a href="{{ action('GenreController@edit', [$genre->id])}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>
                 </td>
         </tr>
         @endforeach            
@@ -35,3 +40,21 @@
   </table>
 <div>
 @endsection
+@section('scripts')
+
+
+<script>
+    $(document).ready(function() {
+        var table = $('#zero_config').DataTable({
+    "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+    "initComplete": function(){ 
+      $("#zero_config").show(); 
+    },
+    buttons: ['copy', 'csv', 'pdf', 'print' ]
+  });
+  table.buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+});
+       
+     
+</script>
+@stop

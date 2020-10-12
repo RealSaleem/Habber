@@ -26,11 +26,16 @@
             
             <td>{{$bookclub->name}}</td>
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->banner_image) ?  url('storage/'.$bookclub->banner_image) : url('storage/bookclub/default.png') }}" alt=""> </td>
-             <td>
-             <form action="{{ action('BookClubController@destroy', [$bookclub->id])}}" method="post">
+                <td>
+                <form action="{{ action('BookClubController@destroy', [$bookclub->id])}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+                    <a href="{{ action('BookClubController@edit', [$bookclub->id])}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>
                 </td>
         </tr>
         @endforeach            
@@ -38,3 +43,12 @@
   </table>
 <div>
 @endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#zero_config').DataTable({
+        paging: true,
+     });
+    })
+</script>
+@stop
