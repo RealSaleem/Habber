@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Resources\CountryCollection;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('/register','AuthController@register');
     Route::post('/login','AuthController@login');
+    Route::get('countries', function() {
+        return (new CountryCollection(App\Country::all()));
+    });
     Route::post('forgot-password', 'AuthController@forgotPassword');
     Route::post('contactus', 'AuthController@ContactUs');
     Route::post('joinus', 'AuthController@createJoinUsRequest');
@@ -34,6 +37,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('favourites/{id}', 'FavouriteController@show');
         Route::delete('favourites/{id}', 'FavouriteController@destroy');
         Route::get('addresses/user/{id}', 'AddressController@showUserAddresses');
+        Route::post('addresses', 'AddressController@store');
         Route::delete('addresses/{id}', 'AddressController@destroy');
         Route::get('addresses/{id}', 'AddressController@show');
         Route::put('users/{id}', 'UserController@update');
