@@ -8,6 +8,7 @@ use App\Address;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\Api\AddressRequest;
 use App\Http\Resources\AddressCollection;
 use App\Http\Resources\AddressResource;
 
@@ -46,9 +47,15 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddressRequest $request)
     {
-        //
+        try {
+            $address = $this->model->create($request->all());
+            return (new AddressResource($address));
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
     }
 
     /**
@@ -62,10 +69,10 @@ class AddressController extends Controller
         try {
             $address = $this->model->UserAddresses($id);
             if(count($address) > 0 && count($address) < 2 ) {
-                return (new AddressResource($address));
+                return (new AddressResource($address[0]));
             }
             elseif (count($address) > 1) {
-                return (new AddressResource($address));
+                return (new AddressCollection($address));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'No Addresses found!');
