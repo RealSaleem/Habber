@@ -115,6 +115,22 @@
     <script src="{{asset('assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
     <script src="{{asset('dist/js/pages/chart/chart-page-init.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{asset('assets/extra-libs/multicheck/datatable-checkbox-init.js')}}"></script>
+    <script src="{{asset('assets/extra-libs/multicheck/jquery.multicheck.js')}}"></script>
+    <script src="{{asset('assets/extra-libs/DataTables/datatables.min.js')}}"></script>
+
+    <!-- <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script> -->
     @yield('scripts');
 </body>
 

@@ -96,6 +96,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="stock_status" id="stock_status" placeholder="Stock Status">
+                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image Url</label>
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url">
