@@ -41,6 +41,7 @@ class AuthController extends Controller
             }
             else {
                 return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, 'User Not Activated');
+                
             }
            
            

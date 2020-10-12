@@ -18,7 +18,7 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/users') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{ action('UserController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add User Info</h4>
