@@ -11,6 +11,11 @@ class Book extends Model
     }
 
     public function genres() {
-        return $this->hasMany('App\Genre');
+        return $this->belongsToMany('App\Genre');
     }
+
+    // public function favourites()
+    // {
+    //     return $this->belongsToMany(Favourite::class);
+    // }
 }

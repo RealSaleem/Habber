@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\User;
+use App\Repositories\Api\UserRepository;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Requests\Api\UserRequest;
+use App\Http\Requests\Api\ChangePasswordRequest;
+use App\Helpers\ApiHelper;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+
+
+class UserController extends Controller
+{
+
+    protected $model;
+
+    public function __construct(User $model) {
+        $this->model = new UserRepository($model);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UserRequest $request, $id)
+    {
+        try{
+            $user = $this->model->update($request->all(),$id);
+            return (new UserResource($user));
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
+    }
+
+    public function updatePassword(ChangePasswordRequest $request) {
+        try{
+            $user = $this->model->passwordUpdate($request->all());
+            if($user == true) {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Password Updated Successfully!');
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
