@@ -64,14 +64,14 @@ class BookmarksController extends Controller
             $bookmark->quantity =$request->quantity;
             $bookmark->business_id = $request->business_id;
             $bookmark->stock_status = $request->stock_status;
-            $bookmark->image_url = "null"; 
+            $bookmark->image = "null"; 
             $bookmark->save();
             $updatebookmark = Bookmark::find($bookmark->id);
             $file = $request->image_url;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "bookmarks/".$bookmark->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $updatebookmark->image_url = $filePath;
+            $updatebookmark->image = $filePath;
             $updatebookmark->update();   
             return back()->with('success', 'Bookmark successfully saved');
        
@@ -142,7 +142,7 @@ class BookmarksController extends Controller
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "bookmarks/".$id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $bookmark->image_url =  $filePath;
+            $bookmark->image =  $filePath;
         }
         $bookmark->save();   
         return back()->with('success', 'Bookmark update sucessfully ');
