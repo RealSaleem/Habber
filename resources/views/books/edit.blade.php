@@ -97,12 +97,34 @@
                      <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business </label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="business_id" id="business_id" >
+                        <select  class="form-control" name="business" id="business_id" >
                             @foreach($business as $b)
-                            <option value="{{$b->id}} {{ ($book->business_id == $b->id ? "selected" : "")}}"  > {{$b->name}}</option>
+                            <option value="{{$b->id}}" {{ ($book->business_id == $b->id ? "selected" : "")}} > {{$b->name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('business_id')}}</span>
+                            <span class="text-danger">{{$errors->first('business')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Book Clubs</label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="bookclub" id="bookclub_id" >
+                            @foreach($bookClubs as $b)
+                            <option value="{{$b->id}}" {{ ($book->book_club_id == $b->id ? "selected" : "")}}> {{$b->name}}</option>
+                            @endforeach
+                        </select>
+                            <span class="text-danger">{{$errors->first('bookclub')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Genres</label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="genre[]" id="genre_id" multiple>
+                            @foreach($genres as $key => $g)
+                                <option value="{{$g->id}}" {{ (in_array($g->id, $selectedGenres)) ? 'selected' : '' }}> {{$g->title}}</option>
+                            @endforeach
+                        </select>
+                            <span class="text-danger">{{$errors->first('genre')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -110,10 +132,10 @@
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url" >
                             <span class="text-danger">{{$errors->first('image_url')}}</span>
-                            @if(isset($book->image_url))
+                            @if(isset($book->image))
                             <div class="form-group row">
                                 <div class="col-sm-9">
-                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$book->image_url)}}" alt="no-image">
+                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$book->image)}}" alt="no-image">
                                 </div>
                             </div>
                             @endif

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Book;
+use App\BookClub;
+use App\Genre;
 use App\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $book = Book::with('businesses')->get();
+        $book = Book::with(['businesses','book_clubs'])->get();
         return view('books.index', compact('book'));
     }
 
@@ -28,7 +30,9 @@ class BooksController extends Controller
     public function create()
     {
         $business = Business::all();
-        return view('books.create',compact('business'));
+        $bookClubs = BookClub::all();
+        $genres = Genre::all();
+        return view('books.create',compact('business','bookClubs','genres'));
     }
 
     /**
@@ -52,11 +56,12 @@ class BooksController extends Controller
             'isbn' => 'required|numeric|unique:books',  
             'total_pages' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'business_id' => 'required',
+            'business' => 'required',
             'stock_status' => 'required',
+            'bookclub' => 'required',
+            "genre" => 'required|array|min:1|max:3',
             'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
             ]);
-            
             $book = new Book();
             $book->title = $request->title;
             $book->author_name = $request->author_name;
@@ -67,16 +72,18 @@ class BooksController extends Controller
             $book->isbn = $request->isbn;
             $book->total_pages= $request->total_pages;
             $book->quantity =$request->quantity;
-            $book->business_id = $request->business_id;
+            $book->business_id = $request->business;
             $book->stock_status = $request->stock_status;
-            $book->image_url = "null"; 
+            $book->book_club_id = $request->bookclub;
+            $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
+            $book->genres()->sync($request->genre);
             $file = $request->image_url;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $updatebook->image_url = $filePath;
+            $updatebook->image = $filePath;
             $updatebook->update();   
             return back()->with('success', 'Book successfully saved');
        
@@ -103,9 +110,12 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        $book = Book::with(['businesses','book_clubs','genres'])->where('id',$id)->first();
+        $selectedGenres = $book->genres->pluck('id')->toArray();
         $business = Business::all();
-        return view('books.edit', compact('book','business'));
+        $bookClubs = BookClub::all();
+        $genres = Genre::all();
+        return view('books.edit', compact('book','business','bookClubs','genres','selectedGenres'));
  
     }
 
@@ -129,12 +139,14 @@ class BooksController extends Controller
             'isbn' => 'required|numeric|unique:books,isbn,'.$id,
             'total_pages' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'business_id' => 'required',  
+            'business' => 'required',  
             'stock_status' => 'required',
+            'bookclub' => 'required',
+            "genre" => 'required|array|min:1|max:3',
             'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048' 
         ]);
         $book = Book::find($id);
-        
+        // dd(count($book->genres) + count($request->genre) > 3);
         $book->title = $request->title;
         $book->author_name = $request->author_name;
         $book->cover_type= $request->cover_type;
@@ -144,8 +156,16 @@ class BooksController extends Controller
         $book->isbn = $request->isbn;
         $book->total_pages= $request->total_pages;
         $book->quantity= $request->quantity;
-        $book->business_id = $request->business_id;
+        $book->business_id = $request->business;
+        $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
+        if(count($book->genres)+ count($request->genre) > 3 ) {
+            $book->genres()->detach($id);
+        }
+        else {
+            $book->genres()->sync($request->genre);
+        }
+        
         if($request->has('image_url')) 
         {
             Storage::disk('public')->deleteDirectory('books/'. $id);
@@ -153,7 +173,7 @@ class BooksController extends Controller
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "books/".$id."/" . $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $book->image_url =  $filePath;
+            $book->image =  $filePath;
         }
         $book->save();   
         return back()->with('success', 'Book updated sucessfully');
@@ -172,6 +192,7 @@ class BooksController extends Controller
     {
         Storage::disk('public')->deleteDirectory('books/'. $id);
         $book = Book::findOrFail($id);
+         $book->genres()->detach($id);
         $book->delete();
         return back()->with('success', 'User deleted successfully');
     
