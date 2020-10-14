@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('bookmarks','BookmarksController');
    Route::resource('bookclubs','BookClubController');     
    Route::resource('genres','GenreController');
-   Route::resource('addressess','AddressessController');
+   Route::resource('address','AddressController');
    Route::resource('contactus','ContactController');
    Route::resource('user_requests','UserRequestController');
 });

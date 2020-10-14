@@ -29,12 +29,12 @@
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
             <td>
-             <form action="{{ action('AddressessController@destroy')}}" method="post">
+             <form action="" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
                   </form>
-                    <a href="{{ action('AddressessController@edit')}}"><button class=" btn btn-success">
+                    <a href=""><button class=" btn btn-success">
                     <span class="fa fa-edit"></span>
                     Edit
                 </button></a>

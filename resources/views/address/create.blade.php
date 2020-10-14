@@ -16,7 +16,7 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('adressess.create')}}" method="post"  enctype="multipart/form-data">   
+            <form action="{{url('address.create')}}" method="post"  enctype="multipart/form-data">   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add Address Info</h4>
@@ -85,7 +85,7 @@
                     </div>
                 <div class="border-top">
                     <div class="card-body">
-                    <a href="{{route('addressess.index')}}">
+                    <a href="{{route('address.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>

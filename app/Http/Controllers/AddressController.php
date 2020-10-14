@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use Illuminate\Http\Request;
 
-class AddressessController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,8 @@ class AddressessController extends Controller
      */
     public function index()
     {
-        //
         $address = Address::all();
-        return view('addressess.index', compact('address'));
+        return view('address.index', compact('address'));
     }
 
     /**
@@ -25,9 +24,8 @@ class AddressessController extends Controller
      */
     public function create()
     {
-        //
         $address = Address::all();
-        return view('addressess.create',compact('address'));
+        return view('address.create',compact('address'));
     }
 
     /**

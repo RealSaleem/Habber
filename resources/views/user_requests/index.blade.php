@@ -34,12 +34,12 @@
             <td>{{$userrequest->image}}</td> 
             <td>{{$userrequest->status}}</td>  
             <td>
-                <form action="{{ action('UserRequestController@destroy')}}" method="post">
+                <form action="" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-                    <a href="{{action('UserRequestController@edit')}}"><button class=" btn btn-success">
+                    <a href=""><button class=" btn btn-success">
                     <span class="fa fa-edit"></span>
                     Edit
                 </button></a>
