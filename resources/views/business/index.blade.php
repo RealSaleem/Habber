@@ -14,7 +14,7 @@
         <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>User ID</th>
+                        <th>User</th>
                         <th>Name</th>
                         <th>Business Type</th>
                         <th>Product Type</th>
@@ -26,7 +26,7 @@
                @foreach($business as $business)
         <tr>
             
-            <td>{{$business->user_id}}</td>
+            <td>{{$business->users['first_name'] ." ". $business->users['last_name']}}</td>
             <td>{{$business->name}}</td>
             <td>{{$business->business_type}}</td>
             <td>{{$business->product_type}}</td>  

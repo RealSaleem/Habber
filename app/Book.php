@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     public function businesses() {
-        return $this->belongsTo('App\Business');
+        return $this->belongsTo('App\Business','business_id','id');
     }
 
     public function genres() {

@@ -22,41 +22,41 @@
                 <div class="card-body">
                     <h4 class="card-title">Add Business Info</h4>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">User ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">User</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="user_id" id="user_id">
-                            @foreach($user as $u)
-                            <option value={{$u->id}} > {{$u->name}}</option>
-                            @endforeach
-                        </select>
+                            <select  class="form-control" name="user_id" id="user_id">
+                                @foreach($user as $u )
+                                <option value="{{$u->id}}" > {{$u->first_name}}</option>
+                                @endforeach
+                            </select>
                             <span class="text-danger">{{$errors->first('user_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name" placeholder=" Name ">
+                            <input type="text" class="form-control" name="name"value="{{ old('name') }}" id="name" placeholder=" Name ">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Business Type</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="business_type" id="business_type" placeholder="Business Type">
+                            <input type="text" class="form-control" name="business_type" value="{{ old('business_type') }}" id="business_type" placeholder="Business Type">
                             <span class="text-danger">{{$errors->first('business_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Product Type</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="product_type" id="product_type" placeholder="Product Type">
+                            <input type="textarea" class="form-control" name="product_type"value="{{ old('product_type') }}" id="product_type" placeholder="Product Type">
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Details</label>
                         <div  class="col-sm-9">
-                         <textarea class="form-control" id="details" name="details" rows="4" cols="54" style="resize:none, " placeholder= "Details"  ></textarea>
+                         <textarea class="form-control" id="details" name="details" value="{{ old('details') }}" rows="4" cols="54" style="resize:none, " placeholder= "Details"  ></textarea>
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>

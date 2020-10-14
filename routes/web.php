@@ -31,7 +31,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('bookclubs','BookClubController');     
    Route::resource('genres','GenreController');
 });
-// ADD A BOOK
 
 
 

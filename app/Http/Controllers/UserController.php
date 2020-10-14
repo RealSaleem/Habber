@@ -51,13 +51,16 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
-        $file = $request->profile_pic;
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
-        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $user->profile_pic = $filePath;
-        $user->save();   
-        return back()->with('success', 'User successfully saved');
+        $user->profile_pic = "null"; 
+            $user->save();
+            $updateuser = User::find($user->id);
+            $file = $request->profile_pic;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "users/".$user->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
+            $updateuser->profile_pic = $filePath;
+            $updateuser->update();   
+            return back()->with('success', 'user successfully saved');
 
     }
     
@@ -109,10 +112,11 @@ class UserController extends Controller
         $user->phone = $request->phone;
         if($request->has('profile_pic')) 
         {
+            Storage::disk('user_profile')->deleteDirectory('users/' . $id);
             $file = $request->profile_pic;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
-            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $filePath =  "users/".$id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
             $user->profile_pic =  $filePath;
         }
         $user->save();   
@@ -126,7 +130,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
+        Storage::disk('user_profile')->deleteDirectory('users/' . $id);
         $user = User::findOrFail($id);
         $user->delete();
         return back()->with('success', 'User deleted successfully');

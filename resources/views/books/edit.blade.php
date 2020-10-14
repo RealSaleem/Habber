@@ -24,70 +24,84 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Title</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" id="title" >
+                            <input type="text" class="form-control" name="title" id="title" value="{{$book->title}}" placeholder= "Title" >
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Author Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="author_name" id="author_name" placeholder="Author Name Here">
+                            <input type="text" class="form-control" name="author_name" id="author_name" value="{{$book->author_name}}" placeholder="Author Name ">
                             <span class="text-danger">{{$errors->first('author_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Cover Type</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="cover_type" id="cover_type" placeholder="Cover Here">
+                            <input type="text" class="form-control" name="cover_type" id="cover_type"value="{{$book->cover_type}}" placeholder="Cover Type">
                             <span class="text-danger">{{$errors->first('cover_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Description</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="description" id="description">
+                            <input type="textarea" class="form-control" name="description" id="description" value="{{$book->description}}" placeholder="Description">
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Book Language</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="book_langauge" id="book_langauge">
-                            <span class="text-danger">{{$errors->first('book_langauge')}}</span>
+                            <input type="text" class="form-control" name="book_language" id="book_language" value="{{$book->book_language}}" placeholder="Book Language"> 
+                            <span class="text-danger">{{$errors->first('book_language')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Price</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="price" id="price" placeholder="Price Here">
+                            <input type="text" class="form-control" name="price" id="price" value="{{$book->price}}" placeholder="Price ">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Isbn</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="isbn" id="isbn" >
+                            <input type="text" class="form-control" name="isbn" id="isbn"value="{{$book->isbn}}" placeholder="Isbn">
                             <span class="text-danger">{{$errors->first('isbn')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Total Pages</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="total_pages" id="total_pages" >
+                            <input type="text" class="form-control" name="total_pages" id="total_pages"value="{{$book->total_pages}}" placeholder="Total Pages"> 
                             <span class="text-danger">{{$errors->first('total_pages')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="quantity" id="quantity" >
+                            <input type="text" class="form-control" name="quantity" id="quantity"value="{{$book->quantity}}" placeholder="Quantity">
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="business_id" id="business_id" >
+                            <select class="form-control" name="stock_status"  id="status">
+                                <option value="0" {{ ($book->stock_status == 0 ? "selected" : "")}} >Not Available</option>
+                                <option value="1" {{ ($book->stock_status == 1 ? "selected" : "")}}>Available</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
+                        </div>
+                     </div> 
+                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business </label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="business_id" id="business_id" >
+                            @foreach($business as $b)
+                            <option value="{{$b->id}} {{ ($book->business_id == $b->id ? "selected" : "")}}"  > {{$b->name}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('business_id')}}</span>
                         </div>
                     </div>
@@ -108,7 +122,7 @@
                     
                 <div class="border-top">
                     <div class="card-body">
-                    <a href="{{route('users.index')}}">
+                    <a href="{{route('books.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>

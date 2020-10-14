@@ -15,9 +15,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $book = Book::all();
+        $book = Book::with('businesses')->get();
         return view('books.index', compact('book'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,36 +42,45 @@ class BooksController extends Controller
         //  
       
         $validatedData = $request->validate([
+        
             'title' => 'required',
             'author_name' => 'required',
             'cover_type' => 'required',
             'description' => 'required',
-            'book_language' => 'required',  
+            'book_language' => 'required',
             'price' => 'required|numeric',
-            'isbn' => 'required|numeric|unique:books',
+            'isbn' => 'required|numeric|unique:books',  
             'total_pages' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'business_id' => 'required|numeric',
-            'image_url' => 'required|image|mimes:jpg,jpeg,png|max:2048'   
-        ]);
-        $book = new Book();
-        $book->title = $request->title;
-        $book->author_name = $request->author_name;
-        $book->cover_type= $request->cover_type;
-        $book->description= $request->description;
-        $book->book_language = $request->book_language;
-        $book->price = $request->price;
-        $book->isbn = $request->isbn;
-        $book->total_pages= $request->total_pages;
-        $book->quantity= $request->quantity;
-        $book->business_id = $request->business_id;
-        $file = $request->image_url;
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "books/" . $fileName . time() . "." . $file->getClientOriginalExtension();
-        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $book->image_url = $filePath;
-        $book->save();   
-        return back()->with('success', 'Book successfully saved');
+            'business_id' => 'required',
+            'stock_status' => 'required',
+            'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
+            ]);
+            
+            $book = new Book();
+            $book->title = $request->title;
+            $book->author_name = $request->author_name;
+            $book->cover_type= $request->cover_type;
+            $book->description= $request->description;
+            $book->book_language= $request->book_language;
+            $book->price =$request->price;
+            $book->isbn = $request->isbn;
+            $book->total_pages= $request->total_pages;
+            $book->quantity =$request->quantity;
+            $book->business_id = $request->business_id;
+            $book->stock_status = $request->stock_status;
+            $book->image_url = "null"; 
+            $book->save();
+            $updatebook = Book::find($book->id);
+            $file = $request->image_url;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $updatebook->image_url = $filePath;
+            $updatebook->update();   
+            return back()->with('success', 'Book successfully saved');
+       
+   
    
     }
 
@@ -93,11 +103,10 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
-        $user = Book::findOrFail($id);
-        return view('books.edit', compact('book'));
-    
-      
+        $book = Book::findOrFail($id);
+        $business = Business::all();
+        return view('books.edit', compact('book','business'));
+ 
     }
 
     /**
@@ -117,13 +126,15 @@ class BooksController extends Controller
             'description' => 'required',
             'book_language' => 'required',  
             'price' => 'required|numeric',
-            'isbn' => 'required|numeric|unique:isbn'.$id, 
+            'isbn' => 'required|numeric|unique:books,isbn,'.$id,
             'total_pages' => 'required|numeric',
             'quantity' => 'required|numeric',
             'business_id' => 'required',  
-            'image_url' => 'required|image|mimes:jpg,jpeg,png|max:2048' 
+            'stock_status' => 'required',
+            'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048' 
         ]);
         $book = Book::find($id);
+        
         $book->title = $request->title;
         $book->author_name = $request->author_name;
         $book->cover_type= $request->cover_type;
@@ -134,13 +145,15 @@ class BooksController extends Controller
         $book->total_pages= $request->total_pages;
         $book->quantity= $request->quantity;
         $book->business_id = $request->business_id;
+        $book->stock_status = $request->stock_status;
         if($request->has('image_url')) 
         {
+            Storage::disk('public')->deleteDirectory('books/'. $id);
             $file = $request->image_url;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "books/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+            $filePath = "books/".$id."/" . $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $bookclub->image_url =  $filePath;
+            $book->image_url =  $filePath;
         }
         $book->save();   
         return back()->with('success', 'Book updated sucessfully');
@@ -157,7 +170,7 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Storage::disk('public')->deleteDirectory('books/'. $id);
         $book = Book::findOrFail($id);
         $book->delete();
         return back()->with('success', 'User deleted successfully');

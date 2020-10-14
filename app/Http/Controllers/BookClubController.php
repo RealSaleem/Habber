@@ -40,21 +40,23 @@ class BookClubController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        
         $validatedData = $request->validate([
             'name' => 'required', 
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
+        $bookclub->banner_image = "null"; 
+        $bookclub->save();
+        $updatebookclub = BookClub::find($bookclub->id);
         $file = $request->banner_image;
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "bookclub/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+        $filePath = "bookclubs/".$bookclub->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
         $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $bookclub->banner_image = $filePath;
-        $bookclub->save();   
+        $updatebookclub->banner_image = $filePath;
+        $updatebookclub->update();   
         return back()->with('success', 'Bookclub successfully saved');
-
     }
 
     /**
@@ -98,13 +100,15 @@ class BookClubController extends Controller
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
         if($request->has('banner_image')) 
-        {
+        {   
+            Storage::disk('public')->deleteDirectory('bookclubs/'. $id);
             $file = $request->banner_image;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "bookclub/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+            $filePath = "bookclubs/".$id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $bookclub->banner_image =  $filePath;
         }
+        
         $bookclub->save();   
         return back()->with('success', 'Bookclub updated sucessfully');
     }
@@ -117,7 +121,7 @@ class BookClubController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Storage::disk('public')->deleteDirectory('bookclubs/'. $id);
         $bookclub = BookClub::findOrFail($id);
         $bookclub->delete();
         return back()->with('success', 'Bookclub deleted successfully');

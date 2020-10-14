@@ -22,10 +22,13 @@
                 <div class="card-body">
                     <h4 class="card-title">Edit Business Info</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">User ID</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">User </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="user_id" value="{{ $business->user_id }}"  placeholder="User ID">
-                            <span class="text-danger">{{$errors->first('user_id')}}</span>
+                        <select  class="form-control" name="user_id" id="user_id" >
+                            @foreach($user as $u)
+                            <option value="{{$u->id}} {{ ($business->user_id == $u->id ? "selected" : "")}}"  > {{$u->first_name}}</option>
+                            @endforeach
+                        </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -45,14 +48,14 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Product Type</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="product_type"value="{{ $business->product_type }}" placeholder="Product Here">
+                            <input type="textarea" class="form-control" name="product_type"  value="{{ $business->product_type }}" placeholder="Product Here">
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Details</label>
                         <div class="col-sm-9">
-                        <textarea class="form-control" id="details" name="details" rows="4" cols="54" style="resize:none," value="{{ $business->details }}"  ></textarea>
+                        <textarea class="form-control" id="details" name="details" rows="4" cols="54" style="resize:none," value=""  >{{ $business->details }}</textarea>
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>
@@ -62,7 +65,7 @@
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
-                        <button type="submit" class="btn btn-primary">EDIT</button>
+                        <button type="submit" class="btn btn-primary">Update </button>
                     </div>
                 </div>
             </form>

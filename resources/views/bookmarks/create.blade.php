@@ -12,6 +12,7 @@
                 <strong>Bookmarks Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
+     
             
         </div> 
         <div class="col-md-12">
@@ -23,54 +24,66 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Title</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" id="title"  placeholder="Title">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label"> Maker Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="maker_name" id="maker_name" placeholder=" Maker Name">
+                            <input type="text" class="form-control" name="maker_name" value="{{ old('maker_name') }}" id="maker_name" placeholder=" Maker Name">
                             <span class="text-danger">{{$errors->first('maker_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Description</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="description" id="description" placeholder="Description">
+                            <input type="textarea" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description">
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Price</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                            <input type="text" class="form-control" name="price" value="{{ old('price') }}" id="price" placeholder="Price">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark ID </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" id="bookmark_id" placeholder="Bookmark Id ">
+                            <input type="text" class="form-control" name="bookmark_id" value="{{ old('bookmark_id') }}" id="bookmark_id" placeholder="Bookmark Id ">
                             <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Size</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="size" id="size" placeholder="Size">
+                            <input type="text" class="form-control" name="size"value="{{ old('size') }}" id="size" placeholder="Size">
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity ">
+                            <input type="text" class="form-control" name="quantity" value="{{ old('quantity') }}" id="quantity" placeholder="Quantity ">
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="stock_status"  id="status">
+                                <option value="0" {{ (old('stock_status') == "0" ? "selected":"")}}>Not Available</option>
+                                <option value="1" {{ (old('stock_status') == "1" ? "selected":"")}}>Available</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
+                        </div>
+                     </div> 
+
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="business_id" id="business_id">
                             @foreach($business as $b)
@@ -81,14 +94,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="stock_status" id="stock_status
-                            " placeholder="Stock status">
-                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
-                        </div>
-                     </div>   
+                     
                     <div class="form-group row">
                         <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image Url</label>
                         <div class="col-sm-9">
