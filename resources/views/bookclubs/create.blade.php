@@ -16,14 +16,14 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/bookclubs') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{action('BookClubController@store')}}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add BookClub Info</h4>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name"  placeholder="name">
+                            <input type="text" class="form-control" name="name"  value="{{ old('name') }}" id="name"  placeholder="name">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>

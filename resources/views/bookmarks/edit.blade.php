@@ -71,9 +71,23 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business ID </label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="business_id" value="{{ $bookmark->business_id }}">
+                            <select class="form-control" name="stock_status"  id="status">
+                                <option value="0" {{ ($bookmark->stock_status == 0 ? "selected":"")}}>Not Available</option>
+                                <option value="1" {{ ($bookmark->stock_status == 1 ? "selected":"")}}>Available</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
+                        </div>
+                     </div> 
+                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business</label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="business_id" id="business_id">
+                            @foreach($business as $b)
+                            <option value="{{$b->id}}" {{$bookmark->business_id == $b->id ? "selected" : ""}} > {{$b->name}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('business_id')}}</span>
                         </div>
                     </div>
@@ -82,10 +96,10 @@
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url" >
                             <span class="text-danger">{{$errors->first('image_url')}}</span>
-                            @if(isset($bookmark->image_url))
+                            @if(isset($bookmark->image))
                             <div class="form-group row">
                                 <div class="col-sm-9">
-                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$bookmark->image_url)}}" alt="no-image">
+                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$bookmark->image)}}" alt="no-image">
                                 </div>
                             </div>
                             @endif
@@ -97,7 +111,7 @@
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
             </form>

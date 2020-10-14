@@ -41,7 +41,7 @@
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
                 </button></a>
-                    <a href="{{url('users/'.$user->id.'/edit')}}"><button class=" btn btn-success">
+                    <a href="{{action('UserController@edit', [$user->id])}}"><button class=" btn btn-success">
                     <span class="fa fa-edit"></span>
                     Edit
                 </button></a>
@@ -98,5 +98,12 @@ function activateUser(id) {
         }
     });
 }
+    $(document).ready(function() {
+        $('#zero_config').DataTable({
+        paging: true,
+       
+     });
+
+    })
 </script>
 @stop

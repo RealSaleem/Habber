@@ -73,7 +73,7 @@
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
-                        <button type="submit" class="btn btn-primary">UPDATE</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
             </form>

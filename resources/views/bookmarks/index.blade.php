@@ -19,10 +19,10 @@
                         <th>Maker Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>Bookmark ID</th>
+                        <th>Bookmark </th>
                         <th>Size</th>         
                         <th>Quantity </th>
-                        <th>Business ID</th>
+                        <th>Business Name</th>
                         <th>Image</th>
                         <th> Action</th>  
                                      
@@ -39,8 +39,8 @@
             <td>{{$bookmark->bookmark_id}}</td>
             <td>{{$bookmark->size}}</td>
             <td>{{$bookmark->quantity}}</td>
-            <td>{{$bookmark->business_id}}</td>  
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image_url) ?  url('storage/'.$bookmark->image_url) : url('storage/bookmarks/default.png') }}" alt=""> </td>
+            <td>{{$bookmark->businesses['name']}}</td>  
+            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
             <td>
                 <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
                     @csrf
