@@ -40,7 +40,7 @@
             <td>{{$bookmark->size}}</td>
             <td>{{$bookmark->quantity}}</td>
             <td>{{$bookmark->businesses['name']}}</td>  
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image_url) ?  url('storage/'.$bookmark->image_url) : url('storage/bookmarks/default.png') }}" alt=""> </td>
+            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
             <td>
                 <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
                     @csrf

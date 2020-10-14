@@ -12,6 +12,12 @@
                 <strong>Book Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
+
+        @if ($errors->any())
+     @foreach ($errors->all() as $error)
+         <div>{{$error}}</div>
+     @endforeach
+ @endif
         </div> 
         <div class="col-md-12">
         <div class="card">
@@ -86,12 +92,34 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business </label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="business_id" id="business_id" >
+                        <select  class="form-control" name="business" id="business_id" >
                             @foreach($business as $b)
                             <option value="{{$b->id}}" > {{$b->name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('business_id')}}</span>
+                            <span class="text-danger">{{$errors->first('business')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Book Clubs</label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="bookclub" id="bookclub_id" >
+                            @foreach($bookClubs as $b)
+                            <option value="{{$b->id}}" > {{$b->name}}</option>
+                            @endforeach
+                        </select>
+                            <span class="text-danger">{{$errors->first('bookclub')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Genres</label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="genre[]" id="genre_id" multiple>
+                            @foreach($genres as $g)
+                            <option value="{{$g->id}}" > {{$g->title}}</option>
+                            @endforeach
+                        </select>
+                            <span class="text-danger">{{$errors->first('genre')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">

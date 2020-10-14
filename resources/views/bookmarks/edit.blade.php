@@ -96,10 +96,10 @@
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url" >
                             <span class="text-danger">{{$errors->first('image_url')}}</span>
-                            @if(isset($bookmark->image_url))
+                            @if(isset($bookmark->image))
                             <div class="form-group row">
                                 <div class="col-sm-9">
-                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$bookmark->image_url)}}" alt="no-image">
+                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$bookmark->image)}}" alt="no-image">
                                 </div>
                             </div>
                             @endif
