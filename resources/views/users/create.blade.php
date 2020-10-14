@@ -18,7 +18,7 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/users') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{action('UserController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add User Info</h4>
@@ -57,11 +57,22 @@
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Role</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="role" id="roles">
+                                @foreach($roles as $r)
+                                    <option value="{{$r}}">{{$r}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">{{$errors->first('role')}}</span>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="profile_pic" class="col-sm-3 text-right control-label col-form-label">Picture</label>
                          <div class="col-md-6">
                          <input id="profile_pic" type="file" class="form-control" name="profile_pic">
-
                             <span class="text-danger">{{$errors->first('profile_pic')}}</span>
                         </div>
                         

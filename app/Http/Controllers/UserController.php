@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -24,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create',compact('roles'));
     
     }
 
@@ -41,8 +43,9 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:8',
-            'phone' => 'required|numeric|max:15',  
-            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            'phone' => 'required|numeric', 
+            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'role' => 'required'
         ]);
             
         $user = new User();
@@ -57,7 +60,8 @@ class UserController extends Controller
         $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
         $user->profile_pic = $filePath;
         $user->save();   
-        return redirect('/users/create')->with('success', 'User successfully saved');
+        $user->assignRole($request->input('roles'));
+        return back()->with('success', 'User successfully saved');
 
     }
     
@@ -80,7 +84,8 @@ class UserController extends Controller
      */
     public function edit($id) {
         $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        $roles = Role::pluck('name','name')->all();
+        return view('users.edit', compact('user','roles'));
     
 
     }
@@ -100,6 +105,7 @@ class UserController extends Controller
             'password' => 'sometimes|required|min:8',
             'phone' => 'sometimes|required|numeric',  
             'profile_pic' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'role' => 'required'
         ]);
        
         $user = User::find($id);
@@ -114,6 +120,7 @@ class UserController extends Controller
             $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $user->profile_pic =  $filePath;
+            $user->assignRole($request->input('roles'));
         }
         $user->save();   
         return back()->with('success', 'User updated sucessfully');
