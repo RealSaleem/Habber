@@ -39,5 +39,18 @@ class AdminSeeder extends Seeder
             $permissions = Permission::pluck('id','id')->all();
             $role->syncPermissions($permissions);
             $user->assignRole([$role->id]);
+
+            $subadmin = User::create([
+            'first_name'     => 'Sub',
+            'last_name'     => 'Admin',
+            'email' => 'sub@admin.com',
+            'password' => bcrypt('click123'),
+            'phone'     => 4301229292921,
+            'status'   => true,
+            ]);
+            $role = Role::create(['name' => 'Sub Admin']);
+            $permissions = Permission::pluck('id','id')->all();
+            $role->syncPermissions($permissions);
+            $subadmin->assignRole([$role->id]);
     }
 }

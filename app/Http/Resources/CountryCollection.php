@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
-use App\Http\Resources\AddressResource;
+use App\Http\Resources\CountryResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AddressCollection extends ResourceCollection
+class CountryCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -13,11 +13,10 @@ class AddressCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    
     public function toArray($request)
         {
             return [
-                'data' => AddressResource::collection($this->collection),
+                'data' => CountryResource::collection($this->collection),
             ];
         }
     
@@ -28,7 +27,7 @@ class AddressCollection extends ResourceCollection
                    'length' => $this->collection->count(),
                    'success' => true,
                    'code' => Response::HTTP_OK,
-                   'message' => "Addresses retrieve successfully"
+                   'message' => "Countries retrieve successfully"
                 ]
             ];
         }

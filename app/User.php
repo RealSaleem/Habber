@@ -41,7 +41,11 @@ class User extends Authenticatable
     ];
 
 
-
+    public function addresses()
+    {
+        return $this->hasOne(Address::class);
+    }
+    
     public function userRequests()
     {
         return $this->hasMany(RequestForBook::class);
