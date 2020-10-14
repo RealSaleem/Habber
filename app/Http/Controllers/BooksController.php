@@ -192,6 +192,7 @@ class BooksController extends Controller
     {
         Storage::disk('public')->deleteDirectory('books/'. $id);
         $book = Book::findOrFail($id);
+         $book->genres()->detach($id);
         $book->delete();
         return back()->with('success', 'User deleted successfully');
     
