@@ -21,7 +21,7 @@
                     <li class="sidebar-item"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Book Clubs </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Book Clubs    </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item"><a href="{{ route('bookclubs.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
                     <li class="sidebar-item"><a href="{{ route('bookclubs.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
@@ -37,6 +37,24 @@
                 <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item"><a href="{{ route('business.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
                     <li class="sidebar-item"><a href="{{ route('business.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Addressess </span></a>
+                <ul aria-expanded="false" class="collapse  first-level">
+                    <li class="sidebar-item"><a href="{{ route('addressess.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('addressess.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> User Request </span></a>
+                <ul aria-expanded="false" class="collapse  first-level">
+                    <li class="sidebar-item"><a href="{{ route('user_requests.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('user_requests.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Contact Us </span></a>
+                <ul aria-expanded="false" class="collapse  first-level">
+                    <li class="sidebar-item"><a href="{{ route('contactus.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('contactus.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
                 </ul>
             </li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
