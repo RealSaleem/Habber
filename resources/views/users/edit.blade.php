@@ -56,7 +56,7 @@
                         <div class="col-sm-9">
                             <select class="form-control" name="role" id="roles">
                                 @foreach($roles as $r)
-                                    <option value="{{$r}}" {{ $user->roles[0]->name == $r ? 'selected' : ''}}>{{$r}}</option>
+                                    <option value="{{$r}}" {{!isset($user->roles[0]) ? "" : ($user->roles[0]->name ? "selected" : "")}} >{{$r}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">{{$errors->first('role')}}</span>

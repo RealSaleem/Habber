@@ -122,8 +122,9 @@ class UserController extends Controller
             $filePath =  "users/".$id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
             $user->profile_pic =  $filePath;
-            $user->assignRole($request->input('roles'));
+          
         }
+        $user->assignRole($request->input('roles'));
         $user->save();   
         return back()->with('success', 'User updated sucessfully');
 
