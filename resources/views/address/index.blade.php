@@ -40,12 +40,12 @@
             <td>{{$address->post_code}}</td>
             <td>{{$address->phone}}</td>
             <td>{{$address->user}}</td>
-                <form action="{{ action('AdressessController@destroy', [$address->id])}}" method="post">
+                <form action="" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-                <a href="{{ action('AddressessController@edit', [$address->id])}}"><button class=" btn btn-success">
+                <a href=""><button class=" btn btn-success">
                 <span class="fa fa-edit"></span>
                 Edit</button></a>                                 
             </td>       
