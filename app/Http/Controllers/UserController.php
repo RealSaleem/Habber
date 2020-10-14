@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index() 
     {
-        $user = User::all();
+        $user = User::all()->except(auth()->user()->id);
         return view('users.index', compact('user'));
     }
     /**
@@ -24,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create',compact('roles'));
     
     }
 
@@ -41,8 +43,9 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:8',
-            'phone' => 'required|numeric',  
-            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            'phone' => 'required|numeric', 
+            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'role' => 'required'
         ]);
             
         $user = new User();
@@ -52,15 +55,14 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
         $user->profile_pic = "null"; 
-            $user->save();
-            $updateuser = User::find($user->id);
-            $file = $request->profile_pic;
-            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "users/".$user->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
-            $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
-            $updateuser->profile_pic = $filePath;
-            $updateuser->update();   
-            return back()->with('success', 'user successfully saved');
+        $file = $request->profile_pic;
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        $user->profile_pic = $filePath;
+        $user->save();   
+        $user->assignRole($request->input('roles'));
+        return back()->with('success', 'User successfully saved');
 
     }
     
@@ -83,7 +85,8 @@ class UserController extends Controller
      */
     public function edit($id) {
         $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        $roles = Role::pluck('name','name')->all();
+        return view('users.edit', compact('user','roles'));
     
 
     }
@@ -103,6 +106,7 @@ class UserController extends Controller
             'password' => 'sometimes|required|min:8',
             'phone' => 'sometimes|required|numeric',  
             'profile_pic' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'role' => 'required'
         ]);
        
         $user = User::find($id);
@@ -118,6 +122,7 @@ class UserController extends Controller
             $filePath =  "users/".$id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
             $user->profile_pic =  $filePath;
+            $user->assignRole($request->input('roles'));
         }
         $user->save();   
         return back()->with('success', 'User updated sucessfully');
