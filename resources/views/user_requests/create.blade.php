@@ -18,35 +18,39 @@
         </div> 
         <div class="col-md-12">
         <div class="card">
-            <form action="{{ url('user_requests.create')}}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{ action('UserRequestController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">Add User Request Info</h4>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">User</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="user_id" id="user_id"  placeholder="User">
-                            <span class="text-danger">{{$errors->first('first_name')}}</span>
+                        <select  class="form-control" name="user_id" id="user_id">
+                                @foreach($user as $u )
+                                <option value="{{$u->id}}" > {{$u->first_name}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">{{$errors->first('user_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Title</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                            <input type="text" class="form-control" name="title"value="{{ old('title') }}" id="title" placeholder="Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Author Name </label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="author_name" id="author_name" placeholder="Author Name">
-                            <span class="text-danger">{{$errors->first('password')}}</span>
+                            <input type="text" class="form-control" name="author_name" value="{{ old('author_name') }}" id="author_name" placeholder="Author Name">
+                            <span class="text-danger">{{$errors->first('author_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Book Type</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="book_type" id="book_type" placeholder="Book Type">
+                            <input type="text" class="form-control" name="book_type" value="{{ old('book_type') }}" id="book_type" placeholder="Book Type">
                             <span class="text-danger">{{$errors->first('book_type')}}</span>
                         </div>
                     </div>

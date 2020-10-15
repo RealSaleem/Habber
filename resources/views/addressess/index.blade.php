@@ -36,20 +36,21 @@
             <td>{{$address->address_line2}}</td>
             <td>{{$address->city}}</td>  
             <td>{{$address->state}}</td>
-            <td>{{$address->country}}</td>
+            <td>{{$address->country_id}}</td>
             <td>{{$address->post_code}}</td>
             <td>{{$address->phone}}</td>
-            <td>{{$address->user}}</td>
-                <form action="{{ action('AdressessController@destroy', [$address->id])}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
+            <td>{{$address->user_id}}</td>
+            <td>
+                <form action="{{ action('AddressessController@destroy', [$address->id])}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-                <a href="{{ action('AddressessController@edit', [$address->id])}}"><button class=" btn btn-success">
-                <span class="fa fa-edit"></span>
-                Edit</button></a>                                 
-            </td>       
-                                 
+                    <a href="{{ action('AddressessController@edit', [$address->id])}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>                      
+            </td>           
         </tr>
         @endforeach      
     </tbody>
