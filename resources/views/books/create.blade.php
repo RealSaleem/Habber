@@ -17,9 +17,9 @@
      @foreach ($errors->all() as $error)
          <div>{{$error}}</div>
      @endforeach
- @endif
+     @endif
         </div> 
-        <div class="col-md-12">
+     <div class="col-md-12">
         <div class="card">
             <form action="{{ action('BooksController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
@@ -139,15 +139,16 @@
                             <span class="text-danger">{{$errors->first('image_url')}}</span>
                         </div>
                     </div>                    
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('books.index')}}">
+                    <div class="border-top">
+                      <div class="card-body">
+                       <a href="{{route('books.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
                     </div>
-                </div>
+                </div>   
             </form>
         </div>
     </div>

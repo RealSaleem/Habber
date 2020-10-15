@@ -11,8 +11,8 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <div class="table-responsive">
-        <table id="zero_config" class="table table-striped table-bordered">
+        <div class="table-responsive">
+          <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -26,7 +26,7 @@
                </thead>
                <tbody>
               @foreach($user as $user)
-        <tr>
+          <tr>
             
             <td>{{$user->first_name}}</td>
             <td>{{$user->last_name}}</td>
@@ -56,11 +56,13 @@
                 @endif
                 
             </td>
-        </tr>
-        @endforeach
-    </tbody>
-  </table>
-<div>
+            </tr>
+           @endforeach
+             </tbody>
+            </table>
+        </div>   
+    </div>    
+</div>
 @endsection
 @section('scripts')
 

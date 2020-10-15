@@ -16,36 +16,38 @@
         <thead>
           <tr>
               <th>Submission Id</th>
-              <th>User</th>
-              <th>Title</th>
-              <th>Author Name</th>
-              <th>Book Type</th>
-              <th>Image</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Business Type</th>
+              <th>Product Type</th>
+              <th>Details</th>
               <th>Status</th>
               <th>Submission Date</th>
               <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($userRequest as $userrequest)
+          @foreach($user as $u)
             <tr>
-              <td>{{$userrequest->id}}</td>
-              <td>{{ucfirst($userrequest->users->first_name .' '.$userrequest->users->last_name)}}</td>
-              <td>{{$userrequest->title}}</td>
-              <td>{{$userrequest->author_name}}</td>
-              <td>{{$userrequest->book_type}}</td>
-              <td><img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$userrequest->image)}}" alt=""></td> 
-              <td>{{$userrequest->status == "0" ? "Pending" : "Seen"}}</td>  
-              <td>{{$userrequest->created_at}}</td>  
+              <td>{{$u->id}}</td>
+              <td>{{ucfirst($u->first_name .' '.$u->last_name)}}</td>
+              <td>{{$u->email}}</td>
+              <td>{{$u->phone}}</td>
+              <td>{{$u->businesses->business_type}}</td>
+              <td>{{$u->businesses->product_type == "both" ? 'Books, Bookmarks' : $u->businesses->product_type}}</td>
+              <td>{{$u->notes}}</td>
+              <td>{{$u->status == "0" ? "Pending" : "Seen"}}</td>  
+              <td>{{$u->created_at}}</td>  
               <td>
-                <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
+                <form action="{{action('UserController@destroyRequest', [$u->id])}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"> </span>Delete</button>
+                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                 </form>
-                  <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success">
-                  <span class="fa fa-edit"></span>
-                  View
+                  <a href="{{action('UserController@showJoinUsRequest', [$u->id])}}"><button class=" btn btn-success">
+                  <span class="fa fa-eye"></span>
+
                 </button></a>
               </td>
             </tr>

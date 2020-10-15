@@ -8,15 +8,15 @@
             <h2>Add New User</h2>
         </div>
     </div>
-    <div class="container-fluid">
+        <div class="container-fluid">
         @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
                 <strong>User Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
             
-        </div> 
-        <div class="col-md-12">
+         </div> 
+    <div class="col-md-12">
         <div class="card">
             <form action="{{ action('UserController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
@@ -77,16 +77,17 @@
                         </div>
                         
                     </div> 
-                </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('users.index')}}">
+                  </div>
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('users.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
+                        </div>
+                     </div>
+                </div>     
             </form>
         </div>
     </div>

@@ -9,7 +9,7 @@
     </div>
 @endif 
 <div class="card">
-    <div class="card-body">
+  <div class="card-body">
     <div class="table-responsive">
         <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
@@ -34,11 +34,13 @@
                     Edit
                 </button></a>
                 </td>
-        </tr>
-        @endforeach            
-    </tbody>
-  </table>
-<div>
+           </tr>
+          @endforeach            
+       </tbody>
+      </table>
+    </div>   
+  </div>  
+</div>
 @endsection
 @section('scripts')
 

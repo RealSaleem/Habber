@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserBookRequest;
 use App\Repositories\Api\UserBookRequestRepository;
 use App\Helpers\ApiHelper;
+use App\Http\Resources\UserBookResource;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 
@@ -48,7 +49,8 @@ class UserRequestController extends Controller
     {
         try {
             $userRequest = $this->model->create($request->all());
-            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, "User's Request Submitted Successfully",$userRequest);
+            return (new UserBookResource($userRequest))->additional(['message'=>"User's Request Submitted Successfully"]);
+            // return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, "User's Request Submitted Successfully",$userRequest);
         }
         catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
