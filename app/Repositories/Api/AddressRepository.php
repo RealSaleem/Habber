@@ -32,23 +32,7 @@ class AddressRepository implements RepositoryInterface {
     // create a new record in the database
     public function create(array $data)
     {
-        $userAddress  = $this->model->where('user_id',$data['user_id'])->first();
-        if(isset($userAddress)) {
-            $userAddress->address_name = $data['address_name'];
-            $userAddress->address_line1 = $data['address_line1'];
-            $userAddress->address_line2 = $data['address_line2'];
-            $userAddress->city = $data['city'];
-            $userAddress->state = $data['state'];
-            $userAddress->post_code = $data['post_code'] ?? null;
-            $userAddress->country_id = $data['country_id'];
-            $userAddress->phone = $data['phone'];
-            $userAddress->update();
-            return $userAddress;
-        }
-        else {
-            return $this->model->create($data);
-        }
-        
+        return $this->model->create($data);  
     }
     // Insert data in multiple rows
     public function createInArray(array $data, Model $model)

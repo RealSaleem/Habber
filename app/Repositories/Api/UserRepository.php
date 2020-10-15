@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
@@ -51,8 +52,6 @@ class UserRepository implements RepositoryInterface
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $filePath = "users/".$id.'/' . $fileName . time() . "." . $file->getClientOriginalExtension();
         $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
-        // $user->profile_pic = $filePath;
-
         $user = $this->model->findOrFail($id);
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
@@ -99,7 +98,9 @@ class UserRepository implements RepositoryInterface
     public function create(array $data)
     {
         $data['password'] = Hash::make($data['password']);
-        return $this->model->create($data);
+        $user =  $this->model->create($data);
+        $user->assignRole('User');
+        return $user;
     }
 
     public function createFavourite(array $data)

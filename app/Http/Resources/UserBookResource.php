@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserBookResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,20 +15,17 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-    //    dd(Storage::disk('public')->url($this->profile_pic));
         return [
             'id'     =>     $this->id,
-            'first_name'   => $this->first_name,
-            'last_name'   => $this->last_name,
-            'email'  => $this->email,
-            'phone'   => $this->phone ?? "",
-            'profile_pic' =>isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
+            'user_id'   => $this->user_id,
+            'title'   => $this->title,
+            'author_name'  => $this->author_name,
+            'book_type'   => $this->book_type ?? "",
+            'image' => url(Storage::disk('public')->url($this->image)) ?? "",
             'status' => $this->status
           ];
-          
     }
 
-    
     public function with($request)
     {
         return [
@@ -36,5 +33,4 @@ class UserResource extends JsonResource
             'code' => Response::HTTP_OK
         ];
     }
-
 }

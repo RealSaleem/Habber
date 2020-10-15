@@ -33,6 +33,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('address','AddressController');
    Route::resource('contactus','ContactController');
    Route::resource('user_requests','UserRequestController');
+   Route::get('joinus','UserController@allJoinUsRequest')->name('joinus');
+   Route::get('joinus/{id}','UserController@showJoinUsRequest');
+   Route::delete('delete/joinus/{id}','UserController@destroyRequest');
+   Route::put('joinus/{id}','UserController@updateRequest')->name('joinus.update');
 });
 
 

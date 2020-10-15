@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\RequestForBook;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class UserRequestController extends Controller
@@ -14,8 +15,8 @@ class UserRequestController extends Controller
     public function index()
     {
         //
-        $userrequest =RequestForBook ::all();
-        return view('user_requests.index', compact('userrequest'));
+        $userRequest = RequestForBook::with('users')->get();
+        return view('user_requests.index', compact('userRequest'));
     }
 
     /**
@@ -26,8 +27,9 @@ class UserRequestController extends Controller
     public function create()
     {
         //
-        $userrequest =RequestForBook ::all();
-        return view('user_requests.create', compact('userrequest'));
+        // $userrequest = RequestForBook::first();
+       
+       
     }
 
     /**
@@ -49,7 +51,8 @@ class UserRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $userRequest = RequestForBook::with('users')->find($id);
+        return view('user_requests.detail', compact('userRequest'));
     }
 
     /**
@@ -72,7 +75,21 @@ class UserRequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $error = false;
+        try{
+            $userRequest = RequestForBook::find($id);
+            $userRequest->status = $request->status;
+            $userRequest->update();
+            return back()->with('success', 'Status Updated Successfully!');
+        }
+        catch(\Exception $e) {
+           
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return back()->with('success', $message);
+        }
     }
 
     /**
@@ -83,6 +100,20 @@ class UserRequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $error = false;
+        try{
+            Storage::disk('public')->deleteDirectory('user_requests/' .  $id);
+            $userRequest = RequestForBook::find($id);
+            $userRequest->delete();
+            return back()->with('success', 'Request Deleted Successfully!');
+        }
+        catch(\Exception $e) {
+           
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return back()->with('success', $message);
+        }
     }
 }
