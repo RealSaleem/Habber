@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\RequestForBook;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 use Illuminate\Http\Request;
+
 
 class UserRequestController extends Controller
 {
@@ -41,6 +43,29 @@ class UserRequestController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'user_id'=> 'required',
+            'title' => 'required',
+            'author_name' => 'required',
+            'book_type' => 'required',
+            'image'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
+            ]);
+            $userrequest = new RequestForBook();
+            $userrequest->user_id = $request->user_id;
+            $userrequest->title = $request->title;
+            $userrequest->author_name = $request->author_name;
+            $userrequest->book_type= $request->book_type;
+            $userrequest->image = "null"; 
+            $userrequest->save();
+            $updateuserrequest =RequestForBook::find($userrequest->id);
+            $file = $request->image;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "user_requests/".$userrequest->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $updateuserrequest->image = $filePath;
+            $updateuserrequest->update();   
+            return back()->with('success', 'User Request successfully saved');
+       
     }
 
     /**
@@ -64,6 +89,9 @@ class UserRequestController extends Controller
     public function edit($id)
     {
         //
+        $userrequest = RequestForBook::findOrFail($id);
+        $user = User::where('id', '!=', 1)->get();
+        return view('user_requests.edit', compact('user_request','user'));
     }
 
     /**
@@ -91,6 +119,7 @@ class UserRequestController extends Controller
             return back()->with('success', $message);
         }
     }
+    
 
     /**
      * Remove the specified resource from storage.

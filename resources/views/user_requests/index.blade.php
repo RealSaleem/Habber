@@ -41,7 +41,7 @@
                 <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
+                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"> </span>Delete</button>
                 </form>
                   <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success">
                   <span class="fa fa-edit"></span>

@@ -6,15 +6,15 @@
             <h2>Add New BookClub</h2>
         </div>
     </div>
-    <div class="container-fluid">
-        @if(Session::has('success'))
+        <div class="container-fluid">
+             @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
                 <strong>BookClub Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
-        @endif 
+              @endif 
             
         </div> 
-        <div class="col-md-12">
+    <div class="col-md-12">
         <div class="card">
             <form action="{{action('BookClubController@store')}}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
@@ -34,15 +34,16 @@
                             <span class="text-danger">{{$errors->first('banner_image')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('bookclubs.index')}}">
+                     <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
+                       </div>
+                      </div>
+                </div>     
             </form>
         </div>
     </div>

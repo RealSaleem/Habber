@@ -60,15 +60,16 @@
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('business.index')}}">
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('business.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
                     </div>
-                </div>
+                </div>   
             </form>
         </div>
     </div>

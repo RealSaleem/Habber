@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb">
+        <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Edit User</h2>
         </div>
-    </div>
-    <div class="container-fluid">
+        </div>
+        <div class="container-fluid">
         @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
                 <strong>User Edited! &nbsp;</strong>{{Session::get('success')}}
@@ -14,7 +14,7 @@
         @endif 
             
         </div> 
-        <div class="col-md-12">
+    <div class="col-md-12">
         <div class="card">
                 <form  action="{{ action('UserController@update',[$user->id])}}" method="POST" enctype="multipart/form-data" >   
                 {{ csrf_field() }}     
@@ -50,7 +50,7 @@
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
-                    <div class="form-group row">
+                     <div class="form-group row">
                   
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">  Role</label>
                         <div class="col-sm-9">
@@ -61,33 +61,34 @@
                             </select>
                             <span class="text-danger">{{$errors->first('role')}}</span>
                         </div>
-                    </div>
-                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Picture</label>
-                        <div class="controls">
+                      </div>
+                       <div class="form-group row">
+                          <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Picture</label>
+                          <div class="controls">
                             <input type="file" name="profile_pic" id="profile_pic">
                             <span class="text-danger">{{$errors->first('profile_pic')}}</span>
                             @if(isset($user->profile_pic))
-                            <div class="form-group row">
-                                <div class="col-sm-9">
+                              <div class="form-group row">
+                                  <div class="col-sm-9">
                                     <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$user->profile_pic)}}" alt="image">
-                                </div>
-                            </div>
+                                  </div>
+                               </div>
                             @endif
-                        </div>  
+                          </div>  
                       
-                    </div>
+                         </div>
                    
-                </div>
-                <div class="border-top">
-                    <div class="card-body">
+                    </div>
+                     <div class="border-top">
+                        <div class="card-body">
                         <a href="{{route('users.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </div>
+                        </div>
+                     </div>
+                </div>    
             </form>
         </div>
     </div>

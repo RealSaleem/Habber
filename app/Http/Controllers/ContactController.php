@@ -26,8 +26,7 @@ class ContactController extends Controller
     public function create()
     {
         //
-        $contact = ContactUs::all();
-        return view('contactus.create',compact('contact'));
+        
     }
 
     /**
@@ -50,6 +49,8 @@ class ContactController extends Controller
     public function show($id)
     {
         //
+        $contact =ContactUs::findOrFail($id);
+        return view('contactus.detail',compact('contact'));
     }
 
     /**
@@ -84,5 +85,8 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+        $contact =ContactUs ::findOrFail($id);
+        $contact->delete();
+        return back()->with('success', 'Contact deleted successfully');
     }
 }

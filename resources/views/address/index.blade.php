@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Addresses</h1>
+<h1 class="page-title">Address</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -10,8 +10,8 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <div class="table-responsive">
-        <table id="zero_config" class="table table-striped table-bordered">
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Address Name</th>
@@ -23,38 +23,42 @@
                         <th>Post Code </th>         
                         <th>Phone </th>
                         <th>User</th>
-                        <th> Action</th>  
+                        <th>Action</th>  
                                      
                     </tr>
                </thead>
                <tbody>
                @foreach($address as $address)
-        <tr>
+            <tr>
             
-            <td>{{$address->address_name}}</td>
-            <td>{{$address->address_line1}}</td>
-            <td>{{$address->address_line2}}</td>
-            <td>{{$address->city}}</td>  
-            <td>{{$address->state}}</td>
-            <td>{{$address->country}}</td>
-            <td>{{$address->post_code}}</td>
-            <td>{{$address->phone}}</td>
-            <td>{{$address->user}}</td>
-                <form action="" method="post">
+              <td>{{$address->address_name}}</td>
+              <td>{{$address->address_line1}}</td>
+              <td>{{$address->address_line2}}</td>
+              <td>{{$address->city}}</td>  
+              <td>{{$address->state}}</td>
+              <td>{{$address->country_id}}</td>
+              <td>{{$address->post_code}}</td>
+               <td>{{$address->phone}}</td>
+               <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>
+              <td>
+                <form action="{{ action('AddressController@destroy', [$address->id])}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-                <a href=""><button class=" btn btn-success">
-                <span class="fa fa-edit"></span>
-                Edit</button></a>                                 
-            </td>       
+                <a href="{{ action('AddressController@edit', [$address->id])}}"><button class=" btn btn-success">
+                    <span class="fa fa-edit"></span>
+                    Edit
+                </button></a>             
+              </td>       
                                  
-        </tr>
-        @endforeach      
-    </tbody>
-  </table>
-<div>
+            </tr>
+               @endforeach         
+             </tbody>
+          </table>
+        </div>  
+    </div>
+</div>
 @endsection
 @section('scripts')
 <script>
