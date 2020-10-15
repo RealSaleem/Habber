@@ -8,7 +8,7 @@
             <h2>Add New User Request</h2>
         </div>
     </div>
-    <div class="container-fluid">
+        <div class="container-fluid">
         @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
                 <strong>User Request Created! &nbsp;</strong>{{Session::get('success')}}
@@ -17,8 +17,8 @@
             
         </div> 
         <div class="col-md-12">
-        <div class="card">
-            <form action="{{ action('UserRequestController@update'[$userrequest->id]) }}" method="post"  enctype="multipart/form-data" >   
+            <div class="card">
+              <form action="{{ action('UserRequestController@update'[$userrequest->id]) }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="card-body">
@@ -68,17 +68,17 @@
                             </div>
                             @endif
                         </div>  
-                    </div>
-                </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('user_requests.index')}}">
+                     </div>
+                   <div class="border-top">
+                      <div class="card-body">
+                       <a href="{{route('user_requests.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Update</button>
+                       </div>
                     </div>
-                </div>
+                </div>   
             </form>
         </div>
     </div>

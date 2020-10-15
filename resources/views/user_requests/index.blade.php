@@ -11,7 +11,7 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <div class="table-responsive">
+     <div class="table-responsive">
         <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -26,27 +26,25 @@
                <tbody>
               @foreach($userrequest as $userrequest)
         <tr>
-           <td>{{$userrequest->users['first_name'] ." ". $business->users['last_name']}}</td>
+           <td>{{$userrequest->user_id}</td>
             <td>{{$userrequest->title}}</td>
             <td>{{$userrequest->author_name}}</td>
             <td>{{$userrequest->book_type}}</td>
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($userrequest->image) ?  url('storage/'.$userrequest->image) : url('storage/user_requests/default.png') }}" alt=""> </td> 
             <td>
-                <form action="{{ action('UserRequestController@destroy',[$userrequest->id])}}" method="post">
+                <form action="" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
+                  <button class="btn btn-danger" type="submit">See More</button>
                 </form>
-                    <a href="{{action('UserRequestController@edit',[$userrequest->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
                 </td>
-        </tr>
-        @endforeach            
-    </tbody>
-  </table>
-<div>
+          </tr>
+          @endforeach            
+       </tbody>
+       </table>
+      </div>   
+    </div>     
+ </div>
 @endsection
 @section('scripts')
 

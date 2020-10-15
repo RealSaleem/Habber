@@ -10,8 +10,8 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <div class="table-responsive">
-        <table id="zero_config" class="table table-striped table-bordered">
+       <div class="table-responsive">
+           <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -33,7 +33,7 @@
                </thead>
                <tbody>
                @foreach($book as $key => $book)
-        <tr>
+         <tr>
             <td>{{$book->title}}</td>
             <td>{{$book->author_name}}</td>
             <td>{{$book->cover_type}}</td>
@@ -74,11 +74,13 @@
                     Edit
                 </button></a>
             </td>
-        </tr>
-        @endforeach            
-    </tbody>
-  </table>
-<div>
+           </tr>
+            @endforeach            
+           </tbody>
+            </table>
+         </div>   
+    </div>
+</div>
 @endsection
 @section('scripts')
 <script>

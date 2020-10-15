@@ -11,8 +11,8 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <div class="table-responsive">
-        <table id="zero_config" class="table table-striped table-bordered">
+       <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -30,7 +30,7 @@
                </thead>
                <tbody>
                @foreach($bookmark as $bookmark)
-        <tr>
+           <tr>
             
             <td>{{$bookmark->title}}</td>
             <td>{{$bookmark->maker_name}}</td>
@@ -52,11 +52,13 @@
                 Edit</button></a>                                 
             </td>       
                                  
-        </tr>
-        @endforeach      
-    </tbody>
-  </table>
-<div>
+           </tr>
+           @endforeach      
+            </tbody>
+            </table>
+        </div>   
+    </div>
+</div>
 @endsection
 @section('scripts')
 <script>

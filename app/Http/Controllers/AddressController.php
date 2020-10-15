@@ -5,7 +5,7 @@ use App\Address;
 use App\User;
 use Illuminate\Http\Request;
 
-class AddressessController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class AddressessController extends Controller
      */
     public function index()
     {
-        //
-        $address = Address::with('users')->get();
-        return view('addressess.index', compact('address'));
+        $address = Address::all();
+        return view('address.index', compact('address'));
     }
 
     /**
@@ -26,9 +25,8 @@ class AddressessController extends Controller
      */
     public function create()
     {
-        //
         $user = User::where('id', '!=', 1)->get();
-        return view('addressess.create',compact('user'));
+        return view('address.create',compact('user'));
     }
 
     /**
@@ -49,8 +47,7 @@ class AddressessController extends Controller
             'country_id' => 'required',
             'post_code' => 'required|numeric',
             'phone' => 'required|numeric',   
-            'user_id' => 'required',  
-             
+            'user_id' => 'required',      
         ]);
         $address = new Address();
         $address->address_name = $request->address_name;
@@ -63,7 +60,7 @@ class AddressessController extends Controller
         $address->phone= $request->phone;
         $address->user_id = $request->user_id; 
         $address->save();   
-       return back()->with('success', 'Adress successfully saved');
+       return back()->with('success', 'Address successfully saved');
     }
 
     /**
@@ -86,9 +83,9 @@ class AddressessController extends Controller
     public function edit($id)
     {
         //
-        $address = Address::findOrFail($id);
+        $address = Address::with('users')->findOrFail($id);
         $user = User::where('id', '!=', 1)->get();
-        return view('addressess.edit', compact('address','user'));
+        return view('address.edit', compact('address','user'));
     }
 
     /**
@@ -110,7 +107,6 @@ class AddressessController extends Controller
             'country_id' => 'required',
             'post_code' => 'required|numeric',
             'phone' => 'required|numeric',   
-            'user_id' => 'required',  
              
         ]);
         $address = Address::find($id);
@@ -122,7 +118,6 @@ class AddressessController extends Controller
         $address->country_id = $request->country_id;
         $address->post_code= $request->post_code;
         $address->phone= $request->phone;
-        $address->user_id = $request->user_id; 
         $address->save();   
        return back()->with('success', 'Address update successfully');
     }

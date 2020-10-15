@@ -59,17 +59,17 @@
                          <div class="col-md-6">
                          <input id="image" type="file" class="form-control" name="image">
                             <span class="text-danger">{{$errors->first('image')}}</span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('user_requests.index')}}">
+                          </div>
+                    </div>
+                   <div class="border-top">
+                      <div class="card-body">
+                        <a href="{{route('user_requests.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                        </div>
+                   </div>
                 </div>
             </form>
         </div>

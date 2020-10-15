@@ -1,22 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Edit BookClub</h2>
-        </div>
-    </div>
-    <div class="container-fluid">
-        @if(Session::has('success'))
-            <div class="alert alert-success text-center" role="alert">
-                <strong>BookClub Edited! &nbsp;</strong>{{Session::get('success')}}
+            <div class="col-lg-12 margin-tb">
+              <div class="pull-left">
+               <h2>Edit BookClub</h2>
+               </div>
             </div>
-        @endif 
-            
-        </div> 
-        <div class="col-md-12">
+            <div class="container-fluid">
+              @if(Session::has('success'))
+               <div class="alert alert-success text-center" role="alert">
+                <strong>BookClub Edited! &nbsp;</strong>{{Session::get('success')}}
+               </div>
+                @endif   
+            </div> 
+    <div class="col-md-12">
         <div class="card">
-            <form action="{{ action('BookClubController@update',[$bookclub->id])}}" method="POST"  enctype="multipart/form-data" >   
+                <form action="{{ action('BookClubController@update',[$bookclub->id])}}" method="POST"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="card-body">
@@ -42,14 +41,15 @@
                             @endif
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('bookclubs.index')}}">
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
+                         </div>
+                     </div>    
                 </div>
             </form>
         </div>

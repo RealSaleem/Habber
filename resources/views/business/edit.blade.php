@@ -14,9 +14,9 @@
         @endif 
             
         </div> 
-        <div class="col-md-12">
+    <div class="col-md-12">
         <div class="card">
-        <form  action="{{ action('BusinessController@update',[$business->id])}}" method="POST" enctype="multipart/form-data" >   
+          <form  action="{{ action('BusinessController@update',[$business->id])}}" method="POST" enctype="multipart/form-data" >   
                 {{ csrf_field() }}     
                   @method('PUT')
                 <div class="card-body">
@@ -59,15 +59,16 @@
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('business.index')}}">
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('business.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Update </button>
-                    </div>
-                </div>
+                       </div>
+                     </div>
+                </div>   
             </form>
         </div>
     </div>

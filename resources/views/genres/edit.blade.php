@@ -14,7 +14,7 @@
         @endif 
             
         </div> 
-        <div class="col-md-12">
+     <div class="col-md-12">
         <div class="card">
             <form action="{{ action('GenreController@update',[$genre->id])}}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
@@ -28,15 +28,16 @@
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('genres.index')}}">
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('genres.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Update</button>
+                       </div>
                     </div>
-                </div>
+                </div>   
             </form>
         </div>
     </div>
