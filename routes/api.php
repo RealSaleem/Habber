@@ -32,7 +32,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('bookmarks', 'BookmarkController@index');
         Route::get('bookmarks/{id}', 'BookmarkController@show');
         Route::get('bookclubs', 'BookclubController@index');
-        Route::get('bookclubs/{id}', 'BookclubController@index');
+        Route::get('bookclubs/{id}', 'BookclubController@show');
         Route::post('favourites', 'FavouriteController@store');
         Route::get('favourites/{id}', 'FavouriteController@show');
         Route::delete('favourites/{id}', 'FavouriteController@destroy');
@@ -42,6 +42,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('addresses/{id}', 'AddressController@show');
         Route::put('users/{id}', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
+        Route::get('banners', 'BannerController@index');
        
     });
 });

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\GenreResource;
+use Illuminate\Support\Facades\Storage;
 
 class BookResource extends JsonResource
 {
@@ -29,6 +30,7 @@ class BookResource extends JsonResource
             'business_id'  => $this->business_id,
             'stock_status'  => $this->stock_status,
             'book_language'    => $this->book_language ?? "",
+            'image' => isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'status' => $this->status
           ];
     }

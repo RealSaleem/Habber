@@ -105,15 +105,16 @@
                             @endif
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('bookmarks.index')}}">
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('bookmarks.index')}}">
                         <button type="button" class=" btn btn-danger">
                             Cancel
                         </button></a>
                         <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </div>
+                       </div>
+                     </div>
+               </div>    
             </form>
         </div>
     </div>

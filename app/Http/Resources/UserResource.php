@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             'last_name'   => $this->last_name,
             'email'  => $this->email,
             'phone'   => $this->phone ?? "",
-            'profile_pic' =>isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
+            'profile_pic' => isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
             'status' => $this->status
           ];
           
