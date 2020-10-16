@@ -18,16 +18,18 @@
                        <th>Description</th>
                         <th>Status</th>
                         <th>Image</th>
+                        <th>Order</th>
                         <th>Action</th>
                     </tr>
                </thead>
-               <tbody>
+               <tbody class="sortable">
               @foreach($banner as $banner)
-          <tr>
+          <tr class="row1" data-id="{{ $banner->id }}">
             
             <td>{{$banner->description}}</td> 
             <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "enable" : "disable"}}</td>  
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
+            <td>{{$banner->sort_order}}</td>
             <td>
                 <form action="{{ action('BannerController@destroy', [$banner->id])}}" method="post">
                   @csrf
@@ -54,6 +56,7 @@
 </div>
 @endsection
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#zero_config').DataTable({
@@ -96,6 +99,44 @@ function enablebanner(id) {
         }
     });
 }
+
+    $( ".sortable" ).sortable({
+        items: "tr",
+        cursor: 'move',
+        opacity: 0.6,
+        update: function() {
+            sendOrderToServer();
+        }
+    });
+    
+    function sendOrderToServer() {
+        var order = [];
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $('tr.row1').each(function(index,element) {
+        order.push({
+            id: $(this).attr('data-id'),
+            position: index+1
+        });
+        });
+
+        $.ajax({
+        type: "POST", 
+        dataType: "json", 
+        url: "{{ url('admin/banners-sortable') }}",
+            data: {
+            order: order,
+            _token: token
+        },
+        success: function(response) {
+            if (response == true) {
+                toastr.success('Banners Order Updated');
+                window.setTimeout(function(){location.reload()},2000);
+            } else {
+                console.log(response);
+            }
+        }
+        });
+    }
 
 </script>
 @stop

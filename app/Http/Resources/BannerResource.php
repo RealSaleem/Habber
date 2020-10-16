@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Resources;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
-class BookclubResource extends JsonResource
+class BannerResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,9 @@ class BookclubResource extends JsonResource
     {
         return [
             'id'     => $this->id,
-            'name'   => $this->name,
-            'image' => isset($this->banner_image) ? url(Storage::disk('public')->url($this->banner_image)) : "" ,
+            'description'   => $this->description,
+            'image' =>isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
+            'order' => $this->sort_order,
         ];
     }
 

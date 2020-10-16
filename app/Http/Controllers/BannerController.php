@@ -15,7 +15,7 @@ class BannerController extends Controller
     public function index()
     {
         //
-         $banner = Banner::all();
+        $banner = Banner::orderBy('sort_order','ASC')->get();
         return view('banners.index', compact('banner'));
     }
 
@@ -84,6 +84,21 @@ class BannerController extends Controller
         //
         $banner = Banner::findOrFail($id);
         return view('banners.edit', compact('banner'));
+    }
+
+    public function sortBanners(Request $request)
+    {
+        $banners = Banner::all();
+
+        foreach ($banners as $banner) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $banner->id) {
+                    $banner->update(['sort_order' => $order['position']]);
+                }
+            }
+        }
+        
+        return response('true', 200);
     }
 
     /**

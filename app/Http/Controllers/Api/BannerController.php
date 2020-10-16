@@ -1,23 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\BookClub;
-use App\Repositories\Api\BookclubRepository;
-use App\Helpers\ApiHelper;
+use App\Banner;
 use App\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
-use App\Http\Resources\BookclubCollection;
-use App\Http\Resources\BookclubResource;
+use App\Helpers\ApiHelper;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use App\Http\Resources\BannerCollection;
 
-class BookclubController extends Controller
+class BannerController extends Controller
 {
-    protected $model;
-    
-    
-    public function __construct(BookClub $model) {
-        $this->model = new BookclubRepository($model);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +17,13 @@ class BookclubController extends Controller
      */
     public function index()
     {
-        try {
-            $BookClubs = $this->model->all();
-            if(count($BookClubs) != 0) {
-                return (new BookclubCollection($BookClubs));
+        try{
+            $banner = Banner::where('status',1)->orderBy('sort_order','ASC')->get();
+            if(count($banner)) {
+                return (new BannerCollection($banner));
             }
             else {
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Clubs Found");
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Banners Found");
             }
         }
         catch(\Exception $e) {
@@ -68,18 +60,7 @@ class BookclubController extends Controller
      */
     public function show($id)
     {
-        try {
-            $BookClubs = $this->model->show($id);
-            if(isset($BookClubs)) {
-                return (new BookclubResource($BookClubs));
-            }
-            else {
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Club Found");
-            }
-        }
-        catch(\Exception $e) {
-            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
-        }
+        //
     }
 
     /**
