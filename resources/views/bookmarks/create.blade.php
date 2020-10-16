@@ -110,7 +110,7 @@
                         </button></a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                        </div>
-                     </div>
+                    </div>
                 </div>    
             </form>
         </div>

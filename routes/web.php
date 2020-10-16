@@ -37,6 +37,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('joinus/{id}','UserController@showJoinUsRequest');
    Route::delete('delete/joinus/{id}','UserController@destroyRequest');
    Route::put('joinus/{id}','UserController@updateRequest')->name('joinus.update');
+   Route::resource('banners','BannerController');
+   Route::post('banner/enable/{id}','BannerController@enableBanner')->name('enable_banner');
+   Route::post('banner/disable/{id}','BannerController@disableBanner')->name('disable_banner');
 });
 
 
