@@ -58,6 +58,7 @@ class BooksController extends Controller
             'quantity' => 'required|numeric',
             'business' => 'required',
             'stock_status' => 'required',
+            'featured'=>'required',
             'bookclub' => 'required',
             "genre" => 'required|array|min:1|max:3',
             'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
@@ -74,6 +75,7 @@ class BooksController extends Controller
             $book->quantity =$request->quantity;
             $book->business_id = $request->business;
             $book->stock_status = $request->stock_status;
+            $book->featured = $request->featured;
             $book->book_club_id = $request->bookclub;
             $book->image = "null"; 
             $book->save();
@@ -141,6 +143,7 @@ class BooksController extends Controller
             'quantity' => 'required|numeric',
             'business' => 'required',  
             'stock_status' => 'required',
+            'featured'=>'required',
             'bookclub' => 'required',
             "genre" => 'required|array|min:1|max:3',
             'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048' 
@@ -159,6 +162,7 @@ class BooksController extends Controller
         $book->business_id = $request->business;
         $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
+        $book->featured = $request->featured;
         if(count($book->genres)+ count($request->genre) > 3 ) {
             $book->genres()->detach($id);
         }

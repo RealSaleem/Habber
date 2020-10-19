@@ -23,6 +23,7 @@
                         <th>Size</th>         
                         <th>Quantity </th>
                         <th>Business Name</th>
+                        <th>Feature</th>
                         <th>Image</th>
                         <th> Action</th>  
                                      
@@ -40,6 +41,7 @@
             <td>{{$bookmark->size}}</td>
             <td>{{$bookmark->quantity}}</td>
             <td>{{$bookmark->businesses['name']}}</td>  
+            <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
             <td>
                 <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
