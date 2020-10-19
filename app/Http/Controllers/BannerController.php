@@ -43,11 +43,14 @@ class BannerController extends Controller
         $validatedData = $request->validate([
             'description' => 'required', 
             'status' => 'required',
+            'url'  => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+             
+         ]);
         $banner = new Banner();
         $banner->description = $request->description;
         $banner->status = $request->status;
+        $banner->url = $request->url;
         $banner->image = "null"; 
         $banner->save();
         $updatebanner = Banner::find($banner->id);
@@ -99,11 +102,13 @@ class BannerController extends Controller
         $validatedData = $request->validate([
             'description' => 'required', 
             'status' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+             'url' => 'required',
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         $banner = Banner::find($id);
         $banner->description = $request->description;
         $banner->status = $request->status;
+        $banner->url = $request->url;
         if($request->has('image'))
         {   
             Storage::disk('public')->deleteDirectory('banners/'. $id);

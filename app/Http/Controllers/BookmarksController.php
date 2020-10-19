@@ -52,6 +52,7 @@ class BookmarksController extends Controller
             'quantity' => 'required|numeric',
             'business_id' => 'required',
             'stock_status' => 'required',
+            'featured'=>'required',
             'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
             ]);
             $bookmark = new Bookmark();
@@ -64,6 +65,7 @@ class BookmarksController extends Controller
             $bookmark->quantity =$request->quantity;
             $bookmark->business_id = $request->business_id;
             $bookmark->stock_status = $request->stock_status;
+            $bookmark->featured = $request->featured;
             $bookmark->image = "null"; 
             $bookmark->save();
             $updatebookmark = Bookmark::find($bookmark->id);
@@ -124,6 +126,7 @@ class BookmarksController extends Controller
             'business_id' => 'required|numeric',
             'image_url'=> 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048', 
             'stock_status' => 'required',
+            'featured'=>'required'
             ]);
         $bookmark = Bookmark::find($id);
         $bookmark->title = $request->title;
@@ -135,6 +138,7 @@ class BookmarksController extends Controller
         $bookmark->quantity =$request->quantity;
         $bookmark->business_id = $request->business_id;
         $bookmark->stock_status = $request->stock_status;
+        $bookmark->featured = $request->featured;
         if($request->has('image_url')) 
         {
             Storage::disk('public')->deleteDirectory('bookmarks/'. $id);
