@@ -132,8 +132,18 @@
                             <span class="text-danger">{{$errors->first('stock_status')}}</span>
                         </div>
                      </div> 
+                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Feature</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="featured"  id="status">
+                                <option value="0" {{ (old('featured') == "0" ? "selected":"")}}>Featured</option>
+                                <option value="1" {{ (old('featured') == "1" ? "selected":"")}}>Not Featured</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('featured')}}</span>
+                        </div>
+                     </div> 
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image Url</label>
+                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image </label>
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url">
                             <span class="text-danger">{{$errors->first('image_url')}}</span>

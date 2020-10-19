@@ -81,6 +81,16 @@
                         </div>
                      </div> 
                      <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Feature</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="featured"  id="status">
+                                <option value="0" {{ ($bookmark->featured == 0 ? "selected":"")}}>Not Featured</option>
+                                <option value="1" {{ ($bookmark->featured == 1 ? "selected":"")}}>Featured</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('featured')}}</span>
+                        </div>
+                     </div> 
+                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="business_id" id="business_id">
@@ -92,7 +102,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image Url</label>
+                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image </label>
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url" >
                             <span class="text-danger">{{$errors->first('image_url')}}</span>

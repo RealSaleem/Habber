@@ -17,6 +17,7 @@
                     <tr>
                        <th>Description</th>
                         <th>Status</th>
+                        <th>Url</th>
                         <th>Image</th>
                         <th>Order</th>
                         <th>Action</th>
@@ -28,6 +29,7 @@
             
             <td>{{$banner->description}}</td> 
             <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "enable" : "disable"}}</td>  
+            <td>{{$banner->url}}</td> 
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
             <td>{{$banner->sort_order}}</td>
             <td>
