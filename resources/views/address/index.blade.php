@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Address</h1>
+<h1 class="page-title">@lang('messages.address_page.address')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -36,7 +36,7 @@
               <td>{{$address->address_line2}}</td>
               <td>{{$address->city}}</td>  
               <td>{{$address->state}}</td>
-              <td>{{$address->country_id}}</td>
+              <td>{{($address->countries['name'])}}</td>
               <td>{{$address->post_code}}</td>
                <td>{{$address->phone}}</td>
                <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>

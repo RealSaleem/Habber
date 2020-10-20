@@ -1658,5 +1658,66 @@ return [
         'min_price' => 'قیمت اتاق باید حداقل باشد :minimum_price :currency',
         'request_send_to_host' => 'أرسل طلب الاتصال إلى المضيف',
     ],
+    'user_page'=> [
+        'users' => 'المستخدمين',
+        'add_new_user'=> 'إضافة مستخدم جديد',
+        'edit_user'=> 'تحرير العضو'
+    ],
+    'book_page' => [
+        'books' => 'الكتب',
+        'add_new_book'=> 'إضافة كتاب جديد',
+        'edit_book'=> ' تحرير_الكتاب'
+    ],
+    'bookmark_page' => [
+        'bookmarks' => 'إشارات مرجعية',
+        'add_new_bookmark'=> 'إضافة إشارة مرجعية جديدة',
+        'edit_bookmarks'=> 'تحرير_العلامات'
+    ],
+
+    'bookclub_page' => [
+        'bookclubs' => 'نوادي الكتب',
+        'add_new_bookclub'=> 'إضافة نادي كتاب جديد',
+        'edit_bookclub'=> 'تحرير نادي الكتاب'
+    ],
+    'genre_page' => [
+        'genres' =>'الأنواع',
+        'add_new_genre'=> 'إضافة نوع جديد',
+        'edit_genre'=> 'نوع التحرير'
+    ],
+    'business_page' => [
+        'business' => 'اعمال',
+        'add_new_business'=> 'اضف عمل جديد',
+        'edit_business'=> 'تحرير الأعمال'
+    ],
+    'address_page' => [
+        'address' => 'عنوان',
+        'add_new_address'=> 'أضف عنوان جديد',
+        'edit_address'=> 'تعديل العنوان'
+    ],
+    'userrequest_page' => [
+        'userrequest' => 'طلب المستخدم'
+    ],
+    'contactus_page' => [
+        'contactus' => 'اتصل بنا',
+        'add_new_contactus'=> 'إضافة اتصال جديد بنا',
+        'edit_contactus'=> 'تحرير_اتصل بنا'
+    ],
+    'joinusrequest_page'=> [
+        'joinusrequest' =>'طلب الانضمام إلينا'
+    ],
+    'banner_page' => [
+        'banners' => 'لافتات',
+        'add_new_banner'=> 'إضافة لافتة جديدة',
+        'edit_banner'=> 'تحرير الشعار'
+    ],
+
+
+    'sidebar' => [
+       
+        'list' => 'قائمة',
+        'create' => 'خلق',
+
+
+    ],
 
 ];
