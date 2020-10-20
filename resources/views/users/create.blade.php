@@ -21,45 +21,45 @@
             <form action="{{ action('UserController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Add User Info</h4>
+                    <h4 class="card-title">@lang('messages.user_page.add_user_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.first_name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="first_name" id="first_name"  placeholder="First Name Here">
+                            <input type="text" class="form-control" name="first_name" id="first_name"  placeholder="First Name ">
                             <span class="text-danger">{{$errors->first('first_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.last_name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="last_name" id="second_name" placeholder="Last Name Here">
+                            <input type="text" class="form-control" name="last_name" id="second_name" placeholder="Last Name ">
                             <span class="text-danger">{{$errors->first('last_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Password</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.password')</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password Here">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password ">
                             <span class="text-danger">{{$errors->first('password')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Email</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.email')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Email Here">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Email ">
                             <span class="text-danger">{{$errors->first('email')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.contact_no')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Contact No Here">
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Contact No ">
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Role</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.role')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="role" id="roles">
                                 @foreach($roles as $r)
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="profile_pic" class="col-sm-3 text-right control-label col-form-label">Picture</label>
+                        <label for="profile_pic" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.picture')</label>
                          <div class="col-md-6">
                          <input id="profile_pic" type="file" class="form-control" name="profile_pic">
                             <span class="text-danger">{{$errors->first('profile_pic')}}</span>

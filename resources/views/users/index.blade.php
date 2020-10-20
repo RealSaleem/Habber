@@ -55,11 +55,11 @@
                                 </div>
                                 <div class="col-2">
                                     @if($user->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">Deactivate</button></a>
+                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a>
                                     @else
                                         <a>
                                             <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
-                                                Activate
+                                            @lang('messages.user_page.activate')
                                             </button>
                                         </a>
                                     @endif

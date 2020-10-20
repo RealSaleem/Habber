@@ -55,7 +55,7 @@
                 </td>
             @elseif( count($book->genres) < 2 && count($book->genres) > 0)
                 <td>
-                    {{$book->genres['title']}}
+                    {{$book->genres[0]->title}}
                 </td>
             @else
                 <td>
