@@ -3,69 +3,68 @@
     <!-- Sidebar navigation-->
     <nav class="sidebar-nav">
         <ul id="sidebarnav" class="p-t-30">
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('welcome')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">User </span></a>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('welcome')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">@lang('messages.header.dashboard')</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.user_page.users')  </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('users.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('users.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('users.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('users.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Books </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.book_page.books') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('books.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('books.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('books.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('books.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Bookmarks </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.bookmark_page.bookmarks') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('bookmarks.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('bookmarks.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Book Clubs    </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.bookclub_page.bookclubs')    </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('bookclubs.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('bookclubs.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('bookclubs.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('bookclubs.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Genres </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.genre_page.genres') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('genres.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('genres.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('genres.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('genres.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create')</span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Business </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.business_page.business') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('business.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('business.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('business.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('business.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Address </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.address_page.address') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('address.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('address.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('address.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('address.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> User Request </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.userrequest_page.userrequest') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('user_requests.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('user_requests.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Contact Us </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.contactus_page.contactus') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('contactus.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <!-- <li class="sidebar-item"><a href="{{ route('contactus.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li> -->
+                    <li class="sidebar-item"><a href="{{ route('contactus.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Join Us Requests </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.joinusrequest_page.joinusrequest') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('joinus') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('joinus') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Banners </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.banner_page.banners') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
-                    <li class="sidebar-item"><a href="{{ route('banners.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> List </span></a></li>
-                    <li class="sidebar-item"><a href="{{ route('banners.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Create </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('banners.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('banners.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
 

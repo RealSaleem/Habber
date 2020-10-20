@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Address;
 use App\User;
+use App\Country;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -14,7 +15,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $address = Address::all();
+        $address = Address::with('countries')->get();
         return view('address.index', compact('address'));
     }
 
@@ -26,7 +27,8 @@ class AddressController extends Controller
     public function create()
     {
         $user = User::where('id', '!=', 1)->get();
-        return view('address.create',compact('user'));
+        $country = Country::all();
+        return view('address.create',compact('user','country'));
     }
 
     /**
@@ -87,7 +89,9 @@ class AddressController extends Controller
         $address = Address::with('users')->findOrFail($id);
         $user = User::all();
         $fromUser = request()->fromUser;
-        return view('address.edit', compact('address','user','fromUser'));
+        $country = Country::all();
+        return view('address.edit', compact('address','user','fromUser','country'));
+
     }
 
     /**

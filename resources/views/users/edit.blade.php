@@ -3,7 +3,7 @@
 <div class="row">
         <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Edit User</h2>
+            <h2>@lang('messages.user_page.edit_user')</h2>
         </div>
         </div>
         <div class="container-fluid">

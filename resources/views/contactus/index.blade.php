@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Contact Us</h1>
+<h1 class="page-title">@lang('messages.contactus_page.contactus')</h1>
 <div class="ml-auto text-right">
 </div> 
    @if(Session::has('success'))
@@ -34,7 +34,7 @@
                         <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
                         @csrf
                             @method('GET')
-                            <button class="btn btn-success" type="submit"><span class="fa fa-trash"></span></button>
+                            <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
                         </form>
                     </div>
                     <div class="col-2">
@@ -42,7 +42,7 @@
                         @csrf
                         @method('Delete')
                             <button class=" btn btn-danger" type="submit">
-                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-trash"></span>
                             </button>
                         </form>
                     </div>

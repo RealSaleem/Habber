@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">User Request </h1>
+<h1 class="page-title">@lang('messages.userrequest_page.userrequest') </h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))

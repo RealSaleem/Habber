@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Address</h2>
+            <h2>@lang('messages.address_page.add_new_address')</h2>
         </div>
     </div>
        <div class="container-fluid">
@@ -42,10 +42,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Country</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Country</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="country_id"  value="{{ old('country_id') }}" id="country_id"  placeholder="Country">
-                            <span class="text-danger">{{$errors->first('country_id')}}</span>
+                            <select  class="form-control" name="country_id" id="country_id">
+                                @foreach($country as $c )
+                                <option value="{{$c->id}}" > {{$c->name}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">{{$errors->first('country')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">

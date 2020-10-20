@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title"> {{isset($fromUser) ? ucfirst($fromUser->first_name)."'s" . ' Address' : 'Address'}}</h1>
+<h1 class="page-title"> @lang('messages.address_page.address')</h1>
 @if(isset($fromUser))
 <div class="ml-auto text-right mb-4">
     <a href="{{ action('AddressController@createUserAddress', [$fromUser->id])}}"><button class=" btn btn-info"> <span class="fa fa-plus"> Create</span></button></a>
@@ -39,7 +39,7 @@
                     <td>{{$address->address_line2}}</td>
                     <td>{{$address->city}}</td>  
                     <td>{{$address->state}}</td>
-                    <td>{{$address->country_id}}</td>
+                    <td>{{($address->countries['name'])}}</td>
                     <td>{{$address->post_code}}</td>
                     <td>{{$address->phone}}</td>
                     <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>

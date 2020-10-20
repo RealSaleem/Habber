@@ -3,7 +3,7 @@
 <div class="row"> 
           <div class="col-lg-12 margin-tb">
              <div class="pull-left">
-            <h2>Edit Book</h2>
+            <h2>@lang('messages.book_page.add_new_book')</h2>
               </div>
            </div>
            <div class="container-fluid">
@@ -72,14 +72,14 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Total Pages</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="total_pages" id="total_pages"value="{{$book->total_pages}}" placeholder="Total Pages"> 
+                            <input type="number" class="form-control"  min="0" name="total_pages" id="total_pages"value="{{$book->total_pages}}" placeholder="Total Pages"> 
                             <span class="text-danger">{{$errors->first('total_pages')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="quantity" id="quantity"value="{{$book->quantity}}" placeholder="Quantity">
+                            <input type="number" class="form-control"  min="0" name="quantity" id="quantity"value="{{$book->quantity}}" placeholder="Quantity">
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>

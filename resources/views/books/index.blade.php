@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Books</h1>
+<h1 class="page-title">@lang('messages.book_page.books')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))

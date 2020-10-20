@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Bookmarks</h1>
+<h1 class="page-title">@lang('messages.bookmark_page.bookmarks')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
