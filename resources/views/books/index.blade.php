@@ -65,15 +65,18 @@
             <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$book->featured == 1 ? "featured" : "not featured"}}</td>  
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image) ?  url('storage/'.$book->image) : url('storage/books/default.png') }}" alt=""> </td>
             <td>
-             <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
+                <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                    </div>
+                </div>
             </td>
            </tr>
             @endforeach            

@@ -31,29 +31,31 @@
                </thead>
                <tbody>
                @foreach($bookmark as $bookmark)
-           <tr>
-            
-            <td>{{$bookmark->title}}</td>
-            <td>{{$bookmark->maker_name}}</td>
-            <td>{{$bookmark->description}}</td>
-            <td>{{$bookmark->price}}</td>  
-            <td>{{$bookmark->bookmark_id}}</td>
-            <td>{{$bookmark->size}}</td>
-            <td>{{$bookmark->quantity}}</td>
-            <td>{{$bookmark->businesses['name']}}</td>  
-            <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
-            <td>
-                <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success">
-                <span class="fa fa-edit"></span>
-                Edit</button></a>                                 
-            </td>       
-                                 
+            <tr>
+                <td>{{$bookmark->title}}</td>
+                <td>{{$bookmark->maker_name}}</td>
+                <td>{{$bookmark->description}}</td>
+                <td>{{$bookmark->price}}</td>  
+                <td>{{$bookmark->bookmark_id}}</td>
+                <td>{{$bookmark->size}}</td>
+                <td>{{$bookmark->quantity}}</td>
+                <td>{{$bookmark->businesses['name']}}</td>  
+                <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
+                <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
+                <td>
+                    <div class="row">
+                        <div class="col-2">
+                            <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                            </form>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                        </div>
+                    </div>
+                </td>                             
            </tr>
            @endforeach      
             </tbody>

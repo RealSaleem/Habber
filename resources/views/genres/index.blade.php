@@ -12,32 +12,34 @@
   <div class="card-body">
     <div class="table-responsive">
         <table id="zero_config" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th> Action</th>                  
-                          </tr>
-               </thead>
-               <tbody>
-               @foreach($genre as $genre)
-        <tr>
-            
-            <td>{{$genre->title}}</td>
-             <td>
-             <form action="{{ action('GenreController@destroy', [$genre->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                  </form>
-                <a href="{{ action('GenreController@edit', [$genre->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
+          <thead>
+              <tr>
+                <th>Title</th>
+                <th> Action</th>                  
+              </tr>
+          </thead>
+          <tbody>
+            @foreach($genre as $genre)
+              <tr>
+                <td>{{$genre->title}}</td>
+                <td>
+                  <div class="row">
+                      <div class="col-1">
+                          <form action="{{ action('GenreController@destroy', [$genre->id])}}" method="post">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                          </form>
+                      </div>
+                      <div class="col-1">
+                          <a href="{{ action('GenreController@edit', [$genre->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                      </div>
+                  </div>
                 </td>
-           </tr>
-          @endforeach            
-       </tbody>
-      </table>
+              </tr>
+            @endforeach            
+          </tbody>
+        </table>
     </div>   
   </div>  
 </div>
