@@ -77,22 +77,12 @@
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">User</label>
-                        <div class="col-sm-9">
-                            <select  class="form-control" name="user_id" id="user_id" disabled>
-                            @foreach($user as $u)
-                            <option value="{{$u->id}} {{ ($address->user_id == $u->id ? "selected" : "")}}"  > {{$u->first_name}}</option>
-                            @endforeach
-                        </select>
-                            <span class="text-danger">{{$errors->first('user_id')}}</span>
-                        </div>
-                    </div>
+
                     <div class="border-top">
                       <div class="card-body">
-                         <a href="{{route('address.index')}}">
+                         <a href="{{ isset($fromUser) ? route('user_address',[$fromUser]) : route('address.index')}}">
                           <button type="button" class=" btn btn-danger">
-                            Cancel
+                            Back
                           </button></a>
                           <button type="submit" class="btn btn-primary">Update</button>
                         </div>

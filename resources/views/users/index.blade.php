@@ -51,7 +51,7 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-4">
                                     @if($user->status == 1)
                                         <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">Deactivate</button></a>
                                     @else
@@ -61,6 +61,9 @@
                                             </button>
                                         </a>
                                     @endif
+                                </div>
+                                <div class="col-2">
+                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">Address</button></a>
                                 </div>
                             </div>
                         </td>

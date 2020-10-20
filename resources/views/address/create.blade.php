@@ -89,9 +89,9 @@
                     </div>
                     <div class="border-top">
                         <div class="card-body">
-                           <a href="{{route('address.index')}}">
+                           <a href="{{ isset($fromUser) ? route('user_address',[$fromUser]) : route('address.index')}}">
                            <button type="button" class=" btn btn-danger">
-                            Cancel
+                            Back
                             </button></a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                          </div>

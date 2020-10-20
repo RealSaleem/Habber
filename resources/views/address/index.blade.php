@@ -1,8 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Address</h1>
-<div class="ml-auto text-right">
+<h1 class="page-title"> {{isset($fromUser) ? ucfirst($fromUser->first_name)."'s" . ' Address' : 'Address'}}</h1>
+@if(isset($fromUser))
+<div class="ml-auto text-right mb-4">
+    <a href="{{ action('AddressController@createUserAddress', [$fromUser->id])}}"><button class=" btn btn-info"> <span class="fa fa-plus"> Create</span></button></a>
 </div> 
+@endif
+
 @if(Session::has('success'))
     <div class="alert alert-success text-center" role="alert">
         <strong>{{Session::get('success')}}</strong>
@@ -49,7 +53,12 @@
                                 </form>
                             </div>
                             <div class="col-2">
-                                <a href="{{ action('AddressController@edit', [$address->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                <form action="{{ action('AddressController@edit', [$address->id])}}" method="post">
+                                    @csrf
+                                    @method('get')
+                                    <input type="hidden" name="fromUser" value="{{$fromUser->id ?? null}}">
+                                    <button class="btn btn-success" type="submit"><span class="fa fa-edit"></span></button>
+                                </form>
                             </div>
                         </div>
                     </td>
