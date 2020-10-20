@@ -78,13 +78,18 @@
             <!-- Comment -->
             <!-- ============================================================== -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Language
+                <!-- <select class="dropdown-toggle waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="language" id="langugage">
+                    <option value="">Select Language</option>
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                </select> -->
                 </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="{{ route('set_language', ['locale' => 'en']) }}">English</a>
+                    <a class="dropdown-item" href="{{ route('set_language', ['locale' => 'ar']) }}">Arabic</a>
+                    <!-- <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a> -->
                 </div>
             </li>
             <!-- ============================================================== -->
