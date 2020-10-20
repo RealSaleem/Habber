@@ -38,15 +38,18 @@
               <td>{{$userrequest->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$userrequest->created_at}}</td>  
               <td>
-                <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"> </span>Delete</button>
-                </form>
-                  <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success">
-                  <span class="fa fa-edit"></span>
-                  View
-                </button></a>
+                <div class="row">
+                  <div class="col-3">
+                      <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                      </form>
+                  </div>
+                  <div class="col-3">
+                    <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                  </div>
+                </div>
               </td>
             </tr>
           @endforeach            

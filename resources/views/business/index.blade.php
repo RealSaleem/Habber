@@ -32,16 +32,19 @@
             <td>{{$business->product_type}}</td>  
             <td>{{$business->details}}</td>
             <td>
-             <form action="{{ action('BusinessController@destroy', [$business->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                  </form>
-                    <a href="{{ action('BusinessController@edit', [$business->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
-                </td>
+                <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('BusinessController@destroy', [$business->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <a href="{{ action('BusinessController@edit', [$business->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                    </div>
+                </div>
+            </td>
             </tr>
             @endforeach            
                 </tbody>

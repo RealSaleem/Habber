@@ -12,46 +12,51 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-          <table id="zero_config" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                       <th>Description</th>
-                        <th>Status</th>
-                        <th>Url</th>
-                        <th>Image</th>
-                        <th>Order</th>
-                        <th>Action</th>
+            <table id="zero_config" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                        <th>Description</th>
+                            <th>Status</th>
+                            <th>Url</th>
+                            <th>Image</th>
+                            <th>Order</th>
+                            <th>Action</th>
+                        </tr>
+                </thead>
+                <tbody class="sortable">
+                    @foreach($banner as $banner)
+                    <tr class="row1" data-id="{{ $banner->id }}">
+                        <td>{{$banner->description}}</td> 
+                        <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "Enabled" : "Disabled"}}</td>  
+                        <td>{{$banner->url}}</td> 
+                        <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
+                        <td>{{$banner->sort_order}}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-2">
+                                    <a href="{{action('BannerController@edit', [$banner->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                </div>
+                                <div class="col-2">
+                                    <form action="{ action('BannerController@destroy', [$banner->id])}}" method="post">
+                                    @csrf
+                                    @method('Delete')
+                                        <button class=" btn btn-danger" type="submit">
+                                        <span class="fa fa-eye"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    @if($banner->status == 1)
+                                        <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">Disable</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')"> Enable</button></a>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
                     </tr>
-               </thead>
-               <tbody class="sortable">
-              @foreach($banner as $banner)
-          <tr class="row1" data-id="{{ $banner->id }}">
-            
-            <td>{{$banner->description}}</td> 
-            <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "enable" : "disable"}}</td>  
-            <td>{{$banner->url}}</td> 
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
-            <td>{{$banner->sort_order}}</td>
-            <td>
-                <form action="{{ action('BannerController@destroy', [$banner->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                    <a href="{{action('BannerController@edit', [$banner->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
-                @if($banner->status == 1)
-                    <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">Disable</button></a>
-                @else
-                    <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')"> Enable</button></a>
-                @endif
-                
-            </td>
-            </tr>
-           @endforeach
-             </tbody>
+                    @endforeach
+                </tbody>
             </table>
         </div>   
     </div>    

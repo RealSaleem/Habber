@@ -14,7 +14,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-          <table id="zero_config" class="table table-striped table-bordered">
+            <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -25,42 +25,50 @@
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
-               </thead>
-               <tbody>
-              @foreach($user as $user)
-          <tr>
-            
-            <td>{{$user->first_name}}</td>
-            <td>{{$user->last_name}}</td>
-            <td>{{$user->email}}</td>
-            <td>{{$user->phone}}</td>  
-            <td class = "{{$user->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$user->status == 1 ? "active" : "not active"}}</td>  
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
-            <td>
-                <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                </button></a>
-                    <a href="{{action('UserController@edit', [$user->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
-                @if($user->status == 1)
-                    <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">Deactivate</button></a>
-                @else
-                    <a>
-                        <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
-                            Activate
-                        </button>
-                    </a>
-                @endif
-                
-            </td>
-            </tr>
-           @endforeach
-             </tbody>
+                </thead>
+                <tbody>
+                    @foreach($user as $user)
+                    <tr>    
+                        <td>{{$user->first_name}}</td>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->phone}}</td>  
+                        <td class = "{{$user->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$user->status == 1 ? "active" : "not active"}}</td>  
+                        <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-2">
+                                    <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    <form action="{{action('UserController@edit', [$user->id])}}" method="post">
+                                    @csrf
+                                    @method('get')
+                                        <button class=" btn btn-success" type="submit">
+                                        <span class="fa fa-edit"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    @if($user->status == 1)
+                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">Deactivate</button></a>
+                                    @else
+                                        <a>
+                                            <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
+                                                Activate
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>   
     </div>    

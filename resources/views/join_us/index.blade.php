@@ -40,16 +40,20 @@
               <td>{{$u->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$u->created_at}}</td>  
               <td>
-                <form action="{{action('UserController@destroyRequest', [$u->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                </form>
-                  <a href="{{action('UserController@showJoinUsRequest', [$u->id])}}"><button class=" btn btn-success">
-                  <span class="fa fa-eye"></span>
-
-                </button></a>
+                <div class="row">
+                  <div class="col-5">
+                      <form action="{{action('UserController@destroyRequest', [$u->id])}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                      </form>
+                  </div>
+                  <div class="col-2">
+                    <a href="{{action('UserController@showJoinUsRequest', [$u->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                  </div>
+                </div>
               </td>
+       
             </tr>
           @endforeach            
         </tbody>

@@ -27,34 +27,35 @@
                                      
                     </tr>
                </thead>
-               <tbody>
-               @foreach($address as $address)
-            <tr>
-            
-              <td>{{$address->address_name}}</td>
-              <td>{{$address->address_line1}}</td>
-              <td>{{$address->address_line2}}</td>
-              <td>{{$address->city}}</td>  
-              <td>{{$address->state}}</td>
-              <td>{{($address->countries['name'])}}</td>
-              <td>{{$address->post_code}}</td>
-               <td>{{$address->phone}}</td>
-               <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>
-              <td>
-                <form action="{{ action('AddressController@destroy', [$address->id])}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                <a href="{{ action('AddressController@edit', [$address->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>             
-              </td>       
-                                 
-            </tr>
-               @endforeach         
-             </tbody>
+            <tbody>
+                @foreach($address as $address)
+                <tr>
+                    <td>{{$address->address_name}}</td>
+                    <td>{{$address->address_line1}}</td>
+                    <td>{{$address->address_line2}}</td>
+                    <td>{{$address->city}}</td>  
+                    <td>{{$address->state}}</td>
+                    <td>{{($address->countries['name'])}}</td>
+                    <td>{{$address->post_code}}</td>
+                    <td>{{$address->phone}}</td>
+                    <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-4">
+                                <form action="{{ action('AddressController@destroy', [$address->id])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                                </form>
+                            </div>
+                            <div class="col-2">
+                                <a href="{{ action('AddressController@edit', [$address->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach         
+            </tbody>
           </table>
         </div>  
     </div>

@@ -18,30 +18,37 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Message</th>
-                        <th> Action</th>                  
-                          </tr>
+                        <th>Action</th>                  
+                    </tr>
                </thead>
                <tbody>
                @foreach($contact as $contact)
-           <tr>
+        <tr>
           <td>{{$contact->name}}</td>
             <td>{{$contact->email}}</td>
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
             <td>
-             <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
-             @csrf
-                  @method('GET')
-                  <button class="btn btn-success" type="submit">View</button>
-                  </form>
-                  <form action="{{ action('ContactController@destroy', [$contact->id])}}" method="post">
-                  @csrf
-                  @method('Delete')
-                  <button class=" btn btn-danger"type="submit">
-                    Delete
-                </button></form>
-                </td>
-            </tr>
+                <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
+                        @csrf
+                            @method('GET')
+                            <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <form action="{{ action('ContactController@destroy', [$contact->id])}}" method="post">
+                        @csrf
+                        @method('Delete')
+                            <button class=" btn btn-danger" type="submit">
+                            <span class="fa fa-trash"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
           @endforeach            
            </tbody>
            </table>
