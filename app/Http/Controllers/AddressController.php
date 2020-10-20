@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Address;
 use App\User;
+use App\Country;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -14,7 +15,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $address = Address::all();
+        $address = Address::with('countries')->get();
         return view('address.index', compact('address'));
     }
 
@@ -26,7 +27,8 @@ class AddressController extends Controller
     public function create()
     {
         $user = User::where('id', '!=', 1)->get();
-        return view('address.create',compact('user'));
+        $country = Country::all();
+        return view('address.create',compact('user','country'));
     }
 
     /**
@@ -83,9 +85,13 @@ class AddressController extends Controller
     public function edit($id)
     {
         //
+        
         $address = Address::with('users')->findOrFail($id);
-        $user = User::where('id', '!=', 1)->get();
-        return view('address.edit', compact('address','user'));
+        $user = User::all();
+        $fromUser = request()->fromUser;
+        $country = Country::all();
+        return view('address.edit', compact('address','user','fromUser','country'));
+
     }
 
     /**
@@ -122,6 +128,19 @@ class AddressController extends Controller
        return back()->with('success', 'Address update successfully');
     }
 
+    public function getUserAddressList($id)
+    {
+        $address = Address::where('user_id',$id)->get();
+        $fromUser = User::find($id);
+        return view('address.index', compact('address','fromUser'));
+    }
+
+    public function createUserAddress($id)
+    {
+        $user = User::where('id',$id)->get();
+        $fromUser = $id;
+        return view('address.create',compact('user','fromUser'));
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Banner</h2>
+            <h2>@lang('messages.banner_page.add_new_banner')</h2>
         </div>
     </div>
         <div class="container-fluid">

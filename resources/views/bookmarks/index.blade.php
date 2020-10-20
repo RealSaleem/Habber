@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Bookmarks</h1>
+<h1 class="page-title">@lang('messages.bookmark_page.bookmarks')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -24,36 +24,38 @@
                         <th>Quantity </th>
                         <th>Business Name</th>
                         <th>Feature</th>
-                        <th>Image</th>
-                        <th> Action</th>  
+                        <th class="not">Image</th>
+                        <th class="not"> Action</th>  
                                      
                     </tr>
                </thead>
                <tbody>
                @foreach($bookmark as $bookmark)
-           <tr>
-            
-            <td>{{$bookmark->title}}</td>
-            <td>{{$bookmark->maker_name}}</td>
-            <td>{{$bookmark->description}}</td>
-            <td>{{$bookmark->price}}</td>  
-            <td>{{$bookmark->bookmark_id}}</td>
-            <td>{{$bookmark->size}}</td>
-            <td>{{$bookmark->quantity}}</td>
-            <td>{{$bookmark->businesses['name']}}</td>  
-            <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
-            <td>
-                <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success">
-                <span class="fa fa-edit"></span>
-                Edit</button></a>                                 
-            </td>       
-                                 
+            <tr>
+                <td>{{$bookmark->title}}</td>
+                <td>{{$bookmark->maker_name}}</td>
+                <td>{{$bookmark->description}}</td>
+                <td>{{$bookmark->price}}</td>  
+                <td>{{$bookmark->bookmark_id}}</td>
+                <td>{{$bookmark->size}}</td>
+                <td>{{$bookmark->quantity}}</td>
+                <td>{{$bookmark->businesses['name']}}</td>  
+                <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
+                <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
+                <td>
+                    <div class="row">
+                        <div class="col-2">
+                            <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                            </form>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                        </div>
+                    </div>
+                </td>                             
            </tr>
            @endforeach      
             </tbody>
@@ -67,7 +69,40 @@
     $(document).ready(function() {
         $('#zero_config').DataTable({
         paging: true,
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
     })
 </script>
 @stop

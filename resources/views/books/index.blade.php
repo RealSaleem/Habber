@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Books</h1>
+<h1 class="page-title">@lang('messages.book_page.books')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -27,8 +27,8 @@
                         <th>Book Clubs</th>
                         <th>Genres</th>
                         <th>Feature</th>
-                        <th>Image </th>
-                        <th>Action</th>
+                        <th class="not">Image </th>
+                        <th class="not">Action</th>
                     </tr>
 
                </thead>
@@ -55,7 +55,7 @@
                 </td>
             @elseif( count($book->genres) < 2 && count($book->genres) > 0)
                 <td>
-                    {{$book->genres['title']}}
+                    {{$book->genres[0]->title}}
                 </td>
             @else
                 <td>
@@ -65,15 +65,18 @@
             <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$book->featured == 1 ? "featured" : "not featured"}}</td>  
             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image) ?  url('storage/'.$book->image) : url('storage/books/default.png') }}" alt=""> </td>
             <td>
-             <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
+                <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                    </div>
+                </div>
             </td>
            </tr>
             @endforeach            
@@ -88,7 +91,40 @@
     $(document).ready(function() {
         $('#zero_config').DataTable({
         paging: true,
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
     })
 </script>
 @stop

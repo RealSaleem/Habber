@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Contact Us</h1>
+<h1 class="page-title">@lang('messages.contactus_page.contactus')</h1>
 <div class="ml-auto text-right">
 </div> 
    @if(Session::has('success'))
@@ -18,30 +18,37 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Message</th>
-                        <th> Action</th>                  
-                          </tr>
+                        <th class="not">Action</th>                  
+                    </tr>
                </thead>
                <tbody>
                @foreach($contact as $contact)
-           <tr>
+        <tr>
           <td>{{$contact->name}}</td>
             <td>{{$contact->email}}</td>
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
             <td>
-             <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
-             @csrf
-                  @method('GET')
-                  <button class="btn btn-success" type="submit">View</button>
-                  </form>
-                  <form action="{{ action('ContactController@destroy', [$contact->id])}}" method="post">
-                  @csrf
-                  @method('Delete')
-                  <button class=" btn btn-danger"type="submit">
-                    Delete
-                </button></form>
-                </td>
-            </tr>
+                <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
+                        @csrf
+                            @method('GET')
+                            <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <form action="{{ action('ContactController@destroy', [$contact->id])}}" method="post">
+                        @csrf
+                        @method('Delete')
+                            <button class=" btn btn-danger" type="submit">
+                            <span class="fa fa-trash"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
           @endforeach            
            </tbody>
            </table>
@@ -54,8 +61,40 @@
     $(document).ready(function() {
         $('#zero_config').DataTable({
         paging: true,
-       
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
 
     })
 </script>

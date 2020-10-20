@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">Business</h1>
+<h1 class="page-title">@lang('messages.business_page.business')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -19,8 +19,8 @@
                         <th>Business Type</th>
                         <th>Product Type</th>
                         <th>Details</th>
-                        <th> Action</th>                  
-                          </tr>
+                        <th class="not"> Action</th>                  
+                    </tr>
                </thead>
                <tbody>
                @foreach($business as $business)
@@ -32,16 +32,19 @@
             <td>{{$business->product_type}}</td>  
             <td>{{$business->details}}</td>
             <td>
-             <form action="{{ action('BusinessController@destroy', [$business->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                  </form>
-                    <a href="{{ action('BusinessController@edit', [$business->id])}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
-                </td>
+                <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('BusinessController@destroy', [$business->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <a href="{{ action('BusinessController@edit', [$business->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                    </div>
+                </div>
+            </td>
             </tr>
             @endforeach            
                 </tbody>
@@ -52,11 +55,42 @@
 @endsection
 @section('scripts')
 <script>
-    $(document).ready(function() {
-        $('#zero_config').DataTable({
+      $('#zero_config').DataTable({
         paging: true,
-       
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
 
     })
 </script>

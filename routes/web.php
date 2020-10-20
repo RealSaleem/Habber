@@ -22,6 +22,7 @@ Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+   Route::get('language/{locale}', 'HomeController@setLanguage')->name('set_language');
    Route::resource('users','UserController');
    Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');
    Route::post('user/deactivate/{id}','UserController@deactivateUser')->name('deactivate_user');
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('bookclubs','BookClubController');     
    Route::resource('genres','GenreController');
    Route::resource('address','AddressController');
+   Route::get('user/address/{userId}','AddressController@getUserAddressList')->name('user_address');
+   Route::get('user/address/create/{userId}','AddressController@createUserAddress');
    Route::resource('contactus','ContactController');
    Route::resource('user_requests','UserRequestController');
    Route::get('joinus','UserController@allJoinUsRequest')->name('joinus');

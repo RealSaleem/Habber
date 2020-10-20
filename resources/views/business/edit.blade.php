@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2> Edit Business</h2>
+            <h2> @lang('messages.business_page.edit_business')</h2>
         </div>
     </div>
     <div class="container-fluid">

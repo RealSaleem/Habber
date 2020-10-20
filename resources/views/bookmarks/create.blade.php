@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Bookmarks</h2>
+            <h2>@lang('messages.bookmark_page.add_new_bookmark')</h2>
         </div>
     </div>
     <div class="container-fluid">
@@ -59,14 +59,14 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Size</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="size"value="{{ old('size') }}" id="size" placeholder="Size">
+                            <input type="number" class="form-control" name="size"value="{{ old('size') }}" id="size" placeholder="Size">
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="quantity" value="{{ old('quantity') }}" id="quantity" placeholder="Quantity ">
+                            <input type="number" class="form-control" name="quantity" value="{{ old('quantity') }}" id="quantity" placeholder="Quantity ">
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>
@@ -91,7 +91,6 @@
                             <span class="text-danger">{{$errors->first('featured')}}</span>
                         </div>
                      </div> 
-
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business</label>
                         <div class="col-sm-9">

@@ -24,7 +24,7 @@
               <th>Details</th>
               <th>Status</th>
               <th>Submission Date</th>
-              <th>Action</th>
+              <th class="not">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -40,16 +40,20 @@
               <td>{{$u->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$u->created_at}}</td>  
               <td>
-                <form action="{{action('UserController@destroyRequest', [$u->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                </form>
-                  <a href="{{action('UserController@showJoinUsRequest', [$u->id])}}"><button class=" btn btn-success">
-                  <span class="fa fa-eye"></span>
-
-                </button></a>
+                <div class="row">
+                  <div class="col-5">
+                      <form action="{{action('UserController@destroyRequest', [$u->id])}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                      </form>
+                  </div>
+                  <div class="col-2">
+                    <a href="{{action('UserController@showJoinUsRequest', [$u->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                  </div>
+                </div>
               </td>
+       
             </tr>
           @endforeach            
         </tbody>
@@ -63,14 +67,42 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#zero_config').DataTable({
-    "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-    "initComplete": function(){ 
-      $("#zero_config").show(); 
-    },
-    buttons: ['copy', 'csv', 'pdf', 'print' ]
-  });
-  table.buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+      $('#zero_config').DataTable({
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
 });   
 </script>
 @stop

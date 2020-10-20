@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">User Request </h1>
+<h1 class="page-title">@lang('messages.userrequest_page.userrequest') </h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -20,10 +20,10 @@
               <th>Title</th>
               <th>Author Name</th>
               <th>Book Type</th>
-              <th>Image</th>
+              <th class="not">Image</th>
               <th>Status</th>
               <th>Submission Date</th>
-              <th>Action</th>
+              <th class="not">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -38,15 +38,18 @@
               <td>{{$userrequest->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$userrequest->created_at}}</td>  
               <td>
-                <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit"><span class="fa fa-trash"> </span>Delete</button>
-                </form>
-                  <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success">
-                  <span class="fa fa-edit"></span>
-                  View
-                </button></a>
+                <div class="row">
+                  <div class="col-3">
+                      <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                      </form>
+                  </div>
+                  <div class="col-3">
+                    <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                  </div>
+                </div>
               </td>
             </tr>
           @endforeach            
@@ -61,14 +64,42 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#zero_config').DataTable({
-    "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-    "initComplete": function(){ 
-      $("#zero_config").show(); 
-    },
-    buttons: ['copy', 'csv', 'pdf', 'print' ]
-  });
-  table.buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+      $('#zero_config').DataTable({
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
 });   
 </script>
 @stop
