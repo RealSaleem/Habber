@@ -27,7 +27,7 @@
                         <th>Post Code </th>         
                         <th>Phone </th>
                         <th>User</th>
-                        <th>Action</th>  
+                        <th class="not">Action</th>  
                                      
                     </tr>
                </thead>
@@ -71,11 +71,47 @@
 </div>
 @endsection
 @section('scripts')
+<!-- <script src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css"> </script> -->
 <script>
+
     $(document).ready(function() {
         $('#zero_config').DataTable({
-        paging: true,
-     });
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
     })
 </script>
 @stop

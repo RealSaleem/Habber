@@ -19,8 +19,8 @@
                         <th>Business Type</th>
                         <th>Product Type</th>
                         <th>Details</th>
-                        <th> Action</th>                  
-                          </tr>
+                        <th class="not"> Action</th>                  
+                    </tr>
                </thead>
                <tbody>
                @foreach($business as $business)
@@ -55,11 +55,42 @@
 @endsection
 @section('scripts')
 <script>
-    $(document).ready(function() {
-        $('#zero_config').DataTable({
+      $('#zero_config').DataTable({
         paging: true,
-       
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
 
     })
 </script>
