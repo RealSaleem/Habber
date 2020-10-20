@@ -139,7 +139,8 @@ class AddressController extends Controller
     {
         $user = User::where('id',$id)->get();
         $fromUser = $id;
-        return view('address.create',compact('user','fromUser'));
+        $country = Country::all();
+        return view('address.create',compact('user','fromUser','country'));
     }
     /**
      * Remove the specified resource from storage.
