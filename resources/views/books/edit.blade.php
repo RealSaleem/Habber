@@ -80,7 +80,8 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.quantity')</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control"  min="0" name="quantity" id="quantity"value="{{$book->quantity}}" placeholder="Quantity">
-                            <span class="text-danger">{{$errors->first('quantity')}}</span>
+                            <span class="text-danger">{{$errors->first('quantity')}}
+                            </span>
                         </div>
                     </div>
                     <div class="form-group row">
