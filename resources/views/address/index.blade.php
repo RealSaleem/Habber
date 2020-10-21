@@ -1,8 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">@lang('messages.address_page.address')</h1>
-<div class="ml-auto text-right">
+<h1 class="page-title"> @lang('messages.address_page.address')</h1>
+@if(isset($fromUser))
+<div class="ml-auto text-right mb-4">
+    <a href="{{ action('AddressController@createUserAddress', [$fromUser->id])}}"><button class=" btn btn-info"> <span class="fa fa-plus"> Create</span></button></a>
 </div> 
+@endif
+
 @if(Session::has('success'))
     <div class="alert alert-success text-center" role="alert">
         <strong>{{Session::get('success')}}</strong>
@@ -23,7 +27,7 @@
                         <th>Post Code </th>         
                         <th>Phone </th>
                         <th>User</th>
-                        <th>Action</th>  
+                        <th class="not">Action</th>  
                                      
                     </tr>
                </thead>
@@ -49,7 +53,12 @@
                                 </form>
                             </div>
                             <div class="col-2">
-                                <a href="{{ action('AddressController@edit', [$address->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                <form action="{{ action('AddressController@edit', [$address->id])}}" method="post">
+                                    @csrf
+                                    @method('get')
+                                    <input type="hidden" name="fromUser" value="{{$fromUser->id ?? null}}">
+                                    <button class="btn btn-success" type="submit"><span class="fa fa-edit"></span></button>
+                                </form>
                             </div>
                         </div>
                     </td>
@@ -62,11 +71,47 @@
 </div>
 @endsection
 @section('scripts')
+<!-- <script src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css"> </script> -->
 <script>
+
     $(document).ready(function() {
         $('#zero_config').DataTable({
-        paging: true,
-     });
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
     })
 </script>
 @stop

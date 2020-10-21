@@ -38,7 +38,7 @@
                        <div class="card-body">
                         <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
-                        @lang('messages.button.cancel')
+                        @lang('messages.button.back')
                         </button></a>
                         <button type="submit" class="btn btn-primary"> @lang('messages.button.submit')</button>
                        </div>

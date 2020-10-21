@@ -24,7 +24,7 @@
               <th>Details</th>
               <th>Status</th>
               <th>Submission Date</th>
-              <th>Action</th>
+              <th class="not">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -67,14 +67,42 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#zero_config').DataTable({
-    "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-    "initComplete": function(){ 
-      $("#zero_config").show(); 
-    },
-    buttons: ['copy', 'csv', 'pdf', 'print' ]
-  });
-  table.buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+      $('#zero_config').DataTable({
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
 });   
 </script>
 @stop

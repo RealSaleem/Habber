@@ -18,7 +18,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Message</th>
-                        <th>Action</th>                  
+                        <th class="not">Action</th>                  
                     </tr>
                </thead>
                <tbody>
@@ -61,8 +61,40 @@
     $(document).ready(function() {
         $('#zero_config').DataTable({
         paging: true,
-       
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
 
     })
 </script>

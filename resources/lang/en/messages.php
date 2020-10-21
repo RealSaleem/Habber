@@ -159,6 +159,7 @@ return [
         'cancel'=>'Cancel',
         'update'=>'Update',
         'delete'=>'Delete',
-        'edit'=> 'Edit'
+        'edit'=> 'Edit',
+        'back'=> 'Back'
     ]
 ];

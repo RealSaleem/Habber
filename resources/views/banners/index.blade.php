@@ -18,9 +18,9 @@
                         <th>Description</th>
                             <th>Status</th>
                             <th>Url</th>
-                            <th>Image</th>
+                            <th class="not">Image</th>
                             <th>Order</th>
-                            <th>Action</th>
+                            <th class="not">Action</th>
                         </tr>
                 </thead>
                 <tbody class="sortable">
@@ -68,8 +68,40 @@
     $(document).ready(function() {
         $('#zero_config').DataTable({
         paging: true,
-       
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
 
     })
     

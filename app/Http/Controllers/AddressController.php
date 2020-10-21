@@ -85,10 +85,13 @@ class AddressController extends Controller
     public function edit($id)
     {
         //
+        
         $address = Address::with('users')->findOrFail($id);
-        $user = User::where('id', '!=', 1)->get();
+        $user = User::all();
+        $fromUser = request()->fromUser;
         $country = Country::all();
-        return view('address.edit', compact('address','user','country'));
+        return view('address.edit', compact('address','user','fromUser','country'));
+
     }
 
     /**
@@ -125,6 +128,20 @@ class AddressController extends Controller
        return back()->with('success', 'Address update successfully');
     }
 
+    public function getUserAddressList($id)
+    {
+        $address = Address::where('user_id',$id)->get();
+        $fromUser = User::find($id);
+        return view('address.index', compact('address','fromUser'));
+    }
+
+    public function createUserAddress($id)
+    {
+        $user = User::where('id',$id)->get();
+        $fromUser = $id;
+        $country = Country::all();
+        return view('address.create',compact('user','fromUser','country'));
+    }
     /**
      * Remove the specified resource from storage.
      *

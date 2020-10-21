@@ -22,8 +22,8 @@
                         <th>Email</th>
                         <th>Contact</th>
                         <th>Status</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th class="not">Image</th>
+                        <th class="not">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,7 +53,7 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-4">
                                     @if($user->status == 1)
                                         <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a>
                                     @else
@@ -63,6 +63,9 @@
                                             </button>
                                         </a>
                                     @endif
+                                </div>
+                                <div class="col-2">
+                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">Address</button></a>
                                 </div>
                             </div>
                         </td>
@@ -112,9 +115,41 @@ function activateUser(id) {
 }
     $(document).ready(function() {
         $('#zero_config').DataTable({
-        paging: true,
-       
-     });
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
 
     })
 </script>

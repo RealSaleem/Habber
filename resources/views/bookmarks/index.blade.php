@@ -24,8 +24,8 @@
                         <th>Quantity </th>
                         <th>Business Name</th>
                         <th>Feature</th>
-                        <th>Image</th>
-                        <th> Action</th>  
+                        <th class="not">Image</th>
+                        <th class="not"> Action</th>  
                                      
                     </tr>
                </thead>
@@ -69,7 +69,40 @@
     $(document).ready(function() {
         $('#zero_config').DataTable({
         paging: true,
-     });
+        dom: 'Bfrtip',
+        buttons: [
+            
+            // 'csv', 'excel', 'pdf', 'print',
+          
+            {
+                extend: 'pdf',           
+                exportOptions: {
+                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                }                      // Exclude indexes that you don't want to print.
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(.not)'
+                }
+            }         
+        ],
+        
+    });
     })
 </script>
 @stop
