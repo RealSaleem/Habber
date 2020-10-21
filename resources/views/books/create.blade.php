@@ -112,15 +112,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.genre')</label>
-                        <div class="col-sm-9">
-                        <select  class="form-control" name="genre[]" id="genre_id" multiple>
-                            @foreach($genres as $g)
-                            <option value="{{$g->id}}" > {{$g->title}}</option>
-                            @endforeach
-                        </select>
-                            <span class="text-danger">{{$errors->first('genre')}}</span>
-                        </div>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.genre')</label>
+                            <div class="col-md-9">
+                                <select class="select2 form-control m-t-15" name="genre[]" multiple="multiple" >
+                                    @foreach($genres as $value)
+                                    <optgroup label="">
+                                        <option value="{{$value->id}}">{{$value->title}}</option>
+                                    </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
+                        <span class="text-danger">{{$errors->first('genre')}}</span>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.stock_status')</label>
@@ -165,3 +167,8 @@
 </div>
                   
 @endsection
+@section('scripts')
+<script>
+$(".select2").select2();
+</script>
+@stop

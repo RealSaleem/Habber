@@ -161,5 +161,20 @@ return [
         'delete'=>'Delete',
         'edit'=> 'Edit',
         'back'=> 'Back'
+    ],
+
+    'permission_page' => [
+        'permission' => 'Permissions',
+        'add_permission'=> 'Add New Permission',
+        'add_permission_info'=> 'Add Permission Info',
+        'permission_name'=>'Name',
+    ],
+
+    'role_page' => [
+        'role' => 'Roles',
+        'add_role'=> 'Add New Role',
+        'add_role_info'=> 'Add role Info',
+        'role_name'=>'Name',
+        'edit_role' => 'Edit Role'
     ]
 ];

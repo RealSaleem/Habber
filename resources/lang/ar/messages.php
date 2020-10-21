@@ -1803,6 +1803,21 @@ return [
         'delete'=>'حذف',
         'edit'=> 'تعديل',
         'back'=>'عودة'
+    ],
+
+    'permission_page' => [
+        'permission' => 'أذونات',
+        'add_permission'=> 'إضافة إذن جديد',
+        'add_permission_info' => 'أضف معلومات الإذن',
+        'permission_name'=>'اسم',
+    ],
+
+    'role_page' => [
+        'role' => 'وظيفة',
+        'add_role' => 'إضافة دور',
+        'add_role_info' => 'إضافة معلومات الدور',
+        'role_name'=>'اسم',
+        'edit_role' => 'تحرير الدور'
     ]
 
 ];
