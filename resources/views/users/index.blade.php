@@ -67,6 +67,10 @@
                                 <div class="col-2">
                                     <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">Address</button></a>
                                 </div>
+
+                                <div class="col-2">
+                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">Favourites</button></a>
+                                </div>
                             </div>
                         </td>
                     </tr>

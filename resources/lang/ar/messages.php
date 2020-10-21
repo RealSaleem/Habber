@@ -1818,6 +1818,14 @@ return [
         'add_role_info' => 'إضافة معلومات الدور',
         'role_name'=>'اسم',
         'edit_role' => 'تحرير الدور'
+    ],
+
+    'favourite_page' => [
+        'favourites' => 'المفضلة',
+        'add_favourite'=> 'إضافة المفضلة',
+        'add_favourite_info'=> 'إضافة معلومات المفضلة',
+        'favourite_name'=>'اسم',
+        'view_favourite' => 'مشاهدة المفضلة'
     ]
 
 ];

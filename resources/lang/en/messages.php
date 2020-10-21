@@ -176,5 +176,14 @@ return [
         'add_role_info'=> 'Add role Info',
         'role_name'=>'Name',
         'edit_role' => 'Edit Role'
+    ],
+
+    'favourite_page' => [
+        'favourites' => 'Favourites',
+        'add_favourite'=> 'Add New Favourite',
+        'add_favourite_info'=> 'Add Favourite Info',
+        'favourite_name'=>'Name',
+        'edit_favourite' => 'Edit Favourite',
+        'view_favourite' => 'View Favourite'
     ]
 ];
