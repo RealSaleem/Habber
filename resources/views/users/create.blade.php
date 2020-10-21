@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.contact_no')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Contact No ">
+                            <input type="number" class="form-control" name="phone" id="phone" placeholder="Contact No ">
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
@@ -82,9 +82,9 @@
                        <div class="card-body">
                         <a href="{{route('users.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.cancel')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"> @lang('messages.button.update')</button>
                         </div>
                      </div>
                 </div>     

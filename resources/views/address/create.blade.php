@@ -19,30 +19,30 @@
             <form action="{{ action('AddressController@store')}}" method="post"  enctype="multipart/form-data">   
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Add Address Info</h4>
+                    <h4 class="card-title">@lang('messages.address_page.add_address_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Address Name</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.address_name')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="address_name"  value="{{ old('address_name') }}" id="address_name"  placeholder="Address Name">
                             <span class="text-danger">{{$errors->first('address_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Address Line1</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.address_line1')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="address_line1"  value="{{ old('address_line1') }}" id="address_line1"  placeholder="Address Line1">
                             <span class="text-danger">{{$errors->first('address_line1')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Address Line2</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.address_line2')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="address_line2"  value="{{ old('address_line2') }}" id="address_line1"  placeholder="Address Line2">
                             <span class="text-danger">{{$errors->first('address_line2')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Country</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.country')</label>
                         <div class="col-sm-9">
                             <select  class="form-control" name="country_id" id="country_id">
                                 @foreach($country as $c )
@@ -53,35 +53,35 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">City</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.city')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="city"  value="{{ old('city') }}" id="city"  placeholder="City">
                             <span class="text-danger">{{$errors->first('city')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">State</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.state')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="state"  value="{{ old('state') }}" id="state"  placeholder="State">
                             <span class="text-danger">{{$errors->first('state')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Post Code</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.post_code')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="post_code"  value="{{ old('post_code') }}" id="post_code"  placeholder="Post Code">
+                            <input type="number" class="form-control" name="post_code"  value="{{ old('post_code') }}" id="post_code"  placeholder="Post Code">
                             <span class="text-danger">{{$errors->first('post_code')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Phone</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.phone')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone"  value="{{ old('phone') }}" id="phone"  placeholder="Phone">
+                            <input type="number" class="form-control" name="phone"  value="{{ old('phone') }}" id="phone"  placeholder="Phone">
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">User</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.user')</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="user_id" id="user_id">
                                 @foreach($user as $u )
@@ -95,9 +95,9 @@
                         <div class="card-body">
                            <a href="{{route('address.index')}}">
                            <button type="button" class=" btn btn-danger">
-                            Cancel
+                           @lang('messages.button.cancel')
                             </button></a>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">@lang('messages.button.submit')</button>
                          </div>
 
                     </div>

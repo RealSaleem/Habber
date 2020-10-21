@@ -19,16 +19,16 @@
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="card-body">
-                    <h4 class="card-title">Edit BookClub Info</h4>
+                    <h4 class="card-title">@lang('messages.bookclub_page.edit_bookclub_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Name</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.name')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" value="{{ $bookclub->name }}">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">Banner Image</label>
+                        <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.banner_image')</label>
                         <div class="col-sm-9">
                         <input id="banner_image" type="file" class="form-control" name="banner_image" >
                             <span class="text-danger">{{$errors->first('banner_image')}}</span>
@@ -45,9 +45,9 @@
                        <div class="card-body">
                         <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.cancel')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary"> @lang('messages.button.update')</button>
                          </div>
                      </div>    
                 </div>

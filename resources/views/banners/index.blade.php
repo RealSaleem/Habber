@@ -47,9 +47,9 @@
                                 </div>
                                 <div class="col-2">
                                     @if($banner->status == 1)
-                                        <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">Disable</button></a>
+                                        <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">@lang('messages.banner_page.disable')</button></a>
                                     @else
-                                        <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')"> Enable</button></a>
+                                        <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')">@lang('messages.banner_page.enable') </button></a>
                                     @endif
                                 </div>
                             </div>

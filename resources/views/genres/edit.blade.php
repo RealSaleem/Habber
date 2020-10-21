@@ -20,9 +20,9 @@
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="card-body">
-                    <h4 class="card-title">Edit Genre Info</h4>
+                    <h4 class="card-title">@lang('messages.genre_page.edit_genre_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Title</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.genre_page.title')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="title"  value="{{ $genre->title }}">
                             <span class="text-danger">{{$errors->first('title')}}</span>
@@ -32,9 +32,9 @@
                        <div class="card-body">
                         <a href="{{route('genres.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.cancel')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">@lang('messages.button.update')</button>
                        </div>
                     </div>
                 </div>   

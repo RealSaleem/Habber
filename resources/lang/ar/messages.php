@@ -1694,33 +1694,73 @@ return [
         'genre' =>'الأنواع',
         'stock_status'=>'وضع مخزون',
         'feature'=>'خاصية',
-        'image'=> 'صورة',
+        'image'=> 'صورة'
     ],
     'bookmark_page' => [
         'bookmarks' => 'إشارات مرجعية',
         'add_new_bookmark'=> 'إضافة إشارة مرجعية جديدة',
-        'edit_bookmarks'=> 'تحرير_العلامات'
+        'edit_bookmarks'=> 'تحرير_العلامات',
+        'add_bookmark_info'=> 'إضافة معلومات المرجعية',
+        'edit_bookmark_info'=> 'تحرير المعلومات المرجعية',
+        'title'=> 'عنوان',
+        'maker_name'=>'اسم_الصانع',
+        'description'=>   'وصف' ,
+        'price'=>'السعر',
+        'bookmark_id'=>'إشارات مرجعية',
+        'size'=>'بحجم',
+        'quantity'=>'كمية',
+        'stock_status'=>'وضع مخزون',
+        'feature'=>'خاصية',
+        'business'=>'اعمال',
+        'image'=>'صورة'    
     ],
 
     'bookclub_page' => [
         'bookclubs' => 'نوادي الكتب',
         'add_new_bookclub'=> 'إضافة نادي كتاب جديد',
-        'edit_bookclub'=> 'تحرير نادي الكتاب'
+        'edit_bookclub'=> 'تحرير نادي الكتاب',
+        'add_bookclub_info'=> 'إضافة معلومات نادي الكتاب',
+        'edit_bookclub_info'=> 'تحرير معلومات نادي الكتاب',
+        'name'=>'اسم',
+        'banner_image'=>'صورة بانر'
     ],
     'genre_page' => [
         'genres' =>'الأنواع',
         'add_new_genre'=> 'إضافة نوع جديد',
-        'edit_genre'=> 'نوع التحرير'
+        'edit_genre'=> 'نوع التحرير',
+        'add_genre_info'=> 'إضافة معلومات النوع',
+        'edit_genre_info'=> 'تحرير معلومات النوع',
+        'title'=>'عنوان'
     ],
     'business_page' => [
         'business' => 'اعمال',
         'add_new_business'=> 'اضف عمل جديد',
-        'edit_business'=> 'تحرير الأعمال'
+        'edit_business'=> 'تحرير الأعمال',
+        'add_business_info'=> 'إضافة معلومات العمل',
+        'edit_business_info'=> 'تحرير معلومات الأعمال',
+        'user'=>'المستعمل',
+        'name'=>'اسم',
+        'business_type'=>'نوع العمل',
+        'product_type'=>'نوع المنتج',
+        'details'=>'تفاصيل'
     ],
     'address_page' => [
         'address' => 'عنوان',
         'add_new_address'=> 'أضف عنوان جديد',
-        'edit_address'=> 'تعديل العنوان'
+        'edit_address'=> 'تعديل العنوان',
+        'add_address_info'=> 'إضافة معلومات العنوان',
+        'edit_address_info'=> 'تحرير معلومات العنوان',
+        'address_name'=>'اسم عنوان',
+        'address_line1'=>'العنوان الأول',
+        'address_line2'=>'سطر العنوان ',
+        'country'=>'بلد',
+        'city'=>'مدينة',
+        'state'=>'حالة',
+        'post_code'=>'الرمز البريدي',
+        'phone'=>'هاتف',
+        'user'=>'المستعمل'
+
+        
     ],
     'userrequest_page' => [
         'userrequest' => 'طلب المستخدم'
@@ -1736,7 +1776,15 @@ return [
     'banner_page' => [
         'banners' => 'لافتات',
         'add_new_banner'=> 'إضافة لافتة جديدة',
-        'edit_banner'=> 'تحرير الشعار'
+        'edit_banner'=> 'تحرير الشعار',
+        'add_banner_info'=> 'إضافة معلومات لافتة',
+        'edit_banner_info'=> 'تحرير معلومات البانر',
+        'description'=>'وصف',
+        'status'=>'الحالة',
+        'url'=>'عنوان',
+        'image'=>'صورة',
+        'disable'=>'تعطيل',
+        'enable'=> 'ممكن'
     ],
 
 
@@ -1747,5 +1795,13 @@ return [
 
 
     ],
+    'button'=> [
+
+        'submit'=>'إرسال',
+        'cancel'=>'إلغاء',
+        'update'=>'تحديث',
+        'delete'=>'حذف',
+        'edit'=> 'تعديل'
+    ]
 
 ];

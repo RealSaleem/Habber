@@ -63,7 +63,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.price')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="price" id="price" value="{{ old('price') }}"  placeholder="Price ">
+                            <input type="number" class="form-control" name="price" id="price" value="{{ old('price') }}"  placeholder="Price ">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
@@ -153,9 +153,9 @@
                       <div class="card-body">
                        <a href="{{route('books.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.cancel')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"> @lang('messages.button.submit')</button>
                       </div>
                     </div>
                 </div>   

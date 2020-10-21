@@ -5,4 +5,3 @@
 /storage
 storage/*.key
 public/app/*
-/composer.lock
