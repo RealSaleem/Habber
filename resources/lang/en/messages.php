@@ -215,7 +215,7 @@ return [
         'delete'=>'Delete',
         'edit'=> 'Edit',
         'back'=> 'Back',
-        'updatestatus'=> 'UpdateStatus'
+        'update_status'=> 'Update Status'
     ],
 
     'permission_page' => [

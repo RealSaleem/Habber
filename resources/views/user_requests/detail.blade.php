@@ -61,7 +61,7 @@
                         <button type="button" class=" btn btn-success">
                         @lang('messages.button.back')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Update Status</button>
+                        <button type="submit" class="btn btn-primary">@lang('messages.button.update_status')</button>
                     </div>
                 </div>
             </form>

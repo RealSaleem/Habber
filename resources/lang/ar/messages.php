@@ -1851,7 +1851,7 @@ return [
         'delete'=>'حذف',
         'edit'=> 'تعديل',
         'back'=>'عودة',
-        'updatestatus'=>'تحديث الحالة'
+        'update_status'=>'تحديث الحالة'
     ],
 
     'permission_page' => [
