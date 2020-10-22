@@ -124,13 +124,43 @@ return [
     ],
     'userrequest_page' => [
         'userrequest' => 'User Request ',
+        'veiw_user_request'=> 'View User Request',
+        'user'=>'User',
+        'title'=>'Title',
+        'author_name'=>'Author Name',
+        'book_type'=>'Book type',
+        'user_name'=>'User Name',
+        'submission_date'=>'Submission Date',
+        'status'=> 'Status',
+        'image'=> 'Image'
+        
     ],
     'contactus_page' => [
         'contactus' => 'Contact Us',
+        'viewcontactus_request'=> 'View Contact Us Request',
+        'contact_us_request'  => 'Contact Us Request',
+        'user_name'=>'User Name',
+        'email'=>'Email',
+        'phone_number' => 'Phone Number',
+        'message'  => 'Message',
+        'submission_date'=> 'Submission Date:',
+       
+
         
     ],
     'joinusrequest_page'=> [
         'joinusrequest' =>'Join Us Request',
+        'userjoinusrequest' =>'User Join Us Request',
+         'view_user_request'=>'View User Request',
+        'email'=>'Email',
+        'submission_id'=> 'Submission id:',
+        'business_type'=>'Business Type',
+        'product_type'=>'Product Type',
+        'submission_date'=> 'Submission Date:',
+        'phone_number' => 'Phone Number',
+         'requested_by' => 'Requested By',
+         'status'=> 'status'
+
     ],
     'banner_page' => [
         'banners' => 'Banners',
@@ -139,6 +169,7 @@ return [
         'add_banner_info'=> 'Add Banner Info',
         'edit_banner_info'=> 'Edit Banner Info',
         'description'=>'Descripton',
+        'language'=>'Langauge',
         'status'=>'Status',
         'url'=>'Url',
         'image'=>'Image',
@@ -183,7 +214,8 @@ return [
         'update'=>'Update',
         'delete'=>'Delete',
         'edit'=> 'Edit',
-        'back'=> 'Back'
+        'back'=> 'Back',
+        'updatestatus'=> 'UpdateStatus'
     ],
 
     'permission_page' => [
@@ -208,5 +240,9 @@ return [
         'favourite_name'=>'Name',
         'edit_favourite' => 'Edit Favourite',
         'view_favourite' => 'View Favourite'
-    ]
+    ],
+
+    
+
+
 ];
