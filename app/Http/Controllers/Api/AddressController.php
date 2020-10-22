@@ -64,14 +64,11 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showUserAddresses($id)
+    public function showUserAddresses()
     {
         try {
-            $address = $this->model->UserAddresses($id);
-            if(count($address) > 0 && count($address) < 2 ) {
-                return (new AddressResource($address[0]));
-            }
-            elseif (count($address) > 1) {
+            $address = $this->model->userAddresses();
+            if(count($address) > 0) {
                 return (new AddressCollection($address));
             }
             else {

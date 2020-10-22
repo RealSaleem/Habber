@@ -31,7 +31,6 @@ class AddressRequest extends FormRequest
             'address_line1' => ['bail', 'required',  'string', 'max:255', 'min:3'],
             'address_line2' => ['bail', 'required',  'string', 'max:255', 'min:3'],
             'phone'          => ['bail','required',  'numeric', 'digits_between:11,15'],
-            'user_id'        => ['bail','required']
         ];
     }
 }

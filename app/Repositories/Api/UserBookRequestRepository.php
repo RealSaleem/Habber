@@ -31,6 +31,7 @@ class UserBookRequestRepository implements RepositoryInterface
         if(isset($data['image'])) {
             $file = $data['image'];
             $data['image'] = null;
+            $data['user_id'] = auth()->user()->id;
             $userRequest = $this->model->create($data);
             $userRequestUpdate = $this->model->findOrFail($userRequest->id);
             Storage::disk('public')->deleteDirectory('user_requests/' .  $userRequest->id);
@@ -43,6 +44,7 @@ class UserBookRequestRepository implements RepositoryInterface
             return $userRequestResponse;
         }
         else {
+            $data['user_id'] = auth()->user()->id;
             return $this->model->create($data);
         }
     }
