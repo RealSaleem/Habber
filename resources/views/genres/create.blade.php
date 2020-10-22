@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Genre</h2>
+            <h2>@lang('messages.genre_page.add_new_genre')</h2>
         </div>
     </div>
     <div class="container-fluid">
@@ -14,28 +14,29 @@
         @endif 
             
         </div> 
-        <div class="col-md-12">
+    <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/genres') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{action('GenreController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Add Genre Info</h4>
+                    <h4 class="card-title">@lang('messages.genre_page.add_genre_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Title</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.genre_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" id="title"  placeholder="Title Here">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" id="title"  placeholder="Title ">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('genres.index')}}">
-                        <button type="button" class=" btn btn-danger">
-                            Cancel
-                        </button></a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="border-top">
+                      <div class="card-body">
+                         <a href="{{route('genres.index')}}">
+                           <button type="button" class=" btn btn-danger">
+                           @lang('messages.button.back')
+                          </button></a>
+                          <button type="submit" class="btn btn-primary"> @lang('messages.button.submit')</button>
+                      </div>
                     </div>
-                </div>
+                 </div>   
             </form>
         </div>
     </div>

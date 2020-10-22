@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookclubCollection;
+use App\Http\Resources\BookclubResource;
 
 class BookclubController extends Controller
 {

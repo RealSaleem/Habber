@@ -4,3 +4,4 @@
 /public/.htaccess
 /storage
 storage/*.key
+public/app/*

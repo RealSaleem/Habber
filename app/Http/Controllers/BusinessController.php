@@ -15,7 +15,7 @@ class BusinessController extends Controller
     public function index()
     {
         //
-        $business = Business::all();
+        $business = Business::with('users')->get();
         return view('business.index', compact('business'));
     }
 
@@ -27,7 +27,7 @@ class BusinessController extends Controller
     public function create()
     {
         //
-        $user = User::all();
+        $user = User::where('id', '!=', 1)->get();
         return view('business.create',compact('user'));
     }
 
@@ -79,7 +79,8 @@ class BusinessController extends Controller
     {
         //
         $business = Business::findOrFail($id);
-        return view('business.edit', compact('business'));
+        $user = User::where('id', '!=', 1)->get();
+        return view('business.edit', compact('business','user'));
     }
 
     /**

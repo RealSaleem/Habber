@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Business</h2>
+            <h2>@lang('messages.business_page.add_new_business')</h2>
         </div>
     </div>
     <div class="container-fluid">
@@ -20,55 +20,62 @@
             <form action="{{action('BusinessController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Add Business Info</h4>
+                    <h4 class="card-title">@lang('messages.business_page.add_business_info')</h4>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">User ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.user')</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="user_id" id="user_id">
-                            @foreach($user as $u)
-                            <option value={{$u->id}} > {{$u->name}}</option>
-                            @endforeach
-                        </select>
+                            <select  class="form-control" name="user_id" id="user_id">
+                                @foreach($user as $u )
+                                <option value="{{$u->id}}" > {{$u->first_name}}</option>
+                                @endforeach
+                            </select>
                             <span class="text-danger">{{$errors->first('user_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Name</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name" placeholder=" Name ">
+                            <input type="text" class="form-control" name="name"value="{{ old('name') }}" id="name" placeholder=" Name ">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Business Type</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.business_type')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="business_type" id="business_type" placeholder="Business Type">
+                            <input type="text" class="form-control" name="business_type" value="{{ old('business_type') }}" id="business_type" placeholder="Business Type">
                             <span class="text-danger">{{$errors->first('business_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Product Type</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.product_type')</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="product_type" id="product_type" placeholder="Product Type">
+                        
+                            <select class="form-control" name="product_type"  id="status">
+                                <option value="both" {{ (old('product_type') == "boths" ? "selected":"")}}> Both</option>
+                                <option value="books" {{ (old('product_type') == "books" ? "selected":"")}}>Books</option>
+                                <option value="bookmarks" {{ (old('product_type') == "bookmarks" ? "selected":"")}}> Bookmarks</option>
+
+                             </select>   
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Details</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.details')</label>
                         <div  class="col-sm-9">
-                         <textarea class="form-control" id="details" name="details" rows="4" cols="54" style="resize:none, " placeholder= "Details"  ></textarea>
+                         <textarea class="form-control" id="details" name="details" value="{{ old('details') }}" rows="4" cols="54" style="resize:none, " placeholder= "Details"  ></textarea>
                             <span class="text-danger">{{$errors->first('details')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('business.index')}}">
+                    <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('business.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.back')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"> @lang('messages.button.submit')</button>
+                      </div>
                     </div>
-                </div>
+                </div>   
             </form>
         </div>
     </div>

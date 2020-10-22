@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function addresses()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasMany(Address::class);
     }
     
     public function userRequests()
@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function favourites()
     {
-        return $this->hasMany(Favourite::class);
+        return $this->hasMany(Favourite::class,'user_id','id');
     }
 
     public function businesses()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use Auth;
+use Session;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -40,6 +41,7 @@ class LoginController extends Controller
 
     public function logout() {
         Auth::logout();
+        Session::forget('language');
         return redirect('/login');
     }
 }

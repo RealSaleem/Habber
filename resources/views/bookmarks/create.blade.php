@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Bookmarks</h2>
+            <h2>@lang('messages.bookmark_page.add_new_bookmark')</h2>
         </div>
     </div>
     <div class="container-fluid">
@@ -12,6 +12,7 @@
                 <strong>Bookmarks Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
+     
             
         </div> 
         <div class="col-md-12">
@@ -19,58 +20,79 @@
             <form action="{{action('BookmarksController@store') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Add Bookmarks Info</h4>
+                    <h4 class="card-title">@lang('messages.bookmark_page.add_bookmark_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Title</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" id="title"  placeholder="Title">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> Maker Name</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> @lang('messages.bookmark_page.maker_name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="maker_name" id="maker_name" placeholder=" Maker Name">
+                            <input type="text" class="form-control" name="maker_name" value="{{ old('maker_name') }}" id="maker_name" placeholder=" Maker Name">
                             <span class="text-danger">{{$errors->first('maker_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Description</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="description" id="description" placeholder="Description">
+                            <input type="textarea" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description">
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Price</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.price')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                            <input type="number" class="form-control" name="price" value="{{ old('price') }}" id="price" placeholder="Price">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Bookmark ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.bookmark_id') </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" id="bookmark_id" placeholder="Bookmark Id ">
+                            <input type="text" class="form-control" name="bookmark_id" value="{{ old('bookmark_id') }}" id="bookmark_id" placeholder="Bookmark Id ">
                             <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Size</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="size" id="size" placeholder="Size">
+                            <input type="number" class="form-control" name="size"value="{{ old('size') }}" id="size" placeholder="Size">
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Quantity</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.quantity')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity ">
+                            <input type="number" class="form-control" name="quantity" value="{{ old('quantity') }}" id="quantity" placeholder="Quantity ">
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Business ID</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.stock_status')</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="stock_status"  id="status">
+                                <option value="0" {{ (old('stock_status') == "0" ? "selected":"")}}>Not Available</option>
+                                <option value="1" {{ (old('stock_status') == "1" ? "selected":"")}}>Available</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
+                        </div>
+                     </div> 
+                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.feature')</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="featured"  id="status">
+                                <option value="0" {{ (old('featured') == "0" ? "selected":"")}}>Not Featured</option>
+                                <option value="1" {{ (old('featured') == "1" ? "selected":"")}}> Featured</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('featured')}}</span>
+                        </div>
+                     </div> 
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.business')</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="business_id" id="business_id">
                             @foreach($business as $b)
@@ -81,30 +103,24 @@
                         </div>
                     </div>
                     
+                     
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Stock Status</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="stock_status" id="stock_status
-                            " placeholder="Stock status">
-                            <span class="text-danger">{{$errors->first('stock_status')}}</span>
-                        </div>
-                     </div>   
-                    <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">Image Url</label>
+                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image_url">
                             <span class="text-danger">{{$errors->first('image_url')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('bookmarks.index')}}">
+                    <div class="border-top">
+                        <div class="card-body">
+                         <a href="{{route('bookmarks.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.back')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"> @lang('messages.button.submit')</button>
+                       </div>
                     </div>
-                </div>
+                </div>    
             </form>
         </div>
     </div>

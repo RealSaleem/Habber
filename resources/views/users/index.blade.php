@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">Users</h1>
+<h1 class="page-title">@lang('messages.user_page.users')
+
+</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -11,8 +13,8 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <div class="table-responsive">
-        <table id="zero_config" class="table table-striped table-bordered">
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -20,47 +22,64 @@
                         <th>Email</th>
                         <th>Contact</th>
                         <th>Status</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th class="not">Image</th>
+                        <th class="not">Action</th>
                     </tr>
-               </thead>
-               <tbody>
-              @foreach($user as $user)
-        <tr>
-            
-            <td>{{$user->first_name}}</td>
-            <td>{{$user->last_name}}</td>
-            <td>{{$user->email}}</td>
-            <td>{{$user->phone}}</td>  
-            <td>{{$user->status == 1 ? "active" : "not active"}}</td>  
-            <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
-            <td>
-                <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-                </button></a>
-                    <a href="{{url('users/'.$user->id.'/edit')}}"><button class=" btn btn-success">
-                    <span class="fa fa-edit"></span>
-                    Edit
-                </button></a>
-                @if($user->status == 1)
-                    <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">Deactivate</button></a>
-                @else
-                    <a>
-                        <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
-                            Activate
-                        </button>
-                    </a>
-                @endif
-                
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-  </table>
-<div>
+                </thead>
+                <tbody>
+                    @foreach($user as $user)
+                    <tr>    
+                        <td>{{$user->first_name}}</td>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->phone}}</td>  
+                        <td class = "{{$user->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$user->status == 1 ? "active" : "not active"}}</td>  
+                        <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-2">
+                                    <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    <form action="{{action('UserController@edit', [$user->id])}}" method="post">
+                                    @csrf
+                                    @method('get')
+                                        <button class=" btn btn-success" type="submit">
+                                        <span class="fa fa-edit"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-3">
+                                    @if($user->status == 1)
+                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                                    @else
+                                        <a>
+                                            <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
+                                            @lang('messages.user_page.activate')
+                                            </button>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="col-2">
+                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">Address</button></a>
+                                </div>
+
+                                <div class="col-2">
+                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">Favourites</button></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>   
+    </div>    
+</div>
 @endsection
 @section('scripts')
 
@@ -98,5 +117,44 @@ function activateUser(id) {
         }
     });
 }
+    $(document).ready(function() {
+        $('#zero_config').DataTable({
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                
+                // 'csv', 'excel', 'pdf', 'print',
+             
+                {
+                    extend: 'pdf',           
+                    exportOptions: {
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                    }                      // Exclude indexes that you don't want to print.
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(.not)'
+                    }
+                }         
+            ],
+            
+        });
+
+    })
 </script>
 @stop

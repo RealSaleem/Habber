@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
+use App\Banner;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helpers\ApiHelper;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use App\Http\Resources\BannerCollection;
 
-class BookgenreController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +17,18 @@ class BookgenreController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $banner = Banner::where('status',1)->orderBy('sort_order','ASC')->get();
+            if(count($banner)) {
+                return (new BannerCollection($banner));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Banners Found");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
     }
 
     /**

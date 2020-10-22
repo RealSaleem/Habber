@@ -5,6 +5,7 @@ namespace App\Repositories\Api;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class UserBookRequestRepository implements RepositoryInterface
 {
@@ -26,7 +27,26 @@ class UserBookRequestRepository implements RepositoryInterface
     // create a new record in the database
     public function create(array $data)
     {
-        return $this->model->create($data);
+        $data['status'] = 0;
+        if(isset($data['image'])) {
+            $file = $data['image'];
+            $data['image'] = null;
+            $data['user_id'] = auth()->user()->id;
+            $userRequest = $this->model->create($data);
+            $userRequestUpdate = $this->model->findOrFail($userRequest->id);
+            Storage::disk('public')->deleteDirectory('user_requests/' .  $userRequest->id);
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "user_requests/". $userRequest->id.'/' . $fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $userRequestUpdate->image = $filePath;
+            $userRequestUpdate->update();
+            $userRequestResponse = $this->model->findOrFail($userRequest->id);
+            return $userRequestResponse;
+        }
+        else {
+            $data['user_id'] = auth()->user()->id;
+            return $this->model->create($data);
+        }
     }
     // Insert data in multiple rows
     public function createInArray(array $data, Model $model)

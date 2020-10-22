@@ -3,46 +3,57 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New BookClub</h2>
+            <h2>@lang('messages.bookclub_page.add_new_bookclub')</h2>
         </div>
     </div>
-    <div class="container-fluid">
-        @if(Session::has('success'))
+        <div class="container-fluid">
+             @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
                 <strong>BookClub Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
-        @endif 
+              @endif 
             
         </div> 
-        <div class="col-md-12">
+    <div class="col-md-12">
         <div class="card">
-            <form action="{{url('/bookclubs') }}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{action('BookClubController@store')}}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Add BookClub Info</h4>
+                    <h4 class="card-title">@lang('messages.bookclub_page.add_bookclub_info')</h4>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Name</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name"  placeholder="name">
+                            <input type="text" class="form-control" name="name"  value="{{ old('name') }}" id="name"  placeholder="name">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">Banner Image</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.feature')</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="featured"  id="status">
+                                <option value="0" {{ (old('featured') == "0" ? "selected":"")}}>Featured</option>
+                                <option value="1" {{ (old('featured') == "1" ? "selected":"")}}>Not Featured</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('featured')}}</span>
+                        </div>
+                     </div> 
+                    <div class="form-group row">
+                        <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.banner_image')</label>
                         <div class="col-sm-9">
                         <input id="banner_image" type="file" class="form-control" name="banner_image">
                             <span class="text-danger">{{$errors->first('banner_image')}}</span>
                         </div>
                     </div>
-                <div class="border-top">
-                    <div class="card-body">
-                    <a href="{{route('bookclubs.index')}}">
+                     <div class="border-top">
+                       <div class="card-body">
+                        <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">
-                            Cancel
+                        @lang('messages.button.back')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
+                        <button type="submit" class="btn btn-primary"> @lang('messages.button.submit')</button>
+                       </div>
+                      </div>
+                </div>     
             </form>
         </div>
     </div>

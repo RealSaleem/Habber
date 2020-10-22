@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App;
+use Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +25,13 @@ class HomeController extends Controller
     public function index()
     {
         return view('welcome');
+    }
+
+    public  function setLanguage($locale) 
+    {
+        // dd($locale);
+        App::setLocale($locale);
+        Session::put('locale', $locale);
+        return redirect()->back();
     }
 }
