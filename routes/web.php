@@ -46,6 +46,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('banners-sortable', 'BannerController@sortBanners');
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');
+   Route::resource('permissions','PermissionController');
+   Route::resource('roles','RoleController');
+   Route::get('user/favourites/{userId}','FavouriteController@index')->name('user.favourites');
+   Route::resource('favourites','FavouriteController');
 });
 
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories\Api;
-
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +32,7 @@ class AddressRepository implements RepositoryInterface {
     // create a new record in the database
     public function create(array $data)
     {
+        $data['user_id'] = Auth::user()->id;
         return $this->model->create($data);  
     }
     // Insert data in multiple rows
@@ -56,9 +57,9 @@ class AddressRepository implements RepositoryInterface {
     }
 
     // show the record with the given id
-    public function UserAddresses($id)
+    public function userAddresses()
     {
-        return $this->model->with('countries')->where('user_id',$id)->get();
+        return $this->model->with('countries')->where('user_id',Auth::user()->id)->get();
     }
 
     public function show($id)

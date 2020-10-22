@@ -64,11 +64,11 @@ class FavouriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         try{
-            $favourites = $this->model->getUserFavourites($id);
-            if(isset($favourites)) {
+            $favourites = $this->model->getUserFavourites();
+            if(count($favourites) > 0) {
                 return (new FavouriteCollection($favourites));
             }
             else {

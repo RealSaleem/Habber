@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">@lang('messages.user_page.users')
+<h1 class="page-title">@lang('messages.permission_page.permission')
 
 </h1>
 <div class="ml-auto text-right">
@@ -17,60 +17,32 @@
             <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-                        <th>Status</th>
-                        <th class="not">Image</th>
+                        <th>Name</th>
                         <th class="not">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($user as $user)
+                    @foreach($permission as $permission)
                     <tr>    
-                        <td>{{$user->first_name}}</td>
-                        <td>{{$user->last_name}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{$user->phone}}</td>  
-                        <td class = "{{$user->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$user->status == 1 ? "active" : "not active"}}</td>  
-                        <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
+                        <td>{{$permission->name}}</td>
                         <td>
                             <div class="row">
                                 <div class="col-2">
-                                    <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
+                                    <form action="{{ action('PermissionController@destroy', [$permission->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                                     </form>
                                 </div>
-                                <div class="col-2">
-                                    <form action="{{action('UserController@edit', [$user->id])}}" method="post">
+                                <!-- <div class="col-1">
+                                    <form action="{{action('PermissionController@edit', [$permission->id])}}" method="post">
                                     @csrf
                                     @method('get')
                                         <button class=" btn btn-success" type="submit">
                                         <span class="fa fa-edit"></span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="col-3">
-                                    @if($user->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a>
-                                    @else
-                                        <a>
-                                            <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
-                                            @lang('messages.user_page.activate')
-                                            </button>
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="col-2">
-                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">Address</button></a>
-                                </div>
-
-                                <div class="col-2">
-                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">Favourites</button></a>
-                                </div>
+                                </div> -->
                             </div>
                         </td>
                     </tr>
@@ -120,6 +92,8 @@ function activateUser(id) {
     $(document).ready(function() {
         $('#zero_config').DataTable({
             paging: true,
+            autoWidth: true,
+            lengthChange: true,
             dom: 'Bfrtip',
             buttons: [
                 

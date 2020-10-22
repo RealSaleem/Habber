@@ -24,7 +24,6 @@ class UserBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['bail','required'],
             'title' => ['bail','required','string'],
             'author_name' => ['bail','required','string']
         ];

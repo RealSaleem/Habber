@@ -151,6 +151,7 @@ class BooksController extends Controller
             "genre" => 'required|array|min:1|max:3',
             'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048' 
         ]);
+       
         $book = Book::find($id);
         // dd(count($book->genres) + count($request->genre) > 3);
         $book->title = $request->title;
@@ -166,10 +167,14 @@ class BooksController extends Controller
         $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
         $book->featured = $request->featured;
-        if(count($book->genres)+ count($request->genre) > 3 ) {
-            $book->genres()->detach($id);
+        if(count($book->genres) + count($request->genre) > 3 ) {
+            // dd($request->genre);
+            $genre_id = $book->genres()->pluck('genre_id');
+            $book->genres()->detach($genre_id);
+            $book->genres()->sync($request->genre);
         }
         else {
+           
             $book->genres()->sync($request->genre);
         }
         
