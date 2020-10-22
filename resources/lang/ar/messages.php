@@ -1763,16 +1763,41 @@ return [
 
         
     ],
-    'userrequest_page' => [
-        'userrequest' => 'طلب المستخدم'
+        'userrequest_page' => [
+        'userrequest' => 'طلب المستخدم',
+        'veiw_user_request'=> 'عرض طلب المستخدم',
+        'user'=>'المستعمل',
+        'title'=>'عنوان',
+        'author_name'=>'اسم المؤلف',
+        'book_type'=>'نوع الكتاب',
+        'user_name'=>'اسم المستخدم',
+        'submission_date'=>'تاريخ التقديم',
+        'status'=> 'الحالة'
+        
     ],
     'contactus_page' => [
         'contactus' => 'اتصل بنا',
-        'add_new_contactus'=> 'إضافة اتصال جديد بنا',
-        'edit_contactus'=> 'تحرير_اتصل بنا'
+        'viewcontactus_request'=> 'عرض طلب الاتصال بنا',
+        'contact_us_request'  => 'اتصل بنا طلب',
+        'user_name'=>'اسم المستخدم',
+        'email'=>'البريد الإلكتروني',
+        'phone_number' => 'رقم الهاتف',
+        'message'  => 'رسالة',
+        'submission_date'=> 'تاريخ التقديم:',
+        
     ],
     'joinusrequest_page'=> [
-        'joinusrequest' =>'طلب الانضمام إلينا'
+        'joinusrequest' =>'طلب الانضمام إلينا',
+        'userjoinusrequest' =>'طلب انضمام المستخدم إلينا',
+         'view_user_request'=>'عرض طلب المستخدم',
+        'email'=>'البريد الإلكتروني',
+        'submission_id'=> 'معرّف الإرسال:',
+        'business_type'=>'نوع العمل',
+        'product_type'=>'نوع المنتج',
+        'submission_date'=>' تاريخ التقديم',
+        'phone_number' => 'رقم الهاتف',
+         'requested_by' => 'بتوصية من',
+         'status'=> 'الحالة'
     ],
     'banner_page' => [
         'banners' => 'لافتات',
@@ -1781,6 +1806,7 @@ return [
         'add_banner_info'=> 'إضافة معلومات لافتة',
         'edit_banner_info'=> 'تحرير معلومات البانر',
         'description'=>'وصف',
+        'language'=>'لغة',
         'status'=>'الحالة',
         'url'=>'عنوان',
         'image'=>'صورة',
@@ -1824,7 +1850,8 @@ return [
         'update'=>'تحديث',
         'delete'=>'حذف',
         'edit'=> 'تعديل',
-        'back'=>'عودة'
+        'back'=>'عودة',
+        'updatestatus'=>'تحديث الحالة'
     ],
 
     'permission_page' => [
@@ -1832,6 +1859,7 @@ return [
         'add_permission'=> 'إضافة إذن جديد',
         'add_permission_info' => 'أضف معلومات الإذن',
         'permission_name'=>'اسم',
+        
     ],
 
     'role_page' => [

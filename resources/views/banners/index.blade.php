@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                         <th>Description</th>
+                        <td>Language</td>  
                             <th>Status</th>
                             <th>Url</th>
                             <th class="not">Image</th>
@@ -27,6 +28,7 @@
                     @foreach($banner as $banner)
                     <tr class="row1" data-id="{{ $banner->id }}">
                         <td>{{$banner->description}}</td> 
+                        <td>{{$banner->languages['name']}}</td>  
                         <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "Enabled" : "Disabled"}}</td>  
                         <td>{{$banner->url}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>

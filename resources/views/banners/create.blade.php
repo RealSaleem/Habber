@@ -38,6 +38,17 @@
                         </div>
                      </div> 
                      <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.language')</label>
+                        <div class="col-sm-9">
+                       <select  class="form-control" name="language_id" id="language_id" >
+                            @foreach($language as $l)
+                                <option value="{{$l->id}}" > {{$l->name}}</option>
+                            @endforeach
+                        </select>
+                            <span class="text-danger">{{$errors->first('language_id')}}</span>
+                        </div>
+                    </div>
+                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.url')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="url"  value="{{old('url')}}" id="url"  placeholder="Url">

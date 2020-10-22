@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Banner;
+use App\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,7 @@ class BannerController extends Controller
     public function index()
     {
         //
-        $banner = Banner::orderBy('sort_order','ASC')->get();
+        $banner = Banner::with('languages')->orderBy('sort_order','ASC')->get();
         return view('banners.index', compact('banner'));
     }
 
@@ -28,7 +29,8 @@ class BannerController extends Controller
     {
         //
         $banner = Banner::all();
-        return view('banners.create', compact('banner'));
+        $language = Language::all();
+        return view('banners.create', compact('banner','language'));
     }
 
     /**
@@ -42,6 +44,7 @@ class BannerController extends Controller
         //
         $validatedData = $request->validate([
             'description' => 'required', 
+            'language_id' => 'required',
             'status' => 'required',
             'url'  => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
@@ -49,6 +52,7 @@ class BannerController extends Controller
          ]);
         $banner = new Banner();
         $banner->description = $request->description;
+        $banner->language_id = $request->language_id;
         $banner->status = $request->status;
         $banner->url = $request->url;
         $banner->image = "null"; 
@@ -86,7 +90,8 @@ class BannerController extends Controller
     {
         //
         $banner = Banner::findOrFail($id);
-        return view('banners.edit', compact('banner'));
+        $language = Language::all();
+        return view('banners.edit', compact('banner','language'));
     }
 
     public function sortBanners(Request $request)
@@ -116,12 +121,14 @@ class BannerController extends Controller
         //
         $validatedData = $request->validate([
             'description' => 'required', 
+            'language_id' => 'required',
             'status' => 'required',
              'url' => 'required',
             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         $banner = Banner::find($id);
         $banner->description = $request->description;
+        $banner->language_id = $request->language_id;
         $banner->status = $request->status;
         $banner->url = $request->url;
         if($request->has('image'))
