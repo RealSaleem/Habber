@@ -29,7 +29,7 @@
             
             <td>{{$country->iso}}</td>
             <td>{{$country->name}}</td>
-            <td>{{$country->nicname}}</td>
+            <td>{{$country->nicename}}</td>
             <td>{{$country->iso3}}</td>  
             <td>{{$country->numcode}}</td>
             <td>{{$country->phonecode}}</td>
