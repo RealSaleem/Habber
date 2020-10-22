@@ -28,6 +28,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.feature')</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="featured"  id="status">
+                                <option value="0" {{ (old('featured') == "0" ? "selected":"")}}>Featured</option>
+                                <option value="1" {{ (old('featured') == "1" ? "selected":"")}}>Not Featured</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('featured')}}</span>
+                        </div>
+                     </div> 
+                    <div class="form-group row">
                         <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.banner_image')</label>
                         <div class="col-sm-9">
                         <input id="banner_image" type="file" class="form-control" name="banner_image">

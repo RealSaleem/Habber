@@ -82,7 +82,8 @@ return [
         'add_bookclub_info'=> 'Add Bookclub Info',
         'edit_bookclub_info'=> 'Edit Bookclub Info',
         'name'=>'Name',
-        'banner_image'=>'Banner Image'
+        'banner_image'=>'Banner Image',
+        'feature'=>'Feature'
         
     ],
     'genre_page' => [
@@ -144,6 +145,28 @@ return [
         'disable'=>'Disable',
         'enable'=> 'Enable'
 
+    ],
+    'language_page'=> [
+        'languages'=> 'Language',
+        'name'=>'Name',
+        'add_new_language'=> 'Add New Language',
+        'edit_language'=> 'Edit Language',
+        'add_language_info'=> 'Add Language Info',
+        'edit_language_info'=> 'Edit Language Info',
+    ],
+    'country_page'=> [
+        'countries'=> 'Country' ,
+        'country '=>'Country',
+        'add_country'=> 'Add  Country',
+        'edit_country'=> 'Edit Country',
+        'add_country_info'=> 'Add Country Info',
+        'edit_country_info'=> 'Edit Country Info',
+        'iso'=> 'Iso',
+        'name'=> 'Name',
+        'nicename'=> 'Nicename',
+        'iso3'=> 'Iso3',
+        'numcode'=>'Numcode' ,
+        'phonecode'=>'Phonecode'
     ],
 
 

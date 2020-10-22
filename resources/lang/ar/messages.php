@@ -1722,7 +1722,8 @@ return [
         'add_bookclub_info'=> 'إضافة معلومات نادي الكتاب',
         'edit_bookclub_info'=> 'تحرير معلومات نادي الكتاب',
         'name'=>'اسم',
-        'banner_image'=>'صورة بانر'
+        'banner_image'=>'صورة بانر',
+        'feature'=> 'خاصية'
     ],
     'genre_page' => [
         'genres' =>'الأنواع',
@@ -1786,7 +1787,28 @@ return [
         'disable'=>'تعطيل',
         'enable'=> 'ممكن'
     ],
-
+    'language_page'=> [
+        'languages'=> 'لغة',
+        'name'=>'اسم',
+        'add_new_language'=> 'أضف لغة جديدة',
+        'edit_language'=> 'تحرير_اللغة',
+        'add_language_info'=> 'إضافة معلومات اللغة',
+        'edit_language_info'=> 'تحرير معلومات اللغة',
+    ],
+    'country_page'=> [
+        'countries'=>'بلد',
+        'country'=>'بلد',
+        'add_country'=> 'أضف دولة جديدة',
+        'edit_country'=> 'تحرير_البلد',
+        'add_country_info'=> 'إضافة معلومات الدولة',
+        'edit_country_info'=> 'تحرير معلومات الدولة',
+        'iso'=>'ايزو',
+        'name'=>'اسم',
+        'nicename'=> 'اسم جميل',
+         'iso3'=>'ايزو 3',
+         'numcode'=>'كود',
+         'phonecode'=>'رمز الهاتف'
+    ],
 
     'sidebar' => [
        

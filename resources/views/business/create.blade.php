@@ -49,7 +49,13 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.product_type')</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="product_type"value="{{ old('product_type') }}" id="product_type" placeholder="Product Type">
+                        
+                            <select class="form-control" name="product_type"  id="status">
+                                <option value="both" {{ (old('product_type') == "boths" ? "selected":"")}}> Both</option>
+                                <option value="books" {{ (old('product_type') == "books" ? "selected":"")}}>Books</option>
+                                <option value="bookmarks" {{ (old('product_type') == "bookmarks" ? "selected":"")}}> Bookmarks</option>
+
+                             </select>   
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
                     </div>

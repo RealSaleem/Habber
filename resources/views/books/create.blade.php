@@ -54,9 +54,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.book_language')</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.book_language') </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="book_language"  value="{{ old('book_language') }}" id="book_langauge" placeholder="Book language">
+                        <select  class="form-control" name="book_language" id="book
+                        _language" >
+                            @foreach($language as $l)
+                            <option value="{{$l->name}}" > {{$l->name}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('book_language')}}</span>
                         </div>
                     </div>

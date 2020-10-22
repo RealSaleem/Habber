@@ -5,6 +5,7 @@ use App\Book;
 use App\BookClub;
 use App\Genre;
 use App\Business;
+use App\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +33,8 @@ class BooksController extends Controller
         $business = Business::all();
         $bookClubs = BookClub::all();
         $genres = Genre::all();
-        return view('books.create',compact('business','bookClubs','genres'));
+        $language = Language::all();
+        return view('books.create',compact('business','bookClubs','genres','language'));
     }
 
     /**
@@ -117,7 +119,8 @@ class BooksController extends Controller
         $business = Business::all();
         $bookClubs = BookClub::all();
         $genres = Genre::all();
-        return view('books.edit', compact('book','business','bookClubs','genres','selectedGenres'));
+        $language = Language::all();
+        return view('books.edit', compact('book','business','bookClubs','genres','selectedGenres','language'));
  
     }
 

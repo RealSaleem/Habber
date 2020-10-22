@@ -43,10 +43,12 @@ class BookClubController extends Controller
         
         $validatedData = $request->validate([
             'name' => 'required', 
+            'featured'=>'required',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
+        $bookclub->featured =$request->featured;
         $bookclub->banner_image = "null"; 
         $bookclub->save();
         $updatebookclub = BookClub::find($bookclub->id);
@@ -95,10 +97,12 @@ class BookClubController extends Controller
         //
         $validatedData = $request->validate([
             'name' => 'required', 
+            'featured'=>'required',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
+        $bookclub->featured=$request->featured;
         if($request->has('banner_image')) 
         {   
             Storage::disk('public')->deleteDirectory('bookclubs/'. $id);
