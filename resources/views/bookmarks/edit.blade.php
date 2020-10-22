@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" value="{{ $bookmark->title }}">
+                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ $bookmark->title }}">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <input type="textarea" class="form-control" name="description" value="{{ $bookmark->description }}">
+                            <textarea type="textarea"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" value="{{ $bookmark->description }}"></textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
