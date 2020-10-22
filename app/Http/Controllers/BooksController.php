@@ -61,7 +61,6 @@ class BooksController extends Controller
             'business' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            'bookclub' => 'required',
             "genre" => 'required|array|min:1|max:3',
             'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
             ]);
@@ -147,8 +146,7 @@ class BooksController extends Controller
             'business' => 'required',  
             'stock_status' => 'required',
             'featured'=>'required',
-            'bookclub' => 'required',
-            "genre" => 'required|array|min:1|max:3',
+            'genre' => 'required|array|min:1|max:3',
             'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048' 
         ]);
        
