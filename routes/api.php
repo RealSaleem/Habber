@@ -25,6 +25,8 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::group(['middleware'=>'auth:api'], function() {
         Route::post('request/book', 'UserRequestController@store');
         Route::get('books', 'BookController@index');
+        Route::get('books/arabic', 'BookController@arabicBooks');
+        Route::get('books/english', 'BookController@englishBooks');
         Route::get('books/{isbn}', 'BookController@show');
         Route::get('related/books/{id}', 'BookController@relatedBooks');
         Route::any('books/search','BookController@searchBook')->name('search_book');

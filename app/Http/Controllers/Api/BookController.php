@@ -60,6 +60,37 @@ class BookController extends Controller
         //
     }
 
+    public function arabicBooks()
+    {
+        try {
+            $books = $this->model->with('genres')->where('featured',1)->where('book_language','arabic')->get();
+            if(count($books) != 0) {
+                return (new BookCollection($books));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Books Found");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
+    }
+
+    public function englishBooks()
+    {
+        try {
+            $books = $this->model->with('genres')->where('featured',1)->where('book_language','english')->get();
+            if(count($books) != 0) {
+                return (new BookCollection($books));
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Books Found");
+            }
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+        }
+    }
     /**
      * Display the specified resource.
      *

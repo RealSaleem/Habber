@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LanguageController extends Controller
 {
@@ -46,7 +47,7 @@ class LanguageController extends Controller
             
         ]);
         $language = new Language();
-        $language->name = $request->language;
+        $language->name = Str::lower($request->language);
         $language->save();   
         return back()->with('success', 'Language successfully saved');
     }
@@ -90,7 +91,7 @@ class LanguageController extends Controller
             
         ]);
         $language =Language::find($id);
-        $language->name = $request->language;
+        $language->name = Str::lower($request->language);
         $language->save();   
         return back()->with('success', 'Language updated successfully ');
     }
