@@ -26,7 +26,7 @@ class BookclubController extends Controller
     public function index()
     {
         try {
-            $BookClubs = $this->model->all();
+            $BookClubs = $this->model->where('featured',1)->get();
             if(count($BookClubs) != 0) {
                 return (new BookclubCollection($BookClubs));
             }

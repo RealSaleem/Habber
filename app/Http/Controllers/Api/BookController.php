@@ -26,7 +26,7 @@ class BookController extends Controller
     public function index()
     {
         try {
-            $books = $this->model->all('genres');
+            $books = $this->model->with('genres')->where('featured',1)->get();
             if(count($books) != 0) {
                 return (new BookCollection($books));
             }
