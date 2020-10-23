@@ -46,16 +46,20 @@ class UserRepository implements RepositoryInterface
     // update record in the database
     public function update(array $data, $id)
     {
-       
-        Storage::disk('user_profile')->deleteDirectory('users/' . $id);
-        $file = $data['profile_pic'];
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "users/".$id.'/' . $fileName . time() . "." . $file->getClientOriginalExtension();
-        $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
+      
+        
         $user = $this->model->findOrFail($id);
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
-        $user->profile_pic = $filePath;
+        if(isset($data['profile_pic'])) {
+            Storage::disk('user_profile')->deleteDirectory('users/' . $id);
+            $file = $data['profile_pic'];
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "users/".$id.'/' . $fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
+            $user->profile_pic = $filePath;
+        }
+        
         if(isset($data['phone'])) {
             $user->phone = $data['phone'];
         }
@@ -106,7 +110,33 @@ class UserRepository implements RepositoryInterface
     public function createFavourite(array $data)
     {
         $data['user_id'] = Auth::user()->id;
-        return $this->model->create($data);
+        if($data['book_id'] && $data['bookmark_id']) {
+           $fav =  $this->model->where('user_id',$data['user_id'])->where('book_id',$data['book_id'])->where('bookmark_id',$data['bookmark_id'])->first();
+           if(isset($fav)) {
+                return 'exists';
+           }
+           else {
+                return $this->model->create($data);
+           }
+        }
+        else if ($data['book_id']) {
+            $fav =  $this->model->where('user_id',$data['user_id'])->where('book_id',$data['book_id'])->first();
+            if(isset($fav)) {
+                return 'exists';
+           }
+           else {
+                return $this->model->create($data);
+           }
+        }
+        else if ($data['bookmark_id']) {
+            $fav =  $this->model->where('user_id',$data['user_id'])->where('bookmark_id',$data['bookmark_id'])->first();
+            if(isset($fav)) {
+                return 'exists';
+           }
+           else {
+                return $this->model->create($data);
+           }
+        }
     }
 
     public function getUserFavourites() 

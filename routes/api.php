@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::get('countries', function() {
         return (new CountryCollection(App\Country::all()));
     });
+    Route::get('ads','AdController@index');
     Route::post('forgot-password', 'AuthController@forgotPassword');
     Route::post('contactus', 'AuthController@ContactUs');
     Route::post('joinus', 'AuthController@createJoinUsRequest');
@@ -45,6 +46,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::put('users/{id}', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
         Route::get('banners', 'BannerController@index');
+       
        
     });
 });

@@ -51,6 +51,9 @@ class FavouriteController extends Controller
     {
         try{
             $favourite = $this->model->createFavourite($request->all());
+            if($favourite == "exists") {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Favourites already exists');
+            }
             return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Favourites Submitted Successfully');
         }
         catch(\Exception $e) {

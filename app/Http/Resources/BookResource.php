@@ -26,11 +26,12 @@ class BookResource extends JsonResource
             'genre'  => GenreResource::collection($this->genres) ?? "",
             'price'    => $this->price ?? "",
             'total_pages'  => $this->total_pages,
-            'quantity'  => $this->quantity,
+            'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
             'business_id'  => $this->business_id,
             'stock_status'  => $this->stock_status,
             'book_language'    => $this->book_language ?? "",
             'image' => isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
+            'featured' => $this->featured,
             'status' => $this->status
           ];
     }

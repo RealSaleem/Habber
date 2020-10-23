@@ -18,7 +18,7 @@ class BookRepository implements RepositoryInterface {
 
     public function all($with)
     {
-        return $this->model->with($with)->where('status',true)->get();
+        return $this->model->with($with)->where('status',1)->get();
     }
 
     // create a new record in the database
@@ -59,7 +59,7 @@ class BookRepository implements RepositoryInterface {
 
         $ids = $this->model->find($id)->genres->pluck('id')->toArray();
         $genres = Genre::with('books')->whereIn('id',$ids)->get();
-        return $genres[0]->books->except($id);
+        return $genres[0]->books->where('status',1)->except($id);
        
     }
     // Get the associated model
@@ -82,17 +82,40 @@ class BookRepository implements RepositoryInterface {
     }
 
     public function bookSearch($data) {
-        return $this->model->orWhere('title', 'like', "%{$data}%")->orWhere('author_name','like',"%{$data}%")->orWhere('description','like',"%{$data}%")->get();
+        return $this->model->orWhere('title', 'like', "%{$data}%")->orWhere('author_name','like',"%{$data}%")->orWhere('description','like',"%{$data}%")->where('status',1)->get();
     }
 
     public function filterByGenre($data) {
         if(is_array($data)) {
             $genres = Genre::with('books')->whereIn('title',$data)->get();
-            return $genres[0]->books;
+            
+            
+            $books = [];
+           
+            if(count($genres) > 1) {
+              
+                for ($i = 0; $i < count($genres); $i++) {
+                    $books = $genres[$i]->books->where('status',1);
+                }   
+                return $books;
+            }
+            else {
+                return $genres[0]->books->where('status',1);
+            }
+           
+           
         }
         else {
             $genres = Genre::with('books')->where('title',$data)->get();
-            return $genres[0]->books;
+            if(count($genres) > 1) {
+                for ($i = 0; $i < count($genres); $i++) {
+                    $books = $genres[$i]->books->where('status',1);
+                }   
+                return $books;
+            }
+            else {
+                return $genres[0]->books->where('status',1);
+            }
         }
        
     }

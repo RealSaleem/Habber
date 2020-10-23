@@ -81,7 +81,7 @@
                             <span class="text-danger">{{$errors->first('stock_status')}}</span>
                         </div>
                      </div> 
-                     <div class="form-group row">
+                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.feature')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="featured"  id="status">
@@ -90,7 +90,7 @@
                              </select>   
                             <span class="text-danger">{{$errors->first('featured')}}</span>
                         </div>
-                     </div> 
+                    </div> 
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.business')</label>
                         <div class="col-sm-9">

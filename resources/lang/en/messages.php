@@ -242,6 +242,16 @@ return [
         'view_favourite' => 'View Favourite'
     ],
 
+    'ad_page' => [
+        'ad' => 'Ads',
+        'add_ad'=> 'Add New Ad',
+        'add_ad_info'=> 'Add Ad Info',
+        'edit_ad'=> 'Edit Ad',
+        'edit_ad_info'=> 'Edit Ad Info',
+        'image'=>'Image',
+        'featured' => 'Featured'
+    ]
+
     
 
 

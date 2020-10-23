@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'first_name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
             'last_name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
             'phone' => ['sometimes','required','string','max:15','min:3'],
-            'profile_pic' => ['bail', 'required', 'image', 'mimes:jpeg,png,jpg,gif,svg','max:2048'],
+            'profile_pic' => ['sometimes', 'required', 'image', 'mimes:jpeg,png,jpg,gif,svg','max:2048'],
         ];
     }
 }

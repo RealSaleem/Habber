@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');
    Route::resource('permissions','PermissionController');
+   Route::resource('ads','AdController');
    Route::resource('roles','RoleController');
    Route::get('user/favourites/{userId}','FavouriteController@index')->name('user.favourites');
    Route::resource('favourites','FavouriteController');
