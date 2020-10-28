@@ -28,6 +28,7 @@ class RegisterRequest extends FormRequest
             'last_name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
             'email' => ['bail', 'required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['bail', 'required', 'string', 'min:8', 'confirmed'],
+            'language_id' => ['required']
         ];
     }
 

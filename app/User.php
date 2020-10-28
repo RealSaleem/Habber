@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Business');
     }
+
+    public function languages()
+    {
+        return $this->hasOne('App\Language','id','language_id');
+    }
 }

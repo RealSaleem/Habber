@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use DB;
 use App\Business;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterRepository implements RepositoryInterface
@@ -30,17 +31,27 @@ class RegisterRepository implements RepositoryInterface
     // create a new record in the database
     public function create(array $data)
     {
+        $user;
         $this->model->first_name = $data['first_name'];
         $this->model->last_name = $data['last_name'];
         $this->model->email = $data['email'];
         $this->model->password = Hash::make($data['password']);
+        $this->model->language_id = $data['language_id'];
         $this->model->status =  true;  
         if($this->model->save()) {
-            $name = $data['first_name'] .' '.$data['last_name'];
-            $email = $this->model->email;
+            if (Auth::attempt(['email' => $data['email'],'password' => $data['password'] ])) 
+            {
+                $user = Auth::user();
+                if($user->status == true) {
+                    $user['token'] = $user->createToken('token')->accessToken;
+                }   
+            }
+            $name = $user->first_name .' '.$user->last_name;
+            $email = $user->email;
             event(new UserRegisteredEvent($name, $email));
         }
-        return $this->model;
+      
+        return $user;
     }
     // Insert data in multiple rows
     public function createInArray(array $data, Model $model)

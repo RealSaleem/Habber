@@ -15,6 +15,7 @@
           <thead>
               <tr>
                 <th>Name</th>
+                <th>Status</th>
                 <th class="not"> Action</th>                  
               </tr>
           </thead>
@@ -22,6 +23,7 @@
             @foreach($language as $language)
               <tr>
                 <td>{{$language->name}}</td>
+                <td>{{($language->status == 1) ? true : false}}</td>
                 <td>
                   <div class="row">
                       <div class="col-1">

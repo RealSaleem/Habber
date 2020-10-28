@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\LanguageResource;
 
 class UserResource extends JsonResource
 {
@@ -15,7 +16,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-    //    dd(Storage::disk('public')->url($this->profile_pic));
         return [
             'id'     =>     $this->id,
             'first_name'   => $this->first_name,
@@ -23,7 +23,11 @@ class UserResource extends JsonResource
             'email'  => $this->email,
             'phone'   => $this->phone ?? "",
             'profile_pic' => isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
-            'status' => $this->status
+            'status' => $this->status,
+            'token' => $this->token ?? "",
+            'language'  => $this->languages->name ?? "",
+            'currency'  => $this->currencies->name ?? "",
+
           ];
           
     }

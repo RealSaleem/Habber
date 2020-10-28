@@ -33,11 +33,12 @@ class AuthController extends Controller
         {
             $user = Auth::user();
             if($user->status == true) {
-                $success['token'] = $user->createToken('token')->accessToken;
-                $success['id'] = $user->id;
-                $success['name'] = $user->first_name.' '.$user->last_name;
-                $success['email'] = $user->email;
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'You are logged in',$success);
+                $user['token'] = $user->createToken('token')->accessToken;
+                return (new UserResource($user->load('languages')))->additional(['message' => 'You are logged in']);
+                // $success['id'] = $user->id;
+                // $success['name'] = $user->first_name.' '.$user->last_name;
+                // $success['email'] = $user->email;
+                // return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'You are logged in',$success);
             }
             else {
                 return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, 'User Not Activated');
@@ -55,7 +56,7 @@ class AuthController extends Controller
     { 
         try {
             $user = $this->model->create($request->all());
-            return (new UserResource($user))->additional(['message' => 'User Registered Successfullly']);
+            return (new UserResource($user->load('languages')))->additional(['message' => 'User Registered Successfullly']);
         }
         catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
