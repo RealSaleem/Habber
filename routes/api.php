@@ -19,36 +19,49 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::get('countries', function() {
         return (new CountryCollection(App\Country::all()));
     });
+    // Banners
+    Route::get('banners', 'BannerController@index');
+    // Books
+    Route::get('books', 'BookController@index');
+    Route::get('books/arabic', 'BookController@arabicBooks');
+    Route::get('books/english', 'BookController@englishBooks');
+    Route::get('books/{isbn}', 'BookController@show');
+    Route::get('related/books/{id}', 'BookController@relatedBooks');
+    Route::any('books/search','BookController@searchBook')->name('search_book');
+    Route::any('books/filter','BookController@filterBook')->name('filter_book');
+    // Bookmarks
+    Route::get('bookmarks', 'BookmarkController@index');
+    Route::get('bookmarks/{id}', 'BookmarkController@show');
+    // BookClubs
+    Route::get('bookclubs', 'BookclubController@index');
+    Route::get('bookclubs/{id}', 'BookclubController@show');
+    // Languages
     Route::get('languages','LanguageController@index');
+    // Ads
     Route::get('ads','AdController@index');
+    // forgot Password
     Route::post('forgot-password', 'AuthController@forgotPassword');
+    // contact us
     Route::post('contactus', 'AuthController@ContactUs');
+    // join us
     Route::post('joinus', 'AuthController@createJoinUsRequest');
+
+
     Route::group(['middleware'=>'auth:api'], function() {
+        // request book
         Route::post('request/book', 'UserRequestController@store');
-        Route::get('books', 'BookController@index');
-        Route::get('books/arabic', 'BookController@arabicBooks');
-        Route::get('books/english', 'BookController@englishBooks');
-        Route::get('books/{isbn}', 'BookController@show');
-        Route::get('related/books/{id}', 'BookController@relatedBooks');
-        Route::any('books/search','BookController@searchBook')->name('search_book');
-        Route::any('books/filter','BookController@filterBook')->name('filter_book');
-        Route::get('bookmarks', 'BookmarkController@index');
-        Route::get('bookmarks/{id}', 'BookmarkController@show');
-        Route::get('bookclubs', 'BookclubController@index');
-        Route::get('bookclubs/{id}', 'BookclubController@show');
+        // favourites
         Route::post('favourites', 'FavouriteController@store');
         Route::get('favourites', 'FavouriteController@show');
         Route::delete('favourites/{id}', 'FavouriteController@destroy');
+        // address
         Route::get('user/addresses', 'AddressController@showUserAddresses');
         Route::post('addresses', 'AddressController@store');
         Route::delete('addresses/{id}', 'AddressController@destroy');
         Route::get('addresses/{id}', 'AddressController@show');
+        // users
         Route::put('users/{id}', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
-        Route::get('banners', 'BannerController@index');
-       
-       
     });
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {
