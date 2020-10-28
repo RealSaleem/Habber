@@ -44,10 +44,11 @@ class LanguageController extends Controller
         
         $validatedData = $request->validate([
             'language' => 'required|unique:languages,name', 
-            
+            'status' => 'required' 
         ]);
         $language = new Language();
         $language->name = Str::lower($request->language);
+        $language->status = $request->status;
         $language->save();   
         return back()->with('success', 'Language successfully saved');
     }
@@ -87,11 +88,13 @@ class LanguageController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'language' => 'required|unique:languages,name,'.$id 
+            'language' => 'required|unique:languages,name,'.$id,
+            'status' => 'required' 
             
         ]);
         $language =Language::find($id);
         $language->name = Str::lower($request->language);
+        $language->status = $request->status;
         $language->save();   
         return back()->with('success', 'Language updated successfully ');
     }
