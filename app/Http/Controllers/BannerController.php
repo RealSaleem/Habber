@@ -61,6 +61,9 @@ class BannerController extends Controller
         $file = $request->image;
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $filePath = "banners/".$banner->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+        if(!Storage::disk('public')->has("banners/".$banner->id)) {
+            Storage::disk('public')->makeDirectory("banners/".$banner->id);
+        }
         $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
         $updatebanner->image = $filePath;
         $updatebanner->update();   
