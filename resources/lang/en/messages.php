@@ -184,6 +184,7 @@ return [
         'edit_language'=> 'Edit Language',
         'add_language_info'=> 'Add Language Info',
         'edit_language_info'=> 'Edit Language Info',
+        'status'=> 'Status',
     ],
     'country_page'=> [
         'countries'=> 'Country' ,
