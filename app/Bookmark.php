@@ -10,6 +10,10 @@ class Bookmark extends Model
         return $this->belongsTo('App\Business','business_id','id');
     }
 
+    public function banners() {
+        return $this->belongsToMany('App\Banner');
+    }
+
     // public function favourites()
     // {
     //     return $this->belongsToMany(Favourite::class);

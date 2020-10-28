@@ -16,21 +16,36 @@
                     <thead>
                         <tr>
                         <th>Description</th>
-                        <td>Language</td>  
-                            <th>Status</th>
-                            <th>Url</th>
-                            <th class="not">Image</th>
-                            <th>Order</th>
-                            <th class="not">Action</th>
+                        <th>Product Type</th>
+                        <th>Associated With</th>
+                         <th>Language</th>  
+                          <th>Status</th>
+                         <th class="not">Image</th>
+                         <th>Order</th>
+                        <th class="not">Action</th>
                         </tr>
                 </thead>
                 <tbody class="sortable">
                     @foreach($banner as $banner)
                     <tr class="row1" data-id="{{ $banner->id }}">
                         <td>{{$banner->description}}</td> 
+                        <td>{{$banner->product_type}}</td>
+                        @if(isset($banner->books))
+                        <td> 
+                        {{$banner->books['title']}}
+                         </td>
+                         @elseif(isset($banner->bookclubs))
+                         <td> 
+                            {{$banner->bookclubs['name']}}
+                         </td>
+                         @elseif(isset($banner->bookmarks))
+                         <td> 
+                            {{$banner->bookmarks['title']}}
+                         </td>
+                         @endif
+                        
                         <td>{{$banner->languages['name']}}</td>  
-                        <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "Enabled" : "Disabled"}}</td>  
-                        <td>{{$banner->url}}</td> 
+                        <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "Enabled" : "Disabled"}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
                         <td>{{$banner->sort_order}}</td>
                         <td>
@@ -178,6 +193,7 @@ function enablebanner(id) {
         }
         });
     }
+
 
 </script>
 @stop

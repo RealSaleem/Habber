@@ -28,6 +28,34 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.product_type')</label>
+                        <div class="col-sm-9">
+                        
+                            <select class="form-control" name="product_type"  id="product_type">
+                             
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="bookclub" {{ (old('product_type') == "bookclub" ? "selected":"")}}>Bookclubs</option>
+                                <option value="books" {{ (old('product_type') == "books" ? "selected":"")}}>Books</option>
+                                <option value="bookmarks" {{ (old('product_type') == "bookmarks" ? "selected":"")}}> Bookmarks</option>
+                                
+                             </select>
+                            
+                            <span class="text-danger">{{$errors->first('product_type')}}</span>
+                            <span class="text-danger">{{$errors->first('bookmarks_id')}}</span>
+                         <span class="text-danger">{{$errors->first('books_id')}}</span>
+                         <span class="text-danger">{{$errors->first('bookclubs_id')}}</span>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                          <label  for="cono1" class="col-sm-3 text-right control-label col-form-label type "></label>
+                        <div class="col-sm-9">
+                         <select class="form-control" name="type"  id="type" value="type" >
+                         </select>     
+                         
+                        </div>
+                    </div>
+            
+                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
@@ -48,21 +76,14 @@
                             <span class="text-danger">{{$errors->first('language_id')}}</span>
                         </div>
                     </div>
-                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.url')</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="url"  value="{{old('url')}}" id="url"  placeholder="Url">
-                            <span class="text-danger">{{$errors->first('url')}}</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
+                    
+                       <div class="form-group row">
                         <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.image')</label>
-                        <div class="col-sm-9">
-                        <input id="image" type="file" class="form-control" name="image">
+                        <div class="col-md-9">
+                            <input  type="file" id="image" class="form-control" name="image">
                             <span class="text-danger">{{$errors->first('image')}}</span>
                         </div>
-                    </div>
+                       </div>
                      <div class="border-top">
                        <div class="card-body">
                         <a href="{{route('banners.index')}}">
@@ -77,5 +98,58 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#type').hide();
+//  Change
+$('#product_type').change(function(e){
+    e.preventDefault()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   // id
+   var type = $(this).val();
+    if(type == "null") {
+
+        $(".type").hide();   
+        $('#type').hide();
+        e.preventDefault()
+        return false;
+      
+    }
+   // Empty the dropdown
+   // $('').find('option').not(':first').remove();
+
+   // AJAX request 
+   $.ajax({
+     url: "{{ URL('/admin/getlist')}}"+"/"+type,
+     type: 'get',
+     dataType: 'json',
+     success: function(response){
+        var len = response.id.length;
+        for(var i=0; i < len; i++){
+           var id = response.id[i];
+           var name = response.name[i];
+           var option = "<option value='"+id+"'>"+name+"</option>"; 
+           $("#type").append(option); 
+       }
+       $('#type').attr('name', type +'_id');
+       $(".type").text(type);
+       $(".type").show();
+         
+
+       $('#type').show();
+
+     }
+  });
+});
+});
+
+ 
+
+</script>
                   
 @endsection
