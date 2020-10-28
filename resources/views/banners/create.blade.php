@@ -35,8 +35,8 @@
                              
                                 <option disabled selected value> -- select an option -- </option>
                                 <option value="bookclub" {{ (old('product_type') == "bookclub" ? "selected":"")}}>Bookclubs</option>
-                                <option value="books" {{ (old('product_type') == "books" ? "selected":"")}}>Books</option>
-                                <option value="bookmarks" {{ (old('product_type') == "bookmarks" ? "selected":"")}}> Bookmarks</option>
+                                <option value="book" {{ (old('product_type') == "book" ? "selected":"")}}>Books</option>
+                                <option value="bookmark" {{ (old('product_type') == "bookmark" ? "selected":"")}}> Bookmarks</option>
                                 
                              </select>
                             
@@ -102,7 +102,7 @@
 <script>
 $(document).ready(function(){
     $('#type').hide();
-//  Change
+
 $('#product_type').change(function(e){
     e.preventDefault()
     $.ajaxSetup({
@@ -120,10 +120,6 @@ $('#product_type').change(function(e){
         return false;
       
     }
-   // Empty the dropdown
-   // $('').find('option').not(':first').remove();
-
-   // AJAX request 
    $.ajax({
      url: "{{ URL('/admin/getlist')}}"+"/"+type,
      type: 'get',

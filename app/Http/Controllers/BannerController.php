@@ -53,7 +53,7 @@ class BannerController extends Controller
             'bookclubs_id'=>'sometimes|required',
             'books_id'=>'sometimes|required',
             'status' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450|dimensions:ratio=2.25/1',
+            // 'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450|dimensions:ratio=2.25/1',
              
          ]);
         $banner = new Banner();
@@ -78,16 +78,16 @@ class BannerController extends Controller
             $banner->book_id =  $request->books_id;
         }
         $banner->save();
-        $updatebanner = Banner::find($banner->id);
-        $file = $request->image;
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "banners/".$banner->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
-        if(!Storage::disk('public')->has("banners/".$banner->id)) {
-            Storage::disk('public')->makeDirectory("banners/".$banner->id);
-        }
-        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $updatebanner->image = $filePath;
-        $updatebanner->update();   
+        // $updatebanner = Banner::find($banner->id);
+        // $file = $request->image;
+        // $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // $filePath = "banners/".$banner->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+        // if(!Storage::disk('public')->has("banners/".$banner->id)) {
+        //     Storage::disk('public')->makeDirectory("banners/".$banner->id);
+        // }
+        // $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        // $updatebanner->image = $filePath;
+        // $updatebanner->update();   
         return back()->with('success', 'Banner successfully saved');
         
 
@@ -113,7 +113,7 @@ class BannerController extends Controller
     public function edit($id)
     {
         //
-        $banner = Banner::findOrFail($id);
+        $banner = Banner::with('languages','books','bookmarks','bookclubs')->findOrFail($id);
         $language = Language::all();
         return view('banners.edit', compact('banner','language'));
     }
@@ -150,7 +150,7 @@ class BannerController extends Controller
             'books_id'=>'sometimes|required',
             'language_id' => 'required',
             'status' => 'required',
-            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450|dimensions:ratio=2.25/1',
+            // 'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450|dimensions:ratio=2.25/1',
         ]);
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;
@@ -240,11 +240,11 @@ class BannerController extends Controller
     public function getDropDownList($type)
     {
         $response;
-        if($type == "books") {
+        if($type == "book") {
             $response['id'] =  Book::pluck('id')->toArray();
             $response['name'] = Book::pluck('title')->toArray();
         }
-        if($type == "bookmarks") {
+        if($type == "bookmark") {
             $response['id'] =  Bookmark::pluck('id')->toArray();
             $response['name'] = Bookmark::pluck('title')->toArray();
         }

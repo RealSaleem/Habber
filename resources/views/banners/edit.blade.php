@@ -35,9 +35,9 @@
                             <select class="form-control" name="product_type"  id="product_type" >
                              
                                 <option disabled selected value> -- select an option -- </option>
-                                <option value="bookclub" {{ (old('product_type') == "bookclub" ? "selected":"")}}>Bookclubs</option>
-                                <option value="books" {{ (old('product_type') == "books" ? "selected":"")}}>Books</option>
-                                <option value="bookmarks" {{ (old('product_type') == "bookmarks" ? "selected":"")}}> Bookmarks</option>
+                                <option value="bookclub" {{ ($banner->product_type == "bookclub" ? "selected":"")}}>Bookclubs</option>
+                                <option value="book" {{ ($banner->product_type == "book" ? "selected":"")}}>Books</option>
+                                <option value="bookmark" {{ ($banner->product_type == "bookmark" ? "selected":"")}}> Bookmarks</option>
                                 
                              </select>
                             
@@ -109,52 +109,87 @@
 <script>
 $(document).ready(function(){
     //$('#type').hide();
-    $('#type').show();
-//  Change
-$('#product_type').change(function(e){
-    e.preventDefault()
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-   // id
-   var type = $(this).val();
-    if(type == "null") {
-        $(".type").hide();   
-        $('#type').hide();
-        e.preventDefault()
-        return false;
-      
+    var selectedValue = $( "#product_type" ).val();
+    if(selectedValue == "bookclub" || selectedValue == "bookmark" || selectedValue == "books") {
+        fetch(selectedValue);
     }
-   // Empty the dropdown
-   // $('').find('option').not(':first').remove();
 
-   // AJAX request 
-   $.ajax({
-     url: "{{ URL('/admin/getlist')}}"+"/"+type,
-     type: 'get',
-     dataType: 'json',
-     success: function(response){
-        var len = response.id.length;
-        for(var i=0; i < len; i++){
-           var id = response.id[i];
-           var name = response.name[i];
-           var option = "<option value='"+id+"'>"+name+"</option>"; 
-           $("#type").append(option); 
-       }
-       $('#type').attr('name', type +'_id');
-       $(".type").text(type);
-       $(".type").show();
-         
+    
+    var data = {!! json_encode($banner, JSON_HEX_TAG) !!};
+    // console.log(data.bookclubs != null);
+    // if(data.books != null ) {
+    //     $('#type').show();
+    //     $('#type').attr('name', 'book_id');
+    //     $(".type").text('books');
+    //     $(".type").show();
+    // }
+    // else if(data.bookmarks != null ) {
+    //     $('#type').show();
+    //     $('#type').attr('name', 'bookmark_id');
+    //     $(".type").text('bookmarks');
+    //     $(".type").show();
+    // }
+    // else if(data.bookclubs != null) {
+    //     $('#type').show();
+    //     $('#type').attr('name', 'bookclub_id');
+    //     $(".type").text('bookclubs');
+    //     $(".type").show();
+    //     $('product_type option[value="SEL1"]')
+    // }
+    // else {
+    //     $('#type').hide();
+    // }
 
-       $('#type').show();
+    $('#product_type').change(function(e){
+        e.preventDefault()
+        var type = $(this).val();
+        fetch(type);
 
-     } 
-   
+    });
 
-  });
-});
+    function fetch(type) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    // id
+       
+        if(type == "null") {
+            $(".type").hide();   
+            $('#type').hide();
+            e.preventDefault()
+            return false;
+        
+        }
+    
+        $.ajax({
+            url: "{{ URL('/admin/getlist')}}"+"/"+type,
+            type: 'get',
+            dataType: 'json',
+            success: function(response){
+                var len = response.id.length;
+                for(var i=0; i < len; i++){
+                var id = response.id[i];
+                var name = response.name[i];
+                var option = "<option value='"+id+"'>"+name+"</option>"; 
+                $("#type").append(option); 
+            }
+            $('#type').attr('name', type +'_id');
+            $(".type").text(type);
+            $(".type").show();
+                
+
+            $('#type').show();
+
+            } 
+        
+
+        });
+    }
+       
+    
+
 });
  
  

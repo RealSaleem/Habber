@@ -18,10 +18,10 @@
                         <th>Description</th>
                         <th>Product Type</th>
                         <th>Associated With</th>
-                         <th>Language</th>  
-                          <th>Status</th>
-                         <th class="not">Image</th>
-                         <th>Order</th>
+                        <th>Language</th>  
+                        <th>Status</th>
+                        <th class="not">Image</th>
+                        <th>Order</th>
                         <th class="not">Action</th>
                         </tr>
                 </thead>
@@ -42,6 +42,9 @@
                          <td> 
                             {{$banner->bookmarks['title']}}
                          </td>
+                         @else
+                         <td>Not Selected</td>
+
                          @endif
                         
                         <td>{{$banner->languages['name']}}</td>  
