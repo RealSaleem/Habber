@@ -39,11 +39,11 @@
                                     <a href="{{action('BannerController@edit', [$banner->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
                                 </div>
                                 <div class="col-2">
-                                    <form action="{ action('BannerController@destroy', [$banner->id])}}" method="post">
+                                    <form action="{{action('BannerController@destroy', [$banner->id])}}" method="post">
                                     @csrf
                                     @method('Delete')
                                         <button class=" btn btn-danger" type="submit">
-                                        <span class="fa fa-eye"></span>
+                                        <span class="fa fa-trash"></span>
                                         </button>
                                     </form>
                                 </div>
