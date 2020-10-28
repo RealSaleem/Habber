@@ -14,6 +14,7 @@ class AddStatusColumnToLanguages extends Migration
     public function up()
     {
         if(!Schema::hasColumn('languages','status')) {
+            
             Schema::table('languages', function (Blueprint $table) {
                 $table->boolean('status')->default(0)->after('name');
             });

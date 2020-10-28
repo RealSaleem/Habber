@@ -16,6 +16,7 @@ class LanguageCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
+            
             'data' => LanguageResource::collection($this->collection),
         ];
     }

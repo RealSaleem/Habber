@@ -15,6 +15,7 @@ class AddLanguageIdAndCurrencyIdColumnToUsers extends Migration
     {
         if(!Schema::hasColumn('users','language_id') && !Schema::hasColumn('users','currency_id'))
         Schema::table('users', function (Blueprint $table) {
+            
             $table->integer('language_id')->nullable()->after('notes');
             $table->integer('currency_id')->nullable()->after('language_id');
             

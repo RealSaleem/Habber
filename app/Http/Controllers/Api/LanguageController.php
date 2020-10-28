@@ -12,6 +12,7 @@ class LanguageController extends Controller
 {
     public function index() {
         try {
+            
             $language = Language::where('status',1)->get();
             return (new LanguageCollection($language));
         }
