@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::get('countries', function() {
         return (new CountryCollection(App\Country::all()));
     });
+    Route::get('languages','LanguageController@index');
     Route::get('ads','AdController@index');
     Route::post('forgot-password', 'AuthController@forgotPassword');
     Route::post('contactus', 'AuthController@ContactUs');
