@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class BookclubResource extends JsonResource
+class BookClubResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

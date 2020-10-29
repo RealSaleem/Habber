@@ -114,8 +114,17 @@ $(document).ready(function(){
         fetch(selectedValue);
     }
 
+    $('#product_type').change(function(e){
+        e.preventDefault()
+        var type = $(this).val();
+        fetch(type);
+
+    });
     
     var data = {!! json_encode($banner, JSON_HEX_TAG) !!};
+    var selectedId = (data.books) ? data.books.id : data.bookmarks ?  data.bookmarks.id : data.bookclubs ? data.bookclubs.id : null  ;
+    // $("#type").val();
+   
     // console.log(data.bookclubs != null);
     // if(data.books != null ) {
     //     $('#type').show();
@@ -140,12 +149,7 @@ $(document).ready(function(){
     //     $('#type').hide();
     // }
 
-    $('#product_type').change(function(e){
-        e.preventDefault()
-        var type = $(this).val();
-        fetch(type);
 
-    });
 
     function fetch(type) {
         $.ajaxSetup({
@@ -172,15 +176,17 @@ $(document).ready(function(){
                 for(var i=0; i < len; i++){
                 var id = response.id[i];
                 var name = response.name[i];
-                var option = "<option value='"+id+"'>"+name+"</option>"; 
+                
+                var option = "<option value='"+id+"' >"+name+"</option>"; 
                 $("#type").append(option); 
             }
             $('#type').attr('name', type +'_id');
             $(".type").text(type);
             $(".type").show();
-                
-
             $('#type').show();
+            if(selectedId != null ) {
+                $("#type").val(selectedId);
+            }
 
             } 
         

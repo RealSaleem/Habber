@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Resources;
-use App\Http\Resources\BookclubResource;
+use App\Http\Resources\BookClubResource;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class BookclubCollection extends ResourceCollection
+class BookClubCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -16,7 +16,7 @@ class BookclubCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => BookclubResource::collection($this->collection),
+            'data' => BookClubResource::collection($this->collection),
         ];
     }
 
