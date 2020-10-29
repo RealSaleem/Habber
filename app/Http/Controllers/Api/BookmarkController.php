@@ -28,7 +28,7 @@ class BookmarkController extends Controller
     public function index()
     {
         try {
-            $bookmarks = $this->model->with('businesses')->where('featured',1)->get();
+            $bookmarks = $this->model->with('businesses')->where('featured',1)->paginate(100);
             if(count($bookmarks) != 0) {
                
                 return (new BookmarkCollection($bookmarks));

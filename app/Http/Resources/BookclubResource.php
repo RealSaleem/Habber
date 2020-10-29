@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\BookResource;
 
 class BookClubResource extends JsonResource
 {
@@ -19,6 +20,7 @@ class BookClubResource extends JsonResource
             'id'     => $this->id,
             'name'   => $this->name,
             'image' => isset($this->banner_image) ? url(Storage::disk('public')->url($this->banner_image)) : "" ,
+            'books' =>  BookResource::collection(optional($this->books)) ?? ""
         ];
     }
 

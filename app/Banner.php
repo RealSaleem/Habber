@@ -19,6 +19,7 @@ class Banner extends Model
     public function bookmarks(){
         return $this->belongsTo('App\Bookmark', 'bookmark_id','id');
     }
+    
     public function bookclubs(){
         return $this->belongsTo('App\Bookclub','bookclub_id','id' );
     }
