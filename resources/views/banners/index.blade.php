@@ -43,7 +43,7 @@
                             {{$banner->bookmarks['title']}}
                          </td>
                          @else
-                         <td>Not Selected</td>
+                         <td>Not Selected</td>  
 
                          @endif
                         

@@ -20,6 +20,7 @@ class BannerController extends Controller
     {
         //
         $banner = Banner::with('languages','books','bookmarks','bookclubs')->orderBy('sort_order','ASC')->get();
+    
         return view('banners.index', compact('banner'));
     }
 
@@ -46,6 +47,7 @@ class BannerController extends Controller
     {
         
         //
+        
         $validatedData = $request->validate([
             'product_type'=>'required',
             'language_id' => 'required',
@@ -53,7 +55,7 @@ class BannerController extends Controller
             'bookclubs_id'=>'sometimes|required',
             'books_id'=>'sometimes|required',
             'status' => 'required',
-            // 'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450|dimensions:ratio=2.25/1',
+            'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450',
              
          ]);
         $banner = new Banner();
@@ -65,29 +67,29 @@ class BannerController extends Controller
         {   
             $banner->description = $request->description;
         }
-        if($request->has('bookmarks_id'))
+        if($request->has('bookmark_id'))
         {   
-            $banner->bookmark_id =  $request->bookmarks_id;
+            $banner->bookmark_id =  $request->bookmark_id;
         }
-        if($request->has('bookclubs_id'))
+        if($request->has('bookclub_id'))
         {   
-            $banner->bookclub_id =  $request->bookclubs_id;
+            $banner->bookclub_id =  $request->bookclub_id;
         }
-        if($request->has('books_id'))
+        if($request->has('book_id'))
         {   
-            $banner->book_id =  $request->books_id;
+            $banner->book_id =  $request->book_id;
         }
         $banner->save();
-        // $updatebanner = Banner::find($banner->id);
-        // $file = $request->image;
-        // $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        // $filePath = "banners/".$banner->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
-        // if(!Storage::disk('public')->has("banners/".$banner->id)) {
-        //     Storage::disk('public')->makeDirectory("banners/".$banner->id);
-        // }
-        // $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        // $updatebanner->image = $filePath;
-        // $updatebanner->update();   
+        $updatebanner = Banner::find($banner->id);
+        $file = $request->image;
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "banners/".$banner->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+        if(!Storage::disk('public')->has("banners/".$banner->id)) {
+            Storage::disk('public')->makeDirectory("banners/".$banner->id);
+        }
+        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        $updatebanner->image = $filePath;
+        $updatebanner->update();   
         return back()->with('success', 'Banner successfully saved');
         
 
@@ -150,7 +152,7 @@ class BannerController extends Controller
             'books_id'=>'sometimes|required',
             'language_id' => 'required',
             'status' => 'required',
-            // 'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450|dimensions:ratio=2.25/1',
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450',
         ]);
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;
@@ -160,17 +162,17 @@ class BannerController extends Controller
         {   
             $banner->description = $request->description;
         }
-        if($request->has('bookmarks_id'))
+        if($request->has('bookmark_id'))
         {   
-            $banner->bookmark_id =  $request->bookmarks_id;
+            $banner->bookmark_id =  $request->bookmark_id;
         }
-        if($request->has('bookclubs_id'))
+        if($request->has('bookclub_id'))
         {   
-            $banner->bookclub_id =  $request->bookclubs_id;
+            $banner->bookclub_id =  $request->bookclub_id;
         }
-        if($request->has('books_id'))
+        if($request->has('book_id'))
         {   
-            $banner->book_id =  $request->books_id;
+            $banner->book_id =  $request->book_id;
         }
         if($request->has('image'))
         {   

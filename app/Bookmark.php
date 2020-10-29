@@ -11,7 +11,7 @@ class Bookmark extends Model
     }
 
     public function banners() {
-        return $this->belongsToMany('App\Banner');
+        return $this->hasMany('App\Banner');
     }
 
     // public function favourites()
