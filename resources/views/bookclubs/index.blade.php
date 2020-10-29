@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Arabic Name</th>
                         <th>Feature</th>
                         <th class="not">Image</th>
                         <th class="not"> Action</th>                  
@@ -24,6 +25,7 @@
                     @foreach($bookclub as $bookclub)
                 <tr>
                     <td>{{$bookclub->name}}</td>
+                    <td>{{$bookclub->arabic_name}}</td>
                     <td class = "{{$bookclub->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$bookclub->featured == 1 ? "featured" : "not featured"}}</td>  
                     <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->banner_image) ?  url('storage/'.$bookclub->banner_image) : url('storage/bookclub/default.png') }}" alt=""> </td>
                     <td>

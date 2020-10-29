@@ -16,8 +16,11 @@
                 <thead>
                     <tr>
                         <th>Title</th>
+                        <th>Arabic Title</th>
                         <th>Maker Name</th>
+                        <th>Arabic Maker Name</th>
                         <th>Description</th>
+                        <th>Arabic Description</th>
                         <th>Price</th>
                         <th>Bookmark </th>
                         <th>Size</th>         
@@ -33,8 +36,11 @@
                @foreach($bookmark as $bookmark)
             <tr>
                 <td>{{$bookmark->title}}</td>
+                <td>{{$bookmark->arabic_title}}</td>
                 <td>{{$bookmark->maker_name}}</td>
+                <td>{{$bookmark->arabic_maker_name}}</td>
                 <td>{{$bookmark->description}}</td>
+                <td>{{$bookmark->arabic_description}}</td>
                 <td>{{$bookmark->price}}</td>  
                 <td>{{$bookmark->bookmark_id}}</td>
                 <td>{{$bookmark->size}}</td>

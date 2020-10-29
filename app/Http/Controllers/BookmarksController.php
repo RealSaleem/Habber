@@ -44,11 +44,14 @@ class BookmarksController extends Controller
         //
         $validatedData = $request->validate([
             'title' => 'required',
+            'arabic_title' => 'required',
             'maker_name' => 'required',
+            'arabic_maker_name' => 'required',
             'description' => 'required',
+            'arabic_description' => 'required',
             'price' => 'required|numeric',
             'bookmark_id' => 'required|numeric|unique:bookmarks',  
-            'size' => 'required|numeric',
+            'size' => 'required',
             'quantity' => 'required|numeric',
             'business_id' => 'required',
             'stock_status' => 'required',
@@ -59,8 +62,11 @@ class BookmarksController extends Controller
             ]);
             $bookmark = new Bookmark();
             $bookmark->title = $request->title;
+            $bookmark->arabic_title = $request->arabic_title;
             $bookmark->maker_name = $request->maker_name;
+            $bookmark->arabic_maker_name = $request->arabic_maker_name;
             $bookmark->description= $request->description;
+            $bookmark->arabic_description= $request->arabic_description;
             $bookmark->price =$request->price;
             $bookmark->bookmark_id = $request->bookmark_id;
             $bookmark->size= $request->size;
@@ -119,11 +125,14 @@ class BookmarksController extends Controller
         //  
         $validatedData = $request->validate([
             'title' => 'required',
+            'arabic_title' => 'required',
             'maker_name' => 'required',
+            'arabic_maker_name' => 'required',
             'description' => 'required',
+            'arabic_description' => 'required',
             'price' => 'required|numeric',
             'bookmark_id' => 'required|numeric|unique:bookmarks,bookmark_id,'.$id,  
-            'size' => 'required|numeric',
+            'size' => 'required',
             'quantity' => 'required|numeric',
             'business_id' => 'required|numeric',
             'image_url'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900|dimensions:ratio=0.33/1',
@@ -132,8 +141,11 @@ class BookmarksController extends Controller
             ]);
         $bookmark = Bookmark::find($id);
         $bookmark->title = $request->title;
+        $bookmark->arabic_title = $request->arabic_title;
         $bookmark->maker_name = $request->maker_name;
+        $bookmark->arabic_maker_name = $request->arabic_maker_name;
         $bookmark->description= $request->description;
+        $bookmark->arabic_description= $request->arabic_description;
         $bookmark->price =$request->price;
         $bookmark->bookmark_id = $request->bookmark_id;
         $bookmark->size= $request->size;
