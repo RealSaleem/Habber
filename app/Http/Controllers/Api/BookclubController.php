@@ -7,8 +7,8 @@ use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
-use App\Http\Resources\BookclubCollection;
-use App\Http\Resources\BookclubResource;
+use App\Http\Resources\BookClubCollection;
+use App\Http\Resources\BookClubResource;
 
 class BookclubController extends Controller
 {
@@ -26,9 +26,9 @@ class BookclubController extends Controller
     public function index()
     {
         try {
-            $BookClubs = BookClub::where('featured',1)->get();
-            if(count($BookClubs) != 0) {
-                return (new BookclubCollection($BookClubs));
+            $bookClubs = BookClub::where('featured',1)->get();
+            if(count($bookClubs) != 0) {
+                return (new BookClubCollection($bookClubs));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Clubs Found");
@@ -69,9 +69,9 @@ class BookclubController extends Controller
     public function show($id)
     {
         try {
-            $BookClubs = $this->model->show($id);
-            if(isset($BookClubs)) {
-                return (new BookclubResource($BookClubs));
+            $bookClubs = $this->model->show($id);
+            if(isset($bookClubs)) {
+                return (new BookClubResource($bookClubs));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Book Club Found");
