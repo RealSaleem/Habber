@@ -43,11 +43,13 @@ class BookClubController extends Controller
         
         $validatedData = $request->validate([
             'name' => 'required', 
+            'arabic_name' => 'required', 
             'featured'=>'required',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=200,height=200|dimensions:ratio=1/1',
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
+        $bookclub->arabic_name = $request->arabic_name;
         $bookclub->featured =$request->featured;
         $bookclub->banner_image = "null"; 
         $bookclub->save();
@@ -97,11 +99,13 @@ class BookClubController extends Controller
         //
         $validatedData = $request->validate([
             'name' => 'required', 
+            'arabic_name' => 'required', 
             'featured'=>'required',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=200,height=200|dimensions:ratio=1/1',
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
+        $bookclub->arabic_name = $request->arabic_name;
         $bookclub->featured=$request->featured;
         if($request->has('banner_image')) 
         {   

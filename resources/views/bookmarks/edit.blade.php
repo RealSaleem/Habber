@@ -24,8 +24,15 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ $bookmark->title }}">
+                            <input type="text" class="form-control" name="title" value="{{ $bookmark->title }}">
                             <span class="text-danger">{{$errors->first('title')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Arabic Title</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control"  name="arabic_title" dir="rtl" value="{{  $bookmark->arabic_title }}" >
+                            <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -36,10 +43,24 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Arabic Maker Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="arabic_maker_name"  dir="rtl" value="{{ $bookmark->arabic_maker_name }}">
+                            <span class="text-danger">{{$errors->first('arabic_maker_name')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" value="{{ $bookmark->description }}"></textarea>
+                            <textarea type="textarea"   class="form-control" name="description"value=""  >{{ $bookmark->description }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Arabic Description</label>
+                        <div class="col-sm-9">
+                            <textarea type="textarea" class="form-control"  name="arabic_description" dir="rtl" value=""  >{{ $bookmark->arabic_description }}</textarea>
+                            <span class="text-danger">{{$errors->first('arabic_description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
