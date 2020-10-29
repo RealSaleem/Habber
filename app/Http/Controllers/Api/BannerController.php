@@ -18,7 +18,7 @@ class BannerController extends Controller
     public function index()
     {
         try{
-            $banner = Banner::where('status',1)->orderBy('sort_order','ASC')->get();
+            $banner = Banner::with('languages','books','bookmarks','bookclubs')->where('status',1)->orderBy('sort_order','ASC')->get();
             if(count($banner)) {
                 return (new BannerCollection($banner));
             }

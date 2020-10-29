@@ -62,7 +62,7 @@ class BooksController extends Controller
             'stock_status' => 'required',
             'featured'=>'required',
             "genre" => 'required|array|min:1|max:3',
-            'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
+            'image_url'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470|dimensions:ratio=1:1.33'
             ]);
             $book = new Book();
             $book->title = $request->title;
@@ -147,7 +147,7 @@ class BooksController extends Controller
             'stock_status' => 'required',
             'featured'=>'required',
             'genre' => 'required|array|min:1|max:3',
-            'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048' 
+            'image_url' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470|dimensions:ratio=1:1.33'
         ]);
        
         $book = Book::find($id);
@@ -207,4 +207,5 @@ class BooksController extends Controller
         return back()->with('success', 'User deleted successfully');
     
     }
+   
 }

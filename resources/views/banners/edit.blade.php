@@ -29,6 +29,33 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.business_page.product_type')</label>
+                        <div class="col-sm-9">
+                        
+                            <select class="form-control" name="product_type"  id="product_type" >
+                             
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="bookclub" {{ ($banner->product_type == "bookclub" ? "selected":"")}}>Bookclubs</option>
+                                <option value="book" {{ ($banner->product_type == "book" ? "selected":"")}}>Books</option>
+                                <option value="bookmark" {{ ($banner->product_type == "bookmark" ? "selected":"")}}> Bookmarks</option>
+                                
+                             </select>
+                            
+                            <span class="text-danger">{{$errors->first('product_type')}}</span>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                          <label  for="cono1" class="col-sm-3 text-right control-label col-form-label type "></label>
+                        <div class="col-sm-9">
+                         <select class="form-control" name="type" id="type"value="{{ $banner->type}}" >
+                         </select>     
+                         <span class="text-danger">{{$errors->first('type')}}</span>
+                        </div>
+                    </div>
+            
+            
+
+                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
@@ -47,13 +74,6 @@
                             @endforeach
                         </select>
                             <span class="text-danger">{{$errors->first('language_id')}}</span>
-                        </div>
-                    </div>
-                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.url')</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="url" value="{{ $banner->url }}">
-                            <span class="text-danger">{{$errors->first('url')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -84,5 +104,101 @@
         </div>
     </div>
 </div>
-                  
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    //$('#type').hide();
+    var selectedValue = $( "#product_type" ).val();
+    if(selectedValue == "bookclub" || selectedValue == "bookmark" || selectedValue == "books") {
+        fetch(selectedValue);
+    }
+
+    $('#product_type').change(function(e){
+        e.preventDefault()
+        var type = $(this).val();
+        fetch(type);
+
+    });
+    
+    var data = {!! json_encode($banner, JSON_HEX_TAG) !!};
+    var selectedId = (data.books) ? data.books.id : data.bookmarks ?  data.bookmarks.id : data.bookclubs ? data.bookclubs.id : null  ;
+    // $("#type").val();
+   
+    // console.log(data.bookclubs != null);
+    // if(data.books != null ) {
+    //     $('#type').show();
+    //     $('#type').attr('name', 'book_id');
+    //     $(".type").text('books');
+    //     $(".type").show();
+    // }
+    // else if(data.bookmarks != null ) {
+    //     $('#type').show();
+    //     $('#type').attr('name', 'bookmark_id');
+    //     $(".type").text('bookmarks');
+    //     $(".type").show();
+    // }
+    // else if(data.bookclubs != null) {
+    //     $('#type').show();
+    //     $('#type').attr('name', 'bookclub_id');
+    //     $(".type").text('bookclubs');
+    //     $(".type").show();
+    //     $('product_type option[value="SEL1"]')
+    // }
+    // else {
+    //     $('#type').hide();
+    // }
+
+
+
+    function fetch(type) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    // id
+       
+        if(type == "null") {
+            $(".type").hide();   
+            $('#type').hide();
+            e.preventDefault()
+            return false;
+        
+        }
+    
+        $.ajax({
+            url: "{{ URL('/admin/getlist')}}"+"/"+type,
+            type: 'get',
+            dataType: 'json',
+            success: function(response){
+                var len = response.id.length;
+                for(var i=0; i < len; i++){
+                var id = response.id[i];
+                var name = response.name[i];
+                
+                var option = "<option value='"+id+"' >"+name+"</option>"; 
+                $("#type").append(option); 
+            }
+            $('#type').attr('name', type +'_id');
+            $(".type").text(type);
+            $(".type").show();
+            $('#type').show();
+            if(selectedId != null ) {
+                $("#type").val(selectedId);
+            }
+
+            } 
+        
+
+        });
+    }
+       
+    
+
+});
+ 
+ 
+
+</script>                
 @endsection

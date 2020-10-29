@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('banners','BannerController');
    Route::post('banner/enable/{id}','BannerController@enableBanner')->name('enable_banner');
    Route::post('banner/disable/{id}','BannerController@disableBanner')->name('disable_banner');
+   Route::get('getlist/{type}','BannerController@getDropDownList');
    Route::post('banners-sortable', 'BannerController@sortBanners');
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');

@@ -53,7 +53,9 @@ class BookmarksController extends Controller
             'business_id' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            'image_url'=> 'required|image|mimes:jpg,jpeg,png|max:2048', 
+            'image_url'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900|dimensions:ratio=0.33/1',
+           
+
             ]);
             $bookmark = new Bookmark();
             $bookmark->title = $request->title;
@@ -124,7 +126,7 @@ class BookmarksController extends Controller
             'size' => 'required|numeric',
             'quantity' => 'required|numeric',
             'business_id' => 'required|numeric',
-            'image_url'=> 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048', 
+            'image_url'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900|dimensions:ratio=0.33/1',
             'stock_status' => 'required',
             'featured'=>'required'
             ]);

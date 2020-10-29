@@ -17,5 +17,7 @@ class Book extends Model
     public function book_clubs() {
         return $this->belongsTo('App\BookClub','book_club_id','id');
     }
-
+    public function banners() {
+        return $this->hasMany('App\Banner');
+    }
 }

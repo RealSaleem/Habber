@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Banner;
+use App\Book;
+use App\Bookmark;
+use App\BookClub;
 use App\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +19,8 @@ class BannerController extends Controller
     public function index()
     {
         //
-        $banner = Banner::with('languages')->orderBy('sort_order','ASC')->get();
+        $banner = Banner::with('languages','books','bookmarks','bookclubs')->orderBy('sort_order','ASC')->get();
+    
         return view('banners.index', compact('banner'));
     }
 
@@ -41,21 +45,40 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        
         //
+        
         $validatedData = $request->validate([
-            'description' => 'required', 
+            'product_type'=>'required',
             'language_id' => 'required',
+            'bookmarks_id'=>'sometimes|required',
+            'bookclubs_id'=>'sometimes|required',
+            'books_id'=>'sometimes|required',
             'status' => 'required',
-            'url'  => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450',
              
          ]);
         $banner = new Banner();
-        $banner->description = $request->description;
+        $banner->product_type = $request->product_type;
         $banner->language_id = $request->language_id;
         $banner->status = $request->status;
-        $banner->url = $request->url;
         $banner->image = "null"; 
+        if($request->has('description'))
+        {   
+            $banner->description = $request->description;
+        }
+        if($request->has('bookmark_id'))
+        {   
+            $banner->bookmark_id =  $request->bookmark_id;
+        }
+        if($request->has('bookclub_id'))
+        {   
+            $banner->bookclub_id =  $request->bookclub_id;
+        }
+        if($request->has('book_id'))
+        {   
+            $banner->book_id =  $request->book_id;
+        }
         $banner->save();
         $updatebanner = Banner::find($banner->id);
         $file = $request->image;
@@ -92,7 +115,7 @@ class BannerController extends Controller
     public function edit($id)
     {
         //
-        $banner = Banner::findOrFail($id);
+        $banner = Banner::with('languages','books','bookmarks','bookclubs')->findOrFail($id);
         $language = Language::all();
         return view('banners.edit', compact('banner','language'));
     }
@@ -123,17 +146,34 @@ class BannerController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'description' => 'required', 
+            'product_type'=> 'required',
+            'bookmarks_id'=>'sometimes|required',
+            'bookclubs_id'=>'sometimes|required',
+            'books_id'=>'sometimes|required',
             'language_id' => 'required',
             'status' => 'required',
-             'url' => 'required',
-            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048'
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450',
         ]);
         $banner = Banner::find($id);
-        $banner->description = $request->description;
+        $banner->product_type = $request->product_type;
         $banner->language_id = $request->language_id;
         $banner->status = $request->status;
-        $banner->url = $request->url;
+        if($request->has('description'))
+        {   
+            $banner->description = $request->description;
+        }
+        if($request->has('bookmark_id'))
+        {   
+            $banner->bookmark_id =  $request->bookmark_id;
+        }
+        if($request->has('bookclub_id'))
+        {   
+            $banner->bookclub_id =  $request->bookclub_id;
+        }
+        if($request->has('book_id'))
+        {   
+            $banner->book_id =  $request->book_id;
+        }
         if($request->has('image'))
         {   
             Storage::disk('public')->deleteDirectory('banners/'. $id);
@@ -199,5 +239,26 @@ class BannerController extends Controller
 
     }
 
+    public function getDropDownList($type)
+    {
+        $response;
+        if($type == "book") {
+            $response['id'] =  Book::pluck('id')->toArray();
+            $response['name'] = Book::pluck('title')->toArray();
+        }
+        if($type == "bookmark") {
+            $response['id'] =  Bookmark::pluck('id')->toArray();
+            $response['name'] = Bookmark::pluck('title')->toArray();
+        }
+        if($type == "bookclub") {
+            $response['id'] =  BookClub::pluck('id')->toArray();
+            $response['name'] = BookClub::pluck('name')->toArray();
+        }
+        return response()->json($response);
+    }
+   
 }
+  
+
+
 
