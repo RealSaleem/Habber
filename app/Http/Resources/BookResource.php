@@ -24,7 +24,7 @@ class BookResource extends JsonResource
             'description'   => $this->description ?? "",
             'cover_type'    => $this->cover_type ?? "",
             'genre'  => GenreResource::collection($this->genres) ?? "",
-            'price'    => $this->price ?? "",
+            'price'    => number_format($this->price,4) ?? "",
             'total_pages'  => $this->total_pages,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
             'business_id'  => $this->business_id,
