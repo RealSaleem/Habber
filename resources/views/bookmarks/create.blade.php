@@ -113,23 +113,23 @@
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.business')</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="business_id" id="business_id">
-                            @foreach($business as $b)
-                            <option value={{$b->id}} > {{$b->name}}</option>
+                        <select  class="form-control" name="publisher" id="publisher">
+                            @foreach($user as $u)
+                            <option value={{$u->id}} > {{$u->first_name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('business_id')}}</span>
+                            <span class="text-danger">{{$errors->first('publisher')}}</span>
                         </div>
                     </div>
                     
                      
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
                         <div class="col-sm-9">
-                        <input id="image_url" type="file" class="form-control" name="image_url">
-                            <span class="text-danger">{{$errors->first('image_url')}}</span>
+                        <input id="image" type="file" class="form-control" name="image">
+                            <span class="text-danger">{{$errors->first('image')}}</span>
                         </div>
                     </div>
                     <div class="border-top">
