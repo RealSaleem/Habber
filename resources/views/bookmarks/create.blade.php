@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Arabic Title</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_title')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" dir="rtl" name="arabic_title" value="{{ old('arabic_title') }}" id="arabic_title"  placeholder="Arabic Title">
                             <span class="text-danger">{{$errors->first('arabic_title')}}</span>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Arabic Maker Name</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_maker_name')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="arabic_maker_name" dir="rtl" value="{{ old('arabic_maker_name') }}" id="arabic_maker_name" placeholder="Arabic Maker Name">
                             <span class="text-danger">{{$errors->first('arabic_maker_name')}}</span>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Arabic Description</label>
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
                         <div class="col-sm-9">
                             <textarea type="textarea" class="form-control" dir="rtl" name="arabic_description" value="{{ old('arabic_description') }}" id="arabic_description" placeholder="Arabic Description"></textarea>
                             <span class="text-danger">{{$errors->first('arabic_description')}}</span>
