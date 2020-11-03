@@ -23,7 +23,7 @@
                         <th>Isbn</th>
                         <th>Total Page</th>
                         <th>Quantity</th>
-                        <th>Business Name</th>
+                        <th>Publisher Name</th>
                         <th>Book Clubs</th>
                         <th>Genres</th>
                         <th>Feature</th>
@@ -44,7 +44,7 @@
             <td>{{$book->isbn}}</td>
             <td>{{$book->total_pages}}</td>  
             <td>{{$book->quantity}}</td>
-            <td>{{$book->businesses['name']}}</td>  
+            <td>{{$book->users['first_name']}}</td>  
             <td>{{$book->book_clubs['name']}}</td>
             {{count($book->genres)}}
             @if(count($book->genres) > 1)

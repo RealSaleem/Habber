@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookmark extends Model
 {
-    public function businesses() {
-        return $this->belongsTo('App\Business','business_id','id');
+    public function users() {
+        return $this->belongsTo('App\User','user_id','id');
     }
 
     public function banners() {

@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Arabic Name</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.arabic_giname')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="arabic_name" dir="rtl" value="{{ old('arabic_name') }}" id="arabic_name"  placeholder="Arabic Name">
                             <span class="text-danger">{{$errors->first('arabic_name')}}</span>
