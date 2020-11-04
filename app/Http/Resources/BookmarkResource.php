@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Storage;
 
 class BookmarkResource extends JsonResource
@@ -21,10 +22,10 @@ class BookmarkResource extends JsonResource
             'maker_name'   => $this->maker_name,
             'bookmark_id'  => $this->bookmark_id,
             'description'   => $this->description ?? "",
-            'price'    => $this->price ?? "",
+            'price'    => number_format($this->price,4) ?? "",
             'size'  => $this->size,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
-            'business_id'  => $this->business_id,
+            'publisher'  => new UserResource($this->users) ?? "",
             'stock_status'  => $this->stock_status,
             'book_language'    => $this->book_language ?? "",
             'image' => isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,

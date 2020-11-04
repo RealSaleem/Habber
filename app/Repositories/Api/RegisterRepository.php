@@ -37,6 +37,7 @@ class RegisterRepository implements RepositoryInterface
         $this->model->email = $data['email'];
         $this->model->password = Hash::make($data['password']);
         $this->model->language_id = $data['language_id'];
+        $this->model->currency_id = 1;
         $this->model->status =  true;  
         if($this->model->save()) {
             if (Auth::attempt(['email' => $data['email'],'password' => $data['password'] ])) 
