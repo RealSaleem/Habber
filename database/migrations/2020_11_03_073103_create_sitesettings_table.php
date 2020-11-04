@@ -35,6 +35,6 @@ class CreateSitesettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sitesettings');
+        Schema::dropIfExists('site_settings');
     }
 }
