@@ -86,8 +86,8 @@
                 </select> -->
                 </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('set_language', ['locale' => 'en']) }}">English</a>
-                    <a class="dropdown-item" href="{{ route('set_language', ['locale' => 'ar']) }}">Arabic</a>
+                     <a class="dropdown-item" href="{{ route('set_language', ['locale' => 'en']) }}">English</a>
+                     <a class="dropdown-item" href="{{ route('set_language', ['locale' => 'ar']) }}">Arabic</a>
                     <!-- <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a> -->
                 </div>

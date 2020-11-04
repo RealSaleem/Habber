@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Bookmark;
-use App\Business;
+//use App\Business;
+use App\User;
+use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +18,7 @@ class BookmarksController extends Controller
     public function index()
     {
         //
-        $bookmark = Bookmark::with('businesses')->get();
+        $bookmark = Bookmark::with('users','product_prices')->get();
         return view('bookmarks.index', compact('bookmark'));
     }
 
@@ -28,8 +30,8 @@ class BookmarksController extends Controller
     public function create()
     {
         //
-        $business = Business::all();
-        return view('bookmarks.create',compact('business'));
+        $user = User::role('publisher')->get();
+        return view('bookmarks.create',compact('user'));
     
     }
 
@@ -53,10 +55,10 @@ class BookmarksController extends Controller
             'bookmark_id' => 'required|numeric|unique:bookmarks',  
             'size' => 'required',
             'quantity' => 'required|numeric',
-            'business_id' => 'required',
+            'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            'image_url'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900|dimensions:ratio=0.33/1',
+            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
            
 
             ]);
@@ -67,22 +69,28 @@ class BookmarksController extends Controller
             $bookmark->arabic_maker_name = $request->arabic_maker_name;
             $bookmark->description= $request->description;
             $bookmark->arabic_description= $request->arabic_description;
-            $bookmark->price =$request->price;
             $bookmark->bookmark_id = $request->bookmark_id;
             $bookmark->size= $request->size;
             $bookmark->quantity =$request->quantity;
-            $bookmark->business_id = $request->business_id;
+            $bookmark->user_id = $request->publisher;
             $bookmark->stock_status = $request->stock_status;
             $bookmark->featured = $request->featured;
+            $bookmark->status = true;
             $bookmark->image = "null"; 
             $bookmark->save();
             $updatebookmark = Bookmark::find($bookmark->id);
-            $file = $request->image_url;
+            $file = $request->image;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "bookmarks/".$bookmark->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $updatebookmark->image = $filePath;
             $updatebookmark->update();   
+            $productPrice= new ProductPrice();
+            $productPrice->product_id= $bookmark->id;
+            $productPrice->product_type= 'bookmark';
+            $productPrice->price =$request->price;
+            $productPrice->currency_id= 1;
+            $productPrice->save();
             return back()->with('success', 'Bookmark successfully saved');
        
     }
@@ -107,9 +115,10 @@ class BookmarksController extends Controller
     public function edit($id)
     {
         //
-        $bookmark = Bookmark::findOrFail($id);
-        $business = Business::all();
-        return view('bookmarks.edit', compact('bookmark','business'));
+        $bookmark = Bookmark::with('users','product_prices')->findOrFail($id);
+      
+        $user = User::role('publisher')->get();
+        return view('bookmarks.edit', compact('bookmark','user'));
        
     }
 
@@ -134,8 +143,8 @@ class BookmarksController extends Controller
             'bookmark_id' => 'required|numeric|unique:bookmarks,bookmark_id,'.$id,  
             'size' => 'required',
             'quantity' => 'required|numeric',
-            'business_id' => 'required|numeric',
-            'image_url'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900|dimensions:ratio=0.33/1',
+            'publisher' => 'required|numeric',
+            'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
             'stock_status' => 'required',
             'featured'=>'required'
             ]);
@@ -146,23 +155,31 @@ class BookmarksController extends Controller
         $bookmark->arabic_maker_name = $request->arabic_maker_name;
         $bookmark->description= $request->description;
         $bookmark->arabic_description= $request->arabic_description;
-        $bookmark->price =$request->price;
         $bookmark->bookmark_id = $request->bookmark_id;
         $bookmark->size= $request->size;
         $bookmark->quantity =$request->quantity;
-        $bookmark->business_id = $request->business_id;
+        $bookmark->user_id = $request->publisher;
         $bookmark->stock_status = $request->stock_status;
         $bookmark->featured = $request->featured;
-        if($request->has('image_url')) 
+        $bookmark->status = true;
+        if($request->has('image')) 
         {
             Storage::disk('public')->deleteDirectory('bookmarks/'. $id);
-            $file = $request->image_url;
+            $file = $request->image;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "bookmarks/".$id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $bookmark->image =  $filePath;
         }
-        $bookmark->save();   
+        $bookmark->save();  
+        if($request->has('price'))
+        {
+            $productPrice= ProductPrice::where('product_id',$id)->where('product_type','bookmark')->first();
+            //$productPrice->product_type= 'bookmark';
+            $productPrice->price =$request->price;
+            $productPrice->currency_id= 1;
+            $productPrice->update();
+        } 
         return back()->with('success', 'Bookmark update sucessfully ');
        
     }

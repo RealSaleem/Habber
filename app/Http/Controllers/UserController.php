@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index() 
     {
-        $user = User::all()->except(auth()->user()->id);
+        $user = User::with('languages','currencies')->get()->except(auth()->user()->id);
         return view('users.index', compact('user'));
     }
     /**
@@ -55,13 +55,18 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
         $user->profile_pic = "null"; 
-        $file = $request->profile_pic;
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
-        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $user->profile_pic = $filePath;
+        $user->currency_id = 1;
+        $user->language_id = 1;
         $user->save();   
         $user->assignRole($request->input('roles'));
+        $updateUser = User::find($user->id);
+        $file = $request->profile_pic;
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "users/".$user->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        $updateUser->profile_pic = $filePath;
+        $updateUser->update();
+     
         return back()->with('success', 'User successfully saved');
 
     }
@@ -125,6 +130,8 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
+        $user->currency_id = 1;
+        $user->language_id = 1;
         if($request->has('profile_pic')) 
         {
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);

@@ -44,7 +44,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description') </label>
                         <div class="col-sm-9">
-                            <textarea  class="form-control"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" id="description" value="{{$book->description}}" placeholder="Description"></textarea>
+                            <textarea  class="form-control"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" id="description" value="" placeholder="Description">{{$book->description}}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.price')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="price" id="price" value="{{$book->price}}" placeholder="Price ">
+                            <input type="number" class="form-control" name="price" id="price" value="{{$book->product_prices['price']}}" placeholder="Price ">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
@@ -109,14 +109,14 @@
                         </div>
                      </div> 
                      <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.business') </label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="business" id="business_id" >
-                            @foreach($business as $b)
-                            <option value="{{$b->id}}" {{ ($book->business_id == $b->id ? "selected" : "")}} > {{$b->name}}</option>
+                        <select  class="form-control" name="publisher" id="publisher">
+                            @foreach($user as $u)
+                            <option value="{{$u->id}}" {{$book->user_id == $u->id ? "selected" : ""}} > {{$u->first_name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('business')}}</span>
+                            <span class="text-danger">{{$errors->first('publisher')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -144,10 +144,10 @@
                         <span class="text-danger">{{$errors->first('genre')}}</span>
                     </div>
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.image')</label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.image')</label>
                         <div class="col-sm-9">
-                          <input id="image_url" type="file" class="form-control" name="image_url" >
-                            <span class="text-danger">{{$errors->first('image_url')}}</span>
+                          <input id="image_url" type="file" class="form-control" name="image" >
+                            <span class="text-danger">{{$errors->first('image')}}</span>
                             @if(isset($book->image))
                             <div class="form-group row">
                                 <div class="col-sm-9">
