@@ -36,8 +36,8 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->phone}}</td>  
                         <td class = "{{$user->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$user->status == 1 ? "active" : "not active"}}</td>  
-                        <td>{{$user->languages->name}}</td>
-                        <td>{{$user->currencies->name}}</td>
+                        <td>{{$user->languages['name']}}</td>
+                        <td>{{$user->currencies['name']}}</td>
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
                         <td>
                             <div class="row">

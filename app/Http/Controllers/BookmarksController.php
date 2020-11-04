@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Bookmark;
 //use App\Business;
 use App\User;
+use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +18,7 @@ class BookmarksController extends Controller
     public function index()
     {
         //
-        $bookmark = Bookmark::with('users')->get();
+        $bookmark = Bookmark::with('users','product_prices')->get();
         return view('bookmarks.index', compact('bookmark'));
     }
 
@@ -57,7 +58,7 @@ class BookmarksController extends Controller
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            //'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
+            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
            
 
             ]);
@@ -68,7 +69,6 @@ class BookmarksController extends Controller
             $bookmark->arabic_maker_name = $request->arabic_maker_name;
             $bookmark->description= $request->description;
             $bookmark->arabic_description= $request->arabic_description;
-            $bookmark->price =$request->price;
             $bookmark->bookmark_id = $request->bookmark_id;
             $bookmark->size= $request->size;
             $bookmark->quantity =$request->quantity;
@@ -85,6 +85,12 @@ class BookmarksController extends Controller
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $updatebookmark->image = $filePath;
             $updatebookmark->update();   
+            $productPrice= new ProductPrice();
+            $productPrice->product_id= $bookmark->id;
+            $productPrice->product_type= 'bookmark';
+            $productPrice->price =$request->price;
+            $productPrice->currency_id= 1;
+            $productPrice->save();
             return back()->with('success', 'Bookmark successfully saved');
        
     }
@@ -109,7 +115,8 @@ class BookmarksController extends Controller
     public function edit($id)
     {
         //
-        $bookmark = Bookmark::findOrFail($id);
+        $bookmark = Bookmark::with('users','product_prices')->findOrFail($id);
+      
         $user = User::role('publisher')->get();
         return view('bookmarks.edit', compact('bookmark','user'));
        
@@ -137,7 +144,7 @@ class BookmarksController extends Controller
             'size' => 'required',
             'quantity' => 'required|numeric',
             'publisher' => 'required|numeric',
-            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
+            'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
             'stock_status' => 'required',
             'featured'=>'required'
             ]);
@@ -148,14 +155,13 @@ class BookmarksController extends Controller
         $bookmark->arabic_maker_name = $request->arabic_maker_name;
         $bookmark->description= $request->description;
         $bookmark->arabic_description= $request->arabic_description;
-        $bookmark->price =$request->price;
         $bookmark->bookmark_id = $request->bookmark_id;
         $bookmark->size= $request->size;
         $bookmark->quantity =$request->quantity;
         $bookmark->user_id = $request->publisher;
         $bookmark->stock_status = $request->stock_status;
         $bookmark->featured = $request->featured;
-        $bookmarks->status = true;
+        $bookmark->status = true;
         if($request->has('image')) 
         {
             Storage::disk('public')->deleteDirectory('bookmarks/'. $id);
@@ -165,7 +171,15 @@ class BookmarksController extends Controller
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $bookmark->image =  $filePath;
         }
-        $bookmark->save();   
+        $bookmark->save();  
+        if($request->has('price'))
+        {
+            $productPrice= ProductPrice::where('product_id',$id)->where('product_type','bookmark')->first();
+            //$productPrice->product_type= 'bookmark';
+            $productPrice->price =$request->price;
+            $productPrice->currency_id= 1;
+            $productPrice->update();
+        } 
         return back()->with('success', 'Bookmark update sucessfully ');
        
     }

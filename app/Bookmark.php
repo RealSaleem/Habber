@@ -18,4 +18,10 @@ class Bookmark extends Model
     // {
     //     return $this->belongsToMany(Favourite::class);
     // }
+
+ 
+    
+    public function product_prices() {
+        return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"bookmark");
+    }
 }

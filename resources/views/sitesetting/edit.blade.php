@@ -24,21 +24,25 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.email')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email"  value="{{ $sitesetting->email }}" >
+                            <input type="email" class="form-control" name="email"  value="{{ $sitesetting->email }}" >
                             <span class="text-danger">{{$errors->first('email')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.currency')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="currency" value="{{ $sitesetting->currency }}">
+                        <select  class="form-control" name="currency" id="currency" >
+                        @foreach($currency as $c)
+                            <option value="{{$c->id}}" {{ ($sitesetting->currency == $c->id ? "selected" : "")}} > {{$c->name}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('currency')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.language')</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="language" id="language" >
+                       <select  class="form-control" name="language" id="language" >
                         @foreach($language as $l)
                             <option value="{{$l->id}}" {{ ($sitesetting->language == $l->id ? "selected" : "")}} > {{$l->name}}</option>
                             @endforeach
@@ -63,28 +67,28 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.twitter_url')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="twitter_url" value="{{ $sitesetting->twitter_url }}" >
+                            <input type="url" class="form-control" name="twitter_url" value="{{ $sitesetting->twitter_url }}" >
                             <span class="text-danger">{{$errors->first('twitter_url')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.facebook_url')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="facebook_url" value="{{$sitesetting->facebook_url}}">
+                            <input type="url" class="form-control" name="facebook_url" value="{{$sitesetting->facebook_url}}">
                             <span class="text-danger">{{$errors->first('facebook_url')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.instagram_url')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="instagram_url" value="{{ $sitesetting->instagram_url }}">
+                            <input type="url" class="form-control" name="instagram_url" value="{{ $sitesetting->instagram_url }}">
                             <span class="text-danger">{{$errors->first('instagram_url')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.snapchat_url')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="snapchat_url" value="{{ $sitesetting->snapchat_url}}">
+                            <input type="url" class="form-control" name="snapchat_url" value="{{ $sitesetting->snapchat_url}}">
                             <span class="text-danger">{{$errors->first('snapchat_url')}}</span>
                         </div>
                     </div>

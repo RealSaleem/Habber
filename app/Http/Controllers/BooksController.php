@@ -7,6 +7,7 @@ use App\Genre;
 use App\Business;
 use App\Language;
 use App\User;
+use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,7 +65,7 @@ class BooksController extends Controller
             'stock_status' => 'required',
             'featured'=>'required',
             "genre" => 'required|array|min:1|max:3',
-            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470|dimensions:ratio=1:1.33'
+            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
             ]);
             $book = new Book();
             $book->title = $request->title;
@@ -72,7 +73,6 @@ class BooksController extends Controller
             $book->cover_type= $request->cover_type;
             $book->description= $request->description;
             $book->book_language= $request->book_language;
-            $book->price =$request->price;
             $book->isbn = $request->isbn;
             $book->total_pages= $request->total_pages;
             $book->quantity =$request->quantity;
@@ -91,6 +91,13 @@ class BooksController extends Controller
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $updatebook->image = $filePath;
             $updatebook->update();   
+            $productPrice= new ProductPrice();
+            $productPrice->product_id= $book->id;
+            $productPrice->product_type= 'book';
+            $productPrice->price =$request->price;
+            $productPrice->currency_id= 1;
+            $productPrice->save();
+
             return back()->with('success', 'Book successfully saved');
        
    
@@ -116,7 +123,7 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::with(['book_clubs','genres'])->where('id',$id)->first();
+        $book = Book::with(['book_clubs','genres','product_prices'])->where('id',$id)->first();
         $selectedGenres = $book->genres->pluck('id')->toArray();
         $user = User::role('publisher')->get();
         $bookClubs = BookClub::all();
@@ -150,7 +157,7 @@ class BooksController extends Controller
             'stock_status' => 'required',
             'featured'=>'required',
             'genre' => 'required|array|min:1|max:3',
-             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470|dimensions:ratio=1:1.33'
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
         ]);
        
         $book = Book::find($id);
@@ -160,7 +167,6 @@ class BooksController extends Controller
         $book->cover_type= $request->cover_type;
         $book->description= $request->description;
         $book->book_language = $request->book_language;
-        $book->price = $request->price;
         $book->isbn = $request->isbn;
         $book->total_pages= $request->total_pages;
         $book->quantity= $request->quantity;
@@ -190,6 +196,15 @@ class BooksController extends Controller
             $book->image =  $filePath;
         }
         $book->save();   
+        if($request->has('price'))
+        {
+            $productPrice= ProductPrice::where('product_id',$id)->where('product_type','book')->first();
+            //$productPrice->product_type= 'book';
+            $productPrice->price =$request->price;
+            $productPrice->currency_id= 1;
+            $productPrice->update();
+        }
+       
         return back()->with('success', 'Book updated sucessfully');
 
    

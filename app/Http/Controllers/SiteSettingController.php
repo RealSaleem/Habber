@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SiteSetting;
 use App\language;
+use App\Currency;
+use App;
+use Session;
 class SiteSettingController extends Controller
 {
     /**
@@ -15,7 +18,7 @@ class SiteSettingController extends Controller
     public function index()
     {
         //  
-        $sitesetting = SiteSetting::with('languages')->get();
+        $sitesetting = SiteSetting::with('languages','currencies')->get();
         return view('sitesetting.index', compact('sitesetting'));
     }
 
@@ -29,7 +32,8 @@ class SiteSettingController extends Controller
         //
 
         $language = Language::all();
-        return view('sitesetting.create', compact('language'));
+        $currency = Currency::all();
+        return view('sitesetting.create', compact('language','currency'));
     }
 
     /**
@@ -45,14 +49,14 @@ class SiteSettingController extends Controller
            
                 $validatedData = $request->validate([
                     'email'=>'required',
-                    'currency'=>'required|numeric',
+                    'currency'=>'required',
                     'language'=>'required',
                     'phone_no'=>'required|numeric',
                     'whatsaap_number'=>'required|numeric',
-                    'twitter_url'=>'required',
-                    'facebook_url'=>'required',
-                    'instagram_url'=>'required',
-                    'snapchat_url'=>'required'
+                    'twitter_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+                    'facebook_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+                    'instagram_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+                    'snapchat_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
                 ]);
                 $sitesetting = new SiteSetting();
                 $sitesetting->email=$request->email;
@@ -91,7 +95,8 @@ class SiteSettingController extends Controller
         //
         $sitesetting = SiteSetting::findOrFail($id);
         $language = Language::all();
-        return view('sitesetting.edit', compact('sitesetting','language'));
+        $currency = Currency::all();
+        return view('sitesetting.edit', compact('sitesetting','language','currency'));
     }
 
     /**
@@ -106,26 +111,39 @@ class SiteSettingController extends Controller
         //
         $validatedData = $request->validate([
             'email'=>'required',
-            'currency'=>'required|numeric',
+            'currency'=>'required',
             'language'=>'required',
             'phone_no'=>'required|numeric',
             'whatsaap_number'=>'required|numeric',
-            'twitter_url'=>'required',
-            'facebook_url'=>'required',
-            'instagram_url'=>'required',
-            'snapchat_url'=>'required'
+            'twitter_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'facebook_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'instagram_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'snapchat_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'
         ]);
         $sitesetting = SiteSetting::find($id);
         $sitesetting->email=$request->email;
         $sitesetting->currency = $request->currency;
-        $sitesetting->language=$request->language;
+        $sitesetting->language= $request->language;
         $sitesetting->phone_no = $request->phone_no;
         $sitesetting->whatsaap_number=$request->whatsaap_number;
         $sitesetting->twitter_url = $request->twitter_url;
         $sitesetting->facebook_url = $request->facebook_url;
         $sitesetting->instagram_url = $request->instagram_url;
         $sitesetting->snapchat_url = $request->snapchat_url;
-        $sitesetting->save();   
+        $sitesetting->save(); 
+        $locale = "";  
+        if($sitesetting->language == "1" ) 
+        {
+            $locale = "ar";
+            App::setLocale($locale);
+            Session::put('locale', $locale);
+        }
+        else {
+            $locale = "en";
+            App::setLocale($locale);
+            Session::put('locale', $locale);
+        }
+        
         return back()->with('success', 'setting updated successfully ');       
         }
        
@@ -144,5 +162,13 @@ class SiteSettingController extends Controller
         $sitesetting  = SiteSetting::findOrFail($id);
         $sitesetting->delete();
         return back()->with('success', 'Sitesetting deleted successfully');
+    }
+
+    public  function setLanguage($locale) 
+    {
+        // dd($locale);
+        App::setLocale($locale);
+        Session::put('locale', $locale);
+        return redirect()->back();
     }
 }

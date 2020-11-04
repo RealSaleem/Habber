@@ -30,7 +30,7 @@
             @foreach($sitesetting as $sitesetting)
               <tr>
                 <td>{{$sitesetting->email}}</td>
-                <td>{{$sitesetting->currency}}</td>
+                <td>{{$sitesetting->currencies['name']}}</td>
                 <td>{{$sitesetting->languages['name']}}</td>
                 <td>{{$sitesetting->phone_no}}</td>
                 <td>{{$sitesetting->whatsaap_number}}</td>
@@ -40,13 +40,13 @@
                 <td>{{$sitesetting->snapchat_url}}</td>
                 <td>
                   <div class="row">
-                      <div class="col-1">
-                          <form action="{{ action('SiteSettingController@destroy', [$sitesetting->id])}}" method="post">
+                 <!-- <div class="col-1">
+                         <form action="{{ action('SiteSettingController@destroy', [$sitesetting->id])}}" method="post">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                           </form>
-                      </div>
+                      </div>-->
                       <div class="col-1">
                           <a href="{{ action('SiteSettingController@edit', [$sitesetting->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
                       </div>
@@ -67,38 +67,38 @@
     $(document).ready(function() {
       $('#zero_config').DataTable({
         paging: true,
-        dom: 'Bfrtip',
-        buttons: [
+        // dom: 'Bfrtip',
+        // buttons: [
             
-            // 'csv', 'excel', 'pdf', 'print',
+        //     // 'csv', 'excel', 'pdf', 'print',
           
-            {
-                extend: 'pdf',           
-                exportOptions: {
-                    columns: ':visible:not(.not)' // indexes of the columns that should be printed,
-                }                      // Exclude indexes that you don't want to print.
-            },
-            {
-                extend: 'csv',
-                exportOptions: {
-                    columns: ':visible:not(.not)'
-                }
+        //     {
+        //         extend: 'pdf',           
+        //         exportOptions: {
+        //             columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+        //         }                      // Exclude indexes that you don't want to print.
+        //     },
+        //     {
+        //         extend: 'csv',
+        //         exportOptions: {
+        //             columns: ':visible:not(.not)'
+        //         }
 
-            },
-            {
-                extend: 'excel',
-                exportOptions: {
-                    columns: ':visible:not(.not)'
-                }
+        //     },
+        //     {
+        //         extend: 'excel',
+        //         exportOptions: {
+        //             columns: ':visible:not(.not)'
+        //         }
 
-            },
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: ':visible:not(.not)'
-                }
-            }         
-        ],
+        //     },
+        //     {
+        //         extend: 'print',
+        //         exportOptions: {
+        //             columns: ':visible:not(.not)'
+        //         }
+        //     }         
+        // ],
         
     });
 });   

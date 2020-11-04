@@ -10,4 +10,10 @@ class Currency extends Model
     {
         return $this->hasOne('App\User','currency_id','id');
     }
+
+    public function site_settings()
+    {
+        return $this->hasOne(SiteSetting::class,'currency_id','id');
+    }
+
 }

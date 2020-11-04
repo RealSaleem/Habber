@@ -62,7 +62,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.price')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="price" id="price" value="{{$book->price}}" placeholder="Price ">
+                            <input type="number" class="form-control" name="price" id="price" value="{{$book->product_prices['price']}}" placeholder="Price ">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>

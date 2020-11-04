@@ -20,4 +20,8 @@ class Book extends Model
     public function banners() {
         return $this->hasMany('App\Banner');
     }
+
+    public function product_prices() {
+        return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"book");
+    }
 }

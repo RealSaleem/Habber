@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!--@extends('layouts.app')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -30,7 +30,11 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.site_setting_page.currency')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control"name="currency" value="{{ old('currency') }}" id="currency"  placeholder="Currency">
+                        <select  class="form-control" name="currency" id="currency" >
+                        @foreach($currency as $c)
+                                <option value="{{$c->id}}" > {{$c->name}}</option>
+                            @endforeach
+                            </select>
                             <span class="text-danger">{{$errors->first('currency')}}</span>
                         </div>
                     </div>
@@ -102,4 +106,4 @@
     </div>
 </div>
                   
-@endsection
+@endsection--!
