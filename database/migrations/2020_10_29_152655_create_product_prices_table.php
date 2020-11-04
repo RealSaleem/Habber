@@ -16,6 +16,7 @@ class CreateProductPricesTable extends Migration
         Schema::create('product_prices', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
+            $table->string('product_type');
             $table->integer('currency_id');
             $table->string('price');
             $table->timestamps();

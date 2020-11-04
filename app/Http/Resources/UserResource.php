@@ -24,11 +24,10 @@ class UserResource extends JsonResource
             'phone'   => $this->phone ?? "",
             'profile_pic' => isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
             'status' => $this->status,
-            'token' => $this->token ?? "",
             'language'  => $this->languages->name ?? "",
             'currency'  => $this->currencies->name ?? "",
-
-          ];
+            'token' => array_key_exists('token', $this ) ? $this->token :  "",
+        ];
           
     }
 

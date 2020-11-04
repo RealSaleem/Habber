@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\GenreResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Storage;
 
 class BookResource extends JsonResource
@@ -27,7 +28,7 @@ class BookResource extends JsonResource
             'price'    => number_format($this->price,4) ?? "",
             'total_pages'  => $this->total_pages,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
-            'business_id'  => $this->business_id,
+            'publisher'  => new UserResource($this->users) ?? "",
             'stock_status'  => $this->stock_status,
             'book_language'    => $this->book_language ?? "",
             'image' => isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
