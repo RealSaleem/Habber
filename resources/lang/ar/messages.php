@@ -1840,6 +1840,22 @@ return [
          'numcode'=>'كود',
          'phonecode'=>'رمز الهاتف'
     ],
+    'site_setting_page'=> [
+        'site_setting' =>'المواقع',
+        'add_site_setting'=>'إضافة إعدادات الموقع',
+        'edit_site_setting'=>'تحرير إعدادات الموقع',
+        'add_site_setting_info'=>'إضافة معلومات إعداد الموقع',
+        'edit_site_setting_info'=>'تحرير إعدادات الموقع',
+        'email'=>'البريد الإلكتروني',
+        'language'=>'لغة',
+        'currency'=>'عملة',
+        'phone_no'=>'رقم الهاتف',
+        'whatsaap_no'=>'رقم واتس اب',
+        'facebook_url'=>'الفيسبوك',
+        'twitter_url'=>'تويتر',
+        'instagram_url'=>'الانستغرام',
+        'snapchat_url'=>'سناب شات',
+    ],
 
     'sidebar' => [
        

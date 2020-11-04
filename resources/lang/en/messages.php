@@ -204,8 +204,23 @@ return [
         'numcode'=>'Numcode' ,
         'phonecode'=>'Phonecode'
     ],
+    'site_setting_page'=> [
+        'site_setting' => 'Site Setting',
+        'add_site_setting'=>'Add Site Setting',
+        'edit_site_setting'=>'Edit Site Setting',
+        'add_site_setting_info'=>'Add Site Setting Info',
+        'edit_site_setting_info'=>'Edit Site Setting Info',
+        'email'=>'Email',
+        'language'=>'Language',
+        'currency'=>'Currency',
+        'phone_no'=>'Phone No',
+        'whatsaap_no'=> 'WhatsApp Number',
+        'facebook_url'=>'Facebook',
+        'twitter_url'=>'Twitter',
+        'instagram_url'=>'Instagram',
+        'snapchat_url'=>'Snapchat'
 
-
+    ],
     'sidebar' => [
         'list' => 'Lists',
         'create' => 'Create',
