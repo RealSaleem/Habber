@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SiteSetting;
-use App\language;
+use App\Language;
 use App\Currency;
 use App;
 use Session;
@@ -29,8 +29,6 @@ class SiteSettingController extends Controller
      */
     public function create()
     {
-        //
-
         $language = Language::all();
         $currency = Currency::all();
         return view('sitesetting.create', compact('language','currency'));

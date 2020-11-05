@@ -56,8 +56,10 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.role')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="role" id="roles">
+                            <option  disabled selected>Select Role</option>
+                            
                                 @foreach($roles as $r)
-                                    <option value="{{$r}}" {{!isset($user->roles[0]) ? "" : ($user->roles[0]->name ? "selected" : "")}} >{{$r}}</option>
+                                    <option value="{{$r}}" {{!isset($user->roles[0]) ? "" : ($user->roles[0]->name == $r ? "selected" : "")}} >{{$r}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">{{$errors->first('role')}}</span>

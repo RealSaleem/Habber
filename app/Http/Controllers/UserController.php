@@ -58,7 +58,7 @@ class UserController extends Controller
         $user->currency_id = 1;
         $user->language_id = 1;
         $user->save();   
-        $user->assignRole($request->input('roles'));
+        $user->assignRole($request->input('role'));
         $updateUser = User::find($user->id);
         $file = $request->profile_pic;
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -100,7 +100,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $user = User::findOrFail($id);
+        $user = User::with('roles')->findOrFail($id);
+        // dd($user);
         $roles = Role::pluck('name','name')->all();
         return view('users.edit', compact('user','roles'));
     
@@ -142,8 +143,9 @@ class UserController extends Controller
             $user->profile_pic =  $filePath;
           
         }
-        $user->assignRole($request->input('roles'));
         $user->save();   
+        $user->syncRoles($request->input('role'));
+        // dd($user);
         return back()->with('success', 'User updated sucessfully');
 
     }

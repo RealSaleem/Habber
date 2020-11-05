@@ -18,6 +18,8 @@ class Language extends Model
        
         return $this->hasOne('App\User','language_id','id');
     }
+
+    
     public function sitesettings()
     {
         return $this->hasOne(SiteSetting::class,'language','id');
