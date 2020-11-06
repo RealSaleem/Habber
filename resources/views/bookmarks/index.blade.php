@@ -16,13 +16,16 @@
                 <thead>
                     <tr>
                         <th>Title</th>
+                        <th>Arabic Title</th>
                         <th>Maker Name</th>
+                        <th>Arabic Maker Name</th>
                         <th>Description</th>
+                        <th>Arabic Description</th>
                         <th>Price</th>
                         <th>Bookmark </th>
                         <th>Size</th>         
                         <th>Quantity </th>
-                        <th>Business Name</th>
+                        <th>Publisher Name</th>
                         <th>Feature</th>
                         <th class="not">Image</th>
                         <th class="not"> Action</th>  
@@ -33,13 +36,16 @@
                @foreach($bookmark as $bookmark)
             <tr>
                 <td>{{$bookmark->title}}</td>
+                <td>{{$bookmark->arabic_title}}</td>
                 <td>{{$bookmark->maker_name}}</td>
+                <td>{{$bookmark->arabic_maker_name}}</td>
                 <td>{{$bookmark->description}}</td>
-                <td>{{$bookmark->price}}</td>  
+                <td>{{$bookmark->arabic_description}}</td>
+                <td>{{$bookmark->product_prices['price']}}</td>  
                 <td>{{$bookmark->bookmark_id}}</td>
                 <td>{{$bookmark->size}}</td>
                 <td>{{$bookmark->quantity}}</td>
-                <td>{{$bookmark->businesses['name']}}</td>  
+                <td>{{$bookmark->users['first_name']}}</td>  
                 <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
                 <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
                 <td>

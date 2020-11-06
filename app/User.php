@@ -65,4 +65,19 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Language','id','language_id');
     }
+
+    public function currencies()
+    {
+        return $this->hasOne('App\Currency','id','currencyc_id');
+    }
+
+    public function books()
+    {
+        return $this->hasMany('App\Book');
+    }
+    public function bookmarks()
+    {
+        return $this->hasMany('App\Bookmark');
+    }
+    
 }

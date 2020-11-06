@@ -28,6 +28,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.arabic_name')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="arabic_name" dir="rtl" value="{{$bookclub->arabic_name}}" >
+                            <span class="text-danger">{{$errors->first('arabic_name')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.feature')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="featured"  id="status">

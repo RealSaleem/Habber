@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookmark extends Model
 {
-    public function businesses() {
-        return $this->belongsTo('App\Business','business_id','id');
+    public function users() {
+        return $this->belongsTo('App\User','user_id','id');
     }
 
     public function banners() {
@@ -18,4 +18,10 @@ class Bookmark extends Model
     // {
     //     return $this->belongsToMany(Favourite::class);
     // }
+
+ 
+    
+    public function product_prices() {
+        return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"bookmark");
+    }
 }

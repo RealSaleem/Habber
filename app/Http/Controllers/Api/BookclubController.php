@@ -26,7 +26,7 @@ class BookclubController extends Controller
     public function index()
     {
         try {
-            $bookClubs = BookClub::with('books')->where('featured',1)->paginate(100);
+            $bookClubs = BookClub::with('books')->where('featured',1)->get();
             if(count($bookClubs) != 0) {
                 return (new BookClubCollection($bookClubs));
             }

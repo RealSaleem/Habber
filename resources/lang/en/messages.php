@@ -64,6 +64,9 @@ return [
         'title'=> 'Title',
         'maker_name'=> 'Maker Name',
         'description'=>'Description',
+        'arabic_title'=> 'Arabic Title',
+        'arabic_maker_name'=> 'Arabic Maker Name',
+        'arabic_description'=>'Arabic Description',
         'price'=>'Price',
         'bookmark_id'=>'Bookmark ID',
         'size'=>'Size',
@@ -82,6 +85,7 @@ return [
         'add_bookclub_info'=> 'Add Bookclub Info',
         'edit_bookclub_info'=> 'Edit Bookclub Info',
         'name'=>'Name',
+        'arabic_name'=>'Arabic Name',
         'banner_image'=>'Banner Image',
         'feature'=>'Feature'
         
@@ -200,8 +204,23 @@ return [
         'numcode'=>'Numcode' ,
         'phonecode'=>'Phonecode'
     ],
+    'site_setting_page'=> [
+        'site_setting' => 'Site Setting',
+        'add_site_setting'=>'Add Site Setting',
+        'edit_site_setting'=>'Edit Site Setting',
+        'add_site_setting_info'=>'Add Site Setting Info',
+        'edit_site_setting_info'=>'Edit Site Setting Info',
+        'email'=>'Email',
+        'language'=>'Language',
+        'currency'=>'Currency',
+        'phone_no'=>'Phone No',
+        'whatsaap_no'=> 'WhatsApp Number',
+        'facebook_url'=>'Facebook',
+        'twitter_url'=>'Twitter',
+        'instagram_url'=>'Instagram',
+        'snapchat_url'=>'Snapchat'
 
-
+    ],
     'sidebar' => [
         'list' => 'Lists',
         'create' => 'Create',

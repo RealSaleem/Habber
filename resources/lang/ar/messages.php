@@ -1703,8 +1703,11 @@ return [
         'add_bookmark_info'=> 'إضافة معلومات المرجعية',
         'edit_bookmark_info'=> 'تحرير المعلومات المرجعية',
         'title'=> 'عنوان',
+        'arabic_title'=> 'عنوان عربي',
+        'arbic_maker_name'=>'عربي اسم_الصانع',
         'maker_name'=>'اسم_الصانع',
         'description'=>   'وصف' ,
+        'arabic_description'=>   'وصفعربي' ,
         'price'=>'السعر',
         'bookmark_id'=>'إشارات مرجعية',
         'size'=>'بحجم',
@@ -1722,6 +1725,7 @@ return [
         'add_bookclub_info'=> 'إضافة معلومات نادي الكتاب',
         'edit_bookclub_info'=> 'تحرير معلومات نادي الكتاب',
         'name'=>'اسم',
+        'arabic_name'=>'اسم عربي',
         'banner_image'=>'صورة بانر',
         'feature'=> 'خاصية'
     ],
@@ -1835,6 +1839,22 @@ return [
          'iso3'=>'ايزو 3',
          'numcode'=>'كود',
          'phonecode'=>'رمز الهاتف'
+    ],
+    'site_setting_page'=> [
+        'site_setting' =>'المواقع',
+        'add_site_setting'=>'إضافة إعدادات الموقع',
+        'edit_site_setting'=>'تحرير إعدادات الموقع',
+        'add_site_setting_info'=>'إضافة معلومات إعداد الموقع',
+        'edit_site_setting_info'=>'تحرير إعدادات الموقع',
+        'email'=>'البريد الإلكتروني',
+        'language'=>'لغة',
+        'currency'=>'عملة',
+        'phone_no'=>'رقم الهاتف',
+        'whatsaap_no'=>'رقم واتس اب',
+        'facebook_url'=>'الفيسبوك',
+        'twitter_url'=>'تويتر',
+        'instagram_url'=>'الانستغرام',
+        'snapchat_url'=>'سناب شات',
     ],
 
     'sidebar' => [

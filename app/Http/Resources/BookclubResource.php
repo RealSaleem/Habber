@@ -19,8 +19,8 @@ class BookClubResource extends JsonResource
         return [
             'id'     => $this->id,
             'name'   => $this->name,
-            'image' => isset($this->banner_image) ? url(Storage::disk('public')->url($this->banner_image)) : "" ,
-            'books' =>  BookResource::collection(optional($this->books)) ?? ""
+            'image'  => isset($this->banner_image) ? url(Storage::disk('public')->url($this->banner_image)) : "" ,
+            'books'  => BookResource::collection($this->books) ?? ""
         ];
     }
 

@@ -62,6 +62,7 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.role')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="role" id="roles">
+                            <option  disabled selected>Select Role</option>
                                 @foreach($roles as $r)
                                     <option value="{{$r}}">{{$r}}</option>
                                 @endforeach

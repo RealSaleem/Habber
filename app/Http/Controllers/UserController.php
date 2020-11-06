@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index() 
     {
-        $user = User::all()->except(auth()->user()->id);
+        $user = User::with('languages','currencies')->get()->except(auth()->user()->id);
         return view('users.index', compact('user'));
     }
     /**
@@ -55,13 +55,18 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
         $user->profile_pic = "null"; 
+        $user->currency_id = 1;
+        $user->language_id = 1;
+        $user->save();   
+        $user->assignRole($request->input('role'));
+        $updateUser = User::find($user->id);
         $file = $request->profile_pic;
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "user/" . $fileName . time() . "." . $file->getClientOriginalExtension();
+        $filePath = "users/".$user->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
         $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $user->profile_pic = $filePath;
-        $user->save();   
-        $user->assignRole($request->input('roles'));
+        $updateUser->profile_pic = $filePath;
+        $updateUser->update();
+     
         return back()->with('success', 'User successfully saved');
 
     }
@@ -95,7 +100,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $user = User::findOrFail($id);
+        $user = User::with('roles')->findOrFail($id);
+        // dd($user);
         $roles = Role::pluck('name','name')->all();
         return view('users.edit', compact('user','roles'));
     
@@ -125,6 +131,8 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
+        $user->currency_id = 1;
+        $user->language_id = 1;
         if($request->has('profile_pic')) 
         {
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);
@@ -135,8 +143,9 @@ class UserController extends Controller
             $user->profile_pic =  $filePath;
           
         }
-        $user->assignRole($request->input('roles'));
         $user->save();   
+        $user->syncRoles($request->input('role'));
+        // dd($user);
         return back()->with('success', 'User updated sucessfully');
 
     }

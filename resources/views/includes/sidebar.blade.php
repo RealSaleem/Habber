@@ -34,12 +34,12 @@
                         <li class="sidebar-item"><a href="{{ route('genres.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create')</span></a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.business_page.business') </span></a>
+                 <!--<li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.business_page.business') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{ route('business.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('business.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.address_page.address') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{ route('address.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -98,6 +98,12 @@
                     <li class="sidebar-item"><a href="{{ route('countries.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                     <li class="sidebar-item"><a href="{{ route('countries.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
+            </li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a>
+                <!-- <ul aria-expanded="false" class="collapse  first-level">
+                    <li class="sidebar-item"><a href="{{ route('sitesetting.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                    <li class="sidebar-item"><a href="{{ route('sitesetting.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
+                </ul> -->
             </li>
     
        

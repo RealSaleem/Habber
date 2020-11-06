@@ -24,22 +24,43 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label"> @lang('messages.bookmark_page.maker_name')</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_title')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" dir="rtl" name="arabic_title" value="{{ old('arabic_title') }}" id="arabic_title"  placeholder="Arabic Title">
+                            <span class="text-danger">{{$errors->first('arabic_title')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.maker_name')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="maker_name" value="{{ old('maker_name') }}" id="maker_name" placeholder=" Maker Name">
                             <span class="text-danger">{{$errors->first('maker_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_maker_name')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="arabic_maker_name" dir="rtl" value="{{ old('arabic_maker_name') }}" id="arabic_maker_name" placeholder="Arabic Maker Name">
+                            <span class="text-danger">{{$errors->first('arabic_maker_name')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" value="{{ old('description') }}" id="description" placeholder="Description"></textarea>
+                            <textarea type="textarea" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description"></textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
+                        <div class="col-sm-9">
+                            <textarea type="textarea" class="form-control" dir="rtl" name="arabic_description" value="{{ old('arabic_description') }}" id="arabic_description" placeholder="Arabic Description"></textarea>
+                            <span class="text-danger">{{$errors->first('arabic_description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -92,23 +113,23 @@
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.business')</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="business_id" id="business_id">
-                            @foreach($business as $b)
-                            <option value={{$b->id}} > {{$b->name}}</option>
+                        <select  class="form-control" name="publisher" id="publisher">
+                            @foreach($user as $u)
+                            <option value={{$u->id}} > {{$u->first_name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('business_id')}}</span>
+                            <span class="text-danger">{{$errors->first('publisher')}}</span>
                         </div>
                     </div>
                     
                      
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
                         <div class="col-sm-9">
-                        <input id="image_url" type="file" class="form-control" name="image_url">
-                            <span class="text-danger">{{$errors->first('image_url')}}</span>
+                        <input id="image" type="file" class="form-control" name="image">
+                            <span class="text-danger">{{$errors->first('image')}}</span>
                         </div>
                     </div>
                     <div class="border-top">

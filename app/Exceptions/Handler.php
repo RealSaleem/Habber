@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use App\Helpers\ApiHelper;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class Handler extends ExceptionHandler
 {
@@ -51,5 +54,15 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    public function unauthenticated($request, AuthenticationException $exception){
+        if(collect($request->route()->middleware())->contains('api')) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, "Un Authenticated");
+        }
+        else {
+            return redirect()->guest('login');
+        }
+       
     }
 }

@@ -45,7 +45,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.country')</label>
                         <div class="col-sm-9">
-                            <select  class="form-control" name="country_id" id="country_id" disabled>
+                            <select  class="form-control" name="country_id" id="country_id" >
                             @foreach($country as $c)
                             <option value="{{$c->id}} {{ ($address->country_id == $c->id ? "selected" : "")}}"  > {{$c->name}}</option>
                             @endforeach

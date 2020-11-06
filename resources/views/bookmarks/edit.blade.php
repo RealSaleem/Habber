@@ -24,8 +24,15 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ $bookmark->title }}">
+                            <input type="text" class="form-control" name="title" value="{{ $bookmark->title }}">
                             <span class="text-danger">{{$errors->first('title')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_title')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control"  name="arabic_title" dir="rtl" value="{{  $bookmark->arabic_title }}" >
+                            <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -36,16 +43,30 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_maker_name')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="arabic_maker_name"  dir="rtl" value="{{ $bookmark->arabic_maker_name }}">
+                            <span class="text-danger">{{$errors->first('arabic_maker_name')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" value="{{ $bookmark->description }}"></textarea>
+                            <textarea type="textarea"   class="form-control" name="description"value=""  >{{ $bookmark->description }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
+                        <div class="col-sm-9">
+                            <textarea type="textarea" class="form-control"  name="arabic_description" dir="rtl" value=""  >{{ $bookmark->arabic_description }}</textarea>
+                            <span class="text-danger">{{$errors->first('arabic_description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.price')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="price" value="{{ $bookmark->price}}">
+                            <input type="number" class="form-control" name="price" value="{{ $bookmark->product_prices['price']}}">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
@@ -91,21 +112,21 @@
                         </div>
                      </div> 
                      <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.business')</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="business_id" id="business_id">
-                            @foreach($business as $b)
-                            <option value="{{$b->id}}" {{$bookmark->business_id == $b->id ? "selected" : ""}} > {{$b->name}}</option>
+                        <select  class="form-control" name="publisher" id="publisher">
+                            @foreach($user as $u)
+                            <option value="{{$u->id}}" {{$bookmark->user_id == $u->id ? "selected" : ""}} > {{$u->first_name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('business_id')}}</span>
+                            <span class="text-danger">{{$errors->first('publisher')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label">Image</label>
                         <div class="col-sm-9">
-                        <input id="image_url" type="file" class="form-control" name="image_url" >
-                            <span class="text-danger">{{$errors->first('image_url')}}</span>
+                        <input id="image" type="file" class="form-control" name="image" >
+                            <span class="text-danger">{{$errors->first('image')}}</span>
                             @if(isset($bookmark->image))
                             <div class="form-group row">
                                 <div class="col-sm-9">
