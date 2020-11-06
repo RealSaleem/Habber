@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class FavouriteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:favourite-list|favourite-create|favourite-edit|favourite-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:favourite-create', ['only' => ['create','store']]);
+        $this->middleware('permission:favourite-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:favourite-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

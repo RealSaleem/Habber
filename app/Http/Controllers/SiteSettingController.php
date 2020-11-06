@@ -10,6 +10,14 @@ use App;
 use Session;
 class SiteSettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:site-setting-list|site-setting-create|site-setting-edit|site-setting-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:site-setting-create', ['only' => ['create','store']]);
+        $this->middleware('permission:site-setting-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:site-setting-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

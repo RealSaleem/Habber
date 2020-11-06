@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Storage;
 
 class BookClubController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:book-club-list|book-club-create|book-club-edit|book-club-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:book-club-create', ['only' => ['create','store']]);
+        $this->middleware('permission:book-club-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:book-club-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
