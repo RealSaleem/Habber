@@ -20,11 +20,11 @@ class ApiHelper {
 
         $base = 'KWD';
         // $amount = $price;
-        // $symbols =  Currency::pluck('iso')->toArray();
-        $symbols = 'EUR,USD,GBP,BHD,OMR,QAR,SAR,AED';
+        $iso =  Currency::pluck('iso')->toArray();
+        $symbols = implode(",",$iso);
        
         // initialize CURL:
-        $ch = curl_init('https://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'&base='.$base.'&symbols='.$symbols.'');   
+        $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'&base='.$base.'&symbols='.$symbols.'');   
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         // get the JSON data:

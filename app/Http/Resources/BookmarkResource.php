@@ -22,7 +22,7 @@ class BookmarkResource extends JsonResource
             'maker_name'   => $this->maker_name,
             'bookmark_id'  => $this->bookmark_id,
             'description'   => $this->description ?? "",
-            'price'    => number_format($this->price,4) ?? "",
+            'price'    => number_format($this->product_prices->price,4) ?? "",
             'size'  => $this->size,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
             'publisher'  => new UserResource($this->users) ?? "",
