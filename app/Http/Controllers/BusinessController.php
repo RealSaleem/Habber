@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:business-list|business-create|business-edit|business-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:business-create', ['only' => ['create','store']]);
+        $this->middleware('permission:business-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:business-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

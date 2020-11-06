@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class AdController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:ad-list|ad-create|ad-edit|ad-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:ad-create', ['only' => ['create','store']]);
+        $this->middleware('permission:ad-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:ad-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

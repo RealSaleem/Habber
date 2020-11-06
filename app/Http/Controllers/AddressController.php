@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:address-list|address-create|address-edit|address-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:address-create', ['only' => ['create','store']]);
+        $this->middleware('permission:address-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:address-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
