@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\CountryCollection;
+use App\Http\Resources\CurrencyCollection;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,6 +19,10 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('/login','AuthController@login');
     Route::get('countries', function() {
         return (new CountryCollection(App\Country::all()));
+    });
+
+    Route::get('currencies', function() {
+        return (new CurrencyCollection(App\Currency::all()));
     });
     // Banners
     Route::get('banners', 'BannerController@index');
