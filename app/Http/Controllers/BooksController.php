@@ -71,6 +71,7 @@ class BooksController extends Controller
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
+            'status'=>'required',
             "genre" => 'required|array|min:1|max:3',
             'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
             ]);
@@ -87,7 +88,7 @@ class BooksController extends Controller
             $book->stock_status = $request->stock_status;
             $book->featured = $request->featured;
             $book->book_club_id = $request->bookclub;
-            $book->status = true;
+            $book->status =  $request->status;
             $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
@@ -120,6 +121,8 @@ class BooksController extends Controller
     public function show($id)
     {
         //
+        $book =Book::findOrFail($id);
+        return view('books.detail',compact('book'));
     }
 
     /**
@@ -163,6 +166,7 @@ class BooksController extends Controller
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
+            'status'=> 'required',
             'genre' => 'required|array|min:1|max:3',
             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
         ]);
@@ -181,7 +185,7 @@ class BooksController extends Controller
         $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
         $book->featured = $request->featured;
-        $book->status = true;
+        $book->status = $request->status;
         if(count($book->genres) + count($request->genre) > 3 ) {
             // dd($request->genre);
             $genre_id = $book->genres()->pluck('genre_id');
@@ -233,4 +237,39 @@ class BooksController extends Controller
         return back()->with('success', 'User deleted successfully');
     
     } 
+    public function deactivateBook($id) {
+        $error = false;
+        try {
+            $bookmark = Book::findOrFail($id);
+            $bookmark->status = false;
+            $bookmark->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function activateBook($id) {
+        $error = false;
+        try {
+            $bookmark = Book::findOrFail($id);
+            $bookmark->status = true;
+            $bookmark->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+    
+    }
 }

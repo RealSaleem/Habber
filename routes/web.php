@@ -27,8 +27,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');
    Route::post('user/deactivate/{id}','UserController@deactivateUser')->name('deactivate_user');
    Route::resource('books','BooksController');
+   Route::post('book/activate/{id}','BooksController@activateBook');
+   Route::post('book/deactivate/{id}','BooksController@deactivateBook');
    Route::resource('business','BusinessController');
    Route::resource('bookmarks','BookmarksController');
+   Route::post('bookmark/activate/{id}','BookmarksController@activateBookmark');
+   Route::post('bookmark/deactivate/{id}','BookmarksController@deactivateBookmark');
+   Route::post('bookmark/feature/{id}','BookmarksController@featureBookmark');
+   Route::post('bookmark/notfeature/{id}','BookmarksController@notfeatureBookmark');
    Route::resource('bookclubs','BookClubController');     
    Route::resource('genres','GenreController');
    Route::resource('address','AddressController');
