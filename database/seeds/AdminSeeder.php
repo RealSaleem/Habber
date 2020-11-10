@@ -48,7 +48,7 @@ class AdminSeeder extends Seeder
             'phone'     => 4301229292921,
             'status'   => true,
             ]);
-            $role = Role::create(['name' => 'Sub Admin']);
+            $role = Role::create(['name' => 'Publisher']);
             $permissions = Permission::pluck('id','id')->all();
             $role->syncPermissions($permissions);
             $subadmin->assignRole([$role->id]);

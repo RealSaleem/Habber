@@ -82,7 +82,7 @@ class BooksController extends Controller
             $book->book_language= $request->book_language;
             $book->isbn = $request->isbn;
             $book->total_pages= $request->total_pages;
-            $book->quantity =$request->quantity;
+            $book->quantity = $request->quantity;
             $book->user_id = $request->publisher;
             $book->stock_status = $request->stock_status;
             $book->featured = $request->featured;

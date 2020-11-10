@@ -24,4 +24,9 @@ class Book extends Model
     public function product_prices() {
         return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"book");
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, 'cart_products')->where('product_type','book')->withPivot('quantity','price');
+    }
 }

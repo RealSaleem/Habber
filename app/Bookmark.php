@@ -20,7 +20,11 @@ class Bookmark extends Model
     // }
 
  
-    
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, 'cart_products')->where('product_type','bookmark')->withPivot('quantity','price');
+    }
+
     public function product_prices() {
         return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"bookmark");
     }
