@@ -47,10 +47,10 @@
                         <label for="lname" class="text-right control-label col-form-label">Publisher:  {{ucfirst($bookmark->users['first_name'])}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Status: {{ucfirst($book->status == 1 ? "Activate" : "Deactivate")}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">Status: {{ucfirst($bookmark->status == 1 ? "Activate" : "Deactivate")}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Feature:{{ucfirst($book->featured == 1 ? "featured" : "not featured")}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">Feature:{{ucfirst($bookmark->featured == 1 ? "featured" : "not featured")}} </label>
                     </div>
                      @if(isset($bookmark->image))
                     <div class="form-group col-6">
