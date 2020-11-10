@@ -16,6 +16,7 @@ class BookmarkResource extends JsonResource
      */
     public function toArray($request)
     {
+        // dd($this->pivot->price);
         return [
             'id'     => $this->id,
             'title'   => $this->title,
@@ -30,7 +31,12 @@ class BookmarkResource extends JsonResource
             'book_language'    => $this->book_language ?? "",
             'image' => isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'featured' => $this->featured,
-            'status' => $this->status
+            'status' => $this->status,
+            $this->mergeWhen($this->pivot, [
+                'cart_quantity' => optional($this->pivot)->quantity,
+                'cart_price' => number_format(optional($this->pivot)->price,4) ?? "",
+                
+            ]),
           ];
     }
 

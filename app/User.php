@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function currencies()
     {
-        return $this->hasOne('App\Currency','id','currencyc_id');
+        return $this->hasOne('App\Currency','id','currency_id');
     }
 
     public function books()

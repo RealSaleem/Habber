@@ -73,7 +73,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.bookmark_id')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" value="{{ $bookmark->bookmark_id }}">
+                            <input type="text" class="form-control" name="bookmark_id" value="{{ltrim($bookmark->bookmark_id,'HB') }}" disable>
                             <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
                         </div>
                     </div>
