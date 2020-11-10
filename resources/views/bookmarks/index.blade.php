@@ -27,6 +27,7 @@
                         <th>Quantity </th>
                         <th>Publisher Name</th>
                         <th>Feature</th>
+                        <th>Status</th>
                         <th class="not">Image</th>
                         <th class="not"> Action</th>  
                                      
@@ -47,19 +48,43 @@
                 <td>{{$bookmark->quantity}}</td>
                 <td>{{$bookmark->users['first_name']}}</td>  
                 <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
+                 <td class = "{{$bookmark->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->status == 1 ? "Activate" : "Deactivate"}}</td> 
                 <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
                 <td>
-                    <div class="row">
-                        <div class="col-2">
-                            <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
+                        <div class="row">
+                    <div class="col-2">
+                        <form action="{{ action('BookmarksController@show', [$bookmark->id])}}" method="post">
+                        @csrf
+                            @method('GET')
+                            <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
+                             </form>
+                             </div>
+                    <div class="col-2">
+                              <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                             </form>
                         </div>
+                      
                         <div class="col-2">
                             <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
                         </div>
+                         <div class="col-2">
+                                    @if($bookmark->status == 0)
+                                        <a><button class="btn btn-danger" onclick="activateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.activate')</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="deactivateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                                    @endif
+                                </div>
+                                <div class="col-2">
+                                    @if($bookmark->featured == 0)
+                                        <a><button class="btn btn-danger" onclick="featureBookmark('{{$bookmark->id}}')">Feature</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="notfeatureBookmark('{{$bookmark->id}}')">Not Feature</button></a>
+                                    @endif
+                                </div>
+                             
                     </div>
                 </td>                             
            </tr>
@@ -110,5 +135,73 @@
         
     });
     })
+    function deactivateBookmark(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookmark/deactivate') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('Bookmark Deactivated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function activateBookmark(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookmark/activate') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('Bookmark Activated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}   
+function notfeatureBookmark(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookmark/notfeature') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('Bookmark Not Featured');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function featureBookmark(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookmark/feature') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('Bookmark Featured');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+   
+   
 </script>
 @stop

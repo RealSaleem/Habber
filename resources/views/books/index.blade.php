@@ -27,6 +27,7 @@
                         <th>Book Clubs</th>
                         <th>Genres</th>
                         <th>Feature</th>
+                        <th>Status</th>
                         <th class="not">Image </th>
                         <th class="not">Action</th>
                     </tr>
@@ -61,19 +62,33 @@
                                 </td>
                             @endif
                             <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$book->featured == 1 ? "featured" : "not featured"}}</td>  
+                            <td class = "{{$book->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->status == 1 ? "Activate" : "Deactivate"}}</td> 
                             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image) ?  url('storage/'.$book->image) : url('storage/books/default.png') }}" alt=""> </td>
                             <td>
                                 <div class="row">
                                     <div class="col-2">
+                                    <form action="{{ action('BooksController@show', [$book->id])}}" method="post">
+                                     @csrf
+                                       @method('GET')
+                                       <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
+                                         </form>
                                         <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                                         </form>
+
                                     </div>
                                     <div class="col-2">
                                         <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
                                     </div>
+                                    <div class="col-2">
+                                    @if($book->status == 0)
+                                        <a><button class="btn btn-danger" onclick="activateBook('{{$book->id}}')">@lang('messages.user_page.activate')</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="deactivateBook('{{$book->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                                    @endif
+                                </div>
                                 </div>
                             </td>
                         </tr>
@@ -124,5 +139,38 @@
         
     });
     })
+    function deactivateBook(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/book/deactivate') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('Book Deactivated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function activateBook(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/book/activate') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('Book Activated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}   
 </script>
 @stop

@@ -65,7 +65,7 @@ class BookmarksController extends Controller
             'stock_status' => 'required',
             'featured'=>'required',
             'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
-           
+            'status' => 'required'
 
             ]);
             $lastBookmark = Bookmark::orderBy('created_at', 'desc')->first();
@@ -87,7 +87,7 @@ class BookmarksController extends Controller
             $bookmark->user_id = $request->publisher;
             $bookmark->stock_status = $request->stock_status;
             $bookmark->featured = $request->featured;
-            $bookmark->status = true;
+            $bookmark->status = $request->status;
             $bookmark->image = "null"; 
             $bookmark->save();
             $updatebookmark = Bookmark::find($bookmark->id);
@@ -116,6 +116,8 @@ class BookmarksController extends Controller
     public function show($id)
     {
         //
+        $bookmark =Bookmark::findOrFail($id);
+        return view('bookmarks.detail',compact('bookmark'));
     }
 
     /**
@@ -158,7 +160,9 @@ class BookmarksController extends Controller
             'publisher' => 'required|numeric',
             'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
             'stock_status' => 'required',
-            'featured'=>'required'
+            'featured'=>'required',
+             'status' => 'required'
+        
             ]);
         $bookmark = Bookmark::find($id);
         $bookmark->title = $request->title;
@@ -172,7 +176,7 @@ class BookmarksController extends Controller
         $bookmark->user_id = $request->publisher;
         $bookmark->stock_status = $request->stock_status;
         $bookmark->featured = $request->featured;
-        $bookmark->status = true;
+        $bookmark->status = $request->status;
         if($request->has('image')) 
         {
             Storage::disk('public')->deleteDirectory('bookmarks/'. $id);
@@ -208,4 +212,78 @@ class BookmarksController extends Controller
         $bookmark->delete();
         return back()->with('success', 'Bookmark deleted successfully');
     }
-}
+
+    public function deactivateBookmark($id) {
+        $error = false;
+        try {
+            $bookmark = Bookmark::findOrFail($id);
+            $bookmark->status = false;
+            $bookmark->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function activateBookmark($id) {
+        $error = false;
+        try {
+            $bookmark = Bookmark::findOrFail($id);
+            $bookmark->status = true;
+            $bookmark->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+    
+    }
+
+        public function notfeatureBookmark($id) {
+            $error = false;
+            try {
+                $bookmark = Bookmark::findOrFail($id);
+                $bookmark->featured = false;
+                $bookmark->save();
+                return 'true';
+            }
+            catch(\Exception $e) {
+                $error = true;
+                $message = $e->getMessage(); 
+            }
+            if($error) {
+                return $message;
+            }
+    
+        }
+    
+        public function featureBookmark($id) {
+            $error = false;
+            try {
+                $bookmark = Bookmark::findOrFail($id);
+                $bookmark->featured = true;
+                $bookmark->save();
+                return 'true';
+            }
+            catch(\Exception $e) {
+               $error = true;
+               $message = $e->getMessage(); 
+            }
+            if($error) {
+                return $message;
+            }
+    
+        }
+    }
+
+    
