@@ -109,8 +109,8 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="publisher" id="publisher">
-                            @foreach($user as $u)
-                            <option value={{$u->id}} > {{$u->first_name}}</option>
+                        @foreach($user as $u)
+                            <option value="{{$u->id}}" > {{$u->first_name}}</option>
                             @endforeach
                         </select>
                             <span class="text-danger">{{$errors->first('publisher')}}</span>

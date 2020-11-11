@@ -8,6 +8,7 @@ use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class BookmarksController extends Controller
 {
     public function __construct()
@@ -37,6 +38,7 @@ class BookmarksController extends Controller
     public function create()
     {
         //
+        
         $user = User::role('publisher')->get();
         return view('bookmarks.create',compact('user'));
     
@@ -87,6 +89,7 @@ class BookmarksController extends Controller
             $bookmark->user_id = $request->publisher;
             $bookmark->stock_status = $request->stock_status;
             $bookmark->featured = $request->featured;
+            $bookmark->added_by = auth()->user()->id;
             $bookmark->status = $request->status;
             $bookmark->image = "null"; 
             $bookmark->save();
@@ -102,7 +105,7 @@ class BookmarksController extends Controller
             $productPrice->product_type= 'bookmark';
             $productPrice->price =$request->price;
             $productPrice->currency_id= 1;
-            $productPrice->save();
+            $productPrice->save();            
             return back()->with('success', 'Bookmark successfully saved');
        
     }
@@ -116,7 +119,8 @@ class BookmarksController extends Controller
     public function show($id)
     {
         //
-        $bookmark =Bookmark::findOrFail($id);
+        $bookmark = Bookmark::with('bookmarkAddedBy')->findOrFail($id);
+      
         return view('bookmarks.detail',compact('bookmark'));
     }
 
@@ -130,7 +134,6 @@ class BookmarksController extends Controller
     {
         //
         $bookmark = Bookmark::with('users','product_prices')->findOrFail($id);
-      
         $user = User::role('publisher')->get();
         return view('bookmarks.edit', compact('bookmark','user'));
        
@@ -157,7 +160,7 @@ class BookmarksController extends Controller
             // 'bookmark_id' => 'required|numeric|unique:bookmarks,bookmark_id,'.$id,  
             'size' => 'required',
             'quantity' => 'required|numeric',
-            'publisher' => 'required|numeric',
+            'publisher' => 'required',
             'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
             'stock_status' => 'required',
             'featured'=>'required',

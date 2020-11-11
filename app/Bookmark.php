@@ -9,6 +9,9 @@ class Bookmark extends Model
     public function users() {
         return $this->belongsTo('App\User','user_id','id');
     }
+    public function bookmarkAddedBy() {
+        return $this->belongsTo('App\User','added_by','id');
+    }
 
     public function banners() {
         return $this->hasMany('App\Banner');

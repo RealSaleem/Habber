@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Genre;
+use App\Book;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
@@ -20,8 +21,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
-        $genre = Genre::all();
+        $genre = Genre::where('title','!=','General')->get();
         return view('genres.index', compact('genre'));
     }
 
@@ -48,11 +48,13 @@ class GenreController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'title' => 'required', 
+            'title' => 'required|unique:genres,title', 
+            'arabic_title' => 'required', 
             
         ]);
         $genre = new Genre();
         $genre->title = $request->title;
+        $genre->arabic_title = $request->arabic_title;
         $genre->save();   
         return back()->with('success', 'Genre successfully saved');
 
@@ -94,11 +96,13 @@ class GenreController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'title' => 'required', 
+            'title' => 'required|unique:genres,title,'.$id,
+            'arabic_title' => 'required' 
             
         ]);
         $genre =  Genre ::find($id);
         $genre->title = $request->title;
+        $genre->arabic_title = $request->arabic_title;
         $genre->save();   
         return back()->with('success', 'Genre updated successfully ');
 
@@ -112,8 +116,8 @@ class GenreController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $genre = Genre::findOrFail($id);
+       
+        $genre = Genre::with('books')->findOrFail($id);
         $genre->delete();
         return back()->with('success', 'Genre deleted successfully');
     }

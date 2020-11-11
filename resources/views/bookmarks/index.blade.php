@@ -25,7 +25,7 @@
                         <th>Bookmark </th>
                         <th>Size</th>         
                         <th>Quantity </th>
-                        <th>Publisher Name</th>
+                        <th>Added by</th>
                         <th>Feature</th>
                         <th>Status</th>
                         <th class="not">Image</th>
@@ -48,7 +48,7 @@
                 <td>{{$bookmark->quantity}}</td>
                 <td>{{$bookmark->users['first_name']}}</td>  
                 <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
-                 <td class = "{{$bookmark->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->status == 1 ? "Activate" : "Deactivate"}}</td> 
+                 <td class = "{{$bookmark->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->status == 1 ? "active" : "not active"}}</td> 
                 <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
                 <td>
                         <div class="row">
@@ -79,9 +79,9 @@
                                 </div>
                                 <div class="col-2">
                                     @if($bookmark->featured == 0)
-                                        <a><button class="btn btn-danger" onclick="featureBookmark('{{$bookmark->id}}')">Feature</button></a>
+                                        <a><button class="btn btn-danger" onclick="featureBookmark('{{$bookmark->id}}')">Featured</button></a>
                                     @else
-                                        <a><button class="btn btn-info" onclick="notfeatureBookmark('{{$bookmark->id}}')">Not Feature</button></a>
+                                        <a><button class="btn btn-info" onclick="notfeatureBookmark('{{$bookmark->id}}')">Unfeatured</button></a>
                                     @endif
                                 </div>
                              

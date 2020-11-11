@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email' , 'password','image',
     ];
 
+    protected $appends = ['fullname'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -79,5 +80,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Bookmark');
     }
+
+    public function bookmarkAddedBy()
+    {
+        return $this->hasMany('App\Bookmark');
+    }
     
+    
+    public function bookAddedBy()
+    {
+        return $this->hasMany('App\Books');
+    }
+
+    public function getFullNameAttribute() {
+        return "{$this['first_name']} {$this['last_name']}";
+    }
 }

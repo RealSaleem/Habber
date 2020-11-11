@@ -23,7 +23,7 @@
                         <th>Isbn</th>
                         <th>Total Page</th>
                         <th>Quantity</th>
-                        <th>Publisher Name</th>
+                        <th>Added by</th>
                         <th>Book Clubs</th>
                         <th>Genres</th>
                         <th>Feature</th>
@@ -49,7 +49,9 @@
                             @if(count($book->genres) > 1)
                                 <td>
                                 @foreach($book->genres as $g)
-                                    {{$g->title}},
+                                    @if($g->title != "General")
+                                        {{$g->title}},
+                                    @endif
                                 @endforeach
                                 </td>
                             @elseif( count($book->genres) < 2 && count($book->genres) > 0)
@@ -62,7 +64,7 @@
                                 </td>
                             @endif
                             <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$book->featured == 1 ? "featured" : "not featured"}}</td>  
-                            <td class = "{{$book->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->status == 1 ? "Activate" : "Deactivate"}}</td> 
+                            <td class = "{{$book->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->status == 1 ? "active" : "not active"}}</td> 
                             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image) ?  url('storage/'.$book->image) : url('storage/books/default.png') }}" alt=""> </td>
                             <td>
                                 <div class="row">
@@ -77,7 +79,6 @@
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                                         </form>
-
                                     </div>
                                     <div class="col-2">
                                         <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
