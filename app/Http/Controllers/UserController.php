@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Book;
+use App\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
@@ -176,6 +177,7 @@ class UserController extends Controller
         Storage::disk('user_profile')->deleteDirectory('users/' . $id);
         $user = User::with('books')->findOrFail($id);
         $userBooks = $user->books->pluck('id');
+        $userBookmarks = $user->bookmarks->pluck('id');
         if(count($userBooks) > 1 ) {
             Book::whereIn('id',$userBooks )->update(['user_id'=> $admin->id]);
             $user->delete();
@@ -184,9 +186,21 @@ class UserController extends Controller
             Book::where('id',$userBooks[0] )->update(['user_id'=> $admin->id]);
             $user->delete();
         }
-        else {
+        // else {
+        //     $user->delete();
+        // }
+
+        if(count($userBookmarks) > 1 ) {
+            Bookmark::whereIn('id',$userBookmarks )->update(['user_id'=> $admin->id]);
             $user->delete();
         }
+        else if(count($userBookmarks) > 0 && count($userBookmarks) < 2) {
+            Bookmark::where('id',$userBookmarks[0] )->update(['user_id'=> $admin->id]);
+            $user->delete();
+        }
+        // else {
+        //     $user->delete();
+        // }
         
       
         return back()->with('success', 'User deleted successfully');
