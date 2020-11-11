@@ -41,7 +41,7 @@ class BooksController extends Controller
     {
         //$business = Business::all();
         $bookClubs = BookClub::all();
-        $genres = Genre::all();
+        $genres = Genre::where('title','!=','General')->get();
         $language = Language::all();
         $user = User::role('publisher')->get();
         return view('books.create',compact('user','bookClubs','genres','language'));
@@ -56,7 +56,8 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         //  
-      
+        
+        $genId = Genre::where('title','General')->first();      
         $validatedData = $request->validate([
         
             'title' => 'required',
@@ -92,7 +93,11 @@ class BooksController extends Controller
             $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
-            $book->genres()->sync($request->genre);
+            if($request->has('genre')) {
+                $genres = $request->genre;
+                array_push($genres, (string) $genId->id);
+                $book->genres()->sync($genres);
+            }
             $file = $request->image;
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
@@ -137,7 +142,7 @@ class BooksController extends Controller
         $selectedGenres = $book->genres->pluck('id')->toArray();
         $user = User::role('publisher')->get();
         $bookClubs = BookClub::all();
-        $genres = Genre::all();
+        $genres = Genre::where('title','!=','General')->get();
         $language = Language::all();
         return view('books.edit', compact('book','bookClubs','user','genres','selectedGenres','language'));
  
@@ -153,6 +158,7 @@ class BooksController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $genId = Genre::where('title','General')->first();     
         $validatedData = $request->validate([
             'title' => 'required',
             'author_name' => 'required',
@@ -186,16 +192,20 @@ class BooksController extends Controller
         $book->stock_status = $request->stock_status;
         $book->featured = $request->featured;
         $book->status = $request->status;
-        if(count($book->genres) + count($request->genre) > 3 ) {
-            // dd($request->genre);
-            $genre_id = $book->genres()->pluck('genre_id');
-            $book->genres()->detach($genre_id);
-            $book->genres()->sync($request->genre);
+        if($request->has('genre')) {
+            if(count($book->genres) + count($request->genre) > 4 ) {
+                $genre_id = $book->genres()->pluck('genre_id');
+                $book->genres()->detach($genre_id);
+                $genres = $request->genre;
+                array_push($genres, (string) $genId->id);
+                $book->genres()->sync($genres);
+            }
+            else {
+               
+                $book->genres()->sync($request->genre);
+            }
         }
-        else {
-           
-            $book->genres()->sync($request->genre);
-        }
+    
         
         if($request->has('image')) 
         {

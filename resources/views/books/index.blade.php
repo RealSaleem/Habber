@@ -49,7 +49,9 @@
                             @if(count($book->genres) > 1)
                                 <td>
                                 @foreach($book->genres as $g)
-                                    {{$g->title}},
+                                    @if($g->title != "General")
+                                        {{$g->title}},
+                                    @endif
                                 @endforeach
                                 </td>
                             @elseif( count($book->genres) < 2 && count($book->genres) > 0)

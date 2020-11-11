@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
@@ -18,8 +19,7 @@ class UserController extends Controller
 
         $this->middleware('permission:join-us-create', ['only' => ['allJoinUsRequest','store']]);
         $this->middleware('permission:join-us-list', ['only' => ['showJoinUsRequest']]);
-        $this->middleware('permission:join-us-delete', ['only' => ['destroyRequest']]);
-        
+        $this->middleware('permission:join-us-delete', ['only' => ['destroyRequest']]);        
     }
     /**
      * Display a listing of the resource.
@@ -28,8 +28,9 @@ class UserController extends Controller
      */
     public function index() 
     {
-        $user = User::with('languages','currencies')->get()->except(auth()->user()->id);
-        return view('users.index', compact('user'));
+        $users = User::with('languages','currencies','roles')->get()->except(auth()->user()->id);
+       
+        return view('users.index', compact('users'));
     }
     /**
      * Show the form for creating a new resource.
@@ -171,9 +172,23 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $admin = User::role('admin')->first();
         Storage::disk('user_profile')->deleteDirectory('users/' . $id);
-        $user = User::findOrFail($id);
-        $user->delete();
+        $user = User::with('books')->findOrFail($id);
+        $userBooks = $user->books->pluck('id');
+        if(count($userBooks) > 1 ) {
+            Book::whereIn('id',$userBooks )->update(['user_id'=> $admin->id]);
+            $user->delete();
+        }
+        else if(count($userBooks) > 0 && count($userBooks) < 2) {
+            Book::where('id',$userBooks[0] )->update(['user_id'=> $admin->id]);
+            $user->delete();
+        }
+        else {
+            $user->delete();
+        }
+        
+      
         return back()->with('success', 'User deleted successfully');
     
         
