@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\LanguageResource;
 
 class AuthResource extends JsonResource
 {
@@ -23,7 +24,7 @@ class AuthResource extends JsonResource
             'phone'   => $this->phone ?? "",
             'profile_pic' => isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
             'status' => $this->status,
-            'language'  => $this->languages->name ?? "",
+            'language'  => new LanguageResource(optional($this->languages)),
             'currency'  => $this->currencies->name ?? "",
             'token' => $this->token,
     
