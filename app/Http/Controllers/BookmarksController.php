@@ -51,8 +51,7 @@ class BookmarksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
         $validatedData = $request->validate([
             'title' => 'required',
             'arabic_title' => 'required',
@@ -61,7 +60,7 @@ class BookmarksController extends Controller
             'description' => 'required',
             'arabic_description' => 'required',
             'price' => 'required|numeric',
-            'bookmark_id' => 'required|numeric|unique:bookmarks',  
+            // 'bookmark_id' => 'required|numeric|unique:bookmarks',  
             'size' => 'required',
             'quantity' => 'required|numeric',
             'publisher' => 'required',
@@ -71,6 +70,7 @@ class BookmarksController extends Controller
             'status' => 'required'
 
             ]);
+            $lastBookmark = Bookmark::orderBy('created_at', 'desc')->first();
             $bookmark = new Bookmark();
             $bookmark->title = $request->title;
             $bookmark->arabic_title = $request->arabic_title;
@@ -78,7 +78,12 @@ class BookmarksController extends Controller
             $bookmark->arabic_maker_name = $request->arabic_maker_name;
             $bookmark->description= $request->description;
             $bookmark->arabic_description= $request->arabic_description;
-            $bookmark->bookmark_id = $request->bookmark_id;
+            if($lastBookmark) {
+                $bookmark->bookmark_id = sprintf('HB%03d',10000 + $lastBookmark->id);
+            }
+            else {
+                $bookmark->bookmark_id =  sprintf('HB%03d',10000 + 1);
+            }
             $bookmark->size= $request->size;
             $bookmark->quantity =$request->quantity;
             $bookmark->user_id = $request->publisher;
@@ -152,7 +157,7 @@ class BookmarksController extends Controller
             'description' => 'required',
             'arabic_description' => 'required',
             'price' => 'required|numeric',
-            'bookmark_id' => 'required|numeric|unique:bookmarks,bookmark_id,'.$id,  
+            // 'bookmark_id' => 'required|numeric|unique:bookmarks,bookmark_id,'.$id,  
             'size' => 'required',
             'quantity' => 'required|numeric',
             'publisher' => 'required',
@@ -169,7 +174,6 @@ class BookmarksController extends Controller
         $bookmark->arabic_maker_name = $request->arabic_maker_name;
         $bookmark->description= $request->description;
         $bookmark->arabic_description= $request->arabic_description;
-        $bookmark->bookmark_id = $request->bookmark_id;
         $bookmark->size= $request->size;
         $bookmark->quantity =$request->quantity;
         $bookmark->user_id = $request->publisher;

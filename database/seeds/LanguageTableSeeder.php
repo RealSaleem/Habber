@@ -13,11 +13,13 @@ class LanguageTableSeeder extends Seeder
     {
         $arabic = Language::create([
                 'name'     => 'arabic',
+                'iso'       => 'ar',
                 'status'     => true,
             ]);
 
         $english = Language::create([
                 'name'     => 'english',
+                'iso'       => 'en',
                 'status'     => true,
             ]);
     }

@@ -17,6 +17,7 @@ class BookResource extends JsonResource
      */
     public function toArray($request)
     {
+     
         return [
             'id'     => $this->id,
             'title'   => $this->title,
@@ -24,7 +25,10 @@ class BookResource extends JsonResource
             'isbn'  => $this->isbn,
             'description'   => $this->description ?? "",
             'cover_type'    => $this->cover_type ?? "",
-            'genre'  => GenreResource::collection($this->genres) ?? "",
+            $this->mergeWhen($this->genres, [
+                'genre'  => GenreResource::collection($this->genres) ?? "",
+            ]),
+           
             'price'    => number_format($this->product_prices->price,4) ?? "",
             'total_pages'  => $this->total_pages,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
@@ -33,8 +37,14 @@ class BookResource extends JsonResource
             'book_language'    => $this->book_language ?? "",
             'image' => isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'featured' => $this->featured,
-            'status' => $this->status
-          ];
+            'status' => $this->status,
+
+            $this->mergeWhen($this->pivot, [
+                'cart_quantity' => optional($this->pivot)->quantity,
+                'cart_price' => number_format(optional($this->pivot)->price,4) ?? "",
+                
+            ]),
+        ];
     }
 
     public function with($request)

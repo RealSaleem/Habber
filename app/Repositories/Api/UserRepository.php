@@ -51,6 +51,8 @@ class UserRepository implements RepositoryInterface
         $user = $this->model->findOrFail($id);
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
+        $user->currency_id = $data['currency_id'];
+        $user->language_id = $data['language_id'];
         if(isset($data['profile_pic'])) {
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);
             $file = $data['profile_pic'];

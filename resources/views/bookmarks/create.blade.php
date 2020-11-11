@@ -71,13 +71,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.bookmark_id') </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" value="{{ old('bookmark_id') }}" id="bookmark_id" placeholder="Bookmark Id ">
-                            <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" name="size"value="{{ old('size') }}" id="size" placeholder="Size">

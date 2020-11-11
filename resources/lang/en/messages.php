@@ -204,6 +204,7 @@ return [
         'add_language_info'=> 'Add Language Info',
         'edit_language_info'=> 'Edit Language Info',
         'status'=> 'Status',
+        'iso'=>'iso',
     ],
     'country_page'=> [
         'countries'=> 'Country' ,
