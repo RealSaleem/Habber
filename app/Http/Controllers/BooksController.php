@@ -11,6 +11,7 @@ use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class BooksController extends Controller
 {
     public function __construct()
@@ -85,6 +86,7 @@ class BooksController extends Controller
             $book->total_pages= $request->total_pages;
             $book->quantity =$request->quantity;
             $book->user_id = $request->publisher;
+            $book->added_by =auth()->user()->id;
             $book->stock_status = $request->stock_status;
             $book->featured = $request->featured;
             $book->book_club_id = $request->bookclub;
@@ -121,7 +123,7 @@ class BooksController extends Controller
     public function show($id)
     {
         //
-        $book =Book::findOrFail($id);
+        $book = Book::with('bookAddedBy')->findOrFail($id);
         return view('books.detail',compact('book'));
     }
 

@@ -52,8 +52,14 @@ return [
         'bookclub'=>'Bookclubs ',
         'genre' =>'Genres',
         'stock_status'=>'Stock Status ',
+        'status'=>'Status',
         'feature'=>'Feature',
         'image'=> 'Image',
+        'deactivate'=>'Deactivate',
+        'activate'=> 'Activate',
+        'publisher'=>'Publisher',
+        'added_by'=> 'Added by'
+
     ],
     'bookmark_page' => [
         'bookmarks' => 'Bookmarks ',
@@ -72,9 +78,16 @@ return [
         'size'=>'Size',
         'quantity'=>'Quantity',
         'stock_status'=>'Stock Status',
+        'status'=> 'Status',
         'feature'=>'Feature',
         'business'=>'Business',
         'image'=> 'Image'  , 
+        'deactivate'=>'Deactivate',
+        'activate'=> 'Activate',
+        'not_feature'=>'Not Feature',
+        'publisher'=>'Publisher',
+        'added_by'=> 'Added by'
+
     ],
 
 
@@ -88,6 +101,7 @@ return [
         'arabic_name'=>'Arabic Name',
         'banner_image'=>'Banner Image',
         'feature'=>'Feature'
+    
         
     ],
     'genre_page' => [
@@ -97,6 +111,7 @@ return [
         'add_genre_info'=> 'Add Genre Info',
         'edit_genre_info'=> 'Edit Genre Info',
         'title'=>'Title',
+        'arabic_title'=>'Arabic Title'
     ],
     'business_page' => [
         'business' => 'Business',

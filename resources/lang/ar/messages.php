@@ -1693,8 +1693,13 @@ return [
         'bookclub'=>'نوادي الكتب',
         'genre' =>'الأنواع',
         'stock_status'=>'وضع مخزون',
+        'status'=>'الحالة',
         'feature'=>'خاصية',
-        'image'=> 'صورة'
+        'image'=> 'صورة',
+        'deactivate'=>'تعطيل',
+        'activate'=> 'تفعيل',
+        'publisher'=>'الناشر',
+        'added_by'=> 'مضاف بواسطة'
     ],
     'bookmark_page' => [
         'bookmarks' => 'إشارات مرجعية',
@@ -1704,7 +1709,7 @@ return [
         'edit_bookmark_info'=> 'تحرير المعلومات المرجعية',
         'title'=> 'عنوان',
         'arabic_title'=> 'عنوان عربي',
-        'arbic_maker_name'=>'عربي اسم_الصانع',
+        'arabic_maker_name'=>'عربي اسم_الصانع',
         'maker_name'=>'اسم_الصانع',
         'description'=>   'وصف' ,
         'arabic_description'=>   'وصفعربي' ,
@@ -1713,9 +1718,15 @@ return [
         'size'=>'بحجم',
         'quantity'=>'كمية',
         'stock_status'=>'وضع مخزون',
+        'status'=>'الحالة',
         'feature'=>'خاصية',
         'business'=>'اعمال',
-        'image'=>'صورة'    
+        'image'=>'صورة'    ,
+        'deactivate'=>'تعطيل',
+        'activate'=> 'تفعيل',
+        'not_feature'=>'ليس ميزة',
+        'publisher'=>'الناشر',
+        'added_by'=> 'مضاف بواسطة'
     ],
 
     'bookclub_page' => [
@@ -1735,7 +1746,8 @@ return [
         'edit_genre'=> 'نوع التحرير',
         'add_genre_info'=> 'إضافة معلومات النوع',
         'edit_genre_info'=> 'تحرير معلومات النوع',
-        'title'=>'عنوان'
+        'title'=>'عنوان',
+        'arabic_title'=>'عنوان عربي'
     ],
     'business_page' => [
         'business' => 'اعمال',

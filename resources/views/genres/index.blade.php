@@ -15,6 +15,7 @@
           <thead>
               <tr>
                 <th>Title</th>
+                <th>Arabic Title</th>
                 <th class="not"> Action</th>                  
               </tr>
           </thead>
@@ -22,6 +23,7 @@
             @foreach($genre as $genre)
               <tr>
                 <td>{{$genre->title}}</td>
+                <td>{{$genre->arabic_title}}</td>
                 <td>
                   <div class="row">
                       <div class="col-1">
