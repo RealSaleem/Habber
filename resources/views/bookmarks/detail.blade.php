@@ -23,38 +23,41 @@
                 <div class="card-body row" style="font-size: 18px;">
                     <h4 class="card-title col-12">Bookmarks</h4>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Bookmark ID:   {{ucfirst($bookmark->bookmark_id)}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.bookmark_id'):   {{ucfirst($bookmark->bookmark_id)}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">title:   {{ucfirst($bookmark->title)}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.title'):   {{ucfirst($bookmark->title)}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Maker Name:   {{ucfirst($bookmark->maker_name)}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.maker_name'):   {{ucfirst($bookmark->maker_name)}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Description:   {{ucfirst($bookmark->description)}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.description'):   {{ucfirst($bookmark->description)}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Size:  {{ucfirst($bookmark->size )}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.size'):  {{ucfirst($bookmark->size )}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Quantity:  {{ucfirst($bookmark->quantity )}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.quantity'):  {{ucfirst($bookmark->quantity )}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Price:  {{ucfirst($bookmark->product_prices['price'])}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.price'):  {{ucfirst($bookmark->product_prices['price'])}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Publisher:  {{ucfirst($bookmark->users['first_name'])}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.publisher'):  {{ucfirst($bookmark->users['first_name'])}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Status: {{ucfirst($book->status == 1 ? "Activate" : "Deactivate")}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.added_by'): {{($bookmark->bookmarkAddedBy->roles[0]->name == "Admin") ? "Admin" : $bookmark->bookmarkAddedBy->roles[0]->name .' '. $bookmark->bookmarkAddedBy->fullname }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Feature:{{ucfirst($book->featured == 1 ? "featured" : "not featured")}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.status'): {{ucfirst($bookmark->status == 1 ? "active" : "not active")}}</label>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.feature'):{{ucfirst($bookmark->featured == 1 ? "featured" : "not featured")}} </label>
                     </div>
                      @if(isset($bookmark->image))
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">Bookmark Image:  </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.image'):  </label>
                         <img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$bookmark->image)}}" alt="">
                     </div>
                     @endif 

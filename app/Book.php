@@ -14,6 +14,10 @@ class Book extends Model
         return $this->belongsToMany('App\Genre','book_genre');
     }
 
+    public function bookAddedBy() {
+        return $this->belongsTo('App\User','added_by','id');
+    }
+
     public function book_clubs() {
         return $this->belongsTo('App\BookClub','book_club_id','id');
     }

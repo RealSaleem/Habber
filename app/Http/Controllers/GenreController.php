@@ -49,11 +49,12 @@ class GenreController extends Controller
         //
         $validatedData = $request->validate([
             'title' => 'required|unique:genres,title', 
-           
+            'arabic_title' => 'required', 
             
         ]);
         $genre = new Genre();
         $genre->title = $request->title;
+        $genre->arabic_title = $request->arabic_title;
         $genre->save();   
         return back()->with('success', 'Genre successfully saved');
 
@@ -96,10 +97,12 @@ class GenreController extends Controller
         //
         $validatedData = $request->validate([
             'title' => 'required|unique:genres,title,'.$id,
+            'arabic_title' => 'required' 
             
         ]);
         $genre =  Genre ::find($id);
         $genre->title = $request->title;
+        $genre->arabic_title = $request->arabic_title;
         $genre->save();   
         return back()->with('success', 'Genre updated successfully ');
 
