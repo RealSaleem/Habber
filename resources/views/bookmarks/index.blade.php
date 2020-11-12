@@ -51,41 +51,40 @@
                  <td class = "{{$bookmark->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->status == 1 ? "active" : "not active"}}</td> 
                 <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
                 <td>
-                        <div class="row">
-                    <div class="col-2">
-                        <form action="{{ action('BookmarksController@show', [$bookmark->id])}}" method="post">
-                        @csrf
-                            @method('GET')
-                            <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
-                             </form>
-                             </div>
-                    <div class="col-2">
-                              <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
+                    <div class="row">
+                        <div class="col-2">
+                            <form action="{{ action('BookmarksController@show', [$bookmark->id])}}" method="post">
+                                @csrf
+                                @method('GET')
+                                <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
+                            </form>
+                        </div>
+                        <div class="col-2">
+                            <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                             </form>
                         </div>
-                      
+                        
                         <div class="col-2">
                             <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
                         </div>
-                         <div class="col-2">
-                                    @if($bookmark->status == 0)
-                                        <a><button class="btn btn-danger" onclick="activateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.activate')</button></a>
-                                    @else
-                                        <a><button class="btn btn-info" onclick="deactivateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.deactivate')</button></a>
-                                    @endif
-                                </div>
-                                <div class="col-2">
-                                    @if($bookmark->featured == 0)
-                                        <a><button class="btn btn-danger" onclick="featureBookmark('{{$bookmark->id}}')">Featured</button></a>
-                                    @else
-                                        <a><button class="btn btn-info" onclick="notfeatureBookmark('{{$bookmark->id}}')">Unfeatured</button></a>
-                                    @endif
-                                </div>
-                             
-                    </div>
+                        <div class="col-2">
+                            @if($bookmark->status == 0)
+                                <a><button class="btn btn-info" onclick="activateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.activate')</button></a>
+                            @else
+                                <a><button class="btn btn-danger" onclick="deactivateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                            @endif
+                        </div>
+                        <div class="col-2">
+                            @if($bookmark->featured == 0)
+                                <a><button class="btn btn-primary" onclick="featureBookmark('{{$bookmark->id}}')">Featured</button></a>
+                            @else
+                                <a><button class="btn btn-danger" onclick="notfeatureBookmark('{{$bookmark->id}}')">Unfeatured</button></a>
+                            @endif
+                        </div>
+                    </div>    
                 </td>                             
            </tr>
            @endforeach      
@@ -179,7 +178,7 @@ function notfeatureBookmark(id) {
         type: 'post',
         success: function(result)
         {
-            toastr.error('Bookmark Not Featured');
+            toastr.error('Bookmark Un Featured');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
@@ -196,8 +195,16 @@ function featureBookmark(id) {
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Bookmark Featured');
-            window.setTimeout(function(){location.reload()},2000);
+          
+            if(result == 'false') {
+                toastr.error('Bookmark Cannot be featured!. You can only feature 8 Bookmarks at a time');
+                window.setTimeout(function(){location.reload()},2000);
+            }
+            else {
+                toastr.success('Bookmark Featured');
+                window.setTimeout(function(){location.reload()},2000);
+            }
+           
         }
     });
 }

@@ -12,7 +12,11 @@
                 <strong>Bookmarks Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
-     
+        @if(Session::has('featured'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
+            </div>
+        @endif 
             
         </div> 
         <div class="col-md-12">
