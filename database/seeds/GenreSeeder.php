@@ -13,7 +13,8 @@ class GenreSeeder extends Seeder
     public function run()
     {
         $genre= Genre::create([
-            'title' => 'General'
+            'title' => 'General',
+            'arabic_title' => 'جنرال لواء'
         ]);
     }
 }
