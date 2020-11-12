@@ -7,6 +7,7 @@ use App\Genre;
 use App\Business;
 use App\Language;
 use App\User;
+use Session;
 use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -75,7 +76,7 @@ class BooksController extends Controller
             'featured'=>'required',
             'status'=>'required',
             "genre" => 'required|array|min:1|max:3',
-            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
+            // 'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
             ]);
             $book = new Book();
             $book->title = $request->title;
@@ -89,7 +90,19 @@ class BooksController extends Controller
             $book->user_id = $request->publisher;
             $book->added_by =auth()->user()->id;
             $book->stock_status = $request->stock_status;
-            $book->featured = $request->featured;
+            if($request->has('featured') && $request->featured == "1") {
+                $featuredBooks = Book::where('featured',1)->count();
+                if($featuredBooks == 8) {
+                    $book->featured = 0; 
+                    Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
+                }
+                else {
+                    $book->featured = $request->featured;
+                }
+            }
+            else {
+                $book->featured = $request->featured;
+            }
             $book->book_club_id = $request->bookclub;
             $book->status =  $request->status;
             $book->image = "null"; 
@@ -100,12 +113,12 @@ class BooksController extends Controller
                 array_push($genres, (string) $genId->id);
                 $book->genres()->sync($genres);
             }
-            $file = $request->image;
-            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
-            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $updatebook->image = $filePath;
-            $updatebook->update();   
+            // $file = $request->image;
+            // $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            // $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            // $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            // $updatebook->image = $filePath;
+            // $updatebook->update();   
             $productPrice= new ProductPrice();
             $productPrice->product_id= $book->id;
             $productPrice->product_type= 'book';
@@ -180,7 +193,6 @@ class BooksController extends Controller
         ]);
        
         $book = Book::find($id);
-        // dd(count($book->genres) + count($request->genre) > 3);
         $book->title = $request->title;
         $book->author_name = $request->author_name;
         $book->cover_type= $request->cover_type;
@@ -192,7 +204,19 @@ class BooksController extends Controller
         $book->user_id = $request->publisher;
         $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
-        $book->featured = $request->featured;
+        if($request->has('featured') && $request->featured == "1") {
+            $featuredBooks = Book::where('featured',1)->count();
+            if($featuredBooks == 8) {
+                $book->featured = 0; 
+                Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
+            }
+            else {
+                $book->featured = $request->featured;
+            }
+        }
+        else {
+            $book->featured = $request->featured;
+        }
         $book->status = $request->status;
         if($request->has('genre')) {
             if(count($book->genres) + count($request->genre) > 4 ) {
