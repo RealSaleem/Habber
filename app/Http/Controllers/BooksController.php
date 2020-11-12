@@ -270,7 +270,7 @@ class BooksController extends Controller
         $book = Book::findOrFail($id);
          $book->genres()->detach($id);
         $book->delete();
-        return back()->with('success', 'User deleted successfully');
+        return back()->with('success', 'Book deleted successfully');
     
     } 
     public function deactivateBook($id) {
