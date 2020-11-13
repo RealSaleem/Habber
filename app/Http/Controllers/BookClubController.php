@@ -52,7 +52,7 @@ class BookClubController extends Controller
             'name' => 'required', 
             'arabic_name' => 'required', 
             'featured'=>'required',
-            'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=200,height=200',
+            'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
@@ -108,7 +108,7 @@ class BookClubController extends Controller
             'name' => 'required', 
             'arabic_name' => 'required', 
             'featured'=>'required',
-            'banner_image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=200,height=200',
+            'banner_image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;

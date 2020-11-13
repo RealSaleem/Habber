@@ -76,7 +76,7 @@ class BooksController extends Controller
             'featured'=>'required',
             'status'=>'required',
             "genre" => 'required|array|min:1|max:3',
-            // 'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
+            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=280,max_height=470'
             ]);
             $book = new Book();
             $book->title = $request->title;
@@ -113,12 +113,12 @@ class BooksController extends Controller
                 array_push($genres, (string) $genId->id);
                 $book->genres()->sync($genres);
             }
-            // $file = $request->image;
-            // $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            // $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
-            // $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            // $updatebook->image = $filePath;
-            // $updatebook->update();   
+            $file = $request->image;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $updatebook->image = $filePath;
+            $updatebook->update();   
             $productPrice= new ProductPrice();
             $productPrice->product_id= $book->id;
             $productPrice->product_type= 'book';
@@ -189,7 +189,7 @@ class BooksController extends Controller
             'featured'=>'required',
             'status'=> 'required',
             'genre' => 'required|array|min:1|max:3',
-            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=280,max_height=470'
         ]);
        
         $book = Book::find($id);

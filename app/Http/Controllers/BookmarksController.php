@@ -67,7 +67,7 @@ class BookmarksController extends Controller
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            // 'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
+            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=300,max_height=900',
             'status' => 'required'
 
             ]);
@@ -174,7 +174,7 @@ class BookmarksController extends Controller
             'size' => 'required',
             'quantity' => 'required|numeric',
             'publisher' => 'required',
-            'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=300,height=900',
+            'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=300,max_height=900',
             'stock_status' => 'required',
             'featured'=>'required',
              'status' => 'required'

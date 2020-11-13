@@ -71,6 +71,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::post('users/password', 'UserController@updatePassword');
 
         Route::resource('cart','CartController');
+        Route::resource('order','OrderController');
     });
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {
