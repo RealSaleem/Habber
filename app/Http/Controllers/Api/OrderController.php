@@ -1,25 +1,27 @@
 <?php
 
+
 namespace App\Http\Controllers\Api;
+use App\Repositories\Api\OrderRepository;
 use App\Repositories\Api\CartRepository;
 use App\Helpers\ApiHelper;
+use App\Order;
 use App\Cart;
-use App\Http\Requests\Api\CartRequest;
+use App\Http\Requests\Api\OrderRequest;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
-use App\Http\Resources\BookCollection;
-use App\Http\Resources\CartResource;
+use App\Http\Resources\OrderResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
-
-    protected $model;
+    protected $model,$cart;
 
     // Constructor to bind model to repo
-    public function __construct(Cart $model)
+    public function __construct(Order $model,Cart $cart)
     {
-        $this->model =  new CartRepository($model);
+        $this->model =  new OrderRepository($model);
+        $this->cart =  new CartRepository($cart);
     }
     /**
      * Display a listing of the resource.
@@ -29,12 +31,12 @@ class CartController extends Controller
     public function index()
     {
         try {
-            $cart = $this->model->all(['books','bookmarks']);
-            if(isset($cart)) {
-                return new CartResource($cart);
+            $order = $this->model->all(['books','bookmarks']);
+            if(isset($order)) {
+                return OrderResource::collection($order);
             }
             else {
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'No Cart Found');
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'No Orders Found');
             }
            
             // $cart = Cart::with('books','bookmarks')->where('user_id',auth()->user()->id
@@ -43,8 +45,6 @@ class CartController extends Controller
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
         
-        // dd($cart);
-       
     }
 
     /**
@@ -63,22 +63,18 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CartRequest $request)
+    public function store(OrderRequest $request)
     {
-        try{
-            $userCart = $this->model->userCart(auth()->user()->id);
-            if(isset($userCart)) {
-                $cart = $this->model->update($request->all(),$userCart);
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Cart Updated Successfully');
-            }
-            else {
-                $cart = $this->model->create($request->all());
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Cart Created Successfully');
-            }
-           
-           
+        try {
+            // dd($request->all());
+            $cartProducts = $this->cart->show($request->cart_id);
+            $data['cartProducts'] = $cartProducts;
+            $data['total_price'] = $request->total_price; 
+            $data['total_quantity'] = $request->total_quantity; 
+            $order = $this->model->create($data);
+            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
         }
-        catch(\Exception $e) {
+        catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
     }
@@ -123,14 +119,8 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        try{
-            $this->model->delete($cart);
-            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Cart Deleted Successfully');
-        }
-        catch(\Exception $e) {
-            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
-        }
+        //
     }
 }

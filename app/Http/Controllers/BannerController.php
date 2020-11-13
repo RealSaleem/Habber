@@ -63,7 +63,7 @@ class BannerController extends Controller
             'bookclubs_id'=>'sometimes|required',
             'books_id'=>'sometimes|required',
             'status' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450',
+            'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=1000,max_height=450',
              
          ]);
         $banner = new Banner();
@@ -160,7 +160,7 @@ class BannerController extends Controller
             'books_id'=>'sometimes|required',
             'language_id' => 'required',
             'status' => 'required',
-            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:width=1000,height=450',
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=1000,max_height=450',
         ]);
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;

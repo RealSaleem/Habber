@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use DB;
 use App\Business;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterRepository implements RepositoryInterface
@@ -38,7 +39,9 @@ class RegisterRepository implements RepositoryInterface
         $this->model->password = Hash::make($data['password']);
         $this->model->language_id = $data['language_id'];
         $this->model->currency_id = 1;
-        $this->model->status =  true;  
+        $this->model->status =  true;
+        $role = Role::where('name', 'LIKE', '%User%')->first();  
+        $this->model->assignRole($role->name);
         if($this->model->save()) {
             if (Auth::attempt(['email' => $data['email'],'password' => $data['password'] ])) 
             {
