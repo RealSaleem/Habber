@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('user/favourites/{userId}','FavouriteController@index')->name('user.favourites');
    Route::resource('favourites','FavouriteController');
    Route::resource('sitesetting','SiteSettingController');
+   Route::resource('publisher','PublisherController');
 });
 
 

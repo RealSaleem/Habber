@@ -1922,6 +1922,19 @@ return [
         'featured' => 'متميز'
 
 
-    ]
+    ],
+
+    'publisher_page' => [
+        'publisher' => 'الناشر',
+        'add_publisher'=>'إضافة ناشر',
+        'add_publisher_info'=>'إضافة معلومات الناشر',
+        'edit_publisher'=>'تحرير_ناشر',
+        'edit_publisher_info'=>'تحرير_ناشر',
+        'product_type'=>'نوع المنتج',
+        'operating_country'=>'بلد التشغيل',
+        'status'=>'الحالة',
+    
+        ]
+
 
 ];

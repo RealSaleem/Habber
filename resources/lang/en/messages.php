@@ -286,7 +286,18 @@ return [
         'edit_ad_info'=> 'Edit Ad Info',
         'image'=>'Image',
         'featured' => 'Featured'
-    ]
+    ],
+    'publisher_page' => [
+        'publisher' => 'Publisher',
+        'add_publisher'=>'Add Publisher',
+        'add_publisher_info'=>'Add Publisher Info',
+        'edit_publisher'=>'Edit Publisher ',
+        'edit_publisher_info'=>'Edit Publisher Info',
+        'product_type'=>'Product Type',
+        'operating_country'=>'Operating Country',
+        'status'=>'Status',
+    
+        ]
 
     
 
