@@ -27,6 +27,14 @@
                             <span class="text-danger">{{$errors->first('language')}}</span>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.language_page.iso')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="iso" value="{{ old('iso') }}" id="name"  placeholder="iso ">
+                            <span class="text-danger">{{$errors->first('iso')}}</span>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.language_page.status')</label>
                         <div class="col-sm-9">

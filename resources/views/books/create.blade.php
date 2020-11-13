@@ -13,12 +13,12 @@
             </div>
         @endif 
 
-        @if ($errors->any())
-     @foreach ($errors->all() as $error)
-         <div>{{$error}}</div>
-     @endforeach
-     @endif
-        </div> 
+        @if(Session::has('featured'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
+            </div>
+        @endif 
+    </div> 
      <div class="col-md-12">
         <div class="card">
             <form action="{{ action('BooksController@store') }}" method="post"  enctype="multipart/form-data" >   
@@ -49,7 +49,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description"></textarea>
+                            <textarea type="textarea" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" id="description" placeholder="Description">{{ old('description') }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             <option value="{{$b->id}}" > {{$b->name}}</option>
                             @endforeach
                         </select>
-                            <span class="text-danger">{{$errors->first('bookclub')}}</span>
+                        <span class="text-danger">{{$errors->first('bookclub')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -126,8 +126,9 @@
                                     </optgroup>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->first('genre')}}</span>
                             </div>
-                        <span class="text-danger">{{$errors->first('genre')}}</span>
+                     
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.stock_status')</label>

@@ -7,6 +7,7 @@ use App\Genre;
 use App\Business;
 use App\Language;
 use App\User;
+use Session;
 use App\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -42,7 +43,7 @@ class BooksController extends Controller
     {
         //$business = Business::all();
         $bookClubs = BookClub::all();
-        $genres = Genre::all();
+        $genres = Genre::where('title','!=','General')->get();
         $language = Language::all();
         $user = User::role('publisher')->get();
         return view('books.create',compact('user','bookClubs','genres','language'));
@@ -57,7 +58,8 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         //  
-      
+        
+        $genId = Genre::where('title','General')->first();      
         $validatedData = $request->validate([
         
             'title' => 'required',
@@ -74,7 +76,7 @@ class BooksController extends Controller
             'featured'=>'required',
             'status'=>'required',
             "genre" => 'required|array|min:1|max:3',
-            'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
+            // 'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:width=280,height=470'
             ]);
             $book = new Book();
             $book->title = $request->title;
@@ -84,23 +86,39 @@ class BooksController extends Controller
             $book->book_language= $request->book_language;
             $book->isbn = $request->isbn;
             $book->total_pages= $request->total_pages;
-            $book->quantity =$request->quantity;
+            $book->quantity = $request->quantity;
             $book->user_id = $request->publisher;
             $book->added_by =auth()->user()->id;
             $book->stock_status = $request->stock_status;
-            $book->featured = $request->featured;
+            if($request->has('featured') && $request->featured == "1") {
+                $featuredBooks = Book::where('featured',1)->count();
+                if($featuredBooks == 8) {
+                    $book->featured = 0; 
+                    Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
+                }
+                else {
+                    $book->featured = $request->featured;
+                }
+            }
+            else {
+                $book->featured = $request->featured;
+            }
             $book->book_club_id = $request->bookclub;
             $book->status =  $request->status;
             $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
-            $book->genres()->sync($request->genre);
-            $file = $request->image;
-            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
-            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-            $updatebook->image = $filePath;
-            $updatebook->update();   
+            if($request->has('genre')) {
+                $genres = $request->genre;
+                array_push($genres, (string) $genId->id);
+                $book->genres()->sync($genres);
+            }
+            // $file = $request->image;
+            // $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            // $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            // $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            // $updatebook->image = $filePath;
+            // $updatebook->update();   
             $productPrice= new ProductPrice();
             $productPrice->product_id= $book->id;
             $productPrice->product_type= 'book';
@@ -139,7 +157,7 @@ class BooksController extends Controller
         $selectedGenres = $book->genres->pluck('id')->toArray();
         $user = User::role('publisher')->get();
         $bookClubs = BookClub::all();
-        $genres = Genre::all();
+        $genres = Genre::where('title','!=','General')->get();
         $language = Language::all();
         return view('books.edit', compact('book','bookClubs','user','genres','selectedGenres','language'));
  
@@ -155,6 +173,7 @@ class BooksController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $genId = Genre::where('title','General')->first();     
         $validatedData = $request->validate([
             'title' => 'required',
             'author_name' => 'required',
@@ -174,7 +193,6 @@ class BooksController extends Controller
         ]);
        
         $book = Book::find($id);
-        // dd(count($book->genres) + count($request->genre) > 3);
         $book->title = $request->title;
         $book->author_name = $request->author_name;
         $book->cover_type= $request->cover_type;
@@ -186,18 +204,34 @@ class BooksController extends Controller
         $book->user_id = $request->publisher;
         $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
-        $book->featured = $request->featured;
-        $book->status = $request->status;
-        if(count($book->genres) + count($request->genre) > 3 ) {
-            // dd($request->genre);
-            $genre_id = $book->genres()->pluck('genre_id');
-            $book->genres()->detach($genre_id);
-            $book->genres()->sync($request->genre);
+        if($request->has('featured') && $request->featured == "1") {
+            $featuredBooks = Book::where('featured',1)->count();
+            if($featuredBooks == 8) {
+                $book->featured = 0; 
+                Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
+            }
+            else {
+                $book->featured = $request->featured;
+            }
         }
         else {
-           
-            $book->genres()->sync($request->genre);
+            $book->featured = $request->featured;
         }
+        $book->status = $request->status;
+        if($request->has('genre')) {
+            if(count($book->genres) + count($request->genre) > 4 ) {
+                $genre_id = $book->genres()->pluck('genre_id');
+                $book->genres()->detach($genre_id);
+                $genres = $request->genre;
+                array_push($genres, (string) $genId->id);
+                $book->genres()->sync($genres);
+            }
+            else {
+               
+                $book->genres()->sync($request->genre);
+            }
+        }
+    
         
         if($request->has('image')) 
         {
@@ -236,7 +270,7 @@ class BooksController extends Controller
         $book = Book::findOrFail($id);
          $book->genres()->detach($id);
         $book->delete();
-        return back()->with('success', 'User deleted successfully');
+        return back()->with('success', 'Book deleted successfully');
     
     } 
     public function deactivateBook($id) {

@@ -59,7 +59,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.added_by'): {{($book->bookAddedBy->roles[0]->name == "Admin") ? "Admin" : $book->bookAddedBy->roles[0]->name .' '. $book->bookAddedBy->fullname }} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.status'):  {{ucfirst($book->status == 1 ? "Activate" : "Deactivate")}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.status'):  {{ucfirst($book->status == 1 ? "active" : "not active")}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.feature'):  {{ucfirst($book->featured == 1 ? "featured" : "not featured")}} </label>

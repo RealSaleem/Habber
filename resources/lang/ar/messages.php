@@ -1837,6 +1837,7 @@ return [
         'add_language_info'=> 'إضافة معلومات اللغة',
         'edit_language_info'=> 'تحرير معلومات اللغة',
         'status'                        => 'الحالة',
+        'iso'=>'ايزو',
     ],
     'country_page'=> [
         'countries'=>'بلد',

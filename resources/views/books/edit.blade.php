@@ -12,7 +12,13 @@
                 <strong>Book Edited! &nbsp;</strong>{{Session::get('success')}}
                </div>
                 @endif 
+                @if(Session::has('featured'))
+                    <div class="alert alert-danger text-center" role="alert">
+                        <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
+                    </div>
+                @endif 
            </div> 
+           
         <div class="col-md-12">
            <div class="card">
               <form  action="{{ action('BooksController@update',[$book->id])}}" method="POST" enctype="multipart/form-data" >   
@@ -44,7 +50,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description') </label>
                         <div class="col-sm-9">
-                            <textarea  class="form-control"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" id="description" value="" placeholder="Description">{{$book->description}}</textarea>
+                            <textarea  class="form-control"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" id="description" value="" placeholder="Description"  maxlength = "160">{{$book->description}}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>

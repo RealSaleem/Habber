@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 
-
 class UserController extends Controller
 {
 
@@ -82,10 +81,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request)
     {
         try{
-            $user = $this->model->update($request->all(),$id);
+            $user = $this->model->update($request->all(),auth()->user()->id);
             return (new UserResource($user));
         }
         catch(\Exception $e) {

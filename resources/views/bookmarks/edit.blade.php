@@ -12,6 +12,12 @@
                 <strong>Bookmarks Edited! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
+
+        @if(Session::has('featured'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
+            </div>
+        @endif 
             
         </div> 
         <div class="col-md-12">
@@ -52,14 +58,14 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea"   class="form-control" name="description"value=""  >{{ $bookmark->description }}</textarea>
+                            <textarea type="textarea"   class="form-control" name="description"value=""   maxlength = "160">{{ $bookmark->description }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" class="form-control"  name="arabic_description" dir="rtl" value=""  >{{ $bookmark->arabic_description }}</textarea>
+                            <textarea type="textarea" class="form-control"  name="arabic_description" dir="rtl" value=""   maxlength = "160">{{ $bookmark->arabic_description }}</textarea>
                             <span class="text-danger">{{$errors->first('arabic_description')}}</span>
                         </div>
                     </div>
@@ -73,7 +79,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.bookmark_id')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" value="{{ $bookmark->bookmark_id }}">
+                            <input type="text" class="form-control" name="bookmark_id" value="{{ltrim($bookmark->bookmark_id,'HB') }}" disable>
                             <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
                         </div>
                     </div>

@@ -12,7 +12,11 @@
                 <strong>Bookmarks Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
-     
+        @if(Session::has('featured'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
+            </div>
+        @endif 
             
         </div> 
         <div class="col-md-12">
@@ -52,14 +56,14 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description"></textarea>
+                            <textarea type="textarea" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description"  maxlength = "160"></textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" class="form-control" dir="rtl" name="arabic_description" value="{{ old('arabic_description') }}" id="arabic_description" placeholder="Arabic Description"></textarea>
+                            <textarea type="textarea" class="form-control" dir="rtl" name="arabic_description" value="{{ old('arabic_description') }}" id="arabic_description" placeholder="Arabic Description"  maxlength = "160"></textarea>
                             <span class="text-danger">{{$errors->first('arabic_description')}}</span>
                         </div>
                     </div>
@@ -68,13 +72,6 @@
                         <div class="col-sm-9">
                             <input type="number" class="form-control" name="price" value="{{ old('price') }}" id="price" placeholder="Price">
                             <span class="text-danger">{{$errors->first('price')}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.bookmark_id') </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="bookmark_id" value="{{ old('bookmark_id') }}" id="bookmark_id" placeholder="Bookmark Id ">
-                            <span class="text-danger">{{$errors->first('bookmark_id')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">

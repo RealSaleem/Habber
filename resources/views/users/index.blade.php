@@ -21,6 +21,7 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Contact</th>
+                        <th>Role</th>
                         <th>Status</th>
                         <th>Language</th>
                         <th>Currency</th>
@@ -29,12 +30,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($user as $user)
+                    @foreach($users as $user)
                     <tr>    
                         <td>{{$user->first_name}}</td>
                         <td>{{$user->last_name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->phone}}</td>  
+                        <td>{{ count($user->roles) > 0 ? $user->roles[0]->name : ""  }}</td>
                         <td class = "{{$user->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$user->status == 1 ? "active" : "not active"}}</td>  
                         <td>{{$user->languages['name']}}</td>
                         <td>{{$user->currencies['name']}}</td>
