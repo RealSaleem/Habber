@@ -62,6 +62,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Business');
     }
 
+    public function countries() {
+        return $this->belongsTo(Country::class,'country_id','id');
+    }
+
     public function languages()
     {
         return $this->hasOne('App\Language','id','language_id');

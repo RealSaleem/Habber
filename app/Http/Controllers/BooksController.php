@@ -29,7 +29,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $book = Book::with(['book_clubs','users'])->get();
+        $book = Book::with(['book_clubs','users'])->get();      
         return view('books.index', compact('book'));
     }
 

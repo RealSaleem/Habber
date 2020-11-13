@@ -58,14 +58,14 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea"   class="form-control" name="description"value=""  >{{ $bookmark->description }}</textarea>
+                            <textarea type="textarea"   class="form-control" name="description"value=""   maxlength = "160">{{ $bookmark->description }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" class="form-control"  name="arabic_description" dir="rtl" value=""  >{{ $bookmark->arabic_description }}</textarea>
+                            <textarea type="textarea" class="form-control"  name="arabic_description" dir="rtl" value=""   maxlength = "160">{{ $bookmark->arabic_description }}</textarea>
                             <span class="text-danger">{{$errors->first('arabic_description')}}</span>
                         </div>
                     </div>
@@ -132,8 +132,8 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
-                                <option value="0" {{ ($bookmark->status == 0 ? "selected":"")}}>Activate</option>
-                                <option value="1" {{ ($bookmark->status == 1 ? "selected":"")}}>Deactivate</option>
+                                <option value="0" {{ ($bookmark->status == 0 ? "selected":"")}}>Deactivate</option>
+                                <option value="1" {{ ($bookmark->status == 1 ? "selected":"")}}>Activate</option>
                              </select>   
                             <span class="text-danger">{{$errors->first('status')}}</span>
                         </div>

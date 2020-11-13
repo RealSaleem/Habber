@@ -50,7 +50,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description') </label>
                         <div class="col-sm-9">
-                            <textarea  class="form-control"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" id="description" value="" placeholder="Description">{{$book->description}}</textarea>
+                            <textarea  class="form-control"  dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="description" id="description" value="" placeholder="Description"  maxlength = "160">{{$book->description}}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -118,8 +118,8 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
-                                <option value="0" {{ ($book->status == 0 ? "selected":"")}}>Activate</option>
-                                <option value="1" {{ ($book->status == 1 ? "selected":"")}}>Deactivate</option>
+                                <option value="0" {{ ($book->status == 0 ? "selected":"")}}>Deactivate</option>
+                                <option value="1" {{ ($book->status == 1 ? "selected":"")}}>Activate</option>
                              </select>   
                             <span class="text-danger">{{$errors->first('status')}}</span>
                         </div>
