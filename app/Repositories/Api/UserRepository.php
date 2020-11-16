@@ -112,16 +112,7 @@ class UserRepository implements RepositoryInterface
     public function createFavourite(array $data)
     {
         $data['user_id'] = Auth::user()->id;
-        if($data['book_id'] && $data['bookmark_id']) {
-           $fav =  $this->model->where('user_id',$data['user_id'])->where('book_id',$data['book_id'])->where('bookmark_id',$data['bookmark_id'])->first();
-           if(isset($fav)) {
-                return 'exists';
-           }
-           else {
-                return $this->model->create($data);
-           }
-        }
-        else if ($data['book_id']) {
+        if (array_key_exists('book_id',$data)) {
             $fav =  $this->model->where('user_id',$data['user_id'])->where('book_id',$data['book_id'])->first();
             if(isset($fav)) {
                 return 'exists';
@@ -130,7 +121,7 @@ class UserRepository implements RepositoryInterface
                 return $this->model->create($data);
            }
         }
-        else if ($data['bookmark_id']) {
+        else if (array_key_exists('bookmark_id',$data)) {
             $fav =  $this->model->where('user_id',$data['user_id'])->where('bookmark_id',$data['bookmark_id'])->first();
             if(isset($fav)) {
                 return 'exists';
@@ -147,10 +138,27 @@ class UserRepository implements RepositoryInterface
         return $favourites;
     }
 
-    public function deleteFavourite($id) 
+    public function deleteFavourite(array $data) 
     {
-        $favourites = $this->model->find($id);
-        $favourites->delete();
-        return true;
+        if($data['product_type'] == "book") {
+            $favourites = $this->model->where('user_id',auth()->user()->id)->where('book_id',$data['product_id'])->first();
+            if(isset($favourites)) {
+                $favourites->delete();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        elseif ($data['product_type'] == "bookmark") {
+            $favourites = $this->model->where('user_id',auth()->user()->id)->where('bookmark_id',$data['product_id'])->first();
+            if(isset($favourites)) {
+                $favourites->delete();
+                return true;
+            }
+           else {
+               return false;
+           }
+        }
     }
 }

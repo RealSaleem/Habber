@@ -32,7 +32,7 @@ class AuthController extends Controller
             ])) 
         {
             $user = Auth::user();
-            if($user->status == true) {
+            if($user->status == true && $user->joining_request == false) {
                 $user['token'] = $user->createToken('token')->accessToken;
                
                 return (new AuthResource($user->load('languages')));

@@ -113,12 +113,19 @@ class FavouriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'product_type' => 'required'
+        ]);
         try{
-            $favourites = $this->model->deleteFavourite($id);
+            $favourites = $this->model->deleteFavourite($request->all());
             if($favourites == true) {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Favourites Deleted Successfully!');
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'No Favourite Found!');
             }
         }
         catch(\Exception $e) {

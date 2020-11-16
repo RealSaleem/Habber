@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'phone' => ['sometimes','required','string','max:15','min:3'],
             'profile_pic' => ['sometimes', 'required', 'image', 'mimes:jpeg,png,jpg,gif,svg','max:2048'],
             'currency_id' => ['required'],
-            // 'language_id' => ['required']
+            'language_id' => ['required']
         ];
     }
 }

@@ -60,7 +60,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         // favourites
         Route::post('favourites', 'FavouriteController@store');
         Route::get('favourites', 'FavouriteController@show');
-        Route::delete('favourites/{id}', 'FavouriteController@destroy');
+        Route::delete('favourites', 'FavouriteController@destroy');
         // address
         Route::get('user/addresses', 'AddressController@showUserAddresses');
         Route::post('addresses', 'AddressController@store');
