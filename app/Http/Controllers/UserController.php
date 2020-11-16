@@ -176,36 +176,25 @@ class UserController extends Controller
         $admin = User::role('admin')->first();
         Storage::disk('user_profile')->deleteDirectory('users/' . $id);
         $user = User::with('books')->findOrFail($id);
+     
         $userBooks = $user->books->pluck('id');
+     
         $userBookmarks = $user->bookmarks->pluck('id');
+     
         if(count($userBooks) > 1 ) {
             Book::whereIn('id',$userBooks )->update(['user_id'=> $admin->id]);
-            $user->delete();
         }
         else if(count($userBooks) > 0 && count($userBooks) < 2) {
             Book::where('id',$userBooks[0] )->update(['user_id'=> $admin->id]);
-            $user->delete();
         }
-        // else {
-        //     $user->delete();
-        // }
-
         if(count($userBookmarks) > 1 ) {
             Bookmark::whereIn('id',$userBookmarks )->update(['user_id'=> $admin->id]);
-            $user->delete();
         }
         else if(count($userBookmarks) > 0 && count($userBookmarks) < 2) {
-            Bookmark::where('id',$userBookmarks[0] )->update(['user_id'=> $admin->id]);
-            $user->delete();
-        }
-        // else {
-        //     $user->delete();
-        // }
-        
-      
-        return back()->with('success', 'User deleted successfully');
-    
-        
+            Bookmark::where('id',$userBookmarks[0] )->update(['user_id'=> $admin->id]);  
+        }        
+        $user->delete();
+        return back()->with('success', 'User deleted successfully');   
     }
 
     public function destroyRequest($id)
