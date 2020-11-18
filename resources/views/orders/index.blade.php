@@ -16,6 +16,7 @@
                 <thead>
                     <tr>
                         <th>User ID</th>
+                        <th>Address</th>
                         <th>Total Price</th>
                         <th>Total Quantity</th>
                         <th>Status</th>
@@ -27,6 +28,7 @@
                     <tr>    
 
                         <td>{{$order->user_id}}</td>
+                        <td>{{$order->address_id}}</td>
                         <td>{{$order->total_price}}</td>
                         <td>{{$order->total_quantity}}</td>
                         <td>{{$order->status == "0" ? "Pending" : "Seen"}}</td> 
@@ -39,16 +41,10 @@
                                         <button class="btn btn-danger" type="submit"> Cancel Order  </button>
                                     </form>
                                 </div>
-                                <div class="col-2">
-                                <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
-                                     @csrf
+                                    <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
+                                       @csrf
                                        @method('GET')
                                        <button class="btn btn-success" type="submit">Order Details </span></button>
-                                         </form>
-                                         <form action="" method="post">
-                                     @csrf
-                                       @method('GET')
-                                       <button class="btn btn-info" type="submit">Shipping Address</button>
                                          </form>
                                 </div>
                             </div>

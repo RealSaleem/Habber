@@ -18,4 +18,5 @@ class Business extends Model
         return $this->hasMany('App\Bookmark','id','business_id');
     }
     
+    
 }

@@ -25,6 +25,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'cart_id' => ['bail', 'required'],
+            'address_id' => ['bail','required'],
             'total_price' => ['bail', 'required'],
             'total_quantity' => ['bail','required']
         ];

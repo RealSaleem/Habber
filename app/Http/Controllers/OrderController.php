@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Order;
 use App\User;
-use App\Currency;
-use App\Country;
+
+
+
+
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -17,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $order = Order::with('users')->get();
+        $order = Order::all();
         return view('orders.index', compact('order'));
     }
 
@@ -54,9 +56,8 @@ class OrderController extends Controller
     public function show($id)
     {
         //
-        $order = Order::with('users')->find($id);
-        $country = Country::all();
-        $currencies = Currency::all();
+        $order = Order::with('books','bookmarks','addresses','users')->find($id);
+        // dd($order);
         return view('orders.detail', compact('order'));
     }
 

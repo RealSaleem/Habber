@@ -14,4 +14,8 @@ class Address extends Model
     public function countries() {
         return $this->belongsTo(Country::class,'country_id','id');
     }
+
+    public function orders() {
+        return $this->belongsTo(Order::class,'address_id','id');
+    }
 }
