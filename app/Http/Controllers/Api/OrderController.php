@@ -71,8 +71,16 @@ class OrderController extends Controller
             $data['cartProducts'] = $cartProducts;
             $data['total_price'] = $request->total_price; 
             $data['total_quantity'] = $request->total_quantity; 
+            $data['address_id'] = $request->address_id;
             $order = $this->model->create($data);
-            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
+            if ($order == false) {
+                return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Order Creation UnSuccessfull! Some Products ran out of stock');
+            }
+            else {
+                $this->cart->delete($request->cart_id);
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
+            }
+           
         }
         catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
