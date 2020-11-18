@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories\Api;
 use App\Genre;
+use App\Book;
+use App\Bookmark;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -29,27 +31,36 @@ class OrderRepository implements RepositoryInterface {
         $arr['user_id'] = auth()->user()->id;
         $arr['total_price'] = $data['total_price'];
         $arr['total_quantity'] = $data['total_quantity'];
+        $arr['address_id'] = $data['address_id'];
         $arr['status'] = "pending";
-        $order = $this->model->create($arr);
+    
         if( count($data['cartProducts']->books) > 0) {
             foreach($data['cartProducts']->books as $i) {
-                // if( $i['product_type'] == "book") {
+                if($this->decreaseBookQuantity($i->id,$i->pivot->quantity) == true) {
                     array_push($books, $i);
+                }
+                else {
+                    return false;
+                }
             }
-
-            for($i = 0; $i < count($books); $i++) {
-                // dd($books[$i]->id);
-                $order->books()->attach($books[$i]->id, ['quantity' => $books[$i]->pivot->quantity , 'price' => $books[$i]->pivot->price,'product_type' =>'book' ]);
-            }
+            $order = $this->model->create($arr);
+           
         }
         if(count($data['cartProducts']->bookmarks) > 0) {
             foreach($data['cartProducts']->bookmarks as $j) {
-                // if( $i['product_type'] == "book") {
+                if($this->decreaseBookmarkQuantity($j->id,$j->pivot->quantity) == true) {
                     array_push($bookmarks, $j);
+                }
+                else {
+                    return false;
+                }
             }       
-            for($i = 0; $i < count($bookmarks); $i++) {
-                $order->bookmarks()->attach($bookmarks[$i]->id,['quantity' => $bookmarks[$i]->pivot->quantity , 'price' => $bookmarks[$i]->pivot->price,'product_type' => 'bookmark' ]);
-            }
+        }
+        for($i = 0; $i < count($books); $i++) {
+            $order->books()->attach($books[$i]->id, ['quantity' => $books[$i]->pivot->quantity , 'price' => $books[$i]->pivot->price,'product_type' =>'book' ]);
+        }
+        for($i = 0; $i < count($bookmarks); $i++) {
+            $order->bookmarks()->attach($bookmarks[$i]->id,['quantity' => $bookmarks[$i]->pivot->quantity , 'price' => $bookmarks[$i]->pivot->price,'product_type' => 'bookmark' ]);
         }
         return $order;
 
@@ -60,6 +71,30 @@ class OrderRepository implements RepositoryInterface {
         $this->model = $model;
         
         return $this->model->insert($data);
+    }
+
+    public function decreaseBookQuantity($id,$quantity) {
+        $book = Book::find($id);
+        if($book->quantity > $quantity) {
+            $book->quantity = $book->quantity - $quantity;
+            $book->update();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function decreaseBookmarkQuantity($id,$quantity) {
+        $bookmark = Bookmark::find($id);
+        if($bookmark->quantity > $quantity) {
+            $bookmark->quantity = $bookmark->quantity - $quantity;
+            $bookmark->update();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // update record in the database

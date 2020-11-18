@@ -97,6 +97,7 @@ class CartRepository implements RepositoryInterface {
     // remove record from the database
     public function delete(Model $model)
     {
+        dd($model);
         $model->books()->detach();
         $model->bookmarks()->detach();
         return $model->delete();
