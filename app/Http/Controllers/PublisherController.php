@@ -84,7 +84,8 @@ class PublisherController extends Controller
      */
     public function show($id){
   
-
+        $publisher = User::findOrFail($id);
+        return view('publisher.detail',compact('publisher'));
     }
 
     /**

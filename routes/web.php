@@ -60,6 +60,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('favourites','FavouriteController');
    Route::resource('sitesetting','SiteSettingController');
    Route::resource('publisher','PublisherController');
+   Route::resource('orders','OrderController');
+   Route::post('orders/activate/{id}','OrderController@activateOrder');
+   Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
+
 });
 
 

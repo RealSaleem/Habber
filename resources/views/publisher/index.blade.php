@@ -41,6 +41,11 @@
                         <td>
                             <div class="row">
                                 <div class="col-2">
+                                    <form action="{{ action('PublisherController@show', [$publisher->id])}}" method="post">
+                                     @csrf
+                                       @method('GET')
+                                       <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
+                                         </form>
                                     <form action="{{ action('PublisherController@destroy', [$publisher->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')

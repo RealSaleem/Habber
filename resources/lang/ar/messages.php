@@ -1933,8 +1933,21 @@ return [
         'product_type'=>'نوع المنتج',
         'operating_country'=>'بلد التشغيل',
         'status'=>'الحالة',
+        'name'=>'اسم',
+        'no_of_product'=>'لا من المنتج',
+        'no_of_order'=>'لا توجد أوامر',
+        'publisher_id'=>'معرف الناشر',
+        'date'=>'تاريخ'
     
-        ]
+    ],
+       'order_page' => [
+           'order'=> 'طلب',
+           'edit_order_info'=>'تحرير معلومات الطلب',
+           'user_id'=>'معرف المستخدم',
+           'total_price'=>'السعر الكلي',
+           'total_quantity'=>'الكمية الإجمالية',
+           'status'=>'الحالة',
+       ],
 
 
 ];

@@ -296,8 +296,22 @@ return [
         'product_type'=>'Product Type',
         'operating_country'=>'Operating Country',
         'status'=>'Status',
+        'name'=>'Name',
+        'no_of_product'=>'No Of Products',
+        'no_of_order'=>'No Of Orders',
+        'publisher_id'=>'Publisher ID',
+        'date'=>'Date'
     
-        ]
+    ],
+    'order_page' => [
+        'order'=> 'Order',
+        'edit_order_info'=>'Edit Order Info ',
+        'user_id'=>'User ID',
+        'total_price'=>'Total Price',
+        'total_quantity'=>'Total Quantity',
+        'status'=>'Status'
+    ]
+
 
     
 
