@@ -1,23 +1,28 @@
 @extends('layouts.app')
 @section('content')
-
+<div class="container-fluid">
+        @if(Session::has('success'))
+            <div class="alert alert-success text-center" role="alert">
+                <strong>{{Session::get('success')}} &nbsp;</strong>
+            </div>
+        @endif 
+    </div> 
 
 <div class="container">
     <article class="card">
-        <header class="card-header"> My Orders </header>
         <form action="{{ route('orders.update',['order'=> $order->id])}}" method="post"  enctype="multipart/form-data" > 
                 {{ csrf_field() }}
                 @method('PUT')
         <div class="card-body">
-            <h6>Order ID: {{$order->id}}</h6>
+            <h6>@lang('messages.order_page.order_id'): {{$order->id}}</h6>
             <article class="card">
                 <div class="card-body row">
-                    <div class="col"> <strong>Order Date:</strong> <br>{{$order->created_at}} </div>
-                    <div class="col"> <strong>Order By:</strong> <br>{{ucfirst($order->users->first_name ." ".$order->users->last_name )}}</div>
-                    <div class="col"> <strong>Email:</strong> <br>  {{ucfirst($order->users->email)}} </div>
-                    <div class="col"> <strong>Contact No :</strong> <br> {{ucfirst($order->users->phone)}}</div>
-                    <div class="col"> <strong>Total Quantity :</strong> <br> {{ucfirst($order->total_quantity)}}</div>
-                    <div class="col"> <strong>Total Price:</strong> <br> {{ucfirst($order->total_price)}} </div>
+                    <div class="col"> <strong>@lang('messages.order_page.order_date'):</strong> <br>{{$order->created_at}} </div>
+                    <div class="col"> <strong>@lang('messages.order_page.order_by'):</strong> <br>{{ucfirst($order->users->first_name ." ".$order->users->last_name )}}</div>
+                    <div class="col"> <strong>@lang('messages.user_page.email'):</strong> <br>  {{ucfirst($order->users->email)}} </div>
+                    <div class="col"> <strong>@lang('messages.user_page.contact_no'):</strong> <br> {{ucfirst($order->users->phone)}}</div>
+                    <div class="col"> <strong>@lang('messages.order_page.total_quantity') :</strong> <br> {{ucfirst($order->total_quantity)}}</div>
+                    <div class="col"> <strong>@lang('messages.order_page.total_price'):</strong> <br> {{ucfirst($order->total_price)}} </div>
                 </div>
                 <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
@@ -60,18 +65,18 @@
             </table> 
                     <div class="card-body row">
                 
-                    <div class="col"> <strong>Address:</strong> <br> {{ucfirst($order->addresses['address_name'])}} </div>
-                    <div class="col"> <strong>Address Line 1:</strong> <br> {{ucfirst($order->addresses['address_line1'])}} </div>
-                    <div class="col"> <strong>Address Line 2:</strong> <br> {{ucfirst($order->addresses['address_line2'])}} </div>
-                    <div class="col"> <strong>Country:</strong> <br> {{ucfirst($order->addresses->countries['name'])}} </div>
-                    <div class="col"> <strong>City:</strong> <br> {{ucfirst($order->addresses['city'])}} </div>
-                    <div class="col"> <strong>State:</strong> <br> {{ucfirst($order->addresses['state'])}} </div>
-                    <div class="col"> <strong>Postal Code:</strong> <br> {{ucfirst($order->addresses['post_code'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.address'):</strong> <br> {{ucfirst($order->addresses['address_name'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.address_line1'):</strong> <br> {{ucfirst($order->addresses['address_line1'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.address_line2'):</strong> <br> {{ucfirst($order->addresses['address_line2'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.country'):</strong> <br> {{ucfirst($order->addresses->countries['name'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.city'):</strong> <br> {{ucfirst($order->addresses['city'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.state'):</strong> <br> {{ucfirst($order->addresses['state'])}} </div>
+                    <div class="col"> <strong>@lang('messages.address_page.post_code'):</strong> <br> {{ucfirst($order->addresses['post_code'])}} </div>
                 </div> 
 
 
                 <div class="card-body row">
-                <div class="col"> <strong>Status:</strong> <br> </div>
+                <div class="col"> <strong>@lang('messages.book_page.status'):</strong> <br> </div>
                     <select class="form-control" name="status" id="">
                             <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Confirmed</option>
                             <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Shipped</option>
@@ -82,9 +87,9 @@
                     <div class="card-body">
                     <a href="{{route('orders.index')}}">
                         <button type="button" class=" btn btn-success">
-                         Back To Orders
+                        @lang('messages.button.back')
                         </button></a>
-                        <button type="submit" class="btn btn-primary">Update Status</button>
+                        <button type="submit" class="btn btn-primary">@lang('messages.button.update_status')</button>
                     </div>
                 </div>
                 </form>

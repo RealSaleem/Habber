@@ -38,13 +38,13 @@
                                     <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"> Cancel Order  </button>
+                                        <button class="btn btn-danger" type="submit"> @lang('messages.button.cancel_order') </button>
                                     </form>
                                 </div>
                                     <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
                                        @method('GET')
-                                       <button class="btn btn-success" type="submit">Order Details </span></button>
+                                       <button class="btn btn-success" type="submit">@lang('messages.button.order_details') </span></button>
                                          </form>
                                 </div>
                             </div>

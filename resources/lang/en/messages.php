@@ -31,7 +31,8 @@ return [
         'role'=>'Role',
         'picture'=>'Picture',
         'deactivate'=>'Deactivate',
-        'activate'=> 'Activate'
+        'activate'=> 'Activate',
+        'favourites'=>'Favourites'
     ],
     'book_page' => [
         'books' => 'Books',
@@ -251,7 +252,10 @@ return [
         'delete'=>'Delete',
         'edit'=> 'Edit',
         'back'=> 'Back',
-        'update_status'=> 'Update Status'
+        'update_status'=> 'Update Status',
+        'cancel_order' => 'Cancel Order',
+        'order_details'=> 'Order Details',
+        
     ],
 
     'permission_page' => [
@@ -309,7 +313,10 @@ return [
         'user_id'=>'User ID',
         'total_price'=>'Total Price',
         'total_quantity'=>'Total Quantity',
-        'status'=>'Status'
+        'order_id'=> 'Order ID',
+        'order_by'=> 'Order By',
+        'order_date'=> 'Order Date',
+      
     ]
 
 

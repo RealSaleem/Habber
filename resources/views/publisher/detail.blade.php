@@ -20,8 +20,27 @@
             <form >   
                 {{ csrf_field() }}
                 @method('PUT')
+
+                <div class="col-lg-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="bg-dark p-10 text-white text-center">
+                                <i class="fa fa-tag m-b-5 font-16"></i>
+                                    <h5 class="m-b-0 m-t-5">{{$totalOrder}}</h5>
+                                    <small class="font-light">Total Orders</small>
+                                </div>
+                            </div>
+                    
+                          <div class="col-6">
+                                <div class="bg-dark p-10 text-white text-center">
+                                <i class="fa fa-cart-plus m-b-5 font-16"></i>
+                                    <h5 class="m-b-0 m-t-5"> {{$publisher->books->count() + $publisher->bookmarks->count()}}</h5>
+                                    <small class="font-light">Total Products</small>
+                                </div>
+                            </div>
+                         </div> 
+                        </div> 
                 <div class="card-body row" style="font-size: 18px;">
-                    <h4 class="card-title col-12">@lang('messages.publisher_page.publisher')</h4>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.publisher_id'):  {{$publisher->id}} </label>
                     </div>
@@ -32,13 +51,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.user_page.email'):   {{ucfirst($publisher->email)}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.product_type'):  {{ucfirst($publisher->businesses['product_type'])}}</label>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.no_of_product'):  </label>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.no_of_order'): </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.product_type'): {{ ucfirst($publisher->businesses['product_type'])}}  </label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.operating_country'):  {{ucfirst($publisher->countries['name'])}}</label>
@@ -56,6 +69,7 @@
                     </div>
                     @endif 
                 </div>
+               
                 <div class="border-top">
                     <div class="card-body">
                     <a href="{{route('publisher.index')}}">
