@@ -22,6 +22,7 @@ Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+   Route ::resource('welcome','HomeController@index');
    Route::get('language/{locale}', 'HomeController@setLanguage')->name('set_language');
    Route::resource('users','UserController');
    Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');

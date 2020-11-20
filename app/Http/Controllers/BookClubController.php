@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\BookClub;
+use App\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,7 @@ class BookClubController extends Controller
     public function index()
     {
         //
-        $bookclub = BookClub::all();
+        $bookclub = BookClub::with('books')->get();
         return view('bookclubs.index', compact('bookclub'));
     }
 
