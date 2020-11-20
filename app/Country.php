@@ -16,4 +16,8 @@ class Country extends Model
     {
         return $this->belongsTo(User::class,'id','country_id');
     }
+    public function orders()
+    {
+        return $this->hasOne('App\Order','id','country_id');
+    }
 }

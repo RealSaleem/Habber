@@ -22,11 +22,11 @@ class CartResource extends JsonResource
             'user'   => auth()->user()->first_name,
             'total_price' => $this->total_price,
             $this->mergeWhen($this->bookmarks, [
-                'bookmarks' => BookmarkResource::collection($this->bookmarks),
+                'bookmark' => BookmarkResource::collection($this->bookmarks),
                 
             ]),
             $this->mergeWhen($this->books, [
-                'books' => BookResource::collection($this->books),
+                'book' => BookResource::collection($this->books),
             ]),
             
         ];

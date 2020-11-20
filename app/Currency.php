@@ -15,5 +15,8 @@ class Currency extends Model
     {
         return $this->hasOne(SiteSetting::class,'currency_id','id');
     }
-
+    public function orders()
+    {
+        return $this->hasOne('App\Order','currency_id','id');
+    }
 }

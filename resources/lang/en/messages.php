@@ -31,7 +31,8 @@ return [
         'role'=>'Role',
         'picture'=>'Picture',
         'deactivate'=>'Deactivate',
-        'activate'=> 'Activate'
+        'activate'=> 'Activate',
+        'favourites'=>'Favourites'
     ],
     'book_page' => [
         'books' => 'Books',
@@ -251,7 +252,10 @@ return [
         'delete'=>'Delete',
         'edit'=> 'Edit',
         'back'=> 'Back',
-        'update_status'=> 'Update Status'
+        'update_status'=> 'Update Status',
+        'cancel_order' => 'Cancel Order',
+        'order_details'=> 'Order Details',
+        
     ],
 
     'permission_page' => [
@@ -296,8 +300,25 @@ return [
         'product_type'=>'Product Type',
         'operating_country'=>'Operating Country',
         'status'=>'Status',
+        'name'=>'Name',
+        'no_of_product'=>'No Of Products',
+        'no_of_order'=>'No Of Orders',
+        'publisher_id'=>'Publisher ID',
+        'date'=>'Date'
     
-        ]
+    ],
+    'order_page' => [
+        'order'=> 'Order',
+        'edit_order_info'=>'Edit Order Info ',
+        'user_id'=>'User ID',
+        'total_price'=>'Total Price',
+        'total_quantity'=>'Total Quantity',
+        'order_id'=> 'Order ID',
+        'order_by'=> 'Order By',
+        'order_date'=> 'Order Date',
+      
+    ]
+
 
     
 

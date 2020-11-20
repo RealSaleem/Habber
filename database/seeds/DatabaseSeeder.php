@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
     {
        
         // $this->call(PermissionTableSeeder::class);
-        $this->call(GenreSeeder::class);
+        // $this->call(GenreSeeder::class);
         // $this->call(LanguageTableSeeder::class);
         // $this->call(CountryTableSeeder::class);
-        // $this->call(AdminSeeder::class);
+        $this->call(AdminSeeder::class);
         // $this->call(CurrencyTableSeeder::class);
         // $this->call(SiteSettingSeeder::class);
     }

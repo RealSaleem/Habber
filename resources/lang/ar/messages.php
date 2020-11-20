@@ -1672,7 +1672,8 @@ return [
         'role'=>'وظيفة',
         'picture'=>'صورة',
         'deactivate'=> 'تعطيل',
-        'activate'=> 'تفعيل'
+        'activate'=> 'تفعيل',
+        'favourites'=>'المفضلة'
     ],
     'book_page' => [
         'books' => 'الكتب',
@@ -1885,7 +1886,9 @@ return [
         'delete'=>'حذف',
         'edit'=> 'تعديل',
         'back'=>'عودة',
-        'update_status'=>'تحديث الحالة'
+        'update_status'=>'تحديث الحالة',
+        'cancel_order'=>'الغاء الطلب',
+        'order_details'=> 'تفاصيل الطلب',
     ],
 
     'permission_page' => [
@@ -1933,8 +1936,24 @@ return [
         'product_type'=>'نوع المنتج',
         'operating_country'=>'بلد التشغيل',
         'status'=>'الحالة',
+        'name'=>'اسم',
+        'no_of_product'=>'لا من المنتج',
+        'no_of_order'=>'لا توجد أوامر',
+        'publisher_id'=>'معرف الناشر',
+        'date'=>'تاريخ'
     
-        ]
+    ],
+       'order_page' => [
+           'order'=> 'طلب',
+           'edit_order_info'=>'تحرير معلومات الطلب',
+           'user_id'=>'معرف المستخدم',
+           'total_price'=>'السعر الكلي',
+           'total_quantity'=>'الكمية الإجمالية',
+           'status'=>'الحالة',
+           'order_id'=> 'رقم التعريف الخاص بالطلب',
+           'order_by'=> 'ترتيب حسب',
+           'order_date'=> 'تاريخ الطلب',
+       ],
 
 
 ];

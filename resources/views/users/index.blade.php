@@ -71,11 +71,12 @@
                                     @endif
                                 </div>
                                 <div class="col-2">
-                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">Address</button></a>
+                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">@lang('messages.address_page.address')</button></a>
+                                  
                                 </div>
 
                                 <div class="col-2">
-                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">Favourites</button></a>
+                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">@lang('messages.user_page.favourites')</button></a>
                                 </div>
                             </div>
                         </td>
