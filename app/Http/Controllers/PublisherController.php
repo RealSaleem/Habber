@@ -10,6 +10,14 @@ use App\Country;
 use App\Business;
 class PublisherController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:publisher-list|publisher-create|publisher-edit|publisher-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:publisher-create', ['only' => ['create','store']]);
+        $this->middleware('permission:publisher-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:publisher-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +69,19 @@ class PublisherController extends Controller
         $publisher->profile_pic = "null"; 
         $publisher->save();
         $publisher->assignRole('publisher');
+        if($request->product_type == "both") {
+            $publisher->givePermissionTo('book-edit','book-create','book-list','book-delete',
+            'bookmark-edit','bookmark-create','bookmark-list','bookmark-delete','book-club-edit','book-club-create','book-club-list','book-club-delete');
+        }
+        elseif ($request->product_type == "books") {
+            $publisher->givePermissionTo('book-edit','book-create','book-list','book-delete',
+            'book-club-edit','book-club-create','book-club-list','book-club-delete');
+        }
+        elseif ($request->product_type == "bookmarks") {
+            $publisher->givePermissionTo('bookmark-edit','bookmark-create','bookmark-list','bookmark-delete');
+        }
         $updatePublisher = User::find($publisher->id);
+        
         $file = $request->profile_pic;
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $filePath = "users/".$publisher->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
@@ -93,13 +113,12 @@ class PublisherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-      
-        $publisher = User::findOrFail($id);
+    public function edit($id) 
+    {  
+     
+        $publisher = User::with('businesses')->findOrFail($id);
         $country= Country::all();
-
         return view('publisher.edit',compact('publisher','country'));
-
     }
     
 
@@ -115,7 +134,7 @@ class PublisherController extends Controller
         $validatedData = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'password' => 'required|min:8',
+            'password' => 'sometimes|min:8',
             'product_type' => 'required', 
             'country'=> 'required',
             'profile_pic' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048',
@@ -125,7 +144,10 @@ class PublisherController extends Controller
         $publisher->first_name = $request->first_name;
         $publisher->last_name = $request->last_name;
         $publisher->email = $request->email;
-        $publisher->password = Hash::make($request->password);
+        if($request->has('password')) 
+        {
+            $publisher->password = Hash::make($request->password);
+        }
         $publisher->country_id = $request->country;
         if($request->has('profile_pic')) 
         {
@@ -140,6 +162,18 @@ class PublisherController extends Controller
         $publisher->save();   
         if($request->has('product_type'))
         {
+            if($request->product_type == "both") {
+                $publisher->syncPermissions('book-edit','book-create','book-list','book-delete',
+                'bookmark-edit','bookmark-create','bookmark-list','bookmark-delete','book-club-edit','book-club-create','book-club-list','book-club-delete');
+
+            }
+            elseif ($request->product_type == "books") {
+                $publisher->syncPermissions('book-edit','book-create','book-list','book-delete',
+                'book-club-edit','book-club-create','book-club-list','book-club-delete');
+            }
+            elseif ($request->product_type == "bookmarks") {
+                $publisher->syncPermissions('bookmark-edit','bookmark-create','bookmark-list','bookmark-delete');
+            }
             $business = Business::where('user_id',$id)->first();
             $business->user_id = $publisher->id;
             $business->product_type= $request->product_type;

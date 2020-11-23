@@ -29,8 +29,7 @@ class UserController extends Controller
      */
     public function index() 
     {
-        $users = User::with('languages','currencies','roles')->get()->except(auth()->user()->id);
-       
+        $users = User::with('languages','currencies','roles')->get()->except(auth()->user()->id);  
         return view('users.index', compact('users'));
     }
     /**

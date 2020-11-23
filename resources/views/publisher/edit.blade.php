@@ -32,7 +32,7 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.password')</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password" id="password" value="{{ $publisher->last_name}}">
+                            <input type="text" class="form-control" name="password" id="password">
                             <span class="text-danger">{{$errors->first('password')}}</span>
                         </div>
                     </div>
@@ -43,13 +43,13 @@
                             <span class="text-danger">{{$errors->first('email')}}</span>
                         </div>
                     </div>
-                    < <div class="form-group row">
+                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.product_type')</label>
                         <div class="col-sm-9">
                         <select class="form-control" name="product_type"  id="status">
-                                 <option value="both" {{ (old('product_type') == "boths" ? "selected":"")}}> Both</option>
-                                <option value="books" {{ (old('product_type') == "books" ? "selected":"")}}>Books</option>
-                                <option value="bookmarks" {{ (old('product_type') == "bookmarks" ? "selected":"")}}> Bookmarks</option>
+                                 <option value="both" {{ (($publisher->businesses->product_type == "both") ? "selected":"")}}> Both</option>
+                                <option value="books" {{ (($publisher->businesses->product_type == "books") ? "selected":"")}}>Books</option>
+                                <option value="bookmarks" {{ (($publisher->businesses->product_type == "bookmarks") ? "selected":"")}}> Bookmarks</option>
                         </select>   
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
