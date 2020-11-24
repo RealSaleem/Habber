@@ -18,11 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
-Route::get('/',function() {
-   return view('welcome');
-})->middleware('auth')->name('welcome');
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-   Route ::resource('welcome','HomeController@index');
+   Route::get('/','HomeController@index');
+   Route::get('welcome','HomeController@index')->name('welcome');
    Route::get('language/{locale}', 'HomeController@setLanguage')->name('set_language');
    Route::resource('users','UserController');
    Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');

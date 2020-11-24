@@ -135,7 +135,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'first_name' => 'sometimes|required',
             'last_name' => 'sometimes|required',
-            'password' => 'sometimes|required|min:8',
+            'password' => 'required|min:8',
             'phone' => 'sometimes|required|numeric',  
             'profile_pic' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'role' => 'required'
