@@ -88,6 +88,13 @@
                             <span class="text-danger">{{$errors->first('quantity')}}</span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.type_of_bookmark')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="type_of_bookmark" value="{{ old('type_of_bookmark') }}" id="type_of_bookmark" placeholder="Bookmark Type ">
+                            <span class="text-danger">{{$errors->first('type_of_bookmark')}}</span>
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.stock_status')</label>
@@ -124,7 +131,7 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
-                                <option value="0" {{ (old('status') == "0" ? "selected":"")}}>Deactivate<</option>
+                                <option value="0" {{ (old('status') == "0" ? "selected":"")}}>Deactivate</option>
                                 <option value="1" {{ (old('status') == "1" ? "selected":"")}}>Activate</option>
                              </select>   
                             <span class="text-danger">{{$errors->first('status')}}</span>

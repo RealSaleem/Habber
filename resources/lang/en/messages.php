@@ -78,6 +78,7 @@ return [
         'bookmark_id'=>'Bookmark ID',
         'size'=>'Size',
         'quantity'=>'Quantity',
+        'type_of_bookmark'=>'Bookmark Type',
         'stock_status'=>'Stock Status',
         'status'=> 'Status',
         'feature'=>'Feature',

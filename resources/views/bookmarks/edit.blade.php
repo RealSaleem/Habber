@@ -98,6 +98,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.type_of_bookmark')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="type_of_bookmark" value="{{ $bookmark->type_of_bookmark }}">
+                            <span class="text-danger">{{$errors->first('type_of_bookmark')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.stock_status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="stock_status"  id="status">

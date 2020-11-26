@@ -1718,6 +1718,7 @@ return [
         'bookmark_id'=>'إشارات مرجعية',
         'size'=>'بحجم',
         'quantity'=>'كمية',
+        'type_of_bookmark'=>'نوع الإشارة المرجعية',
         'stock_status'=>'وضع مخزون',
         'status'=>'الحالة',
         'feature'=>'خاصية',
