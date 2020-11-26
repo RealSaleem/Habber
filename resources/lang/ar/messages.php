@@ -1705,7 +1705,7 @@ return [
     'bookmark_page' => [
         'bookmarks' => 'إشارات مرجعية',
         'add_new_bookmark'=> 'إضافة إشارة مرجعية جديدة',
-        'edit_bookmarks'=> 'تحرير_العلامات',
+        'edit_bookmark'=> 'تحرير_العلامات',
         'add_bookmark_info'=> 'إضافة معلومات المرجعية',
         'edit_bookmark_info'=> 'تحرير المعلومات المرجعية',
         'title'=> 'عنوان',

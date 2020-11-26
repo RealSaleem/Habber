@@ -67,7 +67,7 @@ return [
         'add_new_bookmark'=> 'Add New Bookmark',
         'edit_bookmark'=> 'Edit Bookmark',
         'add_bookmark_info'=> 'Add Bookmark Info',
-        'edit_bookmark_info'=> 'Edit Bookmarl Info',
+        'edit_bookmark_info'=> 'Edit Bookmark Info',
         'title'=> 'Title',
         'maker_name'=> 'Maker Name',
         'description'=>'Description',
