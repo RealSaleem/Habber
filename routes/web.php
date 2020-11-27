@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
-
+Route::get('/',function() {	
+   return view('welcome');	
+})->middleware('auth')->name('welcome');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('/','HomeController@index');
    Route::get('welcome','HomeController@index')->name('welcome');
