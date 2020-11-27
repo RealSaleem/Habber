@@ -25,6 +25,7 @@
                         <th>Bookmark </th>
                         <th>Size</th>         
                         <th>Quantity </th>
+                        <th>Bookmark Type</th>
                         <th>Added by</th>
                         <th>Feature</th>
                         <th>Status</th>
@@ -46,6 +47,7 @@
                 <td>{{$bookmark->bookmark_id}}</td>
                 <td>{{$bookmark->size}}</td>
                 <td>{{$bookmark->quantity}}</td>
+                <td>{{$bookmark->type_of_bookmark}}
                 <td>{{$bookmark->users['first_name']}}</td>  
                 <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
                  <td class = "{{$bookmark->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->status == 1 ? "active" : "not active"}}</td> 

@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 use App;
 use Session;
+use App\User;
+use App\Order;
+use App\BookClub;
+use App\Book;
+use App\Bookmark;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +30,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $userDetail = User::count();
+       $publisherDetail= User::role('publisher')->count();
+       $totalOrder= Order::count();
+       $bookclubDetail = BookClub::count(); 
+       $totalProduct = Book::count() + Bookmark::count(); 
+        return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail'));
     }
+       
+    
 
     public  function setLanguage($locale) 
     {
@@ -34,4 +47,5 @@ class HomeController extends Controller
         Session::put('locale', $locale);
         return redirect()->back();
     }
+  
 }

@@ -37,13 +37,17 @@
                             <span class="text-danger">{{$errors->first('last_name')}}</span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.password')</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password"  value="{{ $user->password }}"  placeholder="Password Here">
-                            <span class="text-danger">{{$errors->first('password')}}</span>
+                    <div class="form-group row ">
+                            <label for="password" class="col-sm-3 text-right control-label col-form-label">Password</label>
+                            <div class="col-md-6">
+                                <input  type="password" class="form-control" value="{{ $user->password}}" name="password"  >
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.contact_no')</label>
                         <div class="col-sm-9">

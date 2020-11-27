@@ -64,6 +64,7 @@ class BookmarksController extends Controller
             // 'bookmark_id' => 'required|numeric|unique:bookmarks',  
             'size' => 'required',
             'quantity' => 'required|numeric',
+            'type_of_bookmark'=>'required',
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
@@ -87,6 +88,7 @@ class BookmarksController extends Controller
             }
             $bookmark->size= $request->size;
             $bookmark->quantity =$request->quantity;
+            $bookmark->type_of_bookmark= $request->type_of_bookmark;
             $bookmark->user_id = $request->publisher;
             $bookmark->stock_status = $request->stock_status;
             if($request->has('featured') && $request->featured == "1") {
@@ -173,6 +175,7 @@ class BookmarksController extends Controller
             // 'bookmark_id' => 'required|numeric|unique:bookmarks,bookmark_id,'.$id,  
             'size' => 'required',
             'quantity' => 'required|numeric',
+            'type_of_bookmark'=>'required',
             'publisher' => 'required',
             'image'=> 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=300,max_height=900',
             'stock_status' => 'required',
@@ -189,6 +192,7 @@ class BookmarksController extends Controller
         $bookmark->arabic_description= $request->arabic_description;
         $bookmark->size= $request->size;
         $bookmark->quantity =$request->quantity;
+        $bookmark->type_of_bookmark= $request->type_of_bookmark;
         $bookmark->user_id = $request->publisher;
         $bookmark->stock_status = $request->stock_status;
         if ($request->has('featured') && $request->featured == "1") {
