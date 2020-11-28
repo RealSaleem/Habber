@@ -97,12 +97,18 @@ class CartRepository implements RepositoryInterface {
     // remove record from the database
     public function delete(Model $model)
     {
-        dd($model);
+
         $model->books()->detach();
         $model->bookmarks()->detach();
         return $model->delete();
     }
 
+    public function deleteUserCart($id) {
+        $this->model->where('user_id')->first();
+        $this->model->books()->detach();
+        $this->model->bookmarks()->detach();
+        return $this->model->delete();
+    }
     // show the record with the given id
     public function show($id)
     {

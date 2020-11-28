@@ -33,36 +33,81 @@ class OrderRepository implements RepositoryInterface {
         $arr['total_quantity'] = $data['total_quantity'];
         $arr['address_id'] = $data['address_id'];
         $arr['status'] = "pending";
-    
-        if( count($data['cartProducts']->books) > 0) {
-            foreach($data['cartProducts']->books as $i) {
-                if($this->decreaseBookQuantity($i->id,$i->pivot->quantity) == true) {
-                    array_push($books, $i);
+
+        // $arr['user_id'] = auth()->user()->id;
+        // $arr['total_price'] = $data['total_price'];
+        // $cart = $this->model->create($arr);
+        // dd($data);
+        if( count($data['product']) > 0) {
+            foreach($data['product'] as $i) {
+                if( $i['product_type'] == "book") {
+                    if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+                        array_push($books, $i);
+                    }
+                    else {
+                        return false;
+                    }
                 }
-                else {
-                    return false;
-                }
-            }
-            $order = $this->model->create($arr);
-           
+            }           
         }
-        if(count($data['cartProducts']->bookmarks) > 0) {
-            foreach($data['cartProducts']->bookmarks as $j) {
-                if($this->decreaseBookmarkQuantity($j->id,$j->pivot->quantity) == true) {
-                    array_push($bookmarks, $j);
-                }
-                else {
-                    return false;
+        if(count($data['product']) > 0) {
+            foreach($data['product'] as $j) {
+                if($j['product_type'] == "bookmark") {
+                    if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
+                        array_push($bookmarks, $j);
+                    }
+                    else {
+                        return false;
+                    }   
                 }
             }       
         }
+        // dd($books);
+
+        $order = $this->model->create($arr);
         for($i = 0; $i < count($books); $i++) {
-            $order->books()->attach($books[$i]->id, ['quantity' => $books[$i]->pivot->quantity , 'price' => $books[$i]->pivot->price,'product_type' =>'book' ]);
+            $order->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book' ]);
         }
         for($i = 0; $i < count($bookmarks); $i++) {
-            $order->bookmarks()->attach($bookmarks[$i]->id,['quantity' => $bookmarks[$i]->pivot->quantity , 'price' => $bookmarks[$i]->pivot->price,'product_type' => 'bookmark' ]);
+            $order->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ]);
         }
         return $order;
+    //    dd($books[0]['product_id']);
+        // if(count($books) > 0) {
+        
+        //     for($i = 0; $i < count($books); $i++) {
+        //         $cart->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' => $books[$i]['product_type'] ]);
+        //     }
+        // }
+        // if(count($bookmarks) > 0) {
+        //     for($i = 0; $i < count($bookmarks); $i++) {
+        //         $cart->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => $bookmarks[$i]['product_type'] ]);
+        //     }
+        // }
+    
+        // if( count($data['cartProducts']->books) > 0) {
+        //     foreach($data['cartProducts']->books as $i) {
+        //         if($this->decreaseBookQuantity($i->id,$i->pivot->quantity) == true) {
+        //             array_push($books, $i);
+        //         }
+        //         else {
+        //             return false;
+        //         }
+        //     }
+        //     $order = $this->model->create($arr);
+           
+        // }
+        // if(count($data['cartProducts']->bookmarks) > 0) {
+        //     foreach($data['cartProducts']->bookmarks as $j) {
+        //         if($this->decreaseBookmarkQuantity($j->id,$j->pivot->quantity) == true) {
+        //             array_push($bookmarks, $j);
+        //         }
+        //         else {
+        //             return false;
+        //         }
+        //     }       
+        // }
+      
 
     }
     // Insert data in multiple rows

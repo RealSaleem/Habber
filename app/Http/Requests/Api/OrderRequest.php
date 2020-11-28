@@ -24,7 +24,10 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'cart_id' => ['bail', 'required'],
+            'product.*.product_id' => ['bail', 'required','min:1'],
+            'product.*.product_type' => ['bail', 'required','min:1'],
+            'product.*.quantity' => ['bail','required','min:1'],
+            'product.*.price' => ['bail','required','min:1'],
             'address_id' => ['bail','required'],
             'total_price' => ['bail', 'required'],
             'total_quantity' => ['bail','required']
