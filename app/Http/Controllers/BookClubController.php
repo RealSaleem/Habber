@@ -48,7 +48,6 @@ class BookClubController extends Controller
      */
     public function store(Request $request)
     {
-        
         $validatedData = $request->validate([
             'name' => 'required', 
             'arabic_name' => 'required', 

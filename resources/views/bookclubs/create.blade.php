@@ -47,7 +47,7 @@
                     <div class="form-group row">
                         <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.banner_image')</label>
                         <div class="col-sm-9">
-                        <input id="banner_image" type="file" class="form-control" name="banner_image">
+                        <input id="banner_image" type="file" class="form-control" name="banner_image" >
                             <span class="text-danger">{{$errors->first('banner_image')}}</span>
                         </div>
                     </div>
