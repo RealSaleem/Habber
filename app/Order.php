@@ -24,6 +24,10 @@ class Order extends Model
     public function users() {
         return $this->belongsTo(User::class,'user_id','id');
     }
+    public function currencies() {
+        return $this->belongsTo(Currency::class,'currency_id','id');
+    }
+
   
 
 }

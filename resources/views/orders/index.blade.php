@@ -17,6 +17,7 @@
                     <tr>
                         <th>User ID</th>
                         <th>Address</th>
+                        <th>Currency</th>
                         <th>Total Price</th>
                         <th>Total Quantity</th>
                         <th>Status</th>
@@ -29,6 +30,7 @@
 
                         <td>{{$order->user_id}}</td>
                         <td>{{$order->address_id}}</td>
+                        <td>{{$order->currency_id}}</td>
                         <td>{{$order->total_price}}</td>
                         <td>{{$order->total_quantity}}</td>
                         <td>{{$order->status == "0" ? "Pending" : "Seen"}}</td> 

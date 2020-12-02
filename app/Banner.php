@@ -21,6 +21,6 @@ class Banner extends Model
     }
     
     public function bookclubs(){
-        return $this->belongsTo('App\Bookclub','bookclub_id','id' );
+        return $this->belongsTo('App\BookClub','bookclub_id','id' );
     }
 }
