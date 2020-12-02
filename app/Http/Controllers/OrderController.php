@@ -59,6 +59,7 @@ class OrderController extends Controller
         //
         $order = Order::with('books','bookmarks','addresses','users','currencies')->find($id);
         return view('orders.detail', compact('order'));
+    
     }
 
     /**

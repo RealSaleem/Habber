@@ -22,7 +22,7 @@ class OrderResource extends JsonResource
             'total_price' => $this->total_price,
             'status' => $this->status,
             'total_quantity' => $this->total_quantity,
-            'currency'=> $this->currency,
+            'currency'=> $this->currencies,
             $this->mergeWhen($this->bookmarks, [
                 'bookmarks' => BookmarkResource::collection($this->bookmarks),
                 
