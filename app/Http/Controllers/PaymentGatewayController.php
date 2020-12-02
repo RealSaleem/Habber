@@ -70,9 +70,7 @@ class PaymentGatewayController extends Controller
      */
     public function show($id)
     {
-        $order = Order::findOrFail($id);
-      //  dd($order);
-        return view('payment.create', compact('order'));
+        
     }
 
 public function successPayment() {
