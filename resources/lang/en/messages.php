@@ -317,6 +317,9 @@ return [
         'order_id'=> 'Order ID',
         'order_by'=> 'Order By',
         'order_date'=> 'Order Date',
+        'currency'=>'Currency',
+        'symbol'=>'Symbol',
+        'iso'=>'ISO',
       
     ]
 

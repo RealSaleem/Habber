@@ -7,6 +7,7 @@ use App\User;
 
 
 
+
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -56,7 +57,7 @@ class OrderController extends Controller
     public function show($id)
     {
         //
-        $order = Order::with('books','bookmarks','addresses','users')->find($id);
+        $order = Order::with('books','bookmarks','addresses','users','currencies')->find($id);
         return view('orders.detail', compact('order'));
     }
 

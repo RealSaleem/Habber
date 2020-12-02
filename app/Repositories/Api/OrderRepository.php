@@ -32,6 +32,7 @@ class OrderRepository implements RepositoryInterface {
         $arr['total_price'] = $data['total_price'];
         $arr['total_quantity'] = $data['total_quantity'];
         $arr['address_id'] = $data['address_id'];
+        $arr['currency_id']=$data['currency_id'];
         $arr['status'] = "pending";
 
         // $arr['user_id'] = auth()->user()->id;
