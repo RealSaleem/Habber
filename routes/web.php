@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
+Route::get('payment/success','PaymentGatewayController@successPayment')->name('payment.success');
+Route::get('payment/failure','PaymentGatewayController@failurePayment')->name('payment.failure');
 Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
@@ -60,6 +62,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('favourites','FavouriteController');
    Route::resource('sitesetting','SiteSettingController');
    Route::resource('publisher','PublisherController');
+   Route::resource('push_notifications','PushNotificationController');
+   Route::post('push_notifications','PushNotificationController@sendNotification');
+   Route::get('payment/{id}','PaymentGatewayController@show');
+   Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');
+   
+  
+   
+   
 });
 
 
