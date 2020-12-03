@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
-Route::get('/',function() {	
-   return view('welcome');	
-})->middleware('auth')->name('welcome');
+Route::get('/','HomeController@index')->middleware('auth')->name('welcome');
+// Route::get('/',function() {	
+//    return view('welcome');	
+// })->middleware('auth')->name('welcome');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-   Route::get('/','HomeController@index');
+   
    Route::get('welcome','HomeController@index')->name('welcome');
    Route::get('language/{locale}', 'HomeController@setLanguage')->name('set_language');
    Route::resource('users','UserController');
@@ -63,6 +64,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('sitesetting','SiteSettingController');
    Route::resource('publisher','PublisherController');
    Route::resource('orders','OrderController');
+   Route::resource('systemreports','ReportController');
+
    Route::post('orders/activate/{id}','OrderController@activateOrder');
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
 

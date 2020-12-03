@@ -85,7 +85,7 @@
                             <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Shipped</option>
                             <option value="2" {{($order->status == "2" ? 'selected' : '')}}>Delivered</option>
                      </select>
-</div>
+                    </div>
 
                     <div class="card-body">
                     <a href="{{route('orders.index')}}">

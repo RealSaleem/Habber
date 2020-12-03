@@ -21,6 +21,7 @@
                         <th>Total Price</th>
                         <th>Total Quantity</th>
                         <th>Status</th>
+                        <th>Payment Type</th>
                         <th class="not">Action</th>
                     </tr>
                 </thead>
@@ -34,6 +35,8 @@
                         <td>{{$order->total_price}}</td>
                         <td>{{$order->total_quantity}}</td>
                         <td>{{$order->status == "0" ? "Pending" : "Seen"}}</td> 
+                        <td>{{$order->type == "1" ?  "COD" : "Online"}}</td> 
+
                         <td>
                             <div class="row">
                                 <div class="col-2">

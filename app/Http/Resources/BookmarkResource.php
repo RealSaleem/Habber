@@ -26,7 +26,7 @@ class BookmarkResource extends JsonResource
             'bookmark_id'  => $this->bookmark_id,
             'description'   => $this->description ?? "",
             'arabic_description'   => $this->arabic_description ?? "",
-            'price'    => number_format($this->product_prices->price,4) ?? "",
+            'price'    => number_format(optional($this->product_prices)->price,4) ?? "",
             'size'  => $this->size,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
             'type_of_bookmark'=> $this->type_of_bookmark ?? "",

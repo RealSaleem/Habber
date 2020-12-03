@@ -32,10 +32,11 @@ class HomeController extends Controller
     {
         $userDetail = User::count();
        $publisherDetail= User::role('publisher')->count();
-       $totalOrder= Order::count();
+       $pendingOrder= Order::where('status','pending')->count();
+       $totalOrder = Order::count();
        $bookclubDetail = BookClub::count(); 
        $totalProduct = Book::count() + Bookmark::count(); 
-        return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail'));
+        return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder'));
     }
        
     
