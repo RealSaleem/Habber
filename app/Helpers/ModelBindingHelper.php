@@ -1,6 +1,6 @@
 <?php
 namespace App\Helpers;
-use App\Misc\Constants;
+
 // require_once 'Models/HesabeCheckoutRequestModel.php';
 // require_once 'Models/HesabeCheckoutResponseModel.php';
 // require_once 'Models/HesabePaymentResponseModel.php';
@@ -60,8 +60,8 @@ class ModelBindingHelper
         $this->hesabeCheckoutResponseModel->status = $data['status'];
         $this->hesabeCheckoutResponseModel->code = $data['code'];
         $this->hesabeCheckoutResponseModel->message = $data['message'];
-        $this->hesabeCheckoutResponseModel->response['data'] = ($data['code'] == Constants::SUCCESS_CODE ||
-        $data['code'] == Constants::AUTHENTICATION_FAILED_CODE) ? $data['response']['data'] : $data['data'];
+        $this->hesabeCheckoutResponseModel->response['data'] = ($data['code'] == env('SUCCESS_CODE') ||
+        $data['code'] == env('AUTHENTICATION_FAILED_CODE')) ? $data['response']['data'] : $data['data'];
 
         return $this->hesabeCheckoutResponseModel;
     }

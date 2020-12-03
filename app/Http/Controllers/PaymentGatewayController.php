@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Misc\Constants;
 use Illuminate\Http\Request;
-use App\Misc\PaymentHandler;
 use App\Helpers\ModelBindingHelper;
-use App\HesabeCheckoutResponseModel;
 use Hesabe\Payment\HesabeCrypt; 
 use App\Order;
 use App\Transaction;
@@ -16,67 +13,26 @@ class PaymentGatewayController extends Controller
     public $secretKey;
     public $ivKey;
     public $accessCode;
-    public $hesabeCheckoutResponseModel;
     public $modelBindingHelper;
     public $hesabeCrypt;
 
     public function __construct()
     {
-        $this->paymentApiUrl = Constants::PAYMENT_API_URL;
+        $this->paymentApiUrl = env('PAYMENT_API_URL');
         // Get all three values from Merchant Panel, Profile section
-        $this->secretKey = Constants::MERCHANT_SECRET_KEY;  // Use Secret key
-        $this->ivKey = Constants::MERCHANT_IV;              // Use Iv Key
-        $this->accessCode = Constants::ACCESS_CODE;         // Use Access Code
-        $this->hesabeCheckoutResponseModel = new HesabeCheckoutResponseModel();
+        $this->secretKey = env('MERCHANT_SECRET_KEY'); // Use Secret key
+        $this->ivKey = env('MERCHANT_IV');              // Use Iv Key
+        $this->accessCode = env('ACCESS_CODE');// Use Access Code
         $this->modelBindingHelper = new ModelBindingHelper();
         $this->hesabeCrypt = new HesabeCrypt();   // instance of Hesabe Crypt library
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-       
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
+   
 
 public function successPayment() {
     
     $orderId = $_GET['id'];
     $responseData = $_GET['data'];
+    $decryptResponse = $this->hesabeCrypt::decrypt($responseData, $this->secretKey, $this->ivKey);
     $decryptedResponse = $this->getPaymentResponse($responseData);
     $order = Order::find($orderId);
     $order->payment_status = $decryptedResponse->status;
@@ -101,7 +57,8 @@ public function successPayment() {
     $trans->method = $decryptedResponse->response['method'];
     $trans->administrativecharge =  $decryptedResponse->response['administrativeCharge'];
     $trans->save();
-  // print_r($decryptedResponse);
+    $message3 = $decryptedResponse->message;
+    return view('payment.index', compact('message3'));
     
     
 }
@@ -111,8 +68,10 @@ public function failurePayment() {
     $orderId = $_GET['id'];
     $responseData = $_GET['data'];
     $decryptResponse = $this->hesabeCrypt::decrypt($responseData, $this->secretKey, $this->ivKey);
-    print_r($decryptResponse);
-    exit;
+    $decryptedResponse = $this->getPaymentResponse($responseData);
+    $message3 = $decryptedResponse->message;
+    return view('payment.index', compact('message3'));
+    
 }
 
 
@@ -131,40 +90,5 @@ public function getPaymentResponse($responseData)
     return $decryptedResponse;
 }
 
-  
-
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   
 }
