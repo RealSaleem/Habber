@@ -115,6 +115,7 @@ class OrderController extends Controller
         $order->delete();
         return back()->with('success', 'Order deleted successfully');
     }
+    
 
     
 }

@@ -5,9 +5,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\BookmarkResource;
 use App\Http\Resources\BookClubResource;
+use Illuminate\Support\Facades\URL;
 
 class OrderResource extends JsonResource
-{
+ { //  
     /**
      * Transform the resource into an array.
      *
@@ -23,6 +24,9 @@ class OrderResource extends JsonResource
             'status' => $this->status,
             'total_quantity' => $this->total_quantity,
             'currency'=> $this->currencies,
+            'payment_type'=>$this->payment_type,
+            'payment_success_url'=>URL::to("/").'/payment/success/?id='.$this->id,
+            'payment_failure_url'=>URL::to("/").'/payment/failure/?id='.$this->id,
             $this->mergeWhen($this->bookmarks, [
                 'bookmarks' => BookmarkResource::collection($this->bookmarks),
                 
