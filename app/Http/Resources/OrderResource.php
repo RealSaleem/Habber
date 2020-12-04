@@ -19,14 +19,15 @@ class OrderResource extends JsonResource
     {
         return [
             'id'     => $this->id,
-            'user'   => auth()->user()->first_name,
+            //'user'   => auth()->user()->first_name,
             'total_price' => $this->total_price,
             'status' => $this->status,
             'total_quantity' => $this->total_quantity,
-            'currency'=> $this->currencies,
+            'currency_iso'=> $this->currencies->iso,
             'payment_type'=>$this->payment_type,
             'payment_success_url'=>URL::to("/").'/payment/success/?id='.$this->id,
             'payment_failure_url'=>URL::to("/").'/payment/failure/?id='.$this->id,
+            'navigation' => $this->payment_type == 'online' ? 1 : 0,
             $this->mergeWhen($this->bookmarks, [
                 'bookmarks' => BookmarkResource::collection($this->bookmarks),
                 
