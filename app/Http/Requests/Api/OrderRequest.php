@@ -29,7 +29,7 @@ class OrderRequest extends FormRequest
             'product.*.quantity' => ['bail','required','min:1'],
             'product.*.price' => ['bail','required','min:1'],
             'address_id' => ['bail','required'],
-            'currency_iso'=>['bail','required'],
+            'currency_id'=>['bail','required'],
             'total_price' => ['bail', 'required'],
             'total_quantity' => ['bail','required'],
             'payment_type'=> ['bail','required'],

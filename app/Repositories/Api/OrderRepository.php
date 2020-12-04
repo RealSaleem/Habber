@@ -32,38 +32,37 @@ class OrderRepository implements RepositoryInterface {
         $arr['total_price'] = $data['total_price'];
         $arr['total_quantity'] = $data['total_quantity'];
         $arr['address_id'] = $data['address_id'];
-        //$arr['currency_iso']=$data['currency_iso'];
-        $currency = \App\Currency::where('iso',$data['currency_iso'])->first();
-        $arr['currency_id']= $currency->id;
+        $arr['currency_id']=$data['currency_id'];
         $arr['status'] = "pending";
         $arr['payment_type']=$data['payment_type'];
+//        print_r($arr);exit;
         $total_price = 0;
         if( count($data['product']) > 0) {
             foreach($data['product'] as $i) {
                 if( $i['product_type'] == "book") {
-                    if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
-                        $books['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
-                        $total_price = $total_price+$books['price'];
+                    //if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+                        $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
+                        $total_price = $total_price+$i['price'];
                         array_push($books, $i);
                         
-                    }
-                    else {
-                        return false;
-                    }
+//                    }
+//                    else {
+//                        return false;
+//                    }
                 }
             }           
         }
         if(count($data['product']) > 0) {
             foreach($data['product'] as $j) {
                 if($j['product_type'] == "bookmark") {
-                    if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
-                        $bookmarks['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
-                        $total_price = $total_price+$bookmarks['price'];
+                    //if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
+                        $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
+                        $total_price = $total_price+$i['price'];
                         array_push($bookmarks, $j);
-                    }
-                    else {
-                        return false;
-                    }   
+//                    }
+//                    else {
+//                        return false;
+//                    }   
                 }
             }       
         }
