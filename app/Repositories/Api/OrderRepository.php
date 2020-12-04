@@ -38,8 +38,8 @@ class OrderRepository implements RepositoryInterface {
         $arr['status'] = "pending";
         $arr['payment_type']=$data['payment_type'];
         $total_price = 0;
-        if( count($data['products']) > 0) {
-            foreach($data['products'] as $i) {
+        if( count($data['product']) > 0) {
+            foreach($data['product'] as $i) {
                 if( $i['product_type'] == "book") {
                     if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
                         $books['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
@@ -53,8 +53,8 @@ class OrderRepository implements RepositoryInterface {
                 }
             }           
         }
-        if(count($data['products']) > 0) {
-            foreach($data['products'] as $j) {
+        if(count($data['product']) > 0) {
+            foreach($data['product'] as $j) {
                 if($j['product_type'] == "bookmark") {
                     if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
                         $bookmarks['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
