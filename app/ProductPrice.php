@@ -18,7 +18,7 @@ class ProductPrice extends Model
     }
 
     public static function getPrice($product_id,$currency_id,$quantity,$product_type) {
-        $price = $this::where('product_id',$product_id)->where('currency_id', $currency_id)->where('product_type',$product_type)->first();
+        $price = self::where('product_id',$product_id)->where('currency_id', $currency_id)->where('product_type',$product_type)->first();
         return $price->price * $quantity;
     }
 }
