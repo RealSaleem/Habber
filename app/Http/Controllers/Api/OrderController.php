@@ -77,6 +77,7 @@ class OrderController extends Controller
             }
             else {
                 $this->cart->deleteUserCart(auth()->user()->id);
+                return (new OrderResource($order));
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
             }
            

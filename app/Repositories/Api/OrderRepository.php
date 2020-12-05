@@ -34,37 +34,40 @@ class OrderRepository implements RepositoryInterface {
         $arr['address_id'] = $data['address_id'];
         $arr['currency_id']=$data['currency_id'];
         $arr['status'] = "pending";
-
-        // $arr['user_id'] = auth()->user()->id;
-        // $arr['total_price'] = $data['total_price'];
-        // $cart = $this->model->create($arr);
-        // dd($data);
+        $arr['payment_type']=$data['payment_type'];
+//        print_r($arr);exit;
+        $total_price = 0;
         if( count($data['product']) > 0) {
             foreach($data['product'] as $i) {
                 if( $i['product_type'] == "book") {
-                    if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+                    //if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+                        $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
+                        $total_price = $total_price+$i['price'];
                         array_push($books, $i);
-                    }
-                    else {
-                        return false;
-                    }
+                        
+//                    }
+//                    else {
+//                        return false;
+//                    }
                 }
             }           
         }
         if(count($data['product']) > 0) {
             foreach($data['product'] as $j) {
                 if($j['product_type'] == "bookmark") {
-                    if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
+                    //if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
+                        $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
+                        $total_price = $total_price+$i['price'];
                         array_push($bookmarks, $j);
-                    }
-                    else {
-                        return false;
-                    }   
+//                    }
+//                    else {
+//                        return false;
+//                    }   
                 }
             }       
         }
         // dd($books);
-
+        $arr['total_price'] = $total_price;
         $order = $this->model->create($arr);
         for($i = 0; $i < count($books); $i++) {
             $order->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book' ]);

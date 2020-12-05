@@ -31,7 +31,9 @@ class OrderRequest extends FormRequest
             'address_id' => ['bail','required'],
             'currency_id'=>['bail','required'],
             'total_price' => ['bail', 'required'],
-            'total_quantity' => ['bail','required']
+            'total_quantity' => ['bail','required'],
+            'payment_type'=> ['bail','required'],
+          
         ];
     }
 }
