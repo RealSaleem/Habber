@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('banners-sortable', 'BannerController@sortBanners');
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');
+   Route::get('country/city/{id}','CountryController@getCity')->name('country.cities');
    Route::resource('permissions','PermissionController');
    Route::resource('ads','AdController');
    Route::resource('roles','RoleController');
@@ -65,6 +66,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('publisher','PublisherController');
    Route::resource('orders','OrderController');
    Route::resource('systemreports','ReportController');
+   Route::resource('city','CityController');
+   Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');
+   Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');
 
    Route::post('orders/activate/{id}','OrderController@activateOrder');
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');

@@ -321,7 +321,16 @@ return [
         'symbol'=>'Symbol',
         'iso'=>'ISO',
       
-    ]
+    ],
+    'city_page'=> [
+        'city'=> 'City' ,
+        'add_city'=> 'Add  City',
+        'edit_city'=> 'Edit City',
+        'add_city_info'=> 'Add City Info',
+        'edit_city_info'=> 'Edit City Info',
+        'name'=> 'Name',
+        'shipping_charges'=> 'Shipping Charges',
+    ],
 
 
     
