@@ -56,6 +56,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('banners-sortable', 'BannerController@sortBanners');
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');
+   Route::post('country/enable/{id}','CountryController@enableCountry');
+   Route::post('country/disable/{id}','CountryController@disableCountry');
    Route::resource('permissions','PermissionController');
    Route::resource('ads','AdController');
    Route::resource('roles','RoleController');
@@ -64,7 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('sitesetting','SiteSettingController');
    Route::resource('publisher','PublisherController');
    Route::resource('orders','OrderController');
-   Route::resource('systemreports','ReportController');
+   Route::resource('reports','ReportController');
 
    Route::post('orders/activate/{id}','OrderController@activateOrder');
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');

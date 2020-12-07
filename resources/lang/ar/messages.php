@@ -1956,7 +1956,8 @@ return [
            'order_date'=> 'تاريخ الطلب',
            'currency'=>'عملة',
            'symbol'=>'رمز',
-           'iso'=>'ايزو'
+           'iso'=>'ايزو',
+           'payment_type'=>'نوع الدفع'
        ],
 
 
