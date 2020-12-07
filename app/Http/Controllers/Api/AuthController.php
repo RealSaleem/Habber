@@ -32,9 +32,13 @@ class AuthController extends Controller
             ])) 
         {
             $user = Auth::user();
+           
             if($user->status == true && $user->joining_request == false) {
+                $ftoken = User::where('email',request('email'))->first();
                 $user['token'] = $user->createToken('token')->accessToken;
-               
+                $user['firebase_token'] = request('firebase_token');
+               $ftoken->firebase_token = request('firebase_token');
+               $ftoken->save();
                 return (new AuthResource($user->load('languages')));
             }
             else {
