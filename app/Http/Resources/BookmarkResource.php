@@ -20,6 +20,10 @@ class BookmarkResource extends JsonResource
         return [
             'id'     => $this->id,
             'title'   => $this->title,
+            'product_id' => optional($this->pivot)->product_id,
+            'cart_quantity' => optional($this->pivot)->quantity,
+            'cart_price' => optional($this->pivot)->price,
+            'product_type' => 'bookmark',
             'arabic_title' => $this->arabic_title,
             'maker_name'   => $this->maker_name,
             'arabic_maker_name'   => $this->arabic_maker_name,
