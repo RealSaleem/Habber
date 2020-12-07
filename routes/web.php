@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
+Route::get('payment/success','PaymentGatewayController@successPayment')->name('payment.success');
+Route::get('payment/failure','PaymentGatewayController@failurePayment')->name('payment.failure');
+Route::get('/',function() {
+   return view('welcome');
+})->middleware('auth')->name('welcome');
 Route::get('/','HomeController@index')->middleware('auth')->name('welcome');
 // Route::get('/',function() {	
 //    return view('welcome');	
@@ -64,15 +69,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('favourites','FavouriteController');
    Route::resource('sitesetting','SiteSettingController');
    Route::resource('publisher','PublisherController');
+   Route::resource('push_notifications','PushNotificationController');
+   Route::post('push_notifications','PushNotificationController@sendNotification');
+   Route::get('payment/{id}','PaymentGatewayController@show');
+   Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');
    Route::resource('orders','OrderController');
    Route::resource('systemreports','ReportController');
    Route::resource('city','CityController');
    Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');
    Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');
-
    Route::post('orders/activate/{id}','OrderController@activateOrder');
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
-
 });
 
 

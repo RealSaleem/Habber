@@ -43,7 +43,7 @@
                             <td>{{$book->product_prices['price']}}</td>
                             <td>{{$book->isbn}}</td>
                             <td>{{$book->total_pages}}</td>  
-                            <td>{{$book->quantity}}</td>
+                            <td>{{( $book->quantity == 0 ) ? "out of stock" : $book->quantity}}</td>
                             <td>{{$book->users['first_name']}}</td>  
                             <td>{{$book->book_clubs['name']}}</td>
                             @if(count($book->genres) > 1)

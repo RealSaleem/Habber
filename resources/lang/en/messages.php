@@ -266,6 +266,16 @@ return [
         'permission_name'=>'Name',
     ],
 
+    'push_notifications_page' => [
+        'push_notifications' => 'Push Notifications',
+        'add_push_notifications'=> 'New Notification',
+        'add_push_notifications_info'=> 'New Notification Information',
+        'title'=> 'Title',
+        'options'=> 'Options ',
+        'users' => 'Users',
+        'description'=> 'Description',
+    ],
+
     'role_page' => [
         'role' => 'Roles',
         'add_role'=> 'Add New Role',
