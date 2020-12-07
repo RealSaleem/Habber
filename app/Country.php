@@ -12,6 +12,11 @@ class Country extends Model
         return $this->belongsTo(Address::class,'id','country_id');
     }
 
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
     public function publisher()
     {
         return $this->belongsTo(User::class,'id','country_id');

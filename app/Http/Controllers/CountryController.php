@@ -126,7 +126,19 @@ class CountryController extends Controller
         $country->save();   
         return back()->with('success', 'Country updated successfully ');
     }
-
+     public function getCity($id)
+    {
+        $country = Country::with(['cities' => function($query) {
+            $query->where('status',true);
+        }])->findOrFail($id);
+        if ($country->cities) {
+            return $country->cities; 
+        }
+        else {
+            return json_encode($country->cities); 
+        }
+          
+    }
     /**
      * Remove the specified resource from storage.
      *

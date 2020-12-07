@@ -23,7 +23,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $address = Address::with('countries')->get();
+        $address = Address::with('countries','cities')->get();
         return view('address.index', compact('address'));
     }
 
@@ -63,7 +63,7 @@ class AddressController extends Controller
         $address->address_name = $request->address_name;
         $address->address_line1 = $request->address_line1;
         $address->address_line2= $request->address_line2;
-        $address->city= $request->city;
+        $address->city_id = $request->city;
         $address->state = $request->state; 
         $address->country_id = $request->country_id;
         $address->post_code= $request->post_code;
@@ -94,7 +94,7 @@ class AddressController extends Controller
     {
         //
         
-        $address = Address::with('users')->findOrFail($id);
+        $address = Address::with('users','cities')->findOrFail($id);
         $user = User::all();
         $fromUser = request()->fromUser;
         $country = Country::all();
@@ -127,7 +127,7 @@ class AddressController extends Controller
         $address->address_name = $request->address_name;
         $address->address_line1 = $request->address_line1;
         $address->address_line2= $request->address_line2;
-        $address->city= $request->city;
+        $address->city_id= $request->city;
         $address->state = $request->state; 
         $address->country_id = $request->country_id;
         $address->post_code= $request->post_code;

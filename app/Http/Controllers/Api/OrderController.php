@@ -73,11 +73,11 @@ class OrderController extends Controller
             // $data['address_id'] = $request->address_id;
             $order = $this->model->create($request->all());
             if ($order == false) {
-                return (new OrderResource($order));
                 return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Order Creation UnSuccessfull! Some Products ran out of stock');
             }
             else {
                 $this->cart->deleteUserCart(auth()->user()->id);
+                return (new OrderResource($order));
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
             }
            
