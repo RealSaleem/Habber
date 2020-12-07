@@ -45,6 +45,7 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.country')</label>
                         <div class="col-sm-9">
                             <select  class="form-control" name="country_id" id="country_id">
+                            <option value="" disabled selected> select country</option>
                                 @foreach($country as $c )
                                 <option value="{{$c->id}}" > {{$c->name}}</option>
                                 @endforeach
@@ -55,10 +56,12 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.city')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="city"  value="{{ old('city') }}" id="city"  placeholder="City">
+                        <select  class="form-control" name="city" id="city_id" >
+                        </select>
                             <span class="text-danger">{{$errors->first('city')}}</span>
                         </div>
                     </div>
+                
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.state')</label>
                         <div class="col-sm-9">
@@ -108,3 +111,47 @@
 </div>
                   
 @endsection
+
+@section('scripts')
+<!-- <script src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css"> </script> -->
+<script>
+
+    $(document).ready(function() {
+       $('#country_id').change(function (){
+        var country_id = $("#country_id option").filter(":selected").val()
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('admin/country/city') }}" + "/" + country_id,
+                type: 'GET',
+                success: function(result)
+                {
+                  
+                    if(result == "null" ) {
+                        // window.setTimeout(function(){location.reload()},2000)
+                        toastr.error('Please Select Another Country Currently we do not provide delivery service to this Country');
+                        $('#city_id').append('<option value= disabled>No Citites</option>');
+                    }
+                    else {
+                        console.log(result.length);
+                        $.each(result, function(key, value) {
+
+                            $('#city_id')
+                                .append($('<option>', { value : value.id })
+                                .text(value.name));
+                        });
+                    }
+                  
+                   
+                    // window.setTimeout(function(){location.reload()},2000);
+                }
+            });
+       })
+        
+    });
+</script>
+@stop

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="page-title">@lang('messages.country_page.countries')</h1>
+<h1 class="page-title">@lang('messages.city_page.city')</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -14,38 +14,46 @@
           <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Iso</th>
                         <th>Name</th>
-                        <th>Nice Name</th>
-                        <th>Iso3</th>
-                        <th>Numcode</th>
-                        <th>Phonecode</th>
+                        <th>Country</th>
+                        <th>Shipping Charges</th>
+                        <th>Status</th>
                         <th> Action</th>                  
                     </tr>
                </thead>
                <tbody>
-               @foreach($country as $country)
+               @foreach($city as $city)
            <tr>
             
-            <td>{{$country->iso}}</td>
-            <td>{{$country->name}}</td>
-            <td>{{$country->nicename}}</td>
-            <td>{{$country->iso3}}</td>  
-            <td>{{$country->numcode}}</td>
-            <td>{{$country->phonecode}}</td>
+            <td>{{$city->name}}</td>
+            <td>{{$city->countries->name}}</td>
+            <td>{{$city->shipping_charges}}</td>  
+            <td>{{$city->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
                 <div class="row">
                     <div class="col-2">
-                        <form action="{{ action('CountryController@destroy', [$country->id])}}" method="post">
+                        <form action="{{ action('CityController@destroy', [$city->id])}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                         </form>
                     </div>
                     <div class="col-2">
-                        <a href="{{ action('CountryController@edit', [$country->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                        <a href="{{ action('CityController@edit', [$city->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
                     </div>
+                    <div class="col-2">
+                    @if($city->status == 1)
+                        <a><button class="btn btn-danger" onclick="deactivateCity('{{$city->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                    @else
+                        <a>
+                            <button class="btn btn-info" onclick="activateCity('{{$city->id}}')">
+                            @lang('messages.user_page.activate')
+                            </button>
+                        </a>
+                    @endif
                 </div>
+                </div>
+               
             </td>
             </tr>
             @endforeach            
@@ -94,5 +102,38 @@
         
     });
 
+    function deactivateCity(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/city/deactivate') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('City Deactivated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function activateCity(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/city/activate') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('City Activated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
 </script>
 @stop

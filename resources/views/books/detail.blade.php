@@ -56,6 +56,9 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.genre'):  {{ucfirst($book->genres[0]->title)}}</label>
                     </div>
                     <div class="form-group col-6">
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.quantity'):  {{ucfirst( $book->quantity == 0 ) ? "out of stock" : $book->quantity}}</label>
+                    </div>
+                    <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.added_by'): {{($book->bookAddedBy->roles[0]->name == "Admin") ? "Admin" : $book->bookAddedBy->roles[0]->name .' '. $book->bookAddedBy->fullname }} </label>
                     </div>
                     <div class="form-group col-6">
