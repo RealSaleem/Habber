@@ -26,10 +26,10 @@ class BookResource extends JsonResource
             'description'   => $this->description ?? "",
             'cover_type'    => $this->cover_type ?? "",
             $this->mergeWhen($this->genres, [
-                'genre'  => GenreResource::collection($this->genres) ?? "",
+                'genre'  =>  GenreResource::collection($this->genres) ?? "",
             ]),
            
-            'price'    => number_format($this->product_prices->price,4) ?? "",
+            'price'    => number_format(optional($this->product_prices)->price,4) ?? "",
             'total_pages'  => $this->total_pages,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
             'publisher'  => new UserResource($this->users) ?? "",

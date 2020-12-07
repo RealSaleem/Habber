@@ -27,6 +27,7 @@ class AuthResource extends JsonResource
             'language'  => new LanguageResource(optional($this->languages)),
             'currency'  => $this->currencies->name ?? "",
             'token' => $this->token,
+            'firebase_token' => $this->firebase_token,
     
         ];
           

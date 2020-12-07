@@ -23,7 +23,13 @@ Route::get('payment/failure','PaymentGatewayController@failurePayment')->name('p
 Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
+Route::get('/','HomeController@index')->middleware('auth')->name('welcome');
+// Route::get('/',function() {	
+//    return view('welcome');	
+// })->middleware('auth')->name('welcome');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+   
+   Route::get('welcome','HomeController@index')->name('welcome');
    Route::get('language/{locale}', 'HomeController@setLanguage')->name('set_language');
    Route::resource('users','UserController');
    Route::post('user/activate/{id}','UserController@activateUser')->name('activate_user');
@@ -55,6 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('banners-sortable', 'BannerController@sortBanners');
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');
+   Route::get('country/city/{id}','CountryController@getCity')->name('country.cities');
    Route::resource('permissions','PermissionController');
    Route::resource('ads','AdController');
    Route::resource('roles','RoleController');
@@ -66,10 +73,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('push_notifications','PushNotificationController@sendNotification');
    Route::get('payment/{id}','PaymentGatewayController@show');
    Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');
-   
-  
-   
-   
+   Route::resource('orders','OrderController');
+   Route::resource('systemreports','ReportController');
+   Route::resource('city','CityController');
+   Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');
+   Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');
+   Route::post('orders/activate/{id}','OrderController@activateOrder');
+   Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
 });
 
 

@@ -14,4 +14,13 @@ class Address extends Model
     public function countries() {
         return $this->belongsTo(Country::class,'country_id','id');
     }
+
+    public function cities()
+    {
+        return $this->belongsTo(City::class,'city_id','id');
+    }
+
+    public function orders() {
+        return $this->belongsTo(Order::class,'address_id','id');
+    }
 }

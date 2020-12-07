@@ -53,7 +53,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.bookclub'):  {{ucfirst($book->book_clubs['name'])}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.genre'):  {{ucfirst($book->genre['title'])}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.genre'):  {{ucfirst($book->genres[0]->title)}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.quantity'):  {{ucfirst( $book->quantity == 0 ) ? "out of stock" : $book->quantity}}</label>

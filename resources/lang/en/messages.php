@@ -31,7 +31,8 @@ return [
         'role'=>'Role',
         'picture'=>'Picture',
         'deactivate'=>'Deactivate',
-        'activate'=> 'Activate'
+        'activate'=> 'Activate',
+        'favourites'=>'Favourites'
     ],
     'book_page' => [
         'books' => 'Books',
@@ -66,7 +67,7 @@ return [
         'add_new_bookmark'=> 'Add New Bookmark',
         'edit_bookmark'=> 'Edit Bookmark',
         'add_bookmark_info'=> 'Add Bookmark Info',
-        'edit_bookmark_info'=> 'Edit Bookmarl Info',
+        'edit_bookmark_info'=> 'Edit Bookmark Info',
         'title'=> 'Title',
         'maker_name'=> 'Maker Name',
         'description'=>'Description',
@@ -77,6 +78,7 @@ return [
         'bookmark_id'=>'Bookmark ID',
         'size'=>'Size',
         'quantity'=>'Quantity',
+        'type_of_bookmark'=>'Bookmark Type',
         'stock_status'=>'Stock Status',
         'status'=> 'Status',
         'feature'=>'Feature',
@@ -251,7 +253,10 @@ return [
         'delete'=>'Delete',
         'edit'=> 'Edit',
         'back'=> 'Back',
-        'update_status'=> 'Update Status'
+        'update_status'=> 'Update Status',
+        'cancel_order' => 'Cancel Order',
+        'order_details'=> 'Order Details',
+        
     ],
 
     'permission_page' => [
@@ -306,8 +311,37 @@ return [
         'product_type'=>'Product Type',
         'operating_country'=>'Operating Country',
         'status'=>'Status',
+        'name'=>'Name',
+        'no_of_product'=>'No Of Products',
+        'no_of_order'=>'No Of Orders',
+        'publisher_id'=>'Publisher ID',
+        'date'=>'Date'
     
-        ]
+    ],
+    'order_page' => [
+        'order'=> 'Order',
+        'edit_order_info'=>'Edit Order Info ',
+        'user_id'=>'User ID',
+        'total_price'=>'Total Price',
+        'total_quantity'=>'Total Quantity',
+        'order_id'=> 'Order ID',
+        'order_by'=> 'Order By',
+        'order_date'=> 'Order Date',
+        'currency'=>'Currency',
+        'symbol'=>'Symbol',
+        'iso'=>'ISO',
+      
+    ],
+    'city_page'=> [
+        'city'=> 'City' ,
+        'add_city'=> 'Add  City',
+        'edit_city'=> 'Edit City',
+        'add_city_info'=> 'Add City Info',
+        'edit_city_info'=> 'Edit City Info',
+        'name'=> 'Name',
+        'shipping_charges'=> 'Shipping Charges',
+    ],
+
 
     
 

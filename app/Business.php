@@ -17,4 +17,6 @@ class Business extends Model
     public function bookmarks() {
         return $this->hasMany('App\Bookmark','id','business_id');
     }
+    
+    
 }

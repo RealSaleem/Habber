@@ -1672,7 +1672,8 @@ return [
         'role'=>'وظيفة',
         'picture'=>'صورة',
         'deactivate'=> 'تعطيل',
-        'activate'=> 'تفعيل'
+        'activate'=> 'تفعيل',
+        'favourites'=>'المفضلة'
     ],
     'book_page' => [
         'books' => 'الكتب',
@@ -1704,7 +1705,7 @@ return [
     'bookmark_page' => [
         'bookmarks' => 'إشارات مرجعية',
         'add_new_bookmark'=> 'إضافة إشارة مرجعية جديدة',
-        'edit_bookmarks'=> 'تحرير_العلامات',
+        'edit_bookmark'=> 'تحرير_العلامات',
         'add_bookmark_info'=> 'إضافة معلومات المرجعية',
         'edit_bookmark_info'=> 'تحرير المعلومات المرجعية',
         'title'=> 'عنوان',
@@ -1717,6 +1718,7 @@ return [
         'bookmark_id'=>'إشارات مرجعية',
         'size'=>'بحجم',
         'quantity'=>'كمية',
+        'type_of_bookmark'=>'نوع الإشارة المرجعية',
         'stock_status'=>'وضع مخزون',
         'status'=>'الحالة',
         'feature'=>'خاصية',
@@ -1885,7 +1887,9 @@ return [
         'delete'=>'حذف',
         'edit'=> 'تعديل',
         'back'=>'عودة',
-        'update_status'=>'تحديث الحالة'
+        'update_status'=>'تحديث الحالة',
+        'cancel_order'=>'الغاء الطلب',
+        'order_details'=> 'تفاصيل الطلب',
     ],
 
     'permission_page' => [
@@ -1933,8 +1937,27 @@ return [
         'product_type'=>'نوع المنتج',
         'operating_country'=>'بلد التشغيل',
         'status'=>'الحالة',
+        'name'=>'اسم',
+        'no_of_product'=>'لا من المنتج',
+        'no_of_order'=>'لا توجد أوامر',
+        'publisher_id'=>'معرف الناشر',
+        'date'=>'تاريخ'
     
-        ]
+    ],
+       'order_page' => [
+           'order'=> 'طلب',
+           'edit_order_info'=>'تحرير معلومات الطلب',
+           'user_id'=>'معرف المستخدم',
+           'total_price'=>'السعر الكلي',
+           'total_quantity'=>'الكمية الإجمالية',
+           'status'=>'الحالة',
+           'order_id'=> 'رقم التعريف الخاص بالطلب',
+           'order_by'=> 'ترتيب حسب',
+           'order_date'=> 'تاريخ الطلب',
+           'currency'=>'عملة',
+           'symbol'=>'رمز',
+           'iso'=>'ايزو'
+       ],
 
 
 ];

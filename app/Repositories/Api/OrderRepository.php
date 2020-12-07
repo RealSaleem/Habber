@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories\Api;
 use App\Genre;
+use App\Book;
+use App\Bookmark;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -29,29 +31,87 @@ class OrderRepository implements RepositoryInterface {
         $arr['user_id'] = auth()->user()->id;
         $arr['total_price'] = $data['total_price'];
         $arr['total_quantity'] = $data['total_quantity'];
+        $arr['address_id'] = $data['address_id'];
+        $arr['currency_id']=$data['currency_id'];
         $arr['status'] = "pending";
-        $order = $this->model->create($arr);
-        if( count($data['cartProducts']->books) > 0) {
-            foreach($data['cartProducts']->books as $i) {
-                // if( $i['product_type'] == "book") {
-                    array_push($books, $i);
-            }
-
-            for($i = 0; $i < count($books); $i++) {
-                // dd($books[$i]->id);
-                $order->books()->attach($books[$i]->id, ['quantity' => $books[$i]->pivot->quantity , 'price' => $books[$i]->pivot->price,'product_type' =>'book' ]);
-            }
+        $arr['payment_type']=$data['payment_type'];
+//        print_r($arr);exit;
+        $total_price = 0;
+        if( count($data['product']) > 0) {
+            foreach($data['product'] as $i) {
+                if( $i['product_type'] == "book") {
+                    //if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+                        $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
+                        $total_price = $total_price+$i['price'];
+                        array_push($books, $i);
+                        
+//                    }
+//                    else {
+//                        return false;
+//                    }
+                }
+            }           
         }
-        if(count($data['cartProducts']->bookmarks) > 0) {
-            foreach($data['cartProducts']->bookmarks as $j) {
-                // if( $i['product_type'] == "book") {
-                    array_push($bookmarks, $j);
+        if(count($data['product']) > 0) {
+            foreach($data['product'] as $j) {
+                if($j['product_type'] == "bookmark") {
+                    //if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
+                        $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
+                        $total_price = $total_price+$i['price'];
+                        array_push($bookmarks, $j);
+//                    }
+//                    else {
+//                        return false;
+//                    }   
+                }
             }       
-            for($i = 0; $i < count($bookmarks); $i++) {
-                $order->bookmarks()->attach($bookmarks[$i]->id,['quantity' => $bookmarks[$i]->pivot->quantity , 'price' => $bookmarks[$i]->pivot->price,'product_type' => 'bookmark' ]);
-            }
+        }
+        // dd($books);
+        $arr['total_price'] = $total_price;
+        $order = $this->model->create($arr);
+        for($i = 0; $i < count($books); $i++) {
+            $order->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book' ]);
+        }
+        for($i = 0; $i < count($bookmarks); $i++) {
+            $order->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ]);
         }
         return $order;
+    //    dd($books[0]['product_id']);
+        // if(count($books) > 0) {
+        
+        //     for($i = 0; $i < count($books); $i++) {
+        //         $cart->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' => $books[$i]['product_type'] ]);
+        //     }
+        // }
+        // if(count($bookmarks) > 0) {
+        //     for($i = 0; $i < count($bookmarks); $i++) {
+        //         $cart->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => $bookmarks[$i]['product_type'] ]);
+        //     }
+        // }
+    
+        // if( count($data['cartProducts']->books) > 0) {
+        //     foreach($data['cartProducts']->books as $i) {
+        //         if($this->decreaseBookQuantity($i->id,$i->pivot->quantity) == true) {
+        //             array_push($books, $i);
+        //         }
+        //         else {
+        //             return false;
+        //         }
+        //     }
+        //     $order = $this->model->create($arr);
+           
+        // }
+        // if(count($data['cartProducts']->bookmarks) > 0) {
+        //     foreach($data['cartProducts']->bookmarks as $j) {
+        //         if($this->decreaseBookmarkQuantity($j->id,$j->pivot->quantity) == true) {
+        //             array_push($bookmarks, $j);
+        //         }
+        //         else {
+        //             return false;
+        //         }
+        //     }       
+        // }
+      
 
     }
     // Insert data in multiple rows
@@ -60,6 +120,30 @@ class OrderRepository implements RepositoryInterface {
         $this->model = $model;
         
         return $this->model->insert($data);
+    }
+
+    public function decreaseBookQuantity($id,$quantity) {
+        $book = Book::find($id);
+        if($book->quantity > $quantity) {
+            $book->quantity = $book->quantity - $quantity;
+            $book->update();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function decreaseBookmarkQuantity($id,$quantity) {
+        $bookmark = Bookmark::find($id);
+        if($bookmark->quantity > $quantity) {
+            $bookmark->quantity = $bookmark->quantity - $quantity;
+            $bookmark->update();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // update record in the database

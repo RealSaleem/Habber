@@ -39,7 +39,10 @@
     
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($publisher->profile_pic) ?  url('storage/'.$publisher->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
                         <td>
-                            <div class="row">
+                        <div class="row">
+                               <div>
+                                    <a href="{{action('PublisherController@show',[$publisher->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                                     </div>
                                 <div class="col-2">
                                     <form action="{{ action('PublisherController@destroy', [$publisher->id])}}" method="post">
                                         @csrf

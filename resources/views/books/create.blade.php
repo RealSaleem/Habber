@@ -49,7 +49,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" id="description" placeholder="Description">{{ old('description') }}</textarea>
+                            <textarea type="textarea" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" id="description" placeholder="Description"  maxlength = "160">{{ old('description') }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher </label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.publisher') </label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="publisher" id="publisher" >
                             @foreach($user as $u)
