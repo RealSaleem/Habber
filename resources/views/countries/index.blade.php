@@ -34,7 +34,7 @@
             <td>{{$country->iso3}}</td>  
             <td>{{$country->numcode}}</td>
             <td>{{$country->phonecode}}</td>
-            <td class = "{{$country->status == 1? 'text-primary' : 'text-danger'}}" >{{$country->status == 1 ? "Enable" : "Disable"}}</td> 
+            <td>{{$country->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
             <div class="row">
                                 <div class="col-2">
@@ -51,9 +51,9 @@
                                 </div>
                                 <div class="col-2">
                                     @if($country->status == 1)
-                                        <a><button class="btn btn-danger" onclick="disableCountry('{{$country->id}}')">@lang('messages.banner_page.disable')</button></a>
+                                        <a><button class="btn btn-danger" onclick="deactivateCountry('{{$country->id}}')">@lang('messages.bookmark_page.deactivate')</button></a>
                                     @else
-                                        <a><button class="btn btn-info" onclick="enableCountry('{{$country->id}}')">@lang('messages.banner_page.enable') </button></a>
+                                        <a><button class="btn btn-info" onclick="activateCountry('{{$country->id}}')">@lang('messages.bookmark_page.activate') </button></a>
                                     @endif
                                 </div>
                             </div>
@@ -104,25 +104,25 @@
         ],
         
     }); 
-    function disableCountry($id) {
+    function deactivateCountry($id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "{{ url('admin/country/disable') }}" + "/" +$id,
+        url: "{{ url('admin/country/deactivate') }}" + "/" +$id,
         type: 'post',
         success: function(result)
         {
-            toastr.error('Country Disable');
+            toastr.error('Country Deactivated');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
 }
 
 
-function enableCountry($id) {
+function activateCountry($id) {
   
     $.ajaxSetup({
         headers: {
@@ -130,11 +130,11 @@ function enableCountry($id) {
         }
     });
     $.ajax({
-        url: "{{ url('admin/country/enable') }}" + "/" + $id,
+        url: "{{ url('admin/country/activate') }}" + "/" + $id,
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Country Enabled');
+            toastr.success('Country Activated');
             window.setTimeout(function(){location.reload()},2000);
         }
     });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">Sales Report</h1>
+<h1 class="page-title">Publisher Reports</h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -17,8 +17,6 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>Registered</th>
-                        <th>Publisher Name</th>
                         <th>Payment</th>
                     </tr>
                 </thead>
@@ -27,40 +25,7 @@
                     <tr>    
 
                         <td>{{$order->id}}</td>
-                        <td>{{$order->created_at}}</td>
-                        <td>{{($order->users->first_name ." ".$order->users->last_name )}}</td>
                         <td>{{$order->total_price}}  {{($order->currencies['iso'])}} </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>   
-    </div>    
-</div>
-<h1 class="page-title">Publisher Report</h1>
-<div class="ml-auto text-right">
-</div> 
-@if(Session::has('success'))
-    <div class="alert alert-success text-center" role="alert">
-        <strong>{{Session::get('success')}}</strong>
-    </div>
-@endif 
-<div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table id="zero_config" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Payment</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($order as $order)
-                    <tr>    
-
-                    <td></td>
-                        <td></td>
                     </tr>
                     @endforeach
                 </tbody>

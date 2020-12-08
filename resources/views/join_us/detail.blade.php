@@ -23,7 +23,7 @@
                 <div class="card-body row" style="font-size: 18px;">
                     <h4 class="card-title col-12">@lang('messages.joinusrequest_page.userjoinusrequest')</h4>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_id'):   {{$user->id}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_id')   {{$user->id}} </label>
                     </div>
                     <div class="form-group col-6">
                         <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.requested_by'):  {{ucfirst($user->first_name ." ".$user->last_name )}}</label>
@@ -42,7 +42,7 @@
                         <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.product_type'):  {{($user->businesses->product_type == "both" ) ? "Books, Bookmarks" : $user->businesses->product_type }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_date'):  {{$user->created_at}}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_date')  {{$user->created_at}}</label>
                     </div>
                     <!-- @if(isset($userRequest->image))
                     <div class="form-group col-6">

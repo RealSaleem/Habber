@@ -18,7 +18,7 @@ class ReportController extends Controller
       
         $order = Order::get();
         $publisher = $user = User::role('publisher')->get();
-        return view('reports.index', compact('order','publisher'));
+        return view('reports.sales', compact('order','publisher'));
 }
     
 
@@ -52,6 +52,9 @@ class ReportController extends Controller
     public function show($id)
     {
         //
+        $order = Order::get();
+        $publisher = $user = User::role('publisher')->get();
+        return view('reports.publisher', compact('order','publisher'));
     }
 
     /**
@@ -63,6 +66,7 @@ class ReportController extends Controller
     public function edit($id)
     {
         //
+       
     }
 
     /**
