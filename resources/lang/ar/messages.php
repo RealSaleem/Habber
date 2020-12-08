@@ -1956,8 +1956,18 @@ return [
            'order_date'=> 'تاريخ الطلب',
            'currency'=>'عملة',
            'symbol'=>'رمز',
-           'iso'=>'ايزو'
+           'iso'=>'ايزو',
+           'payment_type'=>'نوع الدفع'
        ],
+       'city_page'=> [
+        'city'=> 'مدينة' ,
+        'add_city'=> 'أضف مدينة',
+        'edit_city'=> 'تحرير المدينة',
+        'add_city_info'=> 'إضافة معلومات المدينة',
+        'edit_city_info'=> 'تحرير معلومات المدينة',
+        'name'=> 'اسم',
+        'shipping_charges'=> 'رسوم الشحن',
+    ],
 
 
 ];

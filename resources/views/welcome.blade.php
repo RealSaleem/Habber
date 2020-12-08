@@ -22,7 +22,7 @@
                     <!-- column -->
                     <div class="col-lg-9">
                         <div class="flot-chart">
-                            <div class="flot-chart-content" id="flot-line-chart"></div>
+                            <div class="flot-chart-content" id="flot-line-chart" ></div>
                         </div>
                     </div>
                     <div class="col-lg-3">

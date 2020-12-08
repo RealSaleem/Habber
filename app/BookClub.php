@@ -10,7 +10,7 @@ class BookClub extends Model
 
 
     public function books() {
-        return $this->hasMany('App\Book');
+        return $this->hasOne('App\Book');
     }
 
     public function banners() {

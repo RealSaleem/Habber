@@ -20,6 +20,7 @@
                         <th>Iso3</th>
                         <th>Numcode</th>
                         <th>Phonecode</th>
+                        <th>Status</th>
                         <th> Action</th>                  
                     </tr>
                </thead>
@@ -33,20 +34,30 @@
             <td>{{$country->iso3}}</td>  
             <td>{{$country->numcode}}</td>
             <td>{{$country->phonecode}}</td>
+            <td>{{$country->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
-                <div class="row">
-                    <div class="col-2">
-                        <form action="{{ action('CountryController@destroy', [$country->id])}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                        </form>
-                    </div>
-                    <div class="col-2">
-                        <a href="{{ action('CountryController@edit', [$country->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                    </div>
-                </div>
-            </td>
+            <div class="row">
+                                <div class="col-2">
+                                    <a href="{{action('CountryController@edit', [$country->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                </div>
+                                <div class="col-2">
+                                    <form action="{{action('CountryController@destroy', [$country->id])}}" method="post">
+                                    @csrf
+                                    @method('Delete')
+                                        <button class=" btn btn-danger" type="submit">
+                                        <span class="fa fa-trash"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    @if($country->status == 1)
+                                        <a><button class="btn btn-danger" onclick="deactivateCountry('{{$country->id}}')">@lang('messages.bookmark_page.deactivate')</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="activateCountry('{{$country->id}}')">@lang('messages.bookmark_page.activate') </button></a>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
             </tr>
             @endforeach            
                 </tbody>
@@ -92,7 +103,43 @@
             }         
         ],
         
+    }); 
+    function deactivateCountry($id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
+    $.ajax({
+        url: "{{ url('admin/country/deactivate') }}" + "/" +$id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('Country Deactivated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+
+function activateCountry($id) {
+  
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/country/activate') }}" + "/" + $id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('Country Activated');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+    
 
 </script>
 @stop

@@ -276,9 +276,9 @@ class BooksController extends Controller
     public function deactivateBook($id) {
         $error = false;
         try {
-            $bookmark = Book::findOrFail($id);
-            $bookmark->status = false;
-            $bookmark->save();
+            $book = Book::findOrFail($id);
+            $book->status = false;
+            $book->save();
             return 'true';
         }
         catch(\Exception $e) {
@@ -294,9 +294,9 @@ class BooksController extends Controller
     public function activateBook($id) {
         $error = false;
         try {
-            $bookmark = Book::findOrFail($id);
-            $bookmark->status = true;
-            $bookmark->save();
+            $book = Book::findOrFail($id);
+            $book->status = true;
+            $book->save();
             return 'true';
         }
         catch(\Exception $e) {
