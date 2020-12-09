@@ -61,6 +61,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('banners-sortable', 'BannerController@sortBanners');
    Route::resource('languages','LanguageController');
    Route::resource('countries','CountryController');
+   Route::post('country/activate/{id}','CountryController@activateCountry');
+   Route::post('country/deactivate/{id}','CountryController@deactivateCountry');
    Route::get('country/city/{id}','CountryController@getCity')->name('country.cities');
    Route::resource('permissions','PermissionController');
    Route::resource('ads','AdController');
@@ -74,7 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('payment/{id}','PaymentGatewayController@show');
    Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');
    Route::resource('orders','OrderController');
-   Route::resource('systemreports','ReportController');
+   Route::resource('reports','ReportController');
    Route::resource('city','CityController');
    Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');
    Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');

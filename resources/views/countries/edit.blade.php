@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>'@lang('messages.country_page.edit_country')</h2>
+            <h2>@lang('messages.country_page.edit_country')</h2>
         </div>
     </div>
     <div class="container-fluid">
@@ -63,6 +63,7 @@
                             <span class="text-danger">{{$errors->first('phonecode')}}</span>
                         </div>
                     </div>
+                     </div> 
                     <div class="border-top">
                       <div class="card-body">
                          <a href="{{route('countries.index')}}">

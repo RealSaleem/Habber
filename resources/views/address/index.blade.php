@@ -38,13 +38,13 @@
                     <td>{{$address->address_name}}</td>
                     <td>{{$address->address_line1}}</td>
                     <td>{{$address->address_line2}}</td>
-                    <td>{{$address->cities->name}}</td>  
+                    <td>{{($address->cities['name'])}}</td>  
                     <td>{{$address->state}}</td>
                     <td>{{($address->countries['name'])}}</td>
                     <td>{{$address->post_code}}</td>
                     <td>{{$address->phone}}</td>
                     <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>
-                    <td>{{$address->cities->shipping_charges}}</td>
+                    <td>{{($address->cities['shipping_charges'])}}</td>
                     <td>
                         <div class="row">
                             <div class="col-4">

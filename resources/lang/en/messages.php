@@ -330,6 +330,7 @@ return [
         'currency'=>'Currency',
         'symbol'=>'Symbol',
         'iso'=>'ISO',
+        'payment_type'=>'Payment Type'
       
     ],
     'city_page'=> [

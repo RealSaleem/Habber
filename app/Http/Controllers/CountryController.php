@@ -53,7 +53,7 @@ class CountryController extends Controller
             'iso3' => 'required|unique:countries,iso3', 
             'numcode' => 'required|unique:countries,numcode', 
             'phonecode' => 'required|unique:countries,phonecode', 
-
+          
             
             
         ]);
@@ -64,6 +64,7 @@ class CountryController extends Controller
         $country->iso3 = $request->iso3;
         $country->numcode = $request->numcode;
         $country->phonecode = $request->phonecode;
+        $country->status = true;
         $country->save();   
         return back()->with('success', 'Country successfully saved');
     }
@@ -109,7 +110,8 @@ class CountryController extends Controller
             'nicename' => 'required|unique:countries,nicename,'.$id  ,
             'iso3' => 'required|unique:countries,iso3,'.$id  ,
             'numcode' => 'required|unique:countries,numcode,'.$id ,
-            'phonecode' => 'required|unique:countries,phonecode,'.$id  
+            'phonecode' => 'required|unique:countries,phonecode,'.$id  ,
+            
             
         ]);
         $country =Country::find($id);
@@ -119,6 +121,7 @@ class CountryController extends Controller
         $country->iso3 = $request->iso3;
         $country->numcode = $request->numcode;
         $country->phonecode = $request->phonecode;
+        $country->status = true;
         $country->save();   
         return back()->with('success', 'Country updated successfully ');
     }
@@ -147,5 +150,41 @@ class CountryController extends Controller
         $country = Country::findOrFail($id);
         $country->delete();
         return back()->with('success', 'Country deleted successfully');
+    }
+
+    public function deactivateCountry($id) {
+        $error = false;
+        try {
+            $country = Country::findOrFail($id);
+            $country->status = false;
+            $country->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function activateCountry($id) {
+        $error = false;
+        try {
+            $country = Country::findOrFail($id);
+            $country->status = true;
+            $country->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+    
     }
 }
