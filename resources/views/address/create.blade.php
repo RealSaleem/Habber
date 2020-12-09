@@ -130,19 +130,27 @@
                 type: 'GET',
                 success: function(result)
                 {
-                  
-                    if(result == "null" ) {
+                    if(result == "null" || result.length == 0 ) {
                         // window.setTimeout(function(){location.reload()},2000)
                         toastr.error('Please Select Another Country Currently we do not provide delivery service to this Country');
-                        $('#city_id').append('<option value= disabled>No Citites</option>');
+                        $('#city_id')
+                                .find('option')
+                                .remove()
+                                .end()
+                                .append('<option value= disabled>No Citites</option>');
+                           
+                        // $('#city_id')
                     }
                     else {
                         console.log(result.length);
                         $.each(result, function(key, value) {
 
                             $('#city_id')
+                                .find('option')
+                                .remove()
+                                .end()
                                 .append($('<option>', { value : value.id })
-                                .text(value.name));
+                                .text(value.name));     
                         });
                     }
                   
