@@ -26,7 +26,7 @@ class Book extends Model
     }
 
     public function product_prices() {
-        return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"book");
+        return $this->hasMany('App\ProductPrice',"product_id","id")->where('product_type',"book")->with('currency');
     }
 
     public function carts()

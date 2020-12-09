@@ -34,6 +34,6 @@ class Bookmark extends Model
     }
 
     public function product_prices() {
-        return $this->hasOne('App\ProductPrice',"product_id","id")->where('product_type',"bookmark");
+        return $this->hasMany('App\ProductPrice',"product_id","id")->where('product_type',"bookmark")->with('currency');
     }
 }

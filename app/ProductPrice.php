@@ -17,6 +17,11 @@ class ProductPrice extends Model
         return $this->hasOne(Bookmark::class,"product_id","id")->where('product_type','bookmark');
     }
 
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
+    
     public static function getPrice($product_id,$currency_id,$quantity,$product_type) {
         $price = self::where('product_id',$product_id)->where('currency_id', $currency_id)->where('product_type',$product_type)->first();
         return $price->price * $quantity;

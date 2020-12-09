@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\PriceResource;
 
 class BookmarkResource extends JsonResource
 {
@@ -31,6 +32,7 @@ class BookmarkResource extends JsonResource
             'description'   => $this->description ?? "",
             'arabic_description'   => $this->arabic_description ?? "",
             'price'    => number_format(optional($this->product_prices)->price,4) ?? "",
+            'prices' => PriceResource::collection($this->product_prices) ?? "",
             'size'  => $this->size,
             'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
             'type_of_bookmark'=> $this->type_of_bookmark ?? "",

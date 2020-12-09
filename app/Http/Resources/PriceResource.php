@@ -3,10 +3,8 @@
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\BookResource;
 
-class BookClubResource extends JsonResource
+class PriceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +15,12 @@ class BookClubResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'     => $this->id,
-            'name'   => $this->name,
-            'arabic_name' => $this->arabic_name,
-            'image'  => isset($this->banner_image) ? url(Storage::disk('public')->url($this->banner_image)) : "" ,
-            'books'  => (new BookResource($this->books)) ?? ""
-        ];
+            'id'     => $this->currency->id,
+            'price'   => number_format($this->price, 4),
+            'name' => $this->currency->name,
+            'iso' => $this->currency->iso,
+            'symbol' => $this->currency->symbol
+          ];
     }
 
     public function with($request)
@@ -32,4 +30,5 @@ class BookClubResource extends JsonResource
             'code' => Response::HTTP_OK
         ];
     }
+    
 }
