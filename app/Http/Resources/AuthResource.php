@@ -25,7 +25,7 @@ class AuthResource extends JsonResource
             'profile_pic' => isset($this->profile_pic) ? url(Storage::disk('user_profile')->url($this->profile_pic)) : "" ,
             'status' => $this->status,
             'language'  => new LanguageResource(optional($this->languages)),
-            'currency'  => $this->currencies->name ?? "",
+            'currency'  => new CurrencyResource(optional($this->currencies)),
             'token' => $this->token,
             'firebase_token' => $this->firebase_token,
     
