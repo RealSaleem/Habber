@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\CityResource;
+use App\Http\Resources\CountryResource;
 
-
-class CountryResource extends JsonResource
+class CityResource extends JsonResource
 {
+ 
     /**
      * Transform the resource into an array.
      *
@@ -18,12 +18,8 @@ class CountryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'iso' => $this->iso,
             'name' => $this->name,
-            'city'=> CityResource::collection(optional($this->cities)),
-            'nicename' => $this->nicename,
-            'iso3' => $this->iso3,
-            'phonecode' => $this->phonecode,
+            'shipping_charges' => $this->shipping_charges,
         ];
     }
 
@@ -36,3 +32,4 @@ class CountryResource extends JsonResource
         ];
     }
 }
+

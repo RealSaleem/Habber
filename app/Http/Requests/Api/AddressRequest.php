@@ -27,12 +27,10 @@ class AddressRequest extends FormRequest
             'address_name'   => ['bail', 'required', 'string', 'max:255', 'min:1'],
             'country_id'     => ['bail', 'required'],
             'state'          => ['required','string','max:15','min:3'],
-            'city_id'           => ['bail', 'required',  'string', 'max:255', 'min:3'],
+            'city_id'           => ['bail', 'required'],
             'address_line1' => ['bail', 'required',  'string', 'max:255', 'min:3'],
             'address_line2' => ['bail', 'required',  'string', 'max:255', 'min:3'],
-            'phone'          => ['bail','required',  'numeric', 'digits_between:11,15'],
-            'shipping_charges'=> ['bail', 'required'],
-            
+            'phone'          => ['bail','required',  'numeric', 'digits_between:11,15'],        
         ];
     }
 }

@@ -45,6 +45,7 @@ class AddressRepository implements RepositoryInterface {
     // update record in the database
     public function update(array $data, Model $model)
     {
+        // dd($model->get());
         return $model->update($data);
     }
 
@@ -59,12 +60,12 @@ class AddressRepository implements RepositoryInterface {
     // show the record with the given id
     public function userAddresses()
     {
-        return $this->model->with('countries')->where('user_id',Auth::user()->id)->get();
+        return $this->model->with('countries','cities')->where('user_id',Auth::user()->id)->get();
     }
 
     public function show($id)
     {
-        return $this->model->with('countries')->findOrFail($id);
+        return $this->model->with('countries','cities')->findOrFail($id);
     }
 
     // Get the associated model
