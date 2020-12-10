@@ -109,9 +109,15 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AddressRequest $request,Address $add)
     {
-        //
+        try {
+            $address = $this->model->update($request->all(),$add->first());
+            return (new AddressResource($add->first()));
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
     }
 
     /**
