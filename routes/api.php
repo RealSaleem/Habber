@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\CountryCollection;
 use App\Http\Resources\CurrencyCollection;
+use App\Http\Resources\CityCollection;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,7 +19,11 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('/register','AuthController@register');
     Route::post('/login','AuthController@login');
     Route::get('countries', function() {
-        return (new CountryCollection(App\Country::all()));
+        return (new CountryCollection(App\Country::with('cities')->get()));
+    });
+
+    Route::get('cities', function() {
+        return (new CityCollection(App\City::with('countries')->get()));
     });
 
     Route::get('currencies', function() {
@@ -66,6 +71,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::post('addresses', 'AddressController@store');
         Route::delete('addresses/{id}', 'AddressController@destroy');
         Route::get('addresses/{id}', 'AddressController@show');
+        Route::put('addresses/{id}', 'AddressController@update');
         // users
         Route::put('user', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');

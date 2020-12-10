@@ -57,7 +57,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.city')</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="city" id="city_id" >
+                        <select  class="form-control" name="city" id="city_id">
                         </select>
                             <span class="text-danger">{{$errors->first('city')}}</span>
                         </div>
@@ -128,18 +128,23 @@
                 success: function(result)
                 {
                   
-                    if(result == "null" ) {
+                    if(result == "null" || result.length == 0 ) {
                         // window.setTimeout(function(){location.reload()},2000)
                         toastr.error('Please Select Another Country Currently we do not provide delivery service to this Country');
-                        $('#city_id').append('<option value= disabled>No Citites</option>');
+                        $('#city_id')
+                                .find('option')
+                                .remove()
+                                .end()
+                                .append('<option value= disabled>No Citites</option>');
                     }
                     else {
-                        console.log(result.length);
                         $.each(result, function(key, value) {
-
                             $('#city_id')
+                                .find('option')
+                                .remove()
+                                .end()
                                 .append($('<option>', { value : value.id })
-                                .text(value.name));
+                                .text(value.name));     
                         });
                         $("#city_id").val(city.id);
                     }
