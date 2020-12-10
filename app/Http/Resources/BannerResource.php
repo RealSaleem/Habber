@@ -23,17 +23,17 @@ class BannerResource extends JsonResource
         return [
             'id'     => $this->id,
             'description'   => $this->description ?? "",
-            'image' =>isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
+            'banner_image' =>isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'order' => $this->sort_order,
             'language' => $this->languages->name,
             $this->mergeWhen($this->bookclubs, [
-                'bookclubs' => new BookClubResource($this->bookclubs),
+                new BookClubResource($this->bookclubs),
             ]),
             $this->mergeWhen($this->bookmarks, [
-                'bookmarks' => new BookmarkResource($this->bookmarks),
+                new BookmarkResource($this->bookmarks),
             ]),
             $this->mergeWhen($this->books, [
-                'books' => new BookResource($this->books),
+                new BookResource($this->books),
             ]),
             
         ];
