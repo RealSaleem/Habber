@@ -30,6 +30,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         return (new CurrencyCollection(App\Currency::all()));
     });
     // Banners
+    Route::get('banners/{language}', 'BannerController@banner');
     Route::get('banners', 'BannerController@index');
     // Books
     Route::get('books', 'BookController@index');

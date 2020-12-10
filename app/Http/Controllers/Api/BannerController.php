@@ -31,6 +31,25 @@ class BannerController extends Controller
         }
     }
 
+    public function banner($language){
+        if($language =='ar'){
+            $lang=1;
+        }
+        else if($language =='en'){
+            $lang=2;
+        }
+        try{
+        $banner = Banner::with('languages','books','bookmarks','bookclubs')->where('language_id',$lang)->where('status',1)->orderBy('sort_order','ASC')->get();
+        if(count($banner)) {
+            return (new BannerCollection($banner));
+        }
+        else {
+            return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Banners Found");
+        }
+    }
+    catch(\Exception $e) {
+        return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
+    }}
     /**
      * Show the form for creating a new resource.
      *
