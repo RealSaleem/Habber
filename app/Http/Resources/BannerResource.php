@@ -20,20 +20,20 @@ class BannerResource extends JsonResource
     {
         // (isset($this->books)) ? BookResource::collection($this->books) : (isset($this->bookmarks)) ? BookmarkResource::collection($this->bookmarks) : (isset($this->bookclubs)) ?
         // dd($this->bookclubs);
-        return [
+        return  [
             'id'     => $this->id,
             'description'   => $this->description ?? "",
             'banner_image' =>isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'order' => $this->sort_order,
             'language' => $this->languages->name,
-            $this->mergeWhen($this->bookclubs, 
-                new BookClubResource($this->bookclubs)
-            ),
-            $this->mergeWhen($this->bookmarks, 
-                new BookmarkResource($this->bookmarks)
-            ),
+            $this->mergeWhen($this->bookclubs, [
+                'product' => new BookClubResource($this->bookclubs),
+            ]),
+            $this->mergeWhen($this->bookmarks, [
+                'product' => new BookmarkResource($this->bookmarks),
+            ]),
             $this->mergeWhen($this->books, [
-                new BookResource($this->books),
+                'product' => new BookResource($this->books),
             ]),
             
         ];
