@@ -26,12 +26,12 @@ class BannerResource extends JsonResource
             'banner_image' =>isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'order' => $this->sort_order,
             'language' => $this->languages->name,
-            $this->mergeWhen($this->bookclubs, [
-                new BookClubResource($this->bookclubs),
-            ]),
-            $this->mergeWhen($this->bookmarks, [
-                new BookmarkResource($this->bookmarks),
-            ]),
+            $this->mergeWhen($this->bookclubs, 
+                new BookClubResource($this->bookclubs)
+            ),
+            $this->mergeWhen($this->bookmarks, 
+                new BookmarkResource($this->bookmarks)
+            ),
             $this->mergeWhen($this->books, [
                 new BookResource($this->books),
             ]),
