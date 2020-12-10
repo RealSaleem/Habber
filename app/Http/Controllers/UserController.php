@@ -194,6 +194,11 @@ class UserController extends Controller
         }        
         $user->delete();
         return back()->with('success', 'User deleted successfully');   
+    } 
+    public function fcm(Request $request,$id){
+         $user = User::find($id);
+         $user->notification=$request->notification;
+         $user->save();
     }
 
     public function destroyRequest($id)

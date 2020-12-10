@@ -80,6 +80,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');
    Route::post('orders/activate/{id}','OrderController@activateOrder');
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
+   // Route::resource('about_us','AboutUsController');
+   Route::post('fcm/{id}','UserController@fcm');
 });
 
 
