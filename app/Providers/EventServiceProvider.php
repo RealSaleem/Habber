@@ -24,6 +24,16 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ForgetPasswordEvent' => [
             'App\Listeners\ForgetPasswordListener',
         ],
+        'App\Events\SendNotificationEvent' => [
+            'App\Listeners\SendNotificationListener',
+        ],
+        'App\Events\OrderStatusChangedEvent' => [
+            'App\Listeners\SendOrderNotificationListener',
+        ],
+        'App\Events\OrderCancelledEvent' => [
+            'App\Listeners\SendOrderCancellationNotificationListener',
+        ],
+        
     ];
 
     /**
