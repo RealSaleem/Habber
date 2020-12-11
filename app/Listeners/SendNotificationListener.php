@@ -12,7 +12,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use App\User;
 
-class SendNotificationListener implements ShouldQueue
+class SendNotificationListener 
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,10 +22,7 @@ class SendNotificationListener implements ShouldQueue
         
             $url=env('FIREBASE_URL');
             $fields = json_encode(array('to'=>$to, 'notification'=>$notif));
-        
-        $certificate_location = '/usr/local/openssl-0.9.8/certs/cacert.pem';
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $certificate_location);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $certificate_location);    
+            
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
