@@ -21,7 +21,8 @@
         @endif 
         <div class="col-md-12">
         <div class="card">
-            <form action="" method="post"  enctype="multipart/form-data" >   
+        
+            <form action="{{ action('PushNotificationController@sendNotification') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">@lang('messages.push_notifications_page.add_push_notifications_info')</h4>
@@ -75,20 +76,12 @@
 </form>
 @endsection
 @section('scripts')
-
-
-
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
-
-
 <script>
 $(".select2").select2();
 </script>
 
 
-<script>
+ <script>
 var value1;
  function wow(obj)
 {
@@ -96,6 +89,8 @@ var value1;
 
     return (value1 === "0" ? document.getElementById("users23").style.display ="none" : document.getElementById("users23").style.display ="flex");
 }
+</script>
+<!--
   var description, users;
   var firebaseConfig = {
     apiKey: "AIzaSyCZXm7EImj1uWqJXE9kgGZ7Kv7yOS12kyg",
@@ -150,6 +145,6 @@ firebase.database().ref();
    
     
 
-</script>
+</script> -->
 
 @stop
