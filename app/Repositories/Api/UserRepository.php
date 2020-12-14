@@ -118,6 +118,7 @@ class UserRepository implements RepositoryInterface
                 return 'exists';
            }
            else {
+               $data['book_id'] = $data['product_id'];
                 return $this->model->create($data);
            }
         }
@@ -127,6 +128,7 @@ class UserRepository implements RepositoryInterface
                 return 'exists';
            }
            else {
+               $data['bookmark_id'] = $data['product_id'];
                 return $this->model->create($data);
            }
         }
