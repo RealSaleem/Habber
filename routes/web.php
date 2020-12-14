@@ -84,8 +84,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
    Route::resource('about_us','AboutUsController');
    Route::post('fcm/{id}','UserController@fcm');
-   Route::resource('static_pages','StaticPagesController');
-   Route::get('pro','StaticPagesController@pro');
+  // Route::resource('static_pages','StaticPagesController');
+   Route::get('link','StaticPagesController@getLink');
    
 
 });

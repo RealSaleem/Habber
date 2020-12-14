@@ -85,15 +85,7 @@ class StaticPagesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function link($url){
-        try {
-            $static = StaticPage::where('url',$url)->first();
-            return (new GroupResource($static));
-        }
-        catch(\Exception $e) {
-            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED,$e->getMessage());
-        }
-    }
+     
      
     public function update(Request $request, $url)
     {
@@ -114,13 +106,13 @@ class StaticPagesController extends Controller
         return back()->with('success', 'Page Updated Successfully!');
     }
 
-    public function pro(){
-
+    public function getLink(){
+    
             $about_us_url=URL::to("/").'/static_pages/about-us';
             $privacy_policy_url = URL::to("/").'/static_pages/privacy-policy';
             $return_policy_url = URL::to("/").'/static_pages/return-policy';
             $terms_and_condition_url = URL::to("/").'/static_pages/terms-and-conditions';
-            return $about_us_url;
+        
     }
 
     /**
