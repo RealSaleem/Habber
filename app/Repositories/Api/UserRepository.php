@@ -112,8 +112,8 @@ class UserRepository implements RepositoryInterface
     public function createFavourite(array $data)
     {
         $data['user_id'] = Auth::user()->id;
-        if (array_key_exists('book_id',$data)) {
-            $fav =  $this->model->where('user_id',$data['user_id'])->where('book_id',$data['book_id'])->first();
+        if ($data['product_type'] == 'book') {
+            $fav =  $this->model->where('user_id',$data['user_id'])->where('book_id',$data['product_id'])->first();
             if(isset($fav)) {
                 return 'exists';
            }
@@ -121,8 +121,8 @@ class UserRepository implements RepositoryInterface
                 return $this->model->create($data);
            }
         }
-        else if (array_key_exists('bookmark_id',$data)) {
-            $fav =  $this->model->where('user_id',$data['user_id'])->where('bookmark_id',$data['bookmark_id'])->first();
+        else if ($data['product_type'] == 'bookmark') {
+            $fav =  $this->model->where('user_id',$data['user_id'])->where('bookmark_id',$data['product_id'])->first();
             if(isset($fav)) {
                 return 'exists';
            }
