@@ -3,7 +3,8 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class RegisterRequest extends FormRequest
 {
     /**
@@ -35,5 +36,17 @@ class RegisterRequest extends FormRequest
     public function response(array $error)
     {
         return response()->json(['error' => $error], 422);
+    }
+    
+    public function failedValidation(Validator $validator)
+    {
+        $messages = $validator->errors()->getMessages();
+        $error_messages = '';
+        foreach($messages as $message) {
+            $error_messages .= $message[0] . ' ';
+        }
+        $response = ['status' => false,'message' => $error_messages, 'errors' => $validator->errors() ];
+        throw new HttpResponseException(response()->json($response, 422)); 
+        
     }
 }
