@@ -26,7 +26,7 @@
            <tr>
             
             <td>{{$city->name}}</td>
-            <td>{{$city->countries->name}}</td>
+            <td>{{$city->countries['name']}}</td>
             <td>{{$city->shipping_charges}}</td>  
             <td>{{$city->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
