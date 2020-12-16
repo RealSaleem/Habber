@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Book;
+use App\Currency;
 use App\BookClub;
 use App\Genre;
 use App\Business;
@@ -118,13 +119,14 @@ class BooksController extends Controller
             $filePath = "books/".$book->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $updatebook->image = $filePath;
-            $updatebook->update();   
+            $updatebook->update();
+            for($i=1;$i<=Count(Currency::all());$i++){   
             $productPrice= new ProductPrice();
             $productPrice->product_id= $book->id;
             $productPrice->product_type= 'book';
             $productPrice->price =$request->price;
-            $productPrice->currency_id= 1;
-            $productPrice->save();
+            $productPrice->currency_id= $i;
+            $productPrice->save();}
 
             return back()->with('success', 'Book successfully saved');
        

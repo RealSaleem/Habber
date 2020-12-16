@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'status' => ($this->status == 1) ? "Active" : "Not Active",
             'language'  => new LanguageResource(optional($this->languages)),
             'currency'  => new CurrencyResource(optional($this->currencies)),
+            'notification' => $this->notification,
         ];
           
     }

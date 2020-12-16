@@ -17,8 +17,8 @@ class FavouriteResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'books'  => BookResource::collection($this->books) ?? "",
-            'bookmarks'  => BookmarkResource::collection($this->bookmarks) ?? "",
+            'product_id'  => $this->book_id ? $this->book_id : $this->bookmark_id,
+            'product_type'  => $this->book_id ? 'book' : 'bookmark',
         ];
         
     }
