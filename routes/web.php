@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
 Route::get('payment/success','PaymentGatewayController@successPayment')->name('payment.success');
 Route::get('payment/failure','PaymentGatewayController@failurePayment')->name('payment.failure');
+
 Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
@@ -82,8 +83,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');
    Route::post('orders/activate/{id}','OrderController@activateOrder');
    Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
-   // Route::resource('about_us','AboutUsController');
+   Route::resource('about_us','AboutUsController');
    Route::post('fcm/{id}','UserController@fcm');
+  Route::resource('static_pages','StaticPagesController');
+   Route::get('static_page/link','StaticPagesController@getLink');
+   Route::get('homes','HomeController@getData')->name('homes.getdata');
+   Route::get('static_pages/{url}/{lang}','StaticPagesController@show')->name('static_pages.show');
+
+
+   
+
 });
 
 
