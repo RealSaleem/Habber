@@ -361,14 +361,19 @@ return [
         'shipping_charges'=> 'Shipping Charges',
     ],
     'static_page'=> [
-        'aboutus'=> 'About Us' ,
-        'privacypolicy'=> 'Privacy Policy',
-        'returnpolicy'=> 'Return Policy',
-        'termsandcondition'=> 'Terms And Condition',
+        'aboutus'=> 'About Us English' ,
+        'privacypolicy'=> 'Privacy Policy English',
+        'returnpolicy'=> 'Return Policy English',
+        'termsandcondition'=> 'Terms And Condition English',
+        'aboutusar'=> 'About Us Arabic' ,
+        'privacypolicyar'=> 'Privacy Policy Arabic',
+        'returnpolicyar'=> 'Return Policy Arabic',
+        'termsandconditionar'=> 'Terms And Condition Arabic',
         'staticpage'=> 'Static Pages',
         'addpageinfo' => 'Add Page Info',
         'editpageinfo' => 'Edit Page Info',
         'pageinfo' => 'Page Information',
+        'arabictitle' => 'Arabic Title',
     ],
 
     

@@ -3,9 +3,9 @@
 <head>
 
 </head>
-<body>
-<h1 class="heading">{{$static_page->title}}</h1>
-<div class="text">
-<textarea >{{$static_page->description}}</textarea></div>
+<body class="heading">
+<h1>{{$title}}</h1>
+
+{!! $description !!}
 </body>
 </html>

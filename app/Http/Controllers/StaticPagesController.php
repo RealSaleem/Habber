@@ -39,18 +39,22 @@ class StaticPagesController extends Controller
     {
         $validatedData = $this->validate($request, [
             'title'         => 'required|min:3|max:255',
+            'arabic_title'         => 'required|min:3|max:255',
             'url'          => 'min:3|max:255|unique:static_pages',
-            'w3review'   => 'required|min:3'
+            'ar-description'   => 'required|min:3',
+            'en-description'   => 'required|min:3'
         ]);
     
         $validatedData['url'] = Str::slug($validatedData['title'], '-');
     
         $static = new StaticPage();
         $static->title = $validatedData['title'];
+        $static->arabic_title = $validatedData['arabic_title'];
         $static->url = $validatedData['url'];
-        $static->description = strip_tags($validatedData['w3review']);
+        $static->description = $validatedData['en-description'];
+        $static->arabic_description = $validatedData['ar-description'];
         $static->save();
-        return redirect()->route('static_pages.index');
+        return back()->with('success', 'Page Created Successfully!');
     }
 
     /**
@@ -59,10 +63,19 @@ class StaticPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($url)
-    {    
-        $static_page=StaticPage::where('url',$url)->first();
-        return view('static_pages.static_page',compact('static_page'));
+    public function show($url,$lang)
+    {   if($lang=='en'){
+         $static_page=StaticPage::where('url',$url)->first();
+         $title=$static_page->title;
+         $description=$static_page->description;
+        return view('static_pages.static_page',compact('title','description'));}
+        else if($lang=='ar'){
+            $static_page=StaticPage::where('url',$url)->first();
+            $title=$static_page->arabic_title;
+            $description=$static_page->arabic_description;
+           return view('static_pages.static_page',compact('title','description'));}
+
+        
     }
 
     /**
@@ -92,26 +105,35 @@ class StaticPagesController extends Controller
        
         $validatedData = $this->validate($request, [
             'title'         => 'required|min:3|max:255',
+            'arabic_title'         => 'required|min:3|max:255',
             'url'          => 'min:3|max:255|unique:static_pages',
-            'w3review'   => 'required|min:3'
+            'ar-description'   => 'required|min:3',
+            'en-description'   => 'required|min:3'
         ]);
     
         $validatedData['url'] = Str::slug($validatedData['title'], '-');
     
         $static =StaticPage::where('url',$url)->first();
         $static->title = $validatedData['title'];
+        $static->arabic_title = $validatedData['arabic_title'];
         $static->url = $validatedData['url'];
-        $static->description = strip_tags($validatedData['w3review']);
-        $static->save();
-        return back()->with('success', 'Page Updated Successfully!');
+        $static->description = $validatedData['en-description'];
+        $static->arabic_description = $validatedData['ar-description'];
+        $static->update();
+        return redirect('/admin/static_pages')->with('success', 'Page Updated Successfully!');
     }
 
     public function getLink(){
-    
-            $about_us_url=URL::to("/").'/static_pages/about-us';
-            $privacy_policy_url = URL::to("/").'/static_pages/privacy-policy';
-            $return_policy_url = URL::to("/").'/static_pages/return-policy';
-            $terms_and_condition_url = URL::to("/").'/static_pages/terms-and-conditions';
+     $links = array (
+            'about_us_url'=> URL::to("/").'/static_pages/about-us/en',
+            'privacy_policy_url' => URL::to("/").'/static_pages/privacy-policy/en',
+            'return_policy_url' => URL::to("/").'/static_pages/return-policy/en',
+            'terms_and_condition_url' => URL::to("/").'/static_pages/terms-and-conditions/en',
+            'about_us_url_ar'=> URL::to("/").'/static_pages/about-us/ar',
+            'privacy_policy_url_ar' => URL::to("/").'/static_pages/privacy-policy/ar',
+            'return_policy_url_ar' => URL::to("/").'/static_pages/return-policy/ar',
+            'terms_and_condition_url_ar' => URL::to("/").'/static_pages/terms-and-conditions/ar');
+            return $links;
         
     }
 

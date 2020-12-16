@@ -27,14 +27,28 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
+                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ old('title') }}" id="title"  placeholder="English Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.static_page.arabictitle')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="arabic_title" dir="rtl" value="{{ old('arabic_title') }}" id="arabic_title"  placeholder="Arabic Title">
+                            <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                    <textarea id="w3review" class="form-control" name="w3review" value="{{ old('description') }}" rows="10" cols="50"></textarea>
+                    <textarea id="en-description" class="form-control" name="en-description" value="{{ old('description') }}" rows="10" cols="50"></textarea>
+                    <span class="text-danger">{{$errors->first('description')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
+                        <div class="col-sm-9">
+                    <textarea id="ar-description" class="form-control" dir="rtl" name="ar-description" value="{{ old('description') }}" rows="10" cols="50"></textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -55,16 +69,40 @@
                    
 @endsection
 @section('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/ar.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/en.js"></script>
 <script>
 
 ClassicEditor
-            .create( document.querySelector( '#w3review' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+    .create( document.querySelector( '#ar-description' ), {
+        language: 'ar'
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
 
 </script>
+
+<script>
+
+ClassicEditor
+    .create( document.querySelector( '#en-description' ), {
+        language: 'en'
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+
+</script>
+
 @stop
 
 

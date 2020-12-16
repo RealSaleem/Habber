@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">@lang('messages.publisher_page.publisher')
+<h1 class="page-title">@lang('messages.static_page.staticpage')
 </h1>
 <div class="ml-auto text-right">
 </div> 
@@ -17,7 +17,9 @@
                 <thead>
                     <tr>
                         <th>Title</th>
+                        <th>Arabic Title</th>
                         <th>Description</th>
+                        <th>Arabic Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +27,9 @@
                     <tr>    
 
                         <td>{{$static_page->title}}</td>
+                        <td>{{$static_page->arabic_title}}</td>
                         <td>{{$static_page->description}}</td>  
+                        <td>{{$static_page->arabic_description}}</td>
     
                         <td>
                         <div class="row">
