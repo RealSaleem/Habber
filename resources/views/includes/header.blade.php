@@ -55,11 +55,14 @@
                     <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"></a>
-                    <a class="dropdown-item" href="#"></a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"></a>
+                 @if(count(Session::get('notification'))>0)
+                @foreach(Session::get('notification') as $no)
+                <a class="dropdown-item" href="#">{{$no['body']}}</a>
+                  
+                @endforeach
+                @endif
                 </div>
+                
             </li> 
             <!-- ============================================================== -->
             <!-- Search -->
