@@ -26,7 +26,7 @@ class AddressResource extends JsonResource
             'state' => $this->state,
             'post_code' => $this->post_code,
             'user_id' => $this->user_id,
-            'shipping_charges'=> number_format(optional($this->cities)->shipping_charges),
+            'shipping_charges'=> number_format(optional($this->cities)->shipping_charges)
         ];
     }
 
