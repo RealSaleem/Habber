@@ -57,9 +57,11 @@ class ApiHelper {
                     $getData    =   $database
                        ->getReference('/User/'.$user->id.'/OrderNotification/');
                        $snapshot = $getData->getSnapshot();
-                    array_push($value,$snapshot->getValue());
+                       if($snapshot->getValue()!=null){
+                    array_push($value,$snapshot->getValue());}
                         
                     }
+                   
                     Session::put('notification',$value);
     }
 
