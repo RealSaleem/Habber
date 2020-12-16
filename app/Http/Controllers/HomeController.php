@@ -8,6 +8,7 @@ use App\Order;
 use App\BookClub;
 use App\Book;
 use App\Bookmark;
+use App\Helpers\ApiHelper;
 
 use Illuminate\Http\Request;
 
@@ -36,7 +37,9 @@ class HomeController extends Controller
        $totalOrder = Order::count();
        $bookclubDetail = BookClub::count(); 
        $totalProduct = Book::count() + Bookmark::count(); 
-        return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder'));
+       ApiHelper::getData();
+                  
+return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder'));
     }
        
     
@@ -48,5 +51,8 @@ class HomeController extends Controller
         Session::put('locale', $locale);
         return redirect()->back();
     }
-  
+
+    
+   
+
 }
