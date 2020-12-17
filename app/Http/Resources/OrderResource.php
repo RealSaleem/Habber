@@ -28,6 +28,7 @@ class OrderResource extends JsonResource
             'payment_success_url'=>URL::to("/").'/payment/success/?id='.$this->id,
             'payment_failure_url'=>URL::to("/").'/payment/failure/?id='.$this->id,
             'navigation' => $this->payment_type == 'online' ? 1 : 0,
+            'created_at'=> $this->created_at,
             $this->mergeWhen($this->bookmarks, [
                 'bookmarks' => BookmarkResource::collection($this->bookmarks),
                 

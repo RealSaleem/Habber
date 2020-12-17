@@ -194,7 +194,8 @@ class UserController extends Controller
         }        
         $user->delete();
         return back()->with('success', 'User deleted successfully');   
-    }
+    } 
+    
 
     public function destroyRequest($id)
     {

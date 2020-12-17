@@ -20,13 +20,13 @@ class AddressResource extends JsonResource
             'address_name' => $this->address_name,
             'address_line1' => $this->address_line1,
             'address_line2' => $this->address_line2,
-            'country' => $this->countries->nicename,
-            'city_id' => optional($this->cities)->name,
+            'country_id' => $this->countries->id,
+            'city_id' => optional($this->cities)->id,
             'phone' => $this->phone,
             'state' => $this->state,
             'post_code' => $this->post_code,
             'user_id' => $this->user_id,
-            'shipping_charges'=> auth()->user()->currencies->symbol. number_format(optional($this->cities)->shipping_charges * auth()->user()->currencies->rate,4) 
+            'shipping_charges'=>auth()->user()->currencies->symbol. number_format(optional($this->cities)->shipping_charges * auth()->user()->currencies->rate,4)
         ];
     }
 

@@ -5,7 +5,6 @@ use App\User;
 use App\Events\SendNotificationEvent;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Mail;
 use Session;
 
 class PushNotificationController extends Controller
@@ -17,28 +16,30 @@ class PushNotificationController extends Controller
      */
     public function index()
     {
-        $usersDropDown =   $user = User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
+ $usersDropDown =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
  return view('push_notifications.create', compact('usersDropDown'));
     }
 
         
-        function sendNotification(Request $request){
-
+     public function sendNotification(Request $request){ 
             $validatedData = $request->validate([
                 'users' => 'sometimes|required',    
-                'title' => 'required',
                 'option' => 'required',
                 'description' => 'required' ]);
-              
+           
                 $data = array(
-                    'title' => $request->title,
                     'option' => $request->option,
                     'description' => $request->description, 
                     'users' => $request->users,
-                    );
+                );
+                        
+                   event(new SendNotificationEvent($data));
+                   return back()->with('success', 'Notification Sent Successfully!');
+            
+                    
+                }
 
-                   // event(new SendNotificationEvent($data));
-                    }
+                    
     /**
      * Show the form for creating a new resource.
      *

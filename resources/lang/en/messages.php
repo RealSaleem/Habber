@@ -165,10 +165,29 @@ return [
         'phone_number' => 'Phone Number',
         'message'  => 'Message',
         'submission_date'=> 'Submission Date:',
-       
+    ],   
+     'about_us_page' => [
+        'about_us' => 'About Us',
 
+
+     ],  
+     'return_policy_page' => [
+        'return_policy' => 'Return Policy',
         
-    ],
+
+     ],
+     'privacy_policy_page' => [
+        'privacy_policy' => 'Private Policy',
+        
+
+     ],
+     'terms_and_conditions_page' => [
+        'terms_and_conditions' => 'Terms And Conditions',
+        
+
+     ], 
+        
+    
     'joinusrequest_page'=> [
         'joinusrequest' =>'Join Us Request',
         'userjoinusrequest' =>'User Join Us Request',
@@ -343,23 +362,24 @@ return [
         'shipping_charges'=> 'Shipping Charges',
     ],
     'static_page'=> [
-        'aboutus'=> 'About Us' ,
-        'privacypolicy'=> 'Privacy Policy',
-        'returnpolicy'=> 'Return Policy',
-        'termsandcondition'=> 'Terms And Condition',
+        'aboutus'=> 'About Us English' ,
+        'privacypolicy'=> 'Privacy Policy English',
+        'returnpolicy'=> 'Return Policy English',
+        'termsandcondition'=> 'Terms And Condition English',
+        'aboutusar'=> 'About Us Arabic' ,
+        'privacypolicyar'=> 'Privacy Policy Arabic',
+        'returnpolicyar'=> 'Return Policy Arabic',
+        'termsandconditionar'=> 'Terms And Condition Arabic',
         'staticpage'=> 'Static Pages',
         'addpageinfo' => 'Add Page Info',
         'editpageinfo' => 'Edit Page Info',
         'pageinfo' => 'Page Information',
+        'arabictitle' => 'Arabic Title',
     ],
     'reports_page'=> [
         'sale_reports'=> 'Sale Reports',    
         'publisher_reports'=>'Publisher Reports',
         'system_reports' => 'System Reports'
     ],
-
-
-    
-
 
 ];

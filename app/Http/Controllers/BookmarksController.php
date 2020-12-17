@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Bookmark;
+use App\Currency;
 //use App\Business;
 use App\User;
 use Session;
@@ -114,13 +115,14 @@ class BookmarksController extends Controller
             $filePath = "bookmarks/".$bookmark->id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $updatebookmark->image = $filePath;
-            $updatebookmark->update();   
+            $updatebookmark->update(); 
+            for($i=1;$i<=Count(Currency::all());$i++){  
             $productPrice= new ProductPrice();
             $productPrice->product_id= $bookmark->id;
             $productPrice->product_type= 'bookmark';
             $productPrice->price =$request->price;
-            $productPrice->currency_id= 1;
-            $productPrice->save();            
+            $productPrice->currency_id= $i;
+            $productPrice->save();   }         
             return back()->with('success', 'Bookmark successfully saved');
        
     }

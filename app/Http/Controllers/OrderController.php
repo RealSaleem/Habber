@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Events\OrderStatusChangedEvent;
+use App\Events\OrderCancelledEvent;
 use App\Order;
 use App\User;
 
@@ -90,7 +92,8 @@ class OrderController extends Controller
             $order = Order::find($id);
             $order->status = $request->status;
             $order->update();
-            return back()->with('success', 'Status Updated Successfully!');
+            event(new OrderStatusChangedEvent($order));
+          return back()->with('success', 'Status Updated Successfully!');
         }
         catch(\Exception $e) {
            
@@ -113,7 +116,8 @@ class OrderController extends Controller
         //
         $order = Order::findOrFail($id);
         $order->delete();
-        return back()->with('success', 'Order deleted successfully');
+        event(new OrderCancelledEvent($order));
+        return back()->with('success', 'Order Deleted Successfully!');
     }
     public function readyOrder($id) {
         $error = false;
