@@ -57,7 +57,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                  @if(count(Session::get('notification'))>0)
                 @foreach(Session::get('notification') as $no)
-                <a class="dropdown-item" href="#">{{$no['body']}}</a>
+                <a class="dropdown-item" href="#">{{$no['to']}}'s order has been {{$no['body']}}</a>
                   
                 @endforeach
                 @endif
