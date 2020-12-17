@@ -47,6 +47,7 @@ class BookResource extends JsonResource
                 'cart_quantity' => optional($this->pivot)->quantity,
                 'cart_price' => number_format(optional($this->pivot)->price, 4) ?? "",
             ]),
+        
         ];
     }
 

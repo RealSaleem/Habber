@@ -17,6 +17,7 @@
             <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>User ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
@@ -31,7 +32,8 @@
                 </thead>
                 <tbody>
                     @foreach($users as $user)
-                    <tr>    
+                    <tr>   
+                        <td>{{$user->id}}</td>
                         <td>{{$user->first_name}}</td>
                         <td>{{$user->last_name}}</td>
                         <td>{{$user->email}}</td>
@@ -133,7 +135,9 @@ function activateUser(id) {
                 // 'csv', 'excel', 'pdf', 'print',
              
                 {
-                    extend: 'pdf',           
+                    extend: 'pdf',     
+                    orientation: 'landscape',   
+                     pageSize: 'LEGAL',          
                     exportOptions: {
                         columns: ':visible:not(.not)' // indexes of the columns that should be printed,
                     }                      // Exclude indexes that you don't want to print.

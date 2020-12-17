@@ -342,6 +342,21 @@ return [
         'name'=> 'Name',
         'shipping_charges'=> 'Shipping Charges',
     ],
+    'static_page'=> [
+        'aboutus'=> 'About Us' ,
+        'privacypolicy'=> 'Privacy Policy',
+        'returnpolicy'=> 'Return Policy',
+        'termsandcondition'=> 'Terms And Condition',
+        'staticpage'=> 'Static Pages',
+        'addpageinfo' => 'Add Page Info',
+        'editpageinfo' => 'Edit Page Info',
+        'pageinfo' => 'Page Information',
+    ],
+    'reports_page'=> [
+        'sale_reports'=> 'Sale Reports',    
+        'publisher_reports'=>'Publisher Reports',
+        'system_reports' => 'System Reports'
+    ],
 
 
     

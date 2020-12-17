@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('genres','GenreController');
    Route::resource('address','AddressController');
    Route::get('user/address/{userId}','AddressController@getUserAddressList')->name('user_address');
-   Route::get('user/address/create/{userId}','AddressController@createUserAddress');
+   Route::post('user/address/create/{userId}','AddressController@createUserAddress');
    Route::resource('contactus','ContactController');
    Route::resource('user_requests','UserRequestController');
    Route::get('joinus','UserController@allJoinUsRequest')->name('joinus');

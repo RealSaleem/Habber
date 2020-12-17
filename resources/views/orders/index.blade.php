@@ -34,7 +34,7 @@
                         <td>{{$order->currency_id}}</td>
                         <td>{{$order->total_price}}</td>
                         <td>{{$order->total_quantity}}</td>
-                        <td>{{$order->status == "0" ? "Pending" : "Seen"}}</td> 
+                        <td>{{$order->status == "0" ? "Not Ready " : "Ready"}}</td> 
                         <td>{{$order->type == "1" ?  "COD" : "Online"}}</td> 
 
                         <td>
@@ -43,14 +43,25 @@
                                     <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"> @lang('messages.button.cancel_order') </button>
-                                    </form>
-                                </div>
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span> </button>
+                                         </form>
                                     <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
                                        @method('GET')
                                        <button class="btn btn-success" type="submit">@lang('messages.button.order_details') </span></button>
                                          </form>
+                                         </div>
+                                         <div class="col-2">
+                                         @if($order->status == 1)
+                                         <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">Not Ready</button></a>
+                                         @else
+                                             <a>
+                                        <button class="btn btn-info" onclick="readyOrder('{{$order->id}}')">
+                                         Ready 
+                                         </button>
+                                             </a>
+                                             @endif
+                                             </div>  
                                 </div>
                             </div>
                         </td>
@@ -65,35 +76,35 @@
 @section('scripts')
 
 <script>
-function deactivateOrder(id) {
+function readyOrder($id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "{{ url('admin/orders/deactivate') }}" + "/" + id,
+        url: "{{ url('admin/orders/notready') }}" + "/" + $id,
         type: 'post',
         success: function(result)
         {
-            toastr.error('Order Deactivated');
+            toastr.error('Order Not Ready');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
 }
 
-function activateOrder(id) {
+function notreadyOrder($id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "{{ url('admin/orders/activate') }}" + "/" + id,
+        url: "{{ url('admin/orders/ready') }}" + "/" + $id,
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Order Activated');
+            toastr.success('Order Ready');
             window.setTimeout(function(){location.reload()},2000);
         }
     });

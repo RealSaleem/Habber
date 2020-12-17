@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DateTime;
 use App\Order;
 use App\User;
 
@@ -15,10 +16,12 @@ class ReportController extends Controller
      */
     public function index()
     {
-      
+       $dt = new DateTime();
+       $order_date = Order::get('created_at');
         $order = Order::get();
+        $total_price = Order::sum('total_price');
         $publisher = $user = User::role('publisher')->get();
-        return view('reports.sales', compact('order','publisher'));
+        return view('reports.sales', compact('order','publisher','total_price','dt','order_date'));
 }
     
 
@@ -54,7 +57,7 @@ class ReportController extends Controller
         //
         $order = Order::get();
         $publisher = $user = User::role('publisher')->get();
-        return view('reports.publisher', compact('order','publisher'));
+        return view('reports.detail', compact('order','publisher'));
     }
 
     /**

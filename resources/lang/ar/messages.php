@@ -1957,7 +1957,9 @@ return [
            'currency'=>'عملة',
            'symbol'=>'رمز',
            'iso'=>'ايزو',
-           'payment_type'=>'نوع الدفع'
+           'payment_type'=>'نوع الدفع',
+           'ready'=>'جاهز',
+           'not ready'=> 'غير جاهز'
        ],
        'city_page'=> [
         'city'=> 'مدينة' ,
@@ -1967,6 +1969,30 @@ return [
         'edit_city_info'=> 'تحرير معلومات المدينة',
         'name'=> 'اسم',
         'shipping_charges'=> 'رسوم الشحن',
+    ],
+    'push_notifications_page' => [
+        'push_notifications' => 'دفع الإخطارات',
+        'add_push_notifications'=> 'إضافة دفع الإخطارات',
+        'add_push_notifications_info'=> 'إضافة دفع الإخطارات',
+        'title'=> 'عنوان',
+        'options'=> 'خيارات ',
+        'users' => 'المستخدمون',
+        'description'=> 'وصف',
+    ],
+    'static_page'=> [
+        'aboutus'=> 'معلومات عنا' ,
+        'privacypolicy'=> 'سياسة خاصة',
+        'returnpolicy'=> 'سياسة العائدات',
+        'termsandcondition'=>'أحكام وشروط',
+        'staticpage'=> 'صفحة ثابتةs',
+        'addpageinfo' => 'أضف معلومات الصفحة',
+        'editpageinfo' => 'تحرير معلومات الصفحة',
+        'pageinfo' => 'معلومات الصفحة',
+    ],
+    'reports_page'=> [
+        'sale_reports'=> 'تقرير البيع' ,
+        'publisher_reports'=>'تقرير الناشر',
+        'system_reports' => 'تقارير النظام'
     ],
 
 
