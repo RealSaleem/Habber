@@ -109,15 +109,19 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AddressRequest $request,Address $add)
+    public function update(AddressRequest $request,$id)
     {
-        try {
-            $address = $this->model->update($request->all(),$add->first());
-            return (new AddressResource($add->first()));
-        }
-        catch(\Exception $e) {
-            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
-        }
+        $address = Address::find($id);
+        $address->address_name = $request->address_name;
+        $address->address_line1 = $request->address_line1;
+        $address->address_line2= $request->address_line2;
+        $address->city_id= $request->city_id;
+        $address->state = $request->state; 
+        $address->country_id = $request->country_id;
+        $address->post_code= $request->post_code;
+        $address->phone= $request->phone;
+        $address->update();   
+        return (new AddressResource($address));
     }
 
     /**
@@ -129,10 +133,10 @@ class AddressController extends Controller
     public function destroy($id)
     {
         try{
-            $address = $this->model->delete($id);
-            if($address == true) {
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Address Deleted Successfully!');
-            }
+            $address = Address::findOrFail($id);
+            $address->delete();
+         return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Address Deleted Successfully!');
+            
         }
         catch(\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
