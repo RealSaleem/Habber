@@ -103,6 +103,13 @@ class UserController extends Controller
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
     }
+
+    public function fcm(Request $request,$id){
+        $user = User::find($id);
+        $user->notification=$request->notification;
+        $user->save();
+       return (new UserResource($user))->additional(['message' => 'Changed Notification Permission Successfullly']);
+   }
     /**
      * Remove the specified resource from storage.
      *
