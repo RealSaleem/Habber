@@ -76,7 +76,12 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         // users
         Route::put('user', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
+            //static pages
+        Route::get('static_page/link','StaticPageController@getLink');    
+            //notification
+            Route::post('fcm/{id}','UserController@fcm');
 
+            
         Route::resource('cart','CartController');
         Route::resource('order','OrderController');
     });
