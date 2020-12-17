@@ -69,7 +69,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::delete('addresses/{id}', 'AddressController@destroy');
         Route::get('addresses/{id}', 'AddressController@show');
         // users
-        Route::put('user', 'UserController@update');
+        Route::post('user', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
             //static pages
             
