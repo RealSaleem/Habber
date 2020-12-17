@@ -76,7 +76,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('addresses/{id}', 'AddressController@show');
         Route::put('addresses/{id}', 'AddressController@update');
         // users
-        Route::put('user', 'UserController@update');
+        Route::post('user', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
             //static pages
             

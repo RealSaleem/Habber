@@ -47,7 +47,6 @@ class UserRepository implements RepositoryInterface
     public function update(array $data, $id)
     {
       
-        
         $user = $this->model->findOrFail($id);
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
