@@ -84,6 +84,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
             
         Route::resource('cart','CartController');
         Route::resource('order','OrderController');
+        Route::resource('invoice','InvoiceController');
     });
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {

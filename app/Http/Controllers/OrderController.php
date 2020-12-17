@@ -119,9 +119,45 @@ class OrderController extends Controller
         event(new OrderCancelledEvent($order));
         return back()->with('success', 'Order Deleted Successfully!');
     }
+    public function readyOrder($id) {
+        $error = false;
+        try {
+            $order = Order::findOrFail($id);
+            $order->status = false;
+            $order->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function notreadyOrder($id) {
+        $error = false;
+        try {
+            $order = Order::findOrFail($id);
+            $order->status = true;
+            $order->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+    
+    }
+}
     
 
     
-}
+
 
 

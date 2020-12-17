@@ -40,7 +40,7 @@
                             <td>{{$book->cover_type}}</td>
                             <td>{{$book->description}}</td>  
                             <td>{{$book->book_language}}</td>  
-                            <td>{{$book->product_prices['price']}}</td>
+                            <td>{{$book->product_price['0']['price']}}</td>
                             <td>{{$book->isbn}}</td>
                             <td>{{$book->total_pages}}</td>  
                             <td>{{( $book->quantity == 0 ) ? "out of stock" : $book->quantity}}</td>

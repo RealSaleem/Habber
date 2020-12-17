@@ -69,6 +69,72 @@
                     </div>
                     @endif 
                 </div>
+                <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                    <th>Product Name </th>
+                        <th>Product ID </th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Image</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                <h3>  Product</h3>
+                @if(count($publisher->books) > 0)
+                    @foreach($publisher->books as $o)
+                        <tr>
+                        <td>{{$o->title}}</td>
+                            <td>{{$o->isbn}}</td>
+                            <td>{{$o->product_price['0']['price']}}</td>
+                            <td>{{$o->quantity}}</td>
+                            <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$o->image)  }}" alt=""> </td>
+                            
+                        </tr>
+                    @endforeach
+                @endif   
+                @if(count($publisher->bookmarks) > 0)
+                    @foreach($publisher->bookmarks as $b)
+                        <tr>
+                        <td>{{$b->title}}</td>
+                            <td>{{$b->bookmark_id}}</td>
+                            <td>{{$b->product_price['0']['price']}}</td>
+                            <td>{{$b->quantity}}</td>
+                            
+                            <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$b->image)  }}" alt=""> </td>
+                        </tr>
+                    @endforeach
+                @endif
+                </tbody>
+            </table> 
+            <h3>  Order</h3>
+            <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Address</th>
+                        <th>Currency</th>
+                        <th>Total Price</th>
+                        <th>Total Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for ($i=0;$i<count($oo);$i++)
+                        @for ($j=0;$j<count($oo[$i]);$j++)
+                    <tr>    
+
+                        <td>{{$oo[$i][$j]['id']}}</td>
+                        <td>{{$oo[$i][$j]['address_id']}}</td>
+                        <td>{{$oo[$i][$j]['currency_id']}}</td>
+                        <td>{{$oo[$i][$j]['total_price']}}</td>
+                        <td>{{$oo[$i][$j]['total_quantity']}}</td> 
+                        
+                    </tr>
+                        @endfor
+                    @endfor
+                </tbody>
+            </table>
+
                
                 <div class="border-top">
                     <div class="card-body">

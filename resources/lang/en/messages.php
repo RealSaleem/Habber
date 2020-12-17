@@ -376,8 +376,10 @@ return [
         'pageinfo' => 'Page Information',
         'arabictitle' => 'Arabic Title',
     ],
-
-    
-
+    'reports_page'=> [
+        'sale_reports'=> 'Sale Reports',    
+        'publisher_reports'=>'Publisher Reports',
+        'system_reports' => 'System Reports'
+    ],
 
 ];

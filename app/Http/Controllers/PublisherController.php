@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Country;
 use App\Business;
+use App\Order;
 
 class PublisherController extends Controller
 {
@@ -104,19 +105,28 @@ class PublisherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
+      
+        $order = Order::get();
         $totalOrder = 0;
         $publisher = User::with('books','bookmarks')->findOrFail($id);
+        $oo= array();
         if(count($publisher->books ) > 0) {
+            
             foreach($publisher->books as $b) {
+                array_push($oo, $b->orders);
                 $totalOrder = $totalOrder + count($b->orders); 
             }
         }
         if (count($publisher->bookmarks ) > 0) {
+            
             foreach($publisher->bookmarks as $bm) {
+               array_push($oo, $bm->orders);
                 $totalOrder = $totalOrder + count($bm->orders); 
+                
             }
-        }  
-        return view('publisher.detail',compact('publisher','totalOrder'));
+        } 
+ 
+        return view('publisher.detail',compact('publisher','totalOrder','order','oo'));
     }
 
     /**

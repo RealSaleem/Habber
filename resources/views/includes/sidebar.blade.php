@@ -122,6 +122,8 @@
                     <li class="sidebar-item"><a href="{{ route('orders.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                 </ul>
             </li>
+
+            <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list') ||  auth()->user()->hasAnyDirectPermission('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list')) == true ? "" : "hidden"}}> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> System Reports </span></a>
             <!-- {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('book-edit','book-delete','book-create','book-list')) == true ? "" : "hidden"}} -->
             <li class="sidebar-item"{{ (auth()->user()->hasAnyRole('Admin')) == true ? "" : "hidden"}}> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.static_page.staticpage') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">

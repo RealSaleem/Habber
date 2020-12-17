@@ -69,8 +69,13 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
+        // {
         //
+        $contact =ContactUs::findOrFail($id);
+        $user = User::where('id', '!=', 1)->get();
+        return view('contactus.edit', compact('contact','user'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -81,7 +86,21 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $error = false;
+        try{
+            $contact = ContactUs::find($id);
+            $contact->status = $request->status;
+            $contact->update();
+            return back()->with('success', 'Status Updated Successfully!');
+        }
+        catch(\Exception $e) {
+           
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return back()->with('success', $message);
+        }
     }
 
     /**
