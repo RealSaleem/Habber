@@ -10,6 +10,7 @@ use DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserRepository implements RepositoryInterface
 {
@@ -53,6 +54,7 @@ class UserRepository implements RepositoryInterface
         $user->currency_id = $data['currency_id'];
         $user->language_id = $data['language_id'];
         if(isset($data['profile_pic'])) {
+            Log::info($data['profile_pic']);
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);
             $file = $data['profile_pic'];
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
