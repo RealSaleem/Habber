@@ -15,7 +15,8 @@
             <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>User ID</th>
+                        <th>Email</th>
+                        <th>Order BY </th>
                         <th>Address</th>
                         <th>Currency</th>
                         <th>Total Price</th>
@@ -29,9 +30,10 @@
                     @foreach($order as $order)
                     <tr>    
 
-                        <td>{{$order->user_id}}</td>
+                        <td>{{$order->users['email']}}</td>
+                        <td>{{$order->users['first_name']}}</td>
                         <td>{{$order->address_id}}</td>
-                        <td>{{$order->currency_id}}</td>
+                        <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}</td>
                         <td>{{$order->total_quantity}}</td>
                         <td>{{$order->status == "0" ? "Not Ready " : "Ready"}}</td> 

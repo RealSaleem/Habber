@@ -67,6 +67,8 @@ class RoleController extends Controller
     public function show($id)
     {
         //
+        $permission = Permission::get();
+        return view('roles.detail',compact('permission'));
     }
 
     /**

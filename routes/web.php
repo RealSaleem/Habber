@@ -81,8 +81,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('city','CityController');
    Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');
    Route::post('city/deactivate/{id}','CityController@deactivateCity')->name('deactivate_city');
-   Route::post('orders/activate/{id}','OrderController@activateOrder');
-   Route::post('orders/deactivate/{id}','OrderController@deactivateOrder');
+   Route::post('orders/ready/{id}','OrderController@readyOrder');
+   Route::post('orders/notready/{id}','OrderController@notreadyOrder');
    Route::resource('about_us','AboutUsController');
   Route::resource('static_pages','StaticPagesController');
    Route::get('homes','HomeController@getData')->name('homes.getdata');
