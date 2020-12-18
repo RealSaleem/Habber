@@ -12,6 +12,7 @@ use App\Helpers\ApiHelper;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use Auth;
 
 class UserController extends Controller
 {
@@ -119,5 +120,18 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function profile() {
+        
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+            if($user) {
+                return (new UserResource($user));
+            }
+            else {
+                return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, 'User Not Activated');
+                
+            }
     }
 }

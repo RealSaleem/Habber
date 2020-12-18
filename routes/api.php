@@ -63,6 +63,8 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
 
 
     Route::group(['middleware'=>'auth:api'], function() {
+        Route::get('/profile','UserController@profile');
+    
         // request book
         Route::post('request/book', 'UserRequestController@store');
         // favourites
