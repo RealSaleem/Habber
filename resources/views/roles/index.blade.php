@@ -27,8 +27,10 @@
                     <tr>    
                         <td>{{$roles->name}}</td>
                         <td>
-                            <div class="row">
-                                <div class="col-2">
+                        <div class="row">
+                               <div>
+                            <a href="{{action('RoleController@show',[$roles->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                             </div>
                                     <form action="{{ action('RoleController@destroy', [$roles->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')

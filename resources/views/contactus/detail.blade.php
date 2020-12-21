@@ -19,7 +19,7 @@
         <div class="card">
         <form action="{{ route('contactus.update',[$contact->id])}}" method="post"  enctype="multipart/form-data" > 
                 {{ csrf_field() }}
-                @method('PUT')>   
+                @method('PUT')  
                 <div class="card-body row" style="font-size: 18px;">
                     <h4 class="card-title col-12">@lang('messages.contactus_page.contact_us_request')</h4>
                     <div class="form-group col-6">
