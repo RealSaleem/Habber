@@ -16,7 +16,7 @@ class PushNotificationController extends Controller
      */
     public function index()
     {
- $usersDropDown =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
+ $usersDropDown =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->where('notification',1)->get();
  return view('push_notifications.create', compact('usersDropDown'));
     }
 
