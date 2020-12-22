@@ -125,7 +125,9 @@ function activatePublisher(id) {
                 // 'csv', 'excel', 'pdf', 'print',
              
                 {
-                    extend: 'pdf',           
+                    extend: 'pdf',     
+                    orientation: 'landscape',   
+                     pageSize: 'LEGAL',               
                     exportOptions: {
                         columns: ':visible:not(.not)' // indexes of the columns that should be printed,
                     }                      // Exclude indexes that you don't want to print.
