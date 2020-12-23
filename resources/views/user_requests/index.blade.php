@@ -30,7 +30,7 @@
           @foreach($userRequest as $userrequest)
             <tr>
               <td>{{$userrequest->id}}</td>
-              <td>{{ucfirst($userrequest->users->first_name .' '.$userrequest->users->last_name)}}</td>
+              <td>{{($userrequest->users['first_name'] ." ". $userrequest->users['last_name'])}}</td>
               <td>{{$userrequest->title}}</td>
               <td>{{$userrequest->author_name}}</td>
               <td>{{$userrequest->book_type}}</td>

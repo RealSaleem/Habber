@@ -76,6 +76,10 @@
                                     <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">@lang('messages.address_page.address')</button></a>
                                   
                                 </div>
+                                <div class="col-2">
+                                    <a href="{{route('user_order',[$user->id])}}"><button class=" btn btn-dark">@lang('messages.order_page.order')</button></a>
+                                  
+                                </div>
 
                                 <div class="col-2">
                                     <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">@lang('messages.user_page.favourites')</button></a>
