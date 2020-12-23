@@ -33,7 +33,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\OrderCancelledEvent' => [
             'App\Listeners\SendOrderCancellationNotificationListener',
         ],
-        
+        'App\Events\ForgotPasswordEvent' => [
+            'App\Listeners\SendForgotPasswordEmailListener',
+        ],
+        'App\Events\OrderSuccessEvent' => [
+            'App\Listeners\SendOrderSuccessEmailListener',
+        ],
     ];
 
     /**
