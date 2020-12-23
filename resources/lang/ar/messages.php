@@ -1959,7 +1959,7 @@ return [
            'iso'=>'ايزو',
            'payment_type'=>'نوع الدفع',
            'ready'=>'جاهز',
-           'not ready'=> 'غير جاهز'
+           'not_ready'=> 'غير جاهز'
        ],
        'city_page'=> [
         'city'=> 'مدينة' ,
@@ -1984,7 +1984,7 @@ return [
         'privacypolicy'=> 'سياسة خاصة',
         'returnpolicy'=> 'سياسة العائدات',
         'termsandcondition'=>'أحكام وشروط',
-        'staticpage'=> 'صفحة ثابتةs',
+        'staticpage'=> 'صفحة ثابتة',
         'addpageinfo' => 'أضف معلومات الصفحة',
         'editpageinfo' => 'تحرير معلومات الصفحة',
         'pageinfo' => 'معلومات الصفحة',
