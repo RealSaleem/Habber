@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Events\OrderStatusChangedEvent;
 use App\Events\OrderCancelledEvent;
+use App\Events\OrderSuccessEvent;
 use App\Order;
 use App\User;
 
@@ -35,6 +36,7 @@ class OrderController extends Controller
     {
         //
         $order = Order::all();
+
         return view('orders.create', compact('order'));
     }
 
@@ -119,6 +121,13 @@ class OrderController extends Controller
         event(new OrderCancelledEvent($order));
         return back()->with('success', 'Order Deleted Successfully!');
     }
+    public function getUserOrderList($id)
+    {
+        $order = Order::where('user_id',$id)->get();
+        $fromUser = User::find($id);
+        return view('orders.index', compact('order','fromUser'));
+    }
+   
     public function readyOrder($id) {
         $error = false;
         try {

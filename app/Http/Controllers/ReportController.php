@@ -56,7 +56,7 @@ class ReportController extends Controller
     {
         //
         $order = Order::get();
-        $publisher = $user = User::role('publisher')->get();
+        $publisher = $user = User::with('orders')->role('publisher')->get();
         return view('reports.detail', compact('order','publisher'));
     }
 

@@ -71,9 +71,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="profile_pic" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.picture')</label>
-                         <div class="col-md-6">
-                         <input id="profile_pic" type="file" class="form-control" name="profile_pic">
+                        <label for="profile_pic" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.picture') <br>
+                         </label>
+                         <div class="col-md-6" >
+                         <input  id="profile_pic" type="file" class="form-control" name="profile_pic" >
                             <span class="text-danger">{{$errors->first('profile_pic')}}</span>
                         </div>
                         

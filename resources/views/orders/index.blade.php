@@ -31,10 +31,10 @@
                     <tr>    
 
                         <td>{{$order->users['email']}}</td>
-                        <td>{{$order->users['first_name']}}</td>
+                        <td>{{($order->users['first_name'] ." ". $order->users['last_name'])}}</td>
                         <td>{{$order->address_id}}</td>
                         <td>{{$order->currencies['iso']}}</td>
-                        <td>{{$order->total_price}}</td>
+                        <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->total_quantity}}</td>
                         <td>{{$order->status == "0" ? "Not Ready " : "Ready"}}</td> 
                         <td>{{$order->type == "1" ?  "COD" : "Online"}}</td> 

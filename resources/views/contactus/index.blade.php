@@ -14,8 +14,10 @@
           <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>Submission ID</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Whatsapp Number</th>
                         <th>Phone</th>
                         <th>Message</th>
                         <th class="not">Action</th>                  
@@ -24,8 +26,10 @@
                <tbody>
                @foreach($contact as $contact)
         <tr>
+            <td>{{$contact->id}}</td>
           <td>{{$contact->name}}</td>
             <td>{{$contact->email}}</td>
+            <td>{{$contact->whatapp_number}}</td>
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
             <td>

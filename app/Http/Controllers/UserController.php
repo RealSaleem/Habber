@@ -58,7 +58,7 @@ class UserController extends Controller
             'email' => 'required|unique:users|email',
             'password' => 'required|min:8',
             'phone' => 'required|numeric', 
-            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'profile_pic' => 'required|image|mimes:jpg,jpeg,png||dimensions:max_width=200,max_height=200',
             'role' => 'required'
         ]);
             

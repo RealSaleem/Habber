@@ -21,7 +21,7 @@
                         <th>Language</th>  
                         <th>Status</th>
                         <th class="not">Image</th>
-                        <th>Order</th>
+                        <th>Banner Order</th>
                         <th class="not">Action</th>
                         </tr>
                 </thead>

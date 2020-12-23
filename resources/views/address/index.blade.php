@@ -43,7 +43,7 @@
                     <td>{{($address->countries['name'])}}</td>
                     <td>{{$address->post_code}}</td>
                     <td>{{$address->phone}}</td>
-                    <td>{{ucfirst($address->users->first_name ." ". $address->users->last_name)}}</td>
+                    <td>{{($address->users['first_name'] ." ". $address->users['last_name'])}}</td>
                     <td>{{($address->cities['shipping_charges'])}}</td>
                     <td>
                         <div class="row">
