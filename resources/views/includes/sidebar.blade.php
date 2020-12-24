@@ -4,7 +4,7 @@
     <nav class="sidebar-nav">
         <ul id="sidebarnav" class="p-t-30">
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('welcome')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">@lang('messages.header.dashboard')</span></a></li>
-                <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('user-edit','user-delete','user-create','user-list') ||  auth()->user()->hasAnyDirectPermission('user-edit','user-delete','user-create','user-list')) == true ? "" : "hidden"}}> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.user_page.users')  </span></a>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.user_page.users')  </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{ route('users.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('users.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
@@ -81,7 +81,7 @@
                         <li class="sidebar-item"><a href="{{ route('permissions.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('role-edit','role-delete','role-create','role-list') ||  auth()->user()->hasAnyDirectPermission('role-edit','role-delete','role-create','role-list')) == true ? "" : "hidden"}}> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.role_page.role') </span></a>
+                <li class="sidebar-item" {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('role-edit','role-delete','role-create','role-list')) == true ? "" : "hidden"}}> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.role_page.role') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{ route('roles.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('roles.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
@@ -106,13 +106,13 @@
                     <li class="sidebar-item"><a href="{{ route('city.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list') ||  auth()->user()->hasAnyDirectPermission('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list')) == true ? "" : "hidden"}}> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a>
+          
                 <!-- <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item"><a href="{{ route('sitesetting.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                     <li class="sidebar-item"><a href="{{ route('sitesetting.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul> -->
             </li>
-            <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list') ||  auth()->user()->hasAnyDirectPermission('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list')) == true ? "" : "hidden"}}> <a class="sidebar-link waves-effect waves-dark"   aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.push_notifications_page.push_notifications') </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.push_notifications_page.push_notifications')</span></a>
                <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item"><a href="{{ route('push_notifications.index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul> 
@@ -131,6 +131,7 @@
                         <li class="sidebar-item"><a href="{{ route('static_pages.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
+                  <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list') ||  auth()->user()->hasAnyDirectPermission('site-setting-edit','site-setting-delete','site-setting-create','site-setting-list')) == true ? "" : "hidden"}}> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a>
 
     
        

@@ -19,8 +19,8 @@
                 <div class="card-body row">
                     <div class="col"> <strong>@lang('messages.order_page.order_date'):</strong> <br>{{$order->created_at}} </div>
                     <div class="col"> <strong>@lang('messages.order_page.order_by'):</strong> <br>{{($order->users['first_name'] ." ".$order->users['last_name'] )}}</div>
-                    <div class="col"> <strong>@lang('messages.user_page.email'):</strong> <br>  {{ucfirst($order->users->email)}} </div>
-                    <div class="col"> <strong>@lang('messages.user_page.contact_no'):</strong> <br> {{ucfirst($order->users->phone)}}</div>
+                    <div class="col"> <strong>@lang('messages.user_page.email'):</strong> <br>  {{ucfirst($order->users['email'])}} </div>
+                    <div class="col"> <strong>@lang('messages.user_page.contact_no'):</strong> <br> {{ucfirst($order->users['phone'])}}</div>
                     <div class="col"> <strong>@lang('messages.order_page.total_quantity') :</strong> <br> {{ucfirst($order->total_quantity)}}</div>
                     <div class="col"> <strong>@lang('messages.order_page.total_price'):</strong> <br> {{$order->total_price}}{{$order->currencies['iso']}} </div>
                 </div>
