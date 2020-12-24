@@ -54,6 +54,8 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('forgot-password', 'AuthController@forgotPassword');
     // contact us
     Route::post('contactus', 'AuthController@ContactUs');
+    //static page
+    Route::get('static_page/link','StaticPageController@getLink');
     // join us
     Route::post('joinus', 'AuthController@createJoinUsRequest');
 
@@ -61,6 +63,8 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
 
 
     Route::group(['middleware'=>'auth:api'], function() {
+        Route::get('/profile','UserController@profile');
+    
         // request book
         Route::post('request/book', 'UserRequestController@store');
         // favourites
@@ -74,14 +78,14 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         Route::get('addresses/{id}', 'AddressController@show');
         Route::put('addresses/{id}', 'AddressController@update');
         // users
-        Route::put('user', 'UserController@update');
+        Route::post('user', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
             //static pages
-        Route::get('static_page/link','StaticPageController@getLink');    
+            
             //notification
             Route::post('fcm/{id}','UserController@fcm');
 
-            
+
         Route::resource('cart','CartController');
         Route::resource('order','OrderController');
         Route::resource('invoice','InvoiceController');

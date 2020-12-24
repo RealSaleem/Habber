@@ -55,11 +55,11 @@
                                          </div>
                                          <div class="col-2">
                                          @if($order->status == 1)
-                                         <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">Not Ready</button></a>
+                                         <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a>
                                          @else
                                              <a>
                                         <button class="btn btn-info" onclick="readyOrder('{{$order->id}}')">
-                                         Ready 
+                                        @lang('messages.order_page.ready') 
                                          </button>
                                              </a>
                                              @endif

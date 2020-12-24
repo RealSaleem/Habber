@@ -349,7 +349,9 @@ return [
         'currency'=>'Currency',
         'symbol'=>'Symbol',
         'iso'=>'ISO',
-        'payment_type'=>'Payment Type'
+        'payment_type'=>'Payment Type',
+        'ready'=>'Ready',
+        'not_ready'=> 'Not Ready'
       
     ],
     'city_page'=> [

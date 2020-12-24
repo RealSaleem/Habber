@@ -28,6 +28,7 @@ class AuthResource extends JsonResource
             'currency'  => new CurrencyResource(optional($this->currencies)),
             'token' => $this->token,
             'firebase_token' => $this->firebase_token,
+            'notification' => $this->notification
     
         ];
           

@@ -10,6 +10,7 @@ use DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserRepository implements RepositoryInterface
 {
@@ -47,13 +48,13 @@ class UserRepository implements RepositoryInterface
     public function update(array $data, $id)
     {
       
-        
         $user = $this->model->findOrFail($id);
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
         $user->currency_id = $data['currency_id'];
         $user->language_id = $data['language_id'];
         if(isset($data['profile_pic'])) {
+            Log::info($data['profile_pic']);
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);
             $file = $data['profile_pic'];
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);

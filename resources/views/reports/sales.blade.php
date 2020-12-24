@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">Sales Report</h1>
+<h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1> 
+{{ $dt->format('Y-m-d H:i:s')}}
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))

@@ -76,7 +76,7 @@ class SendNotificationListener implements ShouldQueue
 
                      } }
                      else if($event->data['option']==0){
-                        $user=User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
+                        $user=User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->where('notification',1)->get();
                             $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
                             $firebase = (new Factory)
                             ->withServiceAccount($serviceAccount)
