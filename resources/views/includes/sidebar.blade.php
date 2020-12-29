@@ -75,19 +75,6 @@
                         <li class="sidebar-item"><a href="{{ route('ads.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
-               <!-- <li class="sidebar-item" {{ (auth()->user()->roles[0]->hasPermissionTo('permission-edit','permission-delete','permission-create','permission-list') ||  auth()->user()->hasAnyDirectPermission('permission-edit','permission-delete','permission-create','permission-list')) == true ? "" : "hidden"}}> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.permission_page.permission') </span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="{{ route('permissions.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
-                        <li class="sidebar-item"><a href="{{ route('permissions.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
-                    </ul>
-                </li>
-                <li class="sidebar-item" {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('role-edit','role-delete','role-create','role-list')) == true ? "" : "hidden"}}> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.role_page.role') </span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="{{ route('roles.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
-                        <li class="sidebar-item"><a href="{{ route('roles.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
-                    </ul>
-                </li>
-            </li>-->
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.language_page.languages') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item"><a href="{{ route('languages.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>

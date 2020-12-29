@@ -44,7 +44,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.type_of_bookmark'):  {{ucfirst($bookmark->type_of_bookmark )}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.price'):  {{ucfirst($bookmark->product_prices['price'])}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.price'):  {{$bookmark->product_price['0']['price']}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.publisher'):  {{ucfirst($bookmark->users['first_name'])}}</label>
