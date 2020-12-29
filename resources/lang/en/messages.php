@@ -383,5 +383,11 @@ return [
         'publisher_reports'=>'Publisher Reports',
         'system_reports' => 'System Reports'
     ],
+    'password_page'=> [
+        'password'=>'Password',
+        'password_confirmation'=>'Password Confirmation',
+        'edit_password'=>'Edit Password',
+        'change_password'=>'Change Password',
+    ]
 
 ];

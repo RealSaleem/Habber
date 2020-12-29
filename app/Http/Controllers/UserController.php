@@ -7,6 +7,7 @@ use App\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\UpdatePasswordRequest;
 
 class UserController extends Controller
 {
@@ -211,6 +212,29 @@ class UserController extends Controller
         $user->status = $request->status;
         $user->update();
         return back()->with('success', 'User Request Updated successfully');
+        
+    }
+
+    public function passwordUpdate(UpdatePasswordRequest $request) {
+        try{
+        $user=User::where('id',auth()->user()->id)->first();
+            $user->password=Hash::make($request['password']);
+            $user->update();
+          //  return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Password Updated Successfully!');
+            return back()->with('success', 'Password Updated Successfully!');
+       }
+        catch (\Exception $e) {
+           // return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+            return back()->with('error', $e->getMessage());
+        }
+        
+
+
+    }
+    public function changepassword()
+    {
+       
+        return view('auth.passwords.change');
         
     }
     public function deactivateUser($id) {

@@ -1994,6 +1994,11 @@ return [
         'publisher_reports'=>'تقرير الناشر',
         'system_reports' => 'تقارير النظام'
     ],
-
+    'password_page'=> [
+        'password'=>'كلمه السر',
+        'password_confirmation'=>'تأكيد كلمة المرور',
+        'edit_password'=>'تحرير_كلمة المرور',
+        'change_password'=>'تحرير_كلمة المرور',
+    ]
 
 ];
