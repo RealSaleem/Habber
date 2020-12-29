@@ -13,7 +13,7 @@ use App\Events\ShowNotificationEvent;
 use App\User;
 use Session;
 
-class ShowNotificationListener
+class ShowNotificationListener implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -25,7 +25,7 @@ class ShowNotificationListener
     
     public function handle(ShowNotificationEvent $event)
     {
-        $users =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->where('notification',1)->get();
+        $users =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
 
         $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
                         $firebase = (new Factory)
@@ -43,7 +43,7 @@ class ShowNotificationListener
                      array_push($value,$snapshot->getValue());}
                          
                      }
-                   
+                        dd($value);
                      Session::put('notification',$value);
     }
 }
