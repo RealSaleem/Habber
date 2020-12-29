@@ -10,6 +10,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Events\ShowNotificationEvent;
+use App\User;
 
 class ShowNotificationListener implements ShouldQueue
 {
