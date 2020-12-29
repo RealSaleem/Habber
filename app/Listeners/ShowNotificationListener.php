@@ -11,8 +11,9 @@ use Kreait\Firebase\ServiceAccount;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Events\ShowNotificationEvent;
 use App\User;
+use Session;
 
-class ShowNotificationListener implements ShouldQueue
+class ShowNotificationListener
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -42,7 +43,7 @@ class ShowNotificationListener implements ShouldQueue
                      array_push($value,$snapshot->getValue());}
                          
                      }
-                    
+                   
                      Session::put('notification',$value);
     }
 }
