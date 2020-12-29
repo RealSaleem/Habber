@@ -23,9 +23,11 @@ class ChangePasswordRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-            'old_password' => ['bail', 'required', new MatchOldPassword],
-            'password' => ['bail', 'required', 'string', 'min:8', 'confirmed', 'different:old_password'],
+            'email' => ['required','email'],
+            'password' => ['bail', 'required', 'string', 'min:8', 'confirmed'],
+            'remember_token' => ['bail']
         ];
     }
 
@@ -34,10 +36,5 @@ class ChangePasswordRequest extends FormRequest
      *
      * @return array
      */
-    public function messages()
-    {
-        return [
-            'password.different' => 'New password and current password must be different.'
-        ];
-    }
+    
 }

@@ -10,21 +10,18 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ForgotPasswordEvent
+class OrderSuccessEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $request;
-    public $token;
+        public $order;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($request,$token)
+    public function __construct($order)
     {
-        $this->request=$request;
-        $this->token=$token;
+        $this->order=$order;
     }
 
- 
 }

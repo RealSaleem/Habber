@@ -5,6 +5,8 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Events\OrderSuccessEvent;
+use Mail;
+use App\User;
 class SendOrderSuccessEmailListener
 {
     /**
@@ -26,11 +28,13 @@ class SendOrderSuccessEmailListener
     public function handle(OrderSuccessEvent $event)
     {
        $order=$event->order;
+       $user=User::where('id',$order['user_id'])->first();
+       $email=$user['email'];
         Mail::send(
-            'order.sucess_email',['email'=> $email['email'], 'token'=>$email['_token']],
-            function($message) use ($order){
-                $message->to($email['email']);
-                $message->subject("reset your password.");
+            'orders.success_email',['email'=> $email, 'order'=>$order],
+            function($message) use ($email){
+                $message->to($email);
+                $message->subject("Order Placed Successfully");
             }
         );
     }

@@ -8,6 +8,7 @@ use App\Helpers\ApiHelper;
 use App\Order;
 use App\Cart;
 use App\Http\Requests\Api\OrderRequest;
+use App\Events\OrderSuccessEvent;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Http\Resources\OrderResource;
 use App\Http\Controllers\Controller;
@@ -77,8 +78,9 @@ class OrderController extends Controller
             }
             else {
                 $this->cart->deleteUserCart(auth()->user()->id);
+                event(new OrderSuccessEvent($order));
                 return (new OrderResource($order));
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
+               return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
             }
            
         }
