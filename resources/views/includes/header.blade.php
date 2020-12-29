@@ -55,12 +55,13 @@
                     <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 
+                @if(Session::get('notification')!=null)
                 @foreach(Session::get('notification') as $no)
                 <a class="dropdown-item" href="#">{{$no['to']}}'s order has been {{$no['body']}}</a>
-                  
                 @endforeach
-             
+              @else
+              <a class="dropdown-item" href="#"></a>
+              @endif
                 </div>
                 
             </li> 
