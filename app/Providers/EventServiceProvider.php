@@ -39,6 +39,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\OrderSuccessEvent' => [
             'App\Listeners\SendOrderSuccessEmailListener',
         ],
+        'App\Events\ShowNotificationEvent' => [
+            'App\Listeners\ShowNotificationListener',
+        ],
     ];
 
     /**

@@ -8,6 +8,7 @@ use App\Order;
 use App\BookClub;
 use App\Book;
 use App\Bookmark;
+use App\Events\ShowNotificationEvent;
 use App\Helpers\ApiHelper;
 
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class HomeController extends Controller
        $totalOrder = Order::count();
        $bookclubDetail = BookClub::count(); 
        $totalProduct = Book::count() + Bookmark::count(); 
-       ApiHelper::getData();
+       event(new ShowNotificationEvent());
+      // ApiHelper::getData();
                   
 return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder'));
     }
