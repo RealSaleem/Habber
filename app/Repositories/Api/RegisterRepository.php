@@ -29,6 +29,13 @@ class RegisterRepository implements RepositoryInterface
         return $this->model->with($with)->get();
     }
 
+    public function updatePassword(array $data){
+        $user = $this->model->where('email',$data['email'])->first();
+        $user->password = Hash::make($data['password']);
+        $user->remember_token = null;
+        $user->update();
+        return true;
+    }
     // create a new record in the database
     public function create(array $data)
     {

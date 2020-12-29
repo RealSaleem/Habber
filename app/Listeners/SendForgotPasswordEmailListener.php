@@ -29,9 +29,11 @@ class SendForgotPasswordEmailListener
     {
         
         $email=$event->request;
+        $token=$event->token;
+        
        
         Mail::send(
-            'auth.passwords.forgot',['email'=> $email['email'], 'token'=>$email['_token']],
+            'auth.passwords.forgot',['email'=> $email['email'], 'token'=>$token],
             function($message) use ($email){
                 $message->to($email['email']);
                 $message->subject("reset your password.");

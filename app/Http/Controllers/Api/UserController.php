@@ -105,6 +105,8 @@ class UserController extends Controller
         }
     }
 
+    
+
     public function fcm(Request $request,$id){
         $user = User::find($id);
         $user->notification=$request->notification;

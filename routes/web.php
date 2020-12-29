@@ -22,6 +22,7 @@ Route::get('payment/success','PaymentGatewayController@successPayment')->name('p
 Route::get('payment/failure','PaymentGatewayController@failurePayment')->name('payment.failure');
 Route::get('static_pages/{url}/{lang}','StaticPagesController@show')->name('static_pages.show');
 Route::post('forgot_password','Auth\ForgotPasswordController@sendEmail')->name('forgot.sendemail');
+Route::post('password/reset','Auth\ForgotPasswordController@updatePassword')->name('password.change');
 Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
