@@ -41,7 +41,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.book_language'):  {{ucfirst($book->book_language )}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.price'):  {{ucfirst($book->product_prices['price'])}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.price'):  {{$book->product_price['0']['price']}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.publisher'):  {{ucfirst($book->users['first_name'])}}</label>
