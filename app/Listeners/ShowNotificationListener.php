@@ -43,7 +43,7 @@ class ShowNotificationListener implements ShouldQueue
                      array_push($value,$snapshot->getValue());}
                          
                      }
-                        dd($value);
+                       
                      Session::put('notification',$value);
     }
 }
