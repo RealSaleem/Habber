@@ -46,7 +46,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('bookmark/deactivate/{id}','BookmarksController@deactivateBookmark');
    Route::post('bookmark/feature/{id}','BookmarksController@featureBookmark');
    Route::post('bookmark/notfeature/{id}','BookmarksController@notfeatureBookmark');
-   Route::resource('bookclubs','BookClubController');     
+   Route::resource('bookclubs','BookClubController');   
+   Route::post('bookclub/activate/{id}','BookClubController@activateBookClub');
+   Route::post('bookclub/deactivate/{id}','BookClubController@deactivateBookClub');
+   Route::post('bookclub/feature/{id}','BookClubController@featureBookClub');
+   Route::post('bookclub/notfeature/{id}','BookClubController@notfeatureBookClub');  
    Route::resource('genres','GenreController');
    Route::resource('address','AddressController');
    Route::get('user/address/{userId}','AddressController@getUserAddressList')->name('user_address');

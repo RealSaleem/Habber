@@ -35,6 +35,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.books') </label>
+                        <div class="col-sm-9">
+                        <select  class="form-control" name="book" id="book_id" >
+                            @foreach($book as $b)
+                            <option value="{{$b->id}}" > {{$b->title}}</option>
+                            @endforeach
+                        </select>
+                            <span class="text-danger">{{$errors->first('book')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.feature')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="featured"  id="status">
@@ -42,6 +53,16 @@
                                 <option value="1" {{ (old('featured') == "1" ? "selected":"")}}>Not Featured</option>
                              </select>   
                             <span class="text-danger">{{$errors->first('featured')}}</span>
+                        </div>
+                     </div> 
+                     <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.status')</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="status"  id="status">
+                                <option value="0" {{ (old('status') == "0" ? "selected":"")}}>Activate</option>
+                                <option value="1" {{ (old('status') == "1" ? "selected":"")}}>Deactivate</option>
+                             </select>   
+                            <span class="text-danger">{{$errors->first('status')}}</span>
                         </div>
                      </div> 
                     <div class="form-group row">

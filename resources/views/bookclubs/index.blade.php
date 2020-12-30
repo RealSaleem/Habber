@@ -16,7 +16,10 @@
                     <tr>
                         <th>Name</th>
                         <th>Arabic Name</th>
+                        <th>Book</th>
                         <th>Feature</th>
+                        <th>Status</th>
+                        <th>Addition Date</th>
                         <th class="not">Image</th>
                         <th class="not"> Action</th>                  
                           </tr>
@@ -26,7 +29,10 @@
                 <tr>
                     <td>{{$bookclub->name}}</td>
                     <td>{{$bookclub->arabic_name}}</td>
-                    <td class = "{{$bookclub->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$bookclub->featured == 1 ? "featured" : "not featured"}}</td>  
+                    <td>{{$bookclub->books['title']}}</td> 
+                    <td class = "{{$bookclub->featured == 0 ? 'text-primary' : 'text-sucees'}}" >{{$bookclub->featured == 0 ? "featured" : "not featured"}}</td> 
+                    <td class = "{{$bookclub->status == 0 ? 'text-primary' : 'text-sucees'}}" >{{$bookclub->status == 0 ? "active" : "not active"}}</td>   
+                    <th>{{$bookclub->created_at}}</th>
                     <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->banner_image) ?  url('storage/'.$bookclub->banner_image) : url('storage/bookclub/default.png') }}" alt=""> </td>
                     <td>
                         <div class="row">
@@ -35,11 +41,24 @@
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                </form>
+                            </form>
                             </div>
                             <div class="col-1">
                                 <a href="{{ action('BookClubController@edit', [$bookclub->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                            </div>
+                        </div>
+                        <div class="col-2">
+                            @if($bookclub->status == 0)
+                                <a><button class="btn btn-info" onclick="activateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.activate')</button></a>
+                            @else
+                                <a><button class="btn btn-danger" onclick="deactivateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                            @endif
+                        </div>
+                        <div class="col-2">
+                            @if($bookclub->featured == 0)
+                                <a><button class="btn btn-primary" onclick="featureBookClub('{{$bookclub->id}}')">@lang('messages.book_page.feature')</button></a>
+                            @else
+                                <a><button class="btn btn-danger" onclick="notfeatureBookClub('{{$bookclub->id}}')">@lang('messages.bookmark_page.not_feature')</button></a>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -90,5 +109,73 @@
         
     });
     })
+    function deactivateBookClub(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookclub/deactivate') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('BookClub Deactivate');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function activateBookClub(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookclub/activate') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('BookClub Activate');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+function notfeatureBookClub(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookclub/notfeature') }}" + "/" + id,
+        type: 'post',
+        success: function(result)
+        {
+            toastr.error('BookClub Un Featured');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+
+function featureBookClub(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{ url('admin/bookclub/feature') }}" + "/" + id,
+        type: 'POST',
+        success: function(result)
+        {
+            toastr.success('BookClub Un Featured');
+            window.setTimeout(function(){location.reload()},2000);
+        }
+    });
+}
+  
+   
 </script>
 @stop

@@ -15,11 +15,12 @@
             <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>Order ID</th>
                         <th>Email</th>
                         <th>Order BY </th>
-                        <th>Address</th>
+                        <th>Country</th>
                         <th>Currency</th>
-                        <th>Total Price</th>
+                        <th>Order Total Amount</th>
                         <th>Total Quantity</th>
                         <th>Status</th>
                         <th>Payment Type</th>
@@ -29,10 +30,10 @@
                 <tbody>
                     @foreach($order as $order)
                     <tr>    
-
+                        <td>{{$order->id}}</td>   
                         <td>{{$order->users['email']}}</td>
                         <td>{{($order->users['first_name'] ." ". $order->users['last_name'])}}</td>
-                        <td>{{$order->address_id}}</td>
+                        <td>{{$order->addresses->countries['name']}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->total_quantity}}</td>
