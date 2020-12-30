@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $order = Order::all();
+        $order = Order::with('addresses')->get();
         return view('orders.index', compact('order'));
     }
 

@@ -35,8 +35,8 @@ class BookClubController extends Controller
     public function create()
     {
         //
-        $bookclub = BookClub::all();
-        return view('bookclubs.create',compact('bookclub'));
+        $book = Book::all();
+        return view('bookclubs.create',compact('book'));
 
     }
 
@@ -51,13 +51,17 @@ class BookClubController extends Controller
         $validatedData = $request->validate([
             'name' => 'required', 
             'arabic_name' => 'required', 
+            'book'=>'required',
+            'status'=>'required',
             'featured'=>'required',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
         $bookclub->arabic_name = $request->arabic_name;
+        $bookclub->book_id = $request->book;
         $bookclub->featured =$request->featured;
+        $bookclub->status =$request->status;
         $bookclub->banner_image = "null"; 
         $bookclub->save();
         $updatebookclub = BookClub::find($bookclub->id);
@@ -91,7 +95,8 @@ class BookClubController extends Controller
     {
         //
         $bookclub = BookClub::findOrFail($id);
-        return view('bookclubs.edit', compact('bookclub'));
+        $book = Book::all();
+        return view('bookclubs.edit', compact('bookclub','book'));
     }
 
     /**
@@ -107,13 +112,17 @@ class BookClubController extends Controller
         $validatedData = $request->validate([
             'name' => 'required', 
             'arabic_name' => 'required', 
+            'book'=>'required',
             'featured'=>'required',
+            'status'=>'required',
             'banner_image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
         $bookclub->arabic_name = $request->arabic_name;
+        $bookclub->book_id = $request->book;
         $bookclub->featured=$request->featured;
+        $bookclub->status =$request->status;
         if($request->has('banner_image')) 
         {   
             Storage::disk('public')->deleteDirectory('bookclubs/'. $id);
@@ -141,4 +150,78 @@ class BookClubController extends Controller
         $bookclub->delete();
         return back()->with('success', 'Bookclub deleted successfully');
     }
-}
+    public function deactivateBookclub($id) {
+        $error = false;
+        try {
+            $bookclub = BookClub::findOrFail($id);
+            $bookclub->status = false;
+            $bookclub->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function activateBookclub($id) {
+        $error = false;
+        try {
+            $bookclub = BookClub::findOrFail($id);
+            $bookclub->status = true;
+            $bookclub->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+    
+    }
+
+        public function notfeatureBookclub($id) {
+            $error = false;
+            try {
+                $bookclub = BookClub::findOrFail($id);
+                $bookclub->featured = false;
+                $bookclub->save();
+                return 'true';
+            }
+            catch(\Exception $e) {
+                $error = true;
+                $message = $e->getMessage(); 
+            }
+            if($error) {
+                return $message;
+            }
+    
+        }
+    
+        public function featureBookclub($id) {
+            $error = false;
+            try {
+                $bookclub = BookClub::findOrFail($id);
+                $bookclub->featured = true;
+                $bookclub->save();
+                return 'true';
+            }
+            catch(\Exception $e) {
+                $error = true;
+                $message = $e->getMessage(); 
+            }
+            if($error) {
+                return $message;
+            }
+    
+        
+    
+        }
+    }
+

@@ -72,7 +72,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.price')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="price" value="{{ $bookmark->product_prices['price']}}">
+                            <input type="number" class="form-control" name="price" value="{{$bookmark->product_prices['0']['price']}}">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
