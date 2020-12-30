@@ -16,6 +16,9 @@ use App\Http\Requests\Api\JoinUsRequest;
 use App\Http\Requests\Api\ForgetPasswordRequest;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+use App\Events\ForgotPasswordEvent;
+
 
 class AuthController extends Controller
 {
@@ -63,7 +66,21 @@ class AuthController extends Controller
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
     }
-
+    public function sendEmail(Request $request){
+        
+        $user=User::where('email',$request['email'])->first();
+       
+       $token=app('auth.password.broker')->createToken($user);
+        if($user==null){
+           return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, 'Email Not Found!');
+        }
+        $user=User::where('email',$request['email'])->first();
+        $user->remember_token=$token;
+        $user->update();
+        event(new ForgotPasswordEvent($request,$token));
+       return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Email Sent Successfully!');
+       
+        }
     public function forgotPassword(ForgetPasswordRequest $request) 
     {
 

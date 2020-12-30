@@ -25,6 +25,7 @@ class ForgetPasswordRequest extends FormRequest
     {
         return [
             'email' => ['bail', 'required', 'string', 'email', 'max:255', 'exists:users'],
+            'base_url'=> ['bail'],
         ];
     }
 
