@@ -27,7 +27,6 @@ class PushNotificationController extends Controller
                 'option' => 'required',
                 'title' => 'required',
                 'description' => 'required' ]);
-           
                 $data = array(
                     'option' => $request->option,
                     'description' => $request->description, 
