@@ -34,7 +34,7 @@
               <td>{{$userrequest->title}}</td>
               <td>{{$userrequest->author_name}}</td>
               <td>{{$userrequest->book_type}}</td>
-              <td><img style=" width: 50px; height: 50px;" src=" {{ isset($userrequest->image) ?  url('storage/'.$userrequest->image) : url('storage/users/default.png') }}" alt=""> </td>
+             <td> <a class=".image-link" href=" {{ isset($userrequest->image) ? url('storage/'.$userrequest->image) : url('storage/users/default.png') }}"><img src=" {{ isset($userrequest->image) ? url('storage/'.$userrequest->image) : url('storage/users/default.png') }}"></a></td>
               <td>{{$userrequest->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$userrequest->created_at}}</td>  
               <td>
@@ -63,6 +63,15 @@
 
 
 <script>
+ $(document).ready(function() {
+  $('.image-link').each(function() {
+      var currentImage = $(this);
+      currentImage.wrap("<a class='image-link' href='" + currentImage.attr("src") + "'</a>");
+  });
+  $('.image-link').magnificPopup({type:'image'});  
+});
+
+
     $(document).ready(function() {
       $('#zero_config').DataTable({
             paging: true,
