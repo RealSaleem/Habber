@@ -56,7 +56,8 @@ class SendNotificationListener implements ShouldQueue
                 
                         $database   =   $firebase->getDatabase();
                         $notif = array(
-                            'body'  =>  $event->data['description']
+                            'body'  =>  $event->data['description'],
+                            'title' => $event->data['title']
                            );
                         for($i=0;$i<count($event->data['users']);$i++){
                         $createPost    =   $database
@@ -64,6 +65,7 @@ class SendNotificationListener implements ShouldQueue
                         ->set([
                             'to' =>  $event->data['users'][$i],
                             'body'  =>  $event->data['description'],
+                            'title' => $event->data['title'],
                             'read' => 'false'
                 
                         ]);   
@@ -85,7 +87,8 @@ class SendNotificationListener implements ShouldQueue
                     
                             $database   =   $firebase->getDatabase();
                             $notif = array(
-                                'body'  =>  $event->data['description']
+                                'body'  =>  $event->data['description'],
+                                'title' => $event->data['title']
                                );
                             
                             for($i=0;$i<$user->count();$i++){
@@ -94,6 +97,7 @@ class SendNotificationListener implements ShouldQueue
                             ->set([
                                 'to' =>  $user[$i]['id'],
                                 'body'  =>  $event->data['description'],
+                                'title' => $event->data['title'],
                                 'read' => 'false'
                     
                             ]);   

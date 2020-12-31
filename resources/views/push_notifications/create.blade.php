@@ -26,6 +26,14 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                     <h4 class="card-title">@lang('messages.push_notifications_page.add_push_notifications_info')</h4>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.push_notifications_page.title')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="title" id="title"  placeholder="Title">
+                            <span class="text-danger">{{$errors->first('first_name')}}</span>
+                        </div>
+                    </div>
+                        
                         <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.push_notifications_page.description')</label>
                         <div class="col-sm-9">

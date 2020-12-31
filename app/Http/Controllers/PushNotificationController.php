@@ -25,12 +25,14 @@ class PushNotificationController extends Controller
             $validatedData = $request->validate([
                 'users' => 'sometimes|required',    
                 'option' => 'required',
+                'title' => 'required',
                 'description' => 'required' ]);
            
                 $data = array(
                     'option' => $request->option,
                     'description' => $request->description, 
                     'users' => $request->users,
+                    'title' => $request->title,
                 );
                         
                    event(new SendNotificationEvent($data));
