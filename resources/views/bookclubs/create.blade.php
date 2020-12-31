@@ -72,6 +72,20 @@
                             <span class="text-danger">{{$errors->first('banner_image')}}</span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="square_banner" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.square_banner')</label>
+                        <div class="col-sm-9">
+                        <input id="square_banner" type="file" class="form-control" name="square_banner" >
+                            <span class="text-danger">{{$errors->first("square_banner")}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="bookclub_logo" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.bookclub_logo')</label>
+                        <div class="col-sm-9">
+                        <input id="bookclub_logo" type="file" class="form-control" name="bookclub_logo" >
+                            <span class="text-danger">{{$errors->first("bookclub_logo")}}</span>
+                        </div>
+                    </div>
                      <div class="border-top">
                        <div class="card-body">
                         <a href="{{route('bookclubs.index')}}">

@@ -14,13 +14,13 @@
             <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>Product Isbn</th>
                         <th>Title</th>
                         <th>Author Name</th>
                         <th>Cover Type</th>
                         <th>Description</th>
                         <th>Book langauge</th>
                         <th>Price</th>
-                        <th>Isbn</th>
                         <th>Total Page</th>
                         <th>Quantity</th>
                         <th>Added by</th>
@@ -36,13 +36,13 @@
                 <tbody>
                     @foreach($book as $book)
                         <tr>
+                             <td>{{$book->isbn}}</td>
                             <td>{{$book->title}}</td>
                             <td>{{$book->author_name}}</td>
                             <td>{{$book->cover_type}}</td>
                             <td>{{$book->description}}</td>  
                             <td>{{$book->book_language}}</td>  
                             <td>{{$book->product_price['0']['price']}}</td>
-                            <td>{{$book->isbn}}</td>
                             <td>{{$book->total_pages}}</td>  
                             <td>{{( $book->quantity == 0 ) ? "out of stock" : $book->quantity}}</td>
                             <td>{{$book->users['first_name']}}</td>  

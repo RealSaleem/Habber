@@ -1687,7 +1687,7 @@ return [
         'description'=> 'وصف',
         'book_language'=> 'لغة الكتاب',
         'price'=>'السعر',
-        'isbn' =>'isbn',
+        'book_isbn' =>'Book Isbn',
         'total_pages'=>'إجمالي الصفحات',
         'quantity'=>'كمية',
         'business'=>'اعمال',
@@ -1740,7 +1740,9 @@ return [
         'name'=>'اسم',
         'arabic_name'=>'اسم عربي',
         'banner_image'=>'صورة بانر',
-        'feature'=> 'خاصية'
+        'feature'=> 'خاصية',
+        'bookclub_logo'=>'شعار نادي الكتاب',
+        'square_banner'=>'لافتة مربعة'
     ],
     'genre_page' => [
         'genres' =>'الأنواع',
@@ -1802,6 +1804,8 @@ return [
         'phone_number' => 'رقم الهاتف',
         'message'  => 'رسالة',
         'submission_date'=> 'تاريخ التقديم:',
+        'whatapp_number' => 'رقم الهاتف',
+        
         
     ],
     'joinusrequest_page'=> [

@@ -55,6 +55,8 @@ class BookClubController extends Controller
             'status'=>'required',
             'featured'=>'required',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
+            'bookclub_logo' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
+            'square_banner' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
@@ -63,6 +65,8 @@ class BookClubController extends Controller
         $bookclub->featured =$request->featured;
         $bookclub->status =$request->status;
         $bookclub->banner_image = "null"; 
+        $bookclub->bookclub_logo = "null";
+        $bookclub->square_banner = "null";
         $bookclub->save();
         $updatebookclub = BookClub::find($bookclub->id);
         $file = $request->banner_image;
@@ -70,6 +74,16 @@ class BookClubController extends Controller
         $filePath = "bookclubs/".$bookclub->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
         $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
         $updatebookclub->banner_image = $filePath;
+        $file = $request->bookclub_logo;
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "bookclubs/".$bookclub->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        $updatebookclub->bookclub_logo = $filePath;
+        $file = $request->square_banner;
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filePath = "bookclubs/".$bookclub->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
+        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+        $updatebookclub->square_banner = $filePath;
         $updatebookclub->update();   
         return back()->with('success', 'Bookclub successfully saved');
     }
@@ -115,7 +129,9 @@ class BookClubController extends Controller
             'book'=>'required',
             'featured'=>'required',
             'status'=>'required',
-            'banner_image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
+            'banner_image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=333,max_height=1000',
+            'bookclub_logo' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
+            'square_banner' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=400,max_height=400',
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
@@ -132,6 +148,25 @@ class BookClubController extends Controller
             $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
             $bookclub->banner_image =  $filePath;
         }
+        if($request->has('bookclub_logo')) 
+        {   
+            Storage::disk('public')->deleteDirectory('bookclubs/'. $id);
+            $file = $request->bookclub_logo;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "bookclubs/".$id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $bookclub->bookclub_logo =  $filePath;
+        }
+        if($request->has('square_banner')) 
+        {   
+            Storage::disk('public')->deleteDirectory('bookclubs/'. $id);
+            $file = $request->square_banner;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath = "bookclubs/".$id."/".$fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
+            $bookclub->square_banner =  $filePath;
+        }
+        
         
         $bookclub->save();   
         return back()->with('success', 'Bookclub updated sucessfully');
