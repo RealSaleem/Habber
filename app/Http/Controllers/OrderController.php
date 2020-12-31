@@ -124,6 +124,7 @@ class OrderController extends Controller
     public function getUserOrderList($id)
     {
         $order = Order::where('user_id',$id)->get();
+    
         $fromUser = User::find($id);
         return view('orders.index', compact('order','fromUser'));
     }

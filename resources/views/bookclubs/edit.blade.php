@@ -73,13 +73,46 @@
                             @if(isset($bookclub->banner_image))
                             <div class="form-group row">
                                 <div class="col-sm-9">
-                                    <img class="form-control" style=" width: 100px; height: 100px;" src="{{ url('storage/'.$bookclub->banner_image)}}" alt="no-image">
+                                    <img class="form-control" style=" width: 50px; height: 50px;" src="{{ url('storage/'.$bookclub->banner_image)}}" alt="no-image">
                                 </div>
                             </div>
                             @endif
                         </div>
-                    </div>
-                    <div class="border-top">
+                        </div>
+                        <div class="form-group row">
+                        <label for="square_banner" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.square_banner')</label>
+                        <div class="col-sm-9">
+                        <input id="square_banner" type="file" class="form-control " name="square_banner" >
+                          <div>
+                            <span class="text-danger">{{$errors->first('square_banner')}}</span>
+                            </div>
+                            @if(isset($bookclub->square_banner))
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <img class="form-control" style=" width: 50px; height: 50px;" src="{{ url('storage/'.$bookclub->square_banner)}}" alt="no-image">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                            </div>
+                        <div class="form-group row">
+                        <label for="bookclub_logo" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.bookclub_logo')</label>
+                        <div class="col-sm-9">
+                        <input id="bookclub_logo" type="file" class="form-control " name="bookclub_logo" >
+                          <div>
+                            <span class="text-danger">{{$errors->first('bookclub_logo')}}</span>
+                            </div>
+                            @if(isset($bookclub->bookclub_logo))
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <img class="form-control" style=" width: 50px; height: 50px;" src="{{ url('storage/'.$bookclub->bookclub_logo)}}" alt="no-image">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                            </div>
+                    
+                         <div class="border-top">
                        <div class="card-body">
                         <a href="{{route('bookclubs.index')}}">
                         <button type="button" class=" btn btn-danger">

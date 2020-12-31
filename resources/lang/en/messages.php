@@ -46,7 +46,7 @@ return [
         'description'=> 'Description',
         'book_language'=> 'Book Language ',
         'price'=>'Price',
-        'isbn' =>'isbn',
+        'book_isbn' =>'Book Isbn',
         'total_pages'=>'Total Pages',
         'quantity'=>'Quantity',
         'business'=>'Business',
@@ -102,7 +102,9 @@ return [
         'name'=>'Name',
         'arabic_name'=>'Arabic Name',
         'banner_image'=>'Banner Image',
-        'feature'=>'Feature'
+        'feature'=>'Feature',
+        'bookclub_logo'=>'BookClub Logo',
+        'square_banner'=>'Square Banner'
     
         
     ],
@@ -165,6 +167,7 @@ return [
         'phone_number' => 'Phone Number',
         'message'  => 'Message',
         'submission_date'=> 'Submission Date:',
+        'whatapp_number' => 'Whatapp Number',
     ],   
      'about_us_page' => [
         'about_us' => 'About Us',

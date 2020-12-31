@@ -20,7 +20,9 @@
                         <th>Feature</th>
                         <th>Status</th>
                         <th>Addition Date</th>
-                        <th class="not">Image</th>
+                        <th class="not">Banner Image </th>
+                        <th class="not">Square Banner</th>
+                        <th class="not">BookClub Logo</th>
                         <th class="not"> Action</th>                  
                           </tr>
                </thead>
@@ -34,6 +36,9 @@
                     <td class = "{{$bookclub->status == 0 ? 'text-primary' : 'text-sucees'}}" >{{$bookclub->status == 0 ? "active" : "not active"}}</td>   
                     <th>{{$bookclub->created_at}}</th>
                     <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->banner_image) ?  url('storage/'.$bookclub->banner_image) : url('storage/bookclub/default.png') }}" alt=""> </td>
+                    <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->square_banner) ?  url('storage/'.$bookclub->square_banner) : url('storage/bookclub/default.png') }}" alt=""> </td>
+                    <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->bookclub_logo) ?  url('storage/'.$bookclub->bookclub_logo) : url('storage/bookclub/default.png') }}" alt=""> </td>
+                  
                     <td>
                         <div class="row">
                             <div class="col-1">
