@@ -22,6 +22,7 @@
                         <th>Product Type</th>
                         <th>Operating Country</th>
                         <th>Status</th>
+                        <th>Addition Date</th>
                         <th class="not">Image</th>
                         <th class="not">Action</th>
                     </tr>
@@ -36,7 +37,7 @@
                         <td>{{$publisher->businesses['product_type']}}</td> 
                         <td>{{$publisher->countries['name']}}</td> 
                         <td class = "{{$publisher->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$publisher->status == 1 ? "active" : "not active"}}</td>  
-    
+                        <td>{{$publisher->created_at}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($publisher->profile_pic) ?  url('storage/'.$publisher->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
                         <td>
                         <div class="row">
