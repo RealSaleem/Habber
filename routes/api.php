@@ -53,6 +53,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     // forgot Password
     Route::post('forgot-password', 'AuthController@forgotPassword');
     Route::post('forgot_password', 'AuthController@sendEmail');
+    Route::post('update_password','AuthController@updatePassword');
     // contact us
     Route::post('contactus', 'AuthController@ContactUs');
     //static page
