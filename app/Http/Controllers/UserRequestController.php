@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class UserRequestController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:user-request-list|user-request-create|user-request-edit|user-request-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:user-request-create', ['only' => ['create','store']]);
-        $this->middleware('permission:user-request-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:user-request-delete', ['only' => ['destroy']]);
-    }
+  //  public function __construct()
+    //{
+     //   $this->middleware('permission:user-request-list|user-request-create|user-request-edit|user-request-delete', ['only' => ['index','show']]);
+       // $this->middleware('permission:user-request-create', ['only' => ['create','store']]);
+       // $this->middleware('permission:user-request-edit', ['only' => ['edit','update']]);
+       // $this->middleware('permission:user-request-delete', ['only' => ['destroy']]);
+    //}
     /**
      * Display a listing of the resource.
      *
