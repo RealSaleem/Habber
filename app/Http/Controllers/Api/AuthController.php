@@ -81,6 +81,25 @@ class AuthController extends Controller
        return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Email Sent Successfully!');
        
         }
+        public function updatePassword(Request $request) {
+        
+            $user=User::where('email',$request['email'])->first();
+            if($user['remember_token'] == $request['remember_token']){
+            try{
+                $user1 = $this->model->updatePassword($request->all());
+                if($user == true) {
+
+                    return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Password Updated Successfully!');
+                }
+            }
+            catch(\Exception $e) {
+                return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+            }}
+            else{
+                return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, 'Sorry! The token is invalid!');
+            }
+        }
+       
     public function forgotPassword(ForgetPasswordRequest $request) 
     {
 
