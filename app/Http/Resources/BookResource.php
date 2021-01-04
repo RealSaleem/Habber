@@ -36,7 +36,7 @@ class BookResource extends JsonResource
             'price' => number_format(optional($this->product_prices[0])->price, 4) ?? "",
             'prices' => PriceResource::collection($this->product_prices) ?? "",
             'total_pages' => $this->total_pages,
-            'quantity' => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
+            'quantity' => $this->quantity,
             'publisher' => new UserResource($this->users) ?? "",
             'stock_status' => $this->stock_status,
             'book_language' => $this->book_language ?? "",
