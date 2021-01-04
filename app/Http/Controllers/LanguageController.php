@@ -7,13 +7,13 @@ use Illuminate\Support\Str;
 
 class LanguageController extends Controller
 {
-   // public function __construct()
-   // {
-     //   $this->middleware('permission:language-list|language-create|language-edit|language-delete', ['only' => ['index','show']]);
-     //   $this->middleware('permission:language-create', ['only' => ['create','store']]);
-      //  $this->middleware('permission:language-edit', ['only' => ['edit','update']]);
-       // $this->middleware('permission:language-delete', ['only' => ['destroy']]);
-   // }
+    public function __construct()
+    {
+       $this->middleware('permission:language-list|language-create|language-edit|language-delete', ['only' => ['index','show']]);
+       $this->middleware('permission:language-create', ['only' => ['create','store']]);
+       $this->middleware('permission:language-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:language-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

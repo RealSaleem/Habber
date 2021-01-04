@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
 {
-   // public function __construct()
-    //{
-      //  $this->middleware('permission:book-list|book-create|book-edit|book-delete', ['only' => ['index','show']]);
-     //   $this->middleware('permission:book-create', ['only' => ['create','store']]);
-     //   $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
-      //  $this->middleware('permission:book-delete', ['only' => ['destroy']]);
-  //  }
+    public function __construct()
+    {
+      $this->middleware('permission:book-list|book-create|book-edit|book-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:book-create', ['only' => ['create','store']]);
+        $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:book-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
