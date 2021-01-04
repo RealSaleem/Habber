@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class BookmarksController extends Controller
 {
-   // public function __construct()
-    //{
-      //  $this->middleware('permission:bookmark-list|bookmark-create|bookmark-edit|bookmark-delete', ['only' => ['index','show']]);
-      //  $this->middleware('permission:bookmark-create', ['only' => ['create','store']]);
-      //  $this->middleware('permission:bookmark-edit', ['only' => ['edit','update']]);
-      //  $this->middleware('permission:bookmark-delete', ['only' => ['destroy']]);
-   // }
+    public function __construct()
+    {
+       $this->middleware('permission:bookmark-list|bookmark-create|bookmark-edit|bookmark-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:bookmark-create', ['only' => ['create','store']]);
+        $this->middleware('permission:bookmark-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:bookmark-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

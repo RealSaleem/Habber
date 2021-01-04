@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-   // public function __construct()
-   // {
-      //  $this->middleware('permission:genre-list|genre-create|genre-edit|genre-delete', ['only' => ['index','show']]);
-     //   $this->middleware('permission:genre-create', ['only' => ['create','store']]);
-     //   $this->middleware('permission:genre-edit', ['only' => ['edit','update']]);
-     //   $this->middleware('permission:genre-delete', ['only' => ['destroy']]);
-   // }
+    public function __construct()
+    {
+       $this->middleware('permission:genre-list|genre-create|genre-edit|genre-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:genre-create', ['only' => ['create','store']]);
+       $this->middleware('permission:genre-edit', ['only' => ['edit','update']]);
+       $this->middleware('permission:genre-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

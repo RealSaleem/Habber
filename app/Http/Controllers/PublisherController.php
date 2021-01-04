@@ -13,13 +13,13 @@ use App\Order;
 class PublisherController extends Controller
 {
 
-   // public function __construct()
-   // {
-     //   $this->middleware('permission:publisher-list|publisher-create|publisher-edit|publisher-delete', ['only' => ['index','show']]);
-     //   $this->middleware('permission:publisher-create', ['only' => ['create','store']]);
-      //  $this->middleware('permission:publisher-edit', ['only' => ['edit','update']]);
-      //  $this->middleware('permission:publisher-delete', ['only' => ['destroy']]);
-    //}
+    public function __construct()
+    {
+       $this->middleware('permission:publisher-list|publisher-create|publisher-edit|publisher-delete', ['only' => ['index','show']]);
+       $this->middleware('permission:publisher-create', ['only' => ['create','store']]);
+        $this->middleware('permission:publisher-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:publisher-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
