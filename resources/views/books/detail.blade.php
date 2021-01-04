@@ -23,7 +23,7 @@
                 <div class="card-body row" style="font-size: 18px;">
                     <h4 class="card-title col-12">@lang('messages.book_page.books')</h4>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.book_isbn'):  {{ucfirst($book->isbn)}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">Book Isbn:  {{ucfirst($book->isbn)}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.title'):   {{ucfirst($book->title)}} </label>
