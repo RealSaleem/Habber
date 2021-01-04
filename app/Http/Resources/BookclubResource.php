@@ -24,7 +24,10 @@ class BookClubResource extends JsonResource
             'image'  => isset($this->banner_image) ? url(Storage::disk('public')->url($this->banner_image)) : "" ,
             'logo'  => isset($this->bookclub_logo) ? url(Storage::disk('public')->url($this->bookclub_logo)) : "" ,
             'banner'  => isset($this->square_banner) ? url(Storage::disk('public')->url($this->sqaure_banner)) : "" ,
-            'book'  => (new BookResource($this->books)) ?? ""
+            'book'  => (new BookResource($this->books)) ?? "",
+            'featured' => $this->featured,
+            'status' => $this->status,
+
         ];
     }
 
