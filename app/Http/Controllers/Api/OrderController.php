@@ -30,10 +30,10 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {      
         try {
-            $order = $this->model->all(['books','bookmarks']);
-            if(isset($order)) {
+            $order = Order::with(['books','bookmarks'])->get();
+            if($order!=null){
                 return OrderResource::collection($order);
             }
             else {
@@ -45,7 +45,7 @@ class OrderController extends Controller
         catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
-        
+    
     }
 
     /**
