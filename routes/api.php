@@ -62,13 +62,15 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('joinus', 'AuthController@createJoinUsRequest');
 
     Route::get('site-setting','SiteSettingController@index');
+    // request book
+    Route::post('request/book', 'UserRequestController@store');
 
 
     Route::group(['middleware'=>'auth:api'], function() {
         Route::get('/profile','UserController@profile');
     
         // request book
-        Route::post('request/book', 'UserRequestController@store');
+
         // favourites
         Route::post('favourites', 'FavouriteController@store');
         Route::get('favourites', 'FavouriteController@show');

@@ -21,7 +21,10 @@ class OrderResource extends JsonResource
             'id'     => $this->id,
             //'user'   => auth()->user()->first_name,
             'total_price' => $this->total_price,
-            'status' => $this->status,
+            'status' => (
+                ($this->status == 0) ? "Confirmed" :
+                 (($this->status == 1) ? "Shipped" :
+                  (($this->status == 2) ? "Delivered" : $this->status))),
             'total_quantity' => $this->total_quantity,
             'currency_iso'=> $this->currencies->iso,
             'payment_type'=>$this->payment_type,
