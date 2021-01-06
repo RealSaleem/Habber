@@ -35,7 +35,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.contactus_page.phone_number'):   {{$contact->phone}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.contactus_page.whatapp_number'):   {{$contact->whatapp_number}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.contactus_page.whatapp_number'):   {{$contact->phone}} </label>
                     </div>
                   
                     <div class="form-group col-6">
