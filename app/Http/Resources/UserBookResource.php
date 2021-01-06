@@ -16,8 +16,8 @@ class UserBookResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'     =>     $this->id,
-            'user_id'   => $this->user_id,
+            'id'     => $this->id,
+            'user_id'   =>  ($this->user_id == 0 ) ? "Guest User" : $this->user_id,
             'title'   => $this->title,
             'author_name'  => $this->author_name,
             'book_type'   => $this->book_type ?? "",
