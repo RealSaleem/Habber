@@ -27,7 +27,6 @@ class ContactUsRequest extends FormRequest
             'name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
             'email' => ['bail', 'required', 'string', 'email', 'max:255', 'unique:contact_us'],
             'message' => ['bail', 'required', 'string'],
-            'whatapp_number'=>['bail','required'],
         ];
     }
 }
