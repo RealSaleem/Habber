@@ -29,7 +29,7 @@
             <td>{{$contact->id}}</td>
           <td>{{$contact->name}}</td>
             <td>{{$contact->email}}</td>
-            <td>{{$contact->whatapp_number}}</td>
+            <td>{{$contact->phone}}</td>
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
             <td>
