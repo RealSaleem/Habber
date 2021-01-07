@@ -31,7 +31,7 @@ class BookmarkResource extends JsonResource
             'bookmark_id'  => $this->bookmark_id,
             'description'   => $this->description ?? "",
             'arabic_description'   => $this->arabic_description ?? "",
-            'price'    => number_format(optional($this->product_prices)->price,4) ?? "",
+            'price'    => number_format(optional($this->product_prices[0])->price,4) ?? "",
             'prices' => PriceResource::collection($this->product_prices) ?? "",
             'size'  => $this->size,
             'quantity'  =>  $this->quantity,

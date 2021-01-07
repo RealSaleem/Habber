@@ -45,7 +45,7 @@
                 <td>{{$bookmark->arabic_maker_name}}</td>
                 <td>{{$bookmark->description}}</td>
                 <td>{{$bookmark->arabic_description}}</td>
-                <td>{{$bookmark->product_price['0']['price']}}</td>  
+                <td>{{($bookmark->product_prices[0])->price}}</td>  
                 <td>{{$bookmark->size}}</td>
                 <td>{{$bookmark->quantity}}</td>
                 <td>{{$bookmark->type_of_bookmark}}
