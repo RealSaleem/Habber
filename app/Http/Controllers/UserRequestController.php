@@ -55,7 +55,7 @@ class UserRequestController extends Controller
             'title' => 'required',
             'author_name' => 'required',
             'book_type' => 'required',
-            'image'=> 'required|image|mimes:jpg,jpeg,png|size:max:5000', 
+            'image'=> 'required|image|mimes:jpg,jpeg,png|max:5000', 
             ]);
             $userrequest = new RequestForBook();
             $userrequest->user_id = $request->user_id;
