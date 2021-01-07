@@ -34,7 +34,7 @@ class BookmarkResource extends JsonResource
             'price'    => number_format(optional($this->product_prices)->price,4) ?? "",
             'prices' => PriceResource::collection($this->product_prices) ?? "",
             'size'  => $this->size,
-            'quantity'  => ($this->quantity == 0 ) ? "out of stock" : $this->quantity,
+            'quantity'  =>  $this->quantity,
             'type_of_bookmark'=> $this->type_of_bookmark ?? "",
             'publisher'  => new UserResource($this->users) ?? "",
             'stock_status'  => $this->stock_status,
