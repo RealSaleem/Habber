@@ -20,7 +20,7 @@ class OrderResource extends JsonResource
         return [
             'id'     => $this->id,
             //'user'   => auth()->user()->first_name,
-            'total_price' => $this->total_price,
+            'total_price' => ($this->total_price) + number_format($this->addresses->cities['shipping_charges']), 
             'status' => (
                 ($this->status == 0) ? "Confirmed" :
                  (($this->status == 1) ? "Shipped" :
@@ -32,6 +32,7 @@ class OrderResource extends JsonResource
             'payment_failure_url'=>URL::to("/").'/payment/failure/?id='.$this->id,
             'navigation' => $this->payment_type == 'online' ? 1 : 0,
             'created_at'=> $this->created_at,
+            'shipping_charges'=> number_format($this->addresses->cities['shipping_charges']), 
             $this->mergeWhen($this->bookmarks, [
                 'bookmarks' => BookmarkResource::collection($this->bookmarks),
                 
