@@ -217,7 +217,8 @@ return [
         'url'=>'Url',
         'image'=>'Image',
         'disable'=>'Disable',
-        'enable'=> 'Enable'
+        'enable'=> 'Enable',
+        'link'=>'Banner Link',
 
     ],
     'language_page'=> [

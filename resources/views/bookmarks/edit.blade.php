@@ -84,12 +84,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="size" value="{{ $bookmark->size }}">
+                        
+                            <select class="form-control" name="size"  id="size" >
+                             
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="2*6" {{ ($bookmark->size == "2*6" ? "selected":"")}}>2*6</option>
+                                <option value="2*7.5" {{ ($bookmark->size == "2*7.5" ? "selected":"")}}>2*7.5</option>
+                                <option value="2*8" {{ ($bookmark->size == "2*8" ? "selected":"")}}> 2*8</option>
+                                
+                             </select>
+                            
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
-                    </div>
+                        </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.quantity')</label>
                         <div class="col-sm-9">

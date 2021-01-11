@@ -29,11 +29,13 @@ class InvoiceController extends Controller
          */
         public function index()
         {
+
             try {
-                $order = $this->model->all(['books','bookmarks']);
+                $order = Order::with('books','bookmarks')->get();
                 if(isset($order)) {
                     return InvoiceResource::collection($order);
                 }
+              
                 else {
                     return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'No Invoice Found');
                 }
@@ -75,9 +77,27 @@ class InvoiceController extends Controller
          */
         public function show($id)
         {
-            //  
+            //   {
+
+            try {
+                $order = Order::with('books','bookmarks')->get();
+                if(isset($order)) {
+                    return InvoiceResource::collection($order);
+                }
+              
+                else {
+                    return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'No Invoice Found');
+                }
+               
+                // $cart = Cart::with('books','bookmarks')->where('user_id',auth()->user()->id
+            }
+            catch (\Exception $e) {
+                return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+            }
             
         }
+            
+        
         
     
         /**

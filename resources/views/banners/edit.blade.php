@@ -77,6 +77,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.link')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="banner_url" value="{{ $banner->banner_url }}">
+                            <span class="text-danger">{{$errors->first('banner_url')}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.image')</label>
                         <div class="col-sm-9">
                         <input id="image" type="file" class="form-control" name="image">

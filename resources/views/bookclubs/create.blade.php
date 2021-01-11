@@ -66,21 +66,21 @@
                         </div>
                      </div> 
                     <div class="form-group row">
-                        <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.banner_image')</label>
+                        <label for="banner_image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.banner_image')<br>(333*1000) </label>
                         <div class="col-sm-9">
                         <input id="banner_image" type="file" class="form-control" name="banner_image" >
                             <span class="text-danger">{{$errors->first('banner_image')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="square_banner" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.square_banner')</label>
+                        <label for="square_banner" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.square_banner')<br>(400*400)</label>
                         <div class="col-sm-9">
                         <input id="square_banner" type="file" class="form-control" name="square_banner" >
                             <span class="text-danger">{{$errors->first("square_banner")}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="bookclub_logo" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.bookclub_logo')</label>
+                        <label for="bookclub_logo" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.bookclub_logo')<br> (200*200)</label>
                         <div class="col-sm-9">
                         <input id="bookclub_logo" type="file" class="form-control" name="bookclub_logo" >
                             <span class="text-danger">{{$errors->first("bookclub_logo")}}</span>
