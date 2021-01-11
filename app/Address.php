@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    protected $fillable = ['address_name','country_id','post_code','address_line1','address_line2','city_id','state','user_id','phone'];
+    protected $fillable = ['address_name','country_id','post_code','address_line1','address_line2','city_id','state','user_id','phone','shipping_charges'];
     public function users() {
         return $this->belongsTo(User::class,'user_id','id');
     }
