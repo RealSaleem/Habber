@@ -56,7 +56,7 @@
                     </div>
             
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label" >@lang('messages.banner_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
                                 <option value="0" {{ (old('status') == "0" ? "selected":"")}}>Disable</option>
@@ -76,10 +76,19 @@
                             <span class="text-danger">{{$errors->first('language_id')}}</span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.link')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="banner_url"  value="{{ old('banner_url') }}" id="banner_url"  placeholder="Banner Link">
+                            <span class="text-danger">{{$errors->first('banner_url')}}</span>
+                        </div>
+                    </div>
                     
                        <div class="form-group row">
-                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.image')</label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label" ">@lang('messages.banner_page.image')
+                        <br> (1000*450)  </label>
                         <div class="col-md-9">
+
                             <input  type="file" id="image" class="form-control" name="image">
                             <span class="text-danger">{{$errors->first('image')}}</span>
                         </div>

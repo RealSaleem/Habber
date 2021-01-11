@@ -75,12 +75,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="size"value="{{ old('size') }}" id="size" placeholder="Size">
+                        
+                            <select class="form-control" name="size"  id="size">
+                             
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="2*6" {{ (old('size') == "2*6" ? "selected":"")}}>2*6</option>
+                                <option value="2*7.5" {{ (old('size') == "2*7.5" ? "selected":"")}}>2*7.5</option>
+                                <option value="2*8" {{ (old('size') == "2*8" ? "selected":"")}}> 2*8</option>
+                                
+                             </select>
+                            
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
-                    </div>
+                        </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.quantity')</label>
                         <div class="col-sm-9">
@@ -140,7 +149,7 @@
                     
                      
                     <div class="form-group row">
-                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image') </label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.image')<br>(300*900) </label>
                         <div class="col-sm-9">
                         <input id="image" type="file" class="form-control" name="image">
                             <span class="text-danger">{{$errors->first('image')}}</span>

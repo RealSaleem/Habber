@@ -19,6 +19,7 @@
                         <th>Product Type</th>
                         <th>Associated With</th>
                         <th>Language</th>  
+                        <th>Banner Link </th>
                         <th>Status</th>
                         <th class="not">Image</th>
                         <th>Banner Order</th>
@@ -48,6 +49,7 @@
                          @endif
                         
                         <td>{{$banner->languages['name']}}</td>  
+                        <td>{{$banner->banner_url}}
                         <td class = "{{$banner->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$banner->status == 1 ? "Enabled" : "Disabled"}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
                         <td>{{$banner->sort_order}}</td>

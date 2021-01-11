@@ -161,7 +161,7 @@
                         </div>
                      </div> 
                     <div class="form-group row">
-                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.image') </label>
+                        <label for="image_url" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.image')<br> (280*470) </label>
                         <div class="col-sm-9">
                         <input id="image_url" type="file" class="form-control" name="image">
                             <span class="text-danger">{{$errors->first('image')}}</span>

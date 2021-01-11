@@ -54,9 +54,9 @@ class BookClubController extends Controller
             'book'=>'required',
             'status'=>'required',
             'featured'=>'required',
-            'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
+            'banner_image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=333,max_height=1000',
             'bookclub_logo' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
-            'square_banner' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=200,max_height=200',
+            'square_banner' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=400,max_height=400',
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;

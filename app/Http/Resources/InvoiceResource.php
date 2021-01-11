@@ -18,7 +18,7 @@ class InvoiceResource extends JsonResource
             'id'  => $this->id,
             'order_date'=>$this->created_at,
             'user'   => auth()->user()->first_name,
-            'phone_no'=>$this->users->phone,
+            'phone_no' => auth()->user()->phone,
             'address'=>$this->addresses->address_name,
             'currency_iso'=> $this->currencies->iso,
             'payment_method'=>$this->payment_type == 'online' ? 1: 0,

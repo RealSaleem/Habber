@@ -1833,7 +1833,8 @@ return [
         'url'=>'عنوان',
         'image'=>'صورة',
         'disable'=>'تعطيل',
-        'enable'=> 'ممكن'
+        'enable'=> 'ممكن',
+        'link'=>'حلقة الوصل'
     ],
     'language_page'=> [
         'languages'=> 'لغة',
