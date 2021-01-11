@@ -18,7 +18,6 @@
                         <th>Order ID</th>
                         <th>Email</th>
                         <th>Order BY </th>
-                        <th>Country</th>
                         <th>Currency</th>
                         <th>Order Total Amount</th>
                         <th>Total Quantity</th>
@@ -33,7 +32,6 @@
                         <td>{{$order->id}}</td>   
                         <td>{{$order->users['email']}}</td>
                         <td>{{($order->users['first_name'] ." ". $order->users['last_name'])}}</td>
-                        <td>{{$order->addresses->countries['name']}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->total_quantity}}</td>
