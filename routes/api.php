@@ -62,10 +62,12 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('joinus', 'AuthController@createJoinUsRequest');
 
     Route::get('site-setting','SiteSettingController@index');
-    // request book
+
+    Route::group(['middleware'=>'multiple'], function(){
     Route::post('request/book', 'UserRequestController@store');
+    });
 
-
+ // request book
     Route::group(['middleware'=>'auth:api'], function() {
         Route::get('/profile','UserController@profile');
     

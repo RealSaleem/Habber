@@ -21,6 +21,7 @@
                         <th>Currency</th>
                         <th>Order Total Amount</th>
                         <th>Total Quantity</th>
+                        <th>Destination Country</th>
                         <th>Status</th>
                         <th>Payment Type</th>
                         <th class="not">Action</th>
@@ -35,6 +36,7 @@
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->total_quantity}}</td>
+                        <td>{{$order->addresses->countries['name']}}
                         <td>{{$order->status == "0" ? "Not Ready " : "Ready"}}</td> 
                         <td>{{$order->type == "1" ?  "COD" : "Online"}}</td> 
 
