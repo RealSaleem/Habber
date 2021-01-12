@@ -54,7 +54,7 @@
                     </div>
                     <div class="border-top">
                       <div class="card-body">
-                       <a href="{{route('books.index')}}">
+                       <a href="{{route('static_pages.index')}}">
                         <button type="button" class=" btn btn-danger">
                         @lang('messages.button.back')
                         </button></a>

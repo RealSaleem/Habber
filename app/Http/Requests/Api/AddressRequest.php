@@ -27,10 +27,10 @@ class AddressRequest extends FormRequest
         return [
             'address_name'   => ['bail', 'required', 'string', 'max:255', 'min:1'],
             'country_id'     => ['bail', 'required'],
-            'state'          => ['required','string','max:15','min:3'],
+            'state'          => ['required','string','max:15','min:1'],
             'city_id'           => ['bail', 'required'],
-            'address_line1' => ['bail', 'required',  'string', 'max:255', 'min:3'],
-            'address_line2' => ['bail', 'required',  'string', 'max:255', 'min:3'],
+            'address_line1' => ['bail', 'required',  'string', 'max:255', 'min:1'],
+            'address_line2' => ['bail', 'required',  'string', 'max:255', 'min:1'],
             'phone'          => ['bail','required',  'numeric', 'digits_between:11,15'],        
         ];
     }
