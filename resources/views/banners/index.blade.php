@@ -24,6 +24,8 @@
                         <th class="not">Image</th>
                         <th>Banner Order</th>
                         <th class="not">Action</th>
+                        <th class="not"></th>
+                        <th class="not"></th>
                         </tr>
                 </thead>
                 <tbody class="sortable">
@@ -54,11 +56,17 @@
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
                         <td>{{$banner->sort_order}}</td>
                         <td>
-                            <div class="row">
-                                <div class="col-2">
+                                    @if($banner->status == 1)
+                                        <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">@lang('messages.banner_page.disable')</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')">@lang('messages.banner_page.enable') </button></a>
+                                    @endif
+                                    </td>
+                            
+                                    <td>
                                     <a href="{{action('BannerController@edit', [$banner->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                                </div>
-                                <div class="col-2">
+                                </td>
+                               <td>
                                     <form action="{{action('BannerController@destroy', [$banner->id])}}" method="post">
                                     @csrf
                                     @method('Delete')
@@ -66,16 +74,8 @@
                                         <span class="fa fa-trash"></span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="col-2">
-                                    @if($banner->status == 1)
-                                        <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">@lang('messages.banner_page.disable')</button></a>
-                                    @else
-                                        <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')">@lang('messages.banner_page.enable') </button></a>
-                                    @endif
-                                </div>
-                            </div>
-                        </td>
+                                    </td>
+                       
                     </tr>
                     @endforeach
                 </tbody>

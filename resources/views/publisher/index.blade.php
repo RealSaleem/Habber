@@ -25,6 +25,9 @@
                         <th>Addition Date</th>
                         <th class="not">Image</th>
                         <th class="not">Action</th>
+                        <th class="not"></th>
+                        <th class="not"></th>
+                        <th class="not"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,27 +43,6 @@
                         <td>{{$publisher->created_at}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($publisher->profile_pic) ?  url('storage/'.$publisher->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
                         <td>
-                        <div class="row">
-                               <div>
-                                    <a href="{{action('PublisherController@show',[$publisher->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                                     </div>
-                                <div class="col-2">
-                                    <form action="{{ action('PublisherController@destroy', [$publisher->id])}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                    </form>
-                                </div>
-                                <div class="col-2">
-                                    <form action="{{action('PublisherController@edit', [$publisher->id])}}" method="post">
-                                    @csrf
-                                    @method('get')
-                                        <button class=" btn btn-success" type="submit">
-                                        <span class="fa fa-edit"></span>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="col-3">
                                     @if($publisher->status == 1)
                                         <a><button class="btn btn-danger" onclick="deactivatePublisher('{{$publisher->id}}')">@lang('messages.user_page.deactivate')</button></a>
                                     @else
@@ -70,9 +52,27 @@
                                             </button>
                                         </a>
                                     @endif
-                                </div>
-                            </div>
-                        </td>
+                                </td>
+                              <td>
+                                    <a href="{{action('PublisherController@show',[$publisher->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                                </td>
+                                <td>     
+                                    <form action="{{ action('PublisherController@destroy', [$publisher->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                                    </form>
+                                  </td>  
+                                
+                                <td>
+                                    <form action="{{action('PublisherController@edit', [$publisher->id])}}" method="post">
+                                    @csrf
+                                    @method('get')
+                                        <button class=" btn btn-success" type="submit">
+                                        <span class="fa fa-edit"></span>
+                                        </button>
+                                    </form>
+                               </td>
                     </tr>
                     @endforeach
                 </tbody>
