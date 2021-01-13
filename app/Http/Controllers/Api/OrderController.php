@@ -30,7 +30,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {      
+    {     if(auth()->user()->hasRole('admin')){
         try {
             $order = Order::with(['books','bookmarks'])->get();
             if($order!=null){
@@ -45,6 +45,23 @@ class OrderController extends Controller
         catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
+    }
+    else{
+        try {
+           ;
+            $order = Order::with(['books','bookmarks'])->where('user_id',auth()->user()->id)->get();
+            if($order!=null){
+                return OrderResource::collection($order);
+            }
+            else {
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'No Orders Found');
+            }
+           
+            // $cart = Cart::with('books','bookmarks')->where('user_id',auth()->user()->id
+        }
+        catch (\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }}
     
     }
 
