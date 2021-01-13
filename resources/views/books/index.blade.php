@@ -67,7 +67,7 @@
                                     No Genres
                                 </td>
                             @endif
-                            <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-sucees'}}" >{{$book->featured == 1 ? "featured" : "not featured"}}</td>  
+                            <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->featured == 1 ? "featured" : "not featured"}}</td>  
                             <td class = "{{$book->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->status == 1 ? "Active" : "In Active"}}</td> 
                             <td>{{$book->created_at}}</td>
                             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image) ?  url('storage/'.$book->image) : url('storage/books/default.png') }}" alt=""> </td>
