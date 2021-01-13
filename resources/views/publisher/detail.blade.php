@@ -57,7 +57,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.operating_country'):  {{ucfirst($publisher->countries['name'])}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.status'):  {{ucfirst($publisher->status == 1 ? "active" : "not active")}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.status'):  {{ucfirst($publisher->status == 1 ? "Active" : "In Active")}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.date'):   {{$publisher->created_at}}</label>
