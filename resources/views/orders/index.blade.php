@@ -24,6 +24,8 @@
                         <th>Status</th>
                         <th>Payment Type</th>
                         <th class="not">Action</th>
+                        <th class="not"></th>
+                        <th class="not"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,22 +39,7 @@
                         <td>{{$order->total_quantity}}</td>
                         <td>{{$order->status == "0" ? "Not Ready " : "Ready"}}</td> 
                         <td>{{$order->type == "1" ?  "COD" : "Online"}}</td> 
-
                         <td>
-                            <div class="row">
-                                <div class="col-2">
-                                    <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span> </button>
-                                         </form>
-                                    <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
-                                       @csrf
-                                       @method('GET')
-                                       <button class="btn btn-success" type="submit">@lang('messages.button.order_details') </span></button>
-                                         </form>
-                                         </div>
-                                         <div class="col-2">
                                          @if($order->status == 1)
                                          <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a>
                                          @else
@@ -62,10 +49,22 @@
                                          </button>
                                              </a>
                                              @endif
-                                             </div>  
-                                </div>
-                            </div>
+                             
                         </td>
+                        <td>
+                                    <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
+                                       @csrf
+                                       @method('GET')
+                                       <button class="btn btn-success" type="submit">@lang('messages.button.order_details') </span></button>
+                                         </form>
+                                         </td>
+                        <td>
+                                    <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span> </button>
+                                         </form>
+                                         </td>
                     </tr>
                     @endforeach
                 </tbody>

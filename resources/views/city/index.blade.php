@@ -18,7 +18,9 @@
                         <th>Country</th>
                         <th>Shipping Charges</th>
                         <th>Status</th>
-                        <th> Action</th>                  
+                        <th> Action</th>   
+                        <th> </th>   
+                        <th></th>                  
                     </tr>
                </thead>
                <tbody>
@@ -30,18 +32,6 @@
             <td>{{$city->shipping_charges}}</td>  
             <td>{{$city->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
-                <div class="row">
-                    <div class="col-2">
-                        <form action="{{ action('CityController@destroy', [$city->id])}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                        </form>
-                    </div>
-                    <div class="col-2">
-                        <a href="{{ action('CityController@edit', [$city->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                    </div>
-                    <div class="col-2">
                     @if($city->status == 1)
                         <a><button class="btn btn-danger" onclick="deactivateCity('{{$city->id}}')">@lang('messages.user_page.deactivate')</button></a>
                     @else
@@ -51,10 +41,18 @@
                             </button>
                         </a>
                     @endif
-                </div>
-                </div>
-               
             </td>
+            <td>
+                        <form action="{{ action('CityController@destroy', [$city->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                        </form>
+                    </td>
+                  <td>
+                        <a href="{{ action('CityController@edit', [$city->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                   </td>
+
             </tr>
             @endforeach            
                 </tbody>

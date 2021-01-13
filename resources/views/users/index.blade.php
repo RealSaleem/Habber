@@ -27,7 +27,12 @@
                         <th>Language</th>
                         <th>Currency</th>
                         <th class="not">Image</th>
-                        <th class="not">Action</th>
+                        <th class="not"  >Action</th>
+                        <th class="not"  ></th>
+                        <th class="not"  ></th>
+                        <th class="not" ></th>
+                        <th class="not"  ></th>
+                        <th class="not" ></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,25 +48,9 @@
                         <td>{{$user->languages['name']}}</td>
                         <td>{{$user->currencies['name']}}</td>
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
-                        <td>
-                            <div class="row">
-                                <div class="col-2">
-                                    <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                    </form>
-                                </div>
-                                <div class="col-2">
-                                    <form action="{{action('UserController@edit', [$user->id])}}" method="post">
-                                    @csrf
-                                    @method('get')
-                                        <button class=" btn btn-success" type="submit">
-                                        <span class="fa fa-edit"></span>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="col-3">
+                        <td> 
+                                  
+                              
                                     @if($user->status == 1)
                                         <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a>
                                     @else
@@ -71,21 +60,38 @@
                                             </button>
                                         </a>
                                     @endif
-                                </div>
-                                <div class="col-2">
-                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">@lang('messages.address_page.address')</button></a>
-                                  
-                                </div>
-                                <div class="col-2">
-                                    <a href="{{route('user_order',[$user->id])}}"><button class=" btn btn-dark">@lang('messages.order_page.order')</button></a>
-                                  
-                                </div>
-
-                                <div class="col-2">
-                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light">@lang('messages.user_page.favourites')</button></a>
-                                </div>
-                            </div>
-                        </td>
+                                   
+                                </td>
+                                 <td>
+                               
+                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light"> @lang('messages.user_page.favourites') </button></a>
+                               
+                                </td>
+                               <td>
+                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">  @lang('messages.address_page.address')</button></a>
+                                    </td> 
+                                
+                                <td>
+                                    <a href="{{route('user_order',[$user->id])}}"><button class=" btn btn-dark">  @lang('messages.order_page.order')</button></a>
+                                    </td>  
+                             <td>
+                                    <form action="{{action('UserController@edit', [$user->id])}}" method="post">
+                                    @csrf
+                                    @method('get')
+                                        <button class=" btn btn-success" type="submit">
+                                        <span class="fa fa-edit"></span>
+                                        </button>
+                                    </form>
+                                    </td>
+                                    <td>
+                                    <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                                    </form>                               
+                              
+                           
+                        </td>  
                     </tr>
                     @endforeach
                 </tbody>

@@ -21,7 +21,11 @@
                         <th>Status</th>
                         <th>Addition Date</th>
                         <th class="not">BookClub Logo</th>
-                        <th class="not"> Action</th>                  
+                        <th class="not"> Action</th>  
+                        <th class="not"></th> 
+                        <th class="not"></th> 
+                        <th class="not"></th> 
+
                           </tr>
                </thead>
                <tbody>
@@ -34,34 +38,31 @@
                     <td class = "{{$bookclub->status == 0 ? 'text-primary' : 'text-danger'}}" >{{$bookclub->status == 0 ? "Active" : "In Active"}}</td>   
                     <th>{{$bookclub->created_at}}</th>
                     <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->bookclub_logo) ?  url('storage/'.$bookclub->bookclub_logo) : url('storage/bookclub/default.png') }}" alt=""> </td>
-                  
                     <td>
-                        <div class="row">
-                            <div class="col-1">
-                                <form action="{{ action('BookClubController@destroy', [$bookclub->id])}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                            </form>
-                            </div>
-                            <div class="col-1">
-                                <a href="{{ action('BookClubController@edit', [$bookclub->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                        </div>
-                        <div class="col-2">
                             @if($bookclub->status == 0)
                                 <a><button class="btn btn-info" onclick="activateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.activate')</button></a>
                             @else
                                 <a><button class="btn btn-danger" onclick="deactivateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.deactivate')</button></a>
                             @endif
-                        </div>
-                        <div class="col-2">
+                            </td>
+                            <td>
                             @if($bookclub->featured == 0)
                                 <a><button class="btn btn-primary" onclick="featureBookClub('{{$bookclub->id}}')">@lang('messages.book_page.feature')</button></a>
                             @else
                                 <a><button class="btn btn-danger" onclick="notfeatureBookClub('{{$bookclub->id}}')">@lang('messages.bookmark_page.not_feature')</button></a>
                             @endif
-                        </div>
-                    </td>
+                        </td>
+                                <td>
+                                <form action="{{ action('BookClubController@destroy', [$bookclub->id])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                            </form>
+                                     </td>
+                                 <td>
+                                <a href="{{ action('BookClubController@edit', [$bookclub->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                </td>
+                            
                 </tr>
                     @endforeach            
                 </tbody>
