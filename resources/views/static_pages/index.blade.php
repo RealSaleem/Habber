@@ -20,6 +20,7 @@
                         <th>Arabic Title</th>
                         <th>Description</th>
                         <th>Arabic Description</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

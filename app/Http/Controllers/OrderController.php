@@ -6,6 +6,7 @@ use App\Events\OrderCancelledEvent;
 use App\Events\OrderSuccessEvent;
 use App\Order;
 use App\User;
+use App\Address;
 
 
 
@@ -23,8 +24,9 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $order = Order::with('addresses')->get();
-        return view('orders.index', compact('order'));
+        $order= Order::with('addresses')->get();
+        $address= Address::all();
+        return view('orders.index', compact('order','address'));
     }
 
     /**

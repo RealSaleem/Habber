@@ -50,7 +50,7 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.added_by'): {{($bookmark->bookmarkAddedBy->roles[0]->name == "Admin") ? "Admin" : $bookmark->bookmarkAddedBy->roles[0]->name .' '. $bookmark->bookmarkAddedBy->fullname }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.status'): {{ucfirst($bookmark->status == 1 ? "active" : "not active")}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.status'): {{ucfirst($bookmark->status == 1 ? "Active" : "In Active")}}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.feature'):{{ucfirst($bookmark->featured == 1 ? "featured" : "not featured")}} </label>

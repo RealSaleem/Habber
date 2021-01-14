@@ -21,7 +21,9 @@
                         <th>Numcode</th>
                         <th>Phonecode</th>
                         <th>Status</th>
-                        <th> Action</th>                  
+                        <th> Action</th>      
+                        <th> </th>      
+                        <th> </th>                  
                     </tr>
                </thead>
                <tbody>
@@ -36,11 +38,16 @@
             <td>{{$country->phonecode}}</td>
             <td>{{$country->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
-            <div class="row">
-                                <div class="col-2">
+                        @if($country->status == 1)
+                                        <a><button class="btn btn-danger" onclick="deactivateCountry('{{$country->id}}')">@lang('messages.bookmark_page.deactivate')</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="activateCountry('{{$country->id}}')">@lang('messages.bookmark_page.activate') </button></a>
+                                    @endif
+                        </td>
+            <td>
                                     <a href="{{action('CountryController@edit', [$country->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                                </div>
-                                <div class="col-2">
+                                </td>
+                                <td>
                                     <form action="{{action('CountryController@destroy', [$country->id])}}" method="post">
                                     @csrf
                                     @method('Delete')
@@ -48,16 +55,7 @@
                                         <span class="fa fa-trash"></span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="col-2">
-                                    @if($country->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivateCountry('{{$country->id}}')">@lang('messages.bookmark_page.deactivate')</button></a>
-                                    @else
-                                        <a><button class="btn btn-info" onclick="activateCountry('{{$country->id}}')">@lang('messages.bookmark_page.activate') </button></a>
-                                    @endif
-                                </div>
-                            </div>
-                        </td>
+                              </td>
             </tr>
             @endforeach            
                 </tbody>

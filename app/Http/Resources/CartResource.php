@@ -15,12 +15,12 @@ class CartResource extends JsonResource
      * @return array
      */
     public function toArray($request)
-    {
+    {   
         // dd();
         return [
             'id'     => $this->id,
             'user'   => auth()->user()->first_name,
-            'total_price' => $this->total_price,
+        'total_price' =>$this->total_price,
             $this->mergeWhen($this->bookmarks, [
                 'bookmark' => BookmarkResource::collection($this->bookmarks),
                 
