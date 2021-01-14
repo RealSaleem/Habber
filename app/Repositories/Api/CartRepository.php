@@ -24,18 +24,22 @@ class CartRepository implements RepositoryInterface {
     // create a new record in the database
     public function create(array $data)
     {
-        
+    
         $books =  [];
         $bookmarks = [];
         $arr['user_id'] = auth()->user()->id;
         $arr['total_price'] = $data['total_price'];
         $cart = $this->model->create($arr);
+       $price = [];
+       $price1= [];
         foreach($data['product'] as $i) {
             if( $i['product_type'] == "book") {
                 array_push($books, $i);
+                array_push($price,$i['price']*$i['quantity']);
             }
             else {
                 array_push($bookmarks ,$i);
+                array_push($price1,$i['price']*$i['quantity']);
             }
         }
     //    dd($books[0]['product_id']);
@@ -43,13 +47,23 @@ class CartRepository implements RepositoryInterface {
         
             for($i = 0; $i < count($books); $i++) {
                 $cart->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' => $books[$i]['product_type'] ]);
+                //$price->books()->attach($books[$i]['quantity'] * $books[$i]['price'] , $books[$i]['product_type']);
             }
         }
         if(count($bookmarks) > 0) {
             for($i = 0; $i < count($bookmarks); $i++) {
                 $cart->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => $bookmarks[$i]['product_type'] ]);
+                //$price->bookmarks()->attach($bookmarks[$i]['quantity']*$bookmarks[$i]['price'] , $books[$i]['product_type']);
             }
         }
+        for($i=0;$i<count($price);$i++){
+            $temp+=$price[$i];
+        }
+        for($i=0;$i<count($price1);$i++){
+            $temp1+=$price[$i];
+        }
+    $t=$temp+$temp1;
+        $arr['total_price'] = $t;
         return $cart;
 
     }
@@ -65,31 +79,48 @@ class CartRepository implements RepositoryInterface {
     public function update(array $data, Model $model)
     {
         // dd($model);
+        $temp=0;
+        $temp1=0;
         $books =  [];
         $bookmarks = [];
         $arr['total_price'] = $data['total_price'];
         $model->update($arr);
         $model->books()->detach();
         $model->bookmarks()->detach();
+        $price= [];
+        $price1= [];
         foreach($data['product'] as $i) {
             if( $i['product_type'] == "book") {
                 array_push($books, $i);
+                array_push($price,$i['price']*$i['quantity']);
             }
             else {
                 array_push($bookmarks ,$i);
+                array_push($price1,$i['price']*$i['quantity']);
             }
         }
         if(count($books) > 0) {
         
             for($i = 0; $i < count($books); $i++) {
-                $model->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' => $books[$i]['product_type'] ]);
+               $model->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' => $books[$i]['product_type'] ]);
+               // $model1->books()->attach($books[$i]['quantity']*$books[$i]['price']);
             }
         }
         if(count($bookmarks) > 0) {
             for($i = 0; $i < count($bookmarks); $i++) {
-                $model->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => $bookmarks[$i]['product_type'] ]);
+               $model->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => $bookmarks[$i]['product_type'] ]);
+               // $model1->bookmarks()->attach($bookmarks[$i]['quantity']*$bookmarks[$i]['price']);
             }
         }
+        for($i=0;$i<count($price);$i++){
+            $temp+=$price[$i];
+        }
+        for($i=0;$i<count($price1);$i++){
+            $temp1+=$price[$i];
+        }
+    $t=$temp+$temp1;
+        $arr['total_price'] = $t;
+        $model->update($arr);
         return $model;
         // return $model->update($data);
     }
