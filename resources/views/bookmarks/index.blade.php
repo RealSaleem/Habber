@@ -56,7 +56,7 @@
                 <td>{{$bookmark->quantity}}</td>
                 <td>{{$bookmark->type_of_bookmark}}
                 <td>{{$bookmark->users['first_name']}}</td>  
-                <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "featured" : "not featured"}}</td>  
+                <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "Featured" : "UnFeatured"}}</td>  
                  <td class = "{{$bookmark->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->status == 1 ? "Active" : "In Active"}}</td> 
                  <td>{{$bookmark->created_at}}</td>
                 <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>

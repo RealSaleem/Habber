@@ -24,7 +24,7 @@
                     @foreach($ad as $ad)
                     <tr class="row1" data-id="{{ $ad->id }}">
 
-                        <td class = "{{$ad->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$ad->featured == 1 ? "Featured" : "Not Featured"}}</td>  
+                        <td class = "{{$ad->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$ad->featured == 1 ? "Featured" : "UnFeatured"}}</td>  
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($ad->image) ?  url('storage/'.$ad->image) : url('storage/ads/default.png') }}" alt=""> </td>
                         <td>
                             <div class="row">
