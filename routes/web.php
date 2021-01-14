@@ -92,6 +92,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('user/order/{userId}','OrderController@getUserOrderList')->name('user_order');
    Route::resource('about_us','AboutUsController');
   Route::resource('static_pages','StaticPagesController');
+  Route::resource('sizes','SizeController');
    Route::get('homes','HomeController@getData')->name('homes.getdata');
    Route::get('admin_change','UserController@changepassword')->name('admin.password');
    Route::post('admin_password','UserController@passwordUpdate')->name('admin.password.change');

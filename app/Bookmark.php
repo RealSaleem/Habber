@@ -12,7 +12,9 @@ class Bookmark extends Model
     public function bookmarkAddedBy() {
         return $this->belongsTo('App\User','added_by','id');
     }
-
+    public function bookmark_size() {
+        return $this->hasOne('App\Size','bookmark_size','id');
+    }
     public function banners() {
         return $this->hasMany('App\Banner');
     }

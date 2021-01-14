@@ -1929,9 +1929,24 @@ return [
         'edit_ad_info'=> 'تحرير معلومات الإعلان',
         'image'=>'صورة',
         'featured' => 'متميز'
+        
 
 
     ],
+    'size_page' => [
+        'size' => 'بحجم',
+        'add_size'=>'إضافة بحجم جديد',
+        'add_size_info'=> 'أضف معلومات بحجم',
+        'edit_size'=> 'تحرير بحجم',
+        'edit_size_info'=> 'تحرير معلومات بحجم',
+        'bookmark_size'=>'بحجم',
+        
+        'featured' => 'متميز'
+        
+
+
+    ],
+
 
     'publisher_page' => [
         'publisher' => 'الناشر',

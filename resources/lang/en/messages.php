@@ -221,6 +221,20 @@ return [
         'link'=>'Banner Link',
 
     ],
+    'size_page' => [
+        'size' => 'Sizes',
+        'add_size'=> 'Add Size',
+        'add_size_info'=> 'Add Size Info',
+        'edit_size'=> 'Edit Size ',
+        'edit_size_info'=> 'Edit Size Info',
+        'bookmark_size'=>'Bookmark Size',
+        
+        'featured' => 'متميز'
+        
+
+
+    ],
+
     'language_page'=> [
         'languages'=> 'Language',
         'name'=>'Name',
