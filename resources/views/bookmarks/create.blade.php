@@ -75,20 +75,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
                         <div class="col-sm-9">
-                        
-                            <select class="form-control" name="size"  id="size">
-                             
-                                <option disabled selected value> -- select an option -- </option>
-                                <option value="2*6" {{ (old('size') == "2*6" ? "selected":"")}}>2*6</option>
-                                <option value="2*7.5" {{ (old('size') == "2*7.5" ? "selected":"")}}>2*7.5</option>
-                                <option value="2*8" {{ (old('size') == "2*8" ? "selected":"")}}> 2*8</option>
-                                
-                             </select>
-                            
+                        <select  class="form-control" name="size" id="size">
+                        @foreach($size as $s)
+                            <option value="{{$s->id}}" > {{$s->bookmark_size}}</option>
+                            @endforeach
+                        </select>
                             <span class="text-danger">{{$errors->first('size')}}</span>
                         </div>
+                    </div>
                         </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.quantity')</label>

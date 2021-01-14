@@ -7,6 +7,7 @@ use App\Currency;
 use App\User;
 use Session;
 use App\ProductPrice;
+use App\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +29,7 @@ class BookmarksController extends Controller
     public function index()
     {
         //
-        $bookmark = Bookmark::with('users','product_prices')->get();
+        $bookmark = Bookmark::with('users','product_prices','bookmark_size')->get();
         return view('bookmarks.index', compact('bookmark'));
     }
 
@@ -42,7 +43,8 @@ class BookmarksController extends Controller
         //
         
         $user = User::role('publisher')->get();
-        return view('bookmarks.create',compact('user'));
+        $size = Size::all();
+        return view('bookmarks.create',compact('user','size'));
     
     }
 
@@ -152,7 +154,8 @@ class BookmarksController extends Controller
         //
         $bookmark = Bookmark::with('users','product_prices')->findOrFail($id);
         $user = User::role('publisher')->get();
-        return view('bookmarks.edit', compact('bookmark','user'));
+        $size = Size::all();
+        return view('bookmarks.edit', compact('bookmark','user','size'));
        
     }
 
