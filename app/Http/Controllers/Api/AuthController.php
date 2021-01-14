@@ -17,7 +17,7 @@ use App\Http\Requests\Api\ForgetPasswordRequest;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
-use App\Events\ForgotPasswordEvent;
+use App\Events\ForgotPasswordApiEvent;
 
 
 class AuthController extends Controller
@@ -77,7 +77,7 @@ class AuthController extends Controller
         $user=User::where('email',$request['email'])->first();
         $user->remember_token=$token;
         $user->update();
-        event(new ForgotPasswordEvent($request,$token));
+        event(new ForgotPasswordApiEvent($request,$token));
        return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Email Sent Successfully!');
        
         }

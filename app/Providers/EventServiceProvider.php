@@ -42,6 +42,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ShowNotificationEvent' => [
             'App\Listeners\ShowNotificationListener',
         ],
+        'App\Events\ForgotPasswordApiEvent' => [
+            'App\Listeners\SendForgotPasswordApiEventListener',
+        ],
     ];
 
     /**
