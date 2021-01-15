@@ -88,7 +88,7 @@
                         <div class="col-sm-9">
                         <select  class="form-control" name="size" id="size">
                             @foreach($size as $s)
-                            <option value="{{$s->id}}" {{$bookmark->id == $s->id ? "selected" : ""}} > {{$s->bookmark_size}}</option>
+                            <option value="{{$s->bookmark_size}}" {{$bookmark->bookmark_size == $s->bookmark_size ? "selected" : ""}} > {{$s->bookmark_size}}</option>
                             @endforeach
                         </select>
                             <span class="text-danger">{{$errors->first('size')}}</span>
