@@ -118,7 +118,18 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
-        $order = Order::findOrFail($id);
+       $order = Order::findOrFail($id);
+        $orders=Order::with('books','bookmarks')->where('id',$id)->first();
+       if(count($orders->books)!=null){
+        foreach($orders->books as $book){
+           $book->quantity+=$book['pivot']->quantity; 
+           $book->update();
+        }}
+        if(count($orders->bookmarks)!=null){
+        foreach($orders->bookmarks as $bookmark){
+            $bookmark->quantity+=$bookmark['pivot']->quantity; 
+            $bookmark->update();
+         }}
         $order->delete();
         event(new OrderCancelledEvent($order));
         return back()->with('success', 'Order Deleted Successfully!');
