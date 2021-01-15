@@ -62,7 +62,7 @@
                                     <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span> </button>
+                                        <button class="btn btn-danger" type="submit"><span class="fa fa-ban"></span> </button>
                                          </form>
                                          </td>
                     </tr>
