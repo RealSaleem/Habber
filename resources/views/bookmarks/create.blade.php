@@ -74,12 +74,12 @@
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
-                    <div class="form-group row">
+                         <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.size')</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="size" id="size">
                         @foreach($size as $s)
-                            <option value="{{$s->id}}" > {{$s->bookmark_size}}</option>
+                            <option value="{{$s->bookmark_size}}" > {{$s->bookmark_size}}</option>
                             @endforeach
                         </select>
                             <span class="text-danger">{{$errors->first('size')}}</span>

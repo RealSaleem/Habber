@@ -55,7 +55,7 @@ class BookmarksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {  
         $validatedData = $request->validate([
             'title' => 'required',
             'arabic_title' => 'required',
@@ -138,7 +138,7 @@ class BookmarksController extends Controller
     public function show($id)
     {
         //
-        $bookmark = Bookmark::with('bookmarkAddedBy')->findOrFail($id);
+        $bookmark = Bookmark::with('bookmarkAddedBy','bookmark_size')->findOrFail($id);
       
         return view('bookmarks.detail',compact('bookmark'));
     }
