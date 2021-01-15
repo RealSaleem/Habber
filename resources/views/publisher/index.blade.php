@@ -12,6 +12,7 @@
 @endif 
 <div class="card">
     <div class="card-body">
+    <a href="{{ route('publisher.create') }}" ><button style="color: orange;font-size:16px;border: 3px solid orange" >  + Add New Publisher</button> </a>
         <div class="table-responsive">
             <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
