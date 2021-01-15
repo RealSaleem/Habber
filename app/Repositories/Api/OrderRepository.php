@@ -40,29 +40,30 @@ class OrderRepository implements RepositoryInterface {
         if( count($data['product']) > 0) {
             foreach($data['product'] as $i) {
                 if( $i['product_type'] == "book") {
-                    //if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+                    if($this->decreaseBookQuantity($i['product_id'],$i['quantity']) == true ) {
+
                         $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
                         $total_price = $total_price+$i['price'];
                         array_push($books, $i);
                         
-//                    }
-//                    else {
-//                        return false;
-//                    }
+                }
+                    else {
+                        return false;
+                  }
                 }
             }           
         }
         if(count($data['product']) > 0) {
             foreach($data['product'] as $j) {
                 if($j['product_type'] == "bookmark") {
-                    //if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
+                    if($this->decreaseBookmarkQuantity($j['product_id'],$j['quantity']) == true) {
                         $i['price'] = \App\ProductPrice::getPrice($i['product_id'], $arr['currency_id'],$i['quantity'], $i['product_type']);
                         $total_price = $total_price+$i['price'];
                         array_push($bookmarks, $j);
-//                    }
-//                    else {
-//                        return false;
-//                    }   
+                    }
+                    else {
+                        return false;
+                    }   
                 }
             }       
         }
@@ -135,6 +136,29 @@ class OrderRepository implements RepositoryInterface {
     }
 
     public function decreaseBookmarkQuantity($id,$quantity) {
+        $bookmark = Bookmark::find($id);
+        if($bookmark->quantity > $quantity) {
+            $bookmark->quantity = $bookmark->quantity - $quantity;
+            $bookmark->update();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public function increaseBookQuantity($id,$quantity) {
+        $book = Book::find($id);
+        if($book->quantity > $quantity) {
+            $book->quantity = $book->quantity - $quantity;
+            $book->update();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function increaseBookmarkQuantity($id,$quantity) {
         $bookmark = Bookmark::find($id);
         if($bookmark->quantity > $quantity) {
             $bookmark->quantity = $bookmark->quantity - $quantity;

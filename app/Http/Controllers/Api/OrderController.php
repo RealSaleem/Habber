@@ -96,7 +96,7 @@ class OrderController extends Controller
             else {
                 $cart=Cart::where('user_id',auth()->user()->id)->first();
                 $cart->delete();
-             //   event(new OrderSuccessEvent($order));
+             event(new OrderSuccessEvent($order));
                 return (new OrderResource($order));
                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
             }
