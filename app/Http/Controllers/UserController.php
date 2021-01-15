@@ -59,6 +59,7 @@ class UserController extends Controller
             'email' => 'required|unique:users|email',
             'password' => 'required|min:8',
             'phone' => 'required|numeric', 
+            'status'=> 'required',
             'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:1024',
             'role' => 'required'
         ]);
@@ -69,6 +70,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
+        $user->status = $request->status;
         $user->profile_pic = "null"; 
         $user->currency_id = 1;
         $user->language_id = 1;
@@ -137,6 +139,7 @@ class UserController extends Controller
             'last_name' => 'sometimes|required',
             'password' => 'sometimes|min:8',
             'phone' => 'sometimes|required|numeric',  
+            'status'=> 'required',
             'profile_pic' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'role' => 'required'
         ]);
@@ -146,6 +149,7 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
+        $user->status = $request->status;
         $user->currency_id = 1;
         $user->language_id = 1;
         if($request->has('profile_pic')) 
