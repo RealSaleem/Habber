@@ -24,7 +24,8 @@ class CartRepository implements RepositoryInterface {
     // create a new record in the database
     public function create(array $data)
     {
-    
+        $temp=0;
+        $temp1=0;
         $books =  [];
         $bookmarks = [];
         $arr['user_id'] = auth()->user()->id;

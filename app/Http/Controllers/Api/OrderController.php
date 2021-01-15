@@ -94,8 +94,9 @@ class OrderController extends Controller
                 return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Order Creation UnSuccessfull! Some Products ran out of stock');
             }
             else {
-                $this->cart->deleteUserCart(auth()->user()->id);
-                event(new OrderSuccessEvent($order));
+                $cart=Cart::where('user_id',auth()->user()->id)->first();
+                $cart->delete();
+             //   event(new OrderSuccessEvent($order));
                 return (new OrderResource($order));
                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
             }
