@@ -18,7 +18,8 @@
             <article class="card">
                 <div class="card-body row">
                     <div class="col"> <strong>@lang('messages.order_page.order_date'):</strong> <br>{{$order->created_at}} </div>
-                    <div class="col"> <strong>@lang('messages.order_page.order_by'):</strong> <br>{{($order->users['first_name'] ." ".$order->users['last_name'] )}}</div>
+                    <div class="col"> <strong>@lang('messages.order_page.first_name'):</strong> <br>{{($order->users['first_name'] )}}</div>
+                    <div class="col"> <strong>@lang('messages.order_page.last_name'):</strong> <br>{{($order->users['last_name'] )}}</div>
                     <div class="col"> <strong>@lang('messages.user_page.email'):</strong> <br>  {{ucfirst($order->users['email'])}} </div>
                     <div class="col"> <strong>@lang('messages.user_page.contact_no'):</strong> <br> {{ucfirst($order->users['phone'])}}</div>
                     <div class="col"> <strong>@lang('messages.order_page.total_quantity') :</strong> <br> {{ucfirst($order->total_quantity)}}</div>
@@ -84,6 +85,13 @@
                             <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Confirmed</option>
                             <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Shipped</option>
                             <option value="2" {{($order->status == "2" ? 'selected' : '')}}>Delivered</option>
+                     </select>
+                    </div>
+                    <div class="card-body row">
+                <div class="col"> <strong>@lang('messages.order_page.order_status'):</strong> <br> </div>
+                    <select class="form-control" name="status" id="">
+                            <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Not Ready</option>
+                            <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Ready</option>
                      </select>
                     </div>
 
