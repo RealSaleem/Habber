@@ -79,6 +79,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::resource('sitesetting','SiteSettingController');
    Route::resource('publisher','PublisherController');
    Route::resource('push_notifications','PushNotificationController');
+   Route::get('push_notification','PushNotificationController@history')->name('push_notifications.history');
    Route::post('push_notifications','PushNotificationController@sendNotification');
    Route::get('payment/{id}','PaymentGatewayController@show');
    Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');

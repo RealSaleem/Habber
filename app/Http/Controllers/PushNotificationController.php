@@ -5,6 +5,8 @@ use App\User;
 use App\Events\SendNotificationEvent;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
 use Session;
 
 class PushNotificationController extends Controller
@@ -38,6 +40,29 @@ class PushNotificationController extends Controller
                    return back()->with('success', 'Notification Sent Successfully!');
             
                     
+                }
+
+                public function history(){
+                    $users =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
+
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
+                        $firebase = (new Factory)
+                        ->withServiceAccount($serviceAccount)
+                        ->withDatabaseUri('https://hebber-72e2b.firebaseio.com/')
+                        ->create();
+                        $database   =   $firebase->getDatabase();
+                        $value= array();
+                   foreach($users as $user){
+                        
+                     $getData    =   $database
+                        ->getReference('/User/'.$user->id.'/Notification/');
+                        $snapshot = $getData->getSnapshot();
+                        if($snapshot->getValue()!=null){
+                     array_push($value,$snapshot->getValue());}
+                         
+                     }
+                     return view('push_notifications.history', compact('value'));
+
                 }
 
                     

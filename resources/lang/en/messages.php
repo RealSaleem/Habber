@@ -305,6 +305,7 @@ return [
 
     'push_notifications_page' => [
         'push_notifications' => 'Push Notifications',
+        'history' => 'Push Notifications History',
         'add_push_notifications'=> 'New Notification',
         'add_push_notifications_info'=> 'New Notification Information',
         'title'=> 'Title',
