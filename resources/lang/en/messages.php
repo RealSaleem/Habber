@@ -279,6 +279,7 @@ return [
     'sidebar' => [
         'list' => 'Lists',
         'create' => 'Create',
+        'history'=> 'History'
 
 
     ],
