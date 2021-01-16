@@ -52,6 +52,7 @@ class PushNotificationController extends Controller
                         ->create();
                         $database   =   $firebase->getDatabase();
                         $value= array();
+                        $us=array();
                    foreach($users as $user){
                         
                      $getData    =   $database
@@ -59,9 +60,12 @@ class PushNotificationController extends Controller
                         $snapshot = $getData->getSnapshot();
                         if($snapshot->getValue()!=null){
                      array_push($value,$snapshot->getValue());}
-                         
+                        
                      }
-                     return view('push_notifications.history', compact('value'));
+                    
+                     foreach($value as $v){
+                     array_push($us,User::findOrFail($v['to']));}
+                     return view('push_notifications.history', compact('value','us'));
 
                 }
 
