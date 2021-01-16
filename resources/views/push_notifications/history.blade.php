@@ -23,17 +23,17 @@
                 </thead>
                 <tbody>
                 @if($value!=null)
-                    @foreach($value as $v)
+                @for($i=0;$i<count($value);$i++)
                     <tr>    
 
-                        <td>{{$v['title']}}</td>
-                        <td>{{$v['body']}}</td>
-                        <td>{{$v['to']}}</td>
+                        <td>{{$value[$i]['title']}}</td>
+                        <td>{{$value[$i]['body']}}</td>
+                        <td>{{$us[$i]['first_name']}}</td>
                         
                             
                                 
                     </tr>
-                    @endforeach
+                    @endfor
                     @endif
                 </tbody>
             </table>
