@@ -1995,6 +1995,7 @@ return [
     ],
     'push_notifications_page' => [
         'push_notifications' => 'دفع الإخطارات',
+        'history' => 'سجل الإخطارات',
         'add_push_notifications'=> 'إضافة دفع الإخطارات',
         'add_push_notifications_info'=> 'إضافة دفع الإخطارات',
         'title'=> 'عنوان',
