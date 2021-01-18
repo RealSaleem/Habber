@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('password.change') }}">
                         @csrf
                     
-                        <input  name="remember_token" value="{{ $token }}">
+                        <input  type="hidden" name="remember_token" value="{{ $token }}">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
