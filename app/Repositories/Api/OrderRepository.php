@@ -125,7 +125,7 @@ class OrderRepository implements RepositoryInterface {
 
     public function decreaseBookQuantity($id,$quantity) {
         $book = Book::find($id);
-        if($book->quantity > $quantity) {
+        if($book->quantity >= $quantity) {
             $book->quantity = $book->quantity - $quantity;
             $book->update();
             return true;
@@ -137,7 +137,7 @@ class OrderRepository implements RepositoryInterface {
 
     public function decreaseBookmarkQuantity($id,$quantity) {
         $bookmark = Bookmark::find($id);
-        if($bookmark->quantity > $quantity) {
+        if($bookmark->quantity >= $quantity) {
             $bookmark->quantity = $bookmark->quantity - $quantity;
             $bookmark->update();
             return true;
