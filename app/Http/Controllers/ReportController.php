@@ -56,9 +56,10 @@ class ReportController extends Controller
     {
         //
         $order = Order::get();
-        $publisher = $user = User::with('orders')->role('publisher')->get();
-        return view('reports.detail', compact('order','publisher'));
+        return view('reports.detail',compact('order'));
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

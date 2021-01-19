@@ -86,7 +86,7 @@
                         <tr>
                         <td>{{$o->title}}</td>
                             <td>{{$o->isbn}}</td>
-                            <td>{{$o->product_price['0']['price']}}</td>
+                            <td>{{($o->product_prices[0])->price}}</td>
                             <td>{{$o->quantity}}</td>
                             <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$o->image)  }}" alt=""> </td>
                             
@@ -98,7 +98,7 @@
                         <tr>
                         <td>{{$b->title}}</td>
                             <td>{{$b->bookmark_id}}</td>
-                            <td>{{$b->product_price['0']['price']}}</td>
+                            <td>{{($b->product_prices[0])->price}}</td>
                             <td>{{$b->quantity}}</td>
                             
                             <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$b->image)  }}" alt=""> </td>

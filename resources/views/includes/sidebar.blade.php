@@ -126,9 +126,9 @@
                 </ul>
             </li>
 
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> System Reports </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.reports_page.system_reports') </span></a>
             <!-- {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('book-edit','book-delete','book-create','book-list')) == true ? "" : "hidden"}} -->
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.static_page.staticpage') </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.statics_page.staticpage') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('static_pages.index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                         <li class="sidebar-item"style="background-color: #786e0047;" ><a href="{{ route('static_pages.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
