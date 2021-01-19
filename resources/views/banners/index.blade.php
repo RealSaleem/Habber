@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-        <a href="{{ route('banners.create') }}" ><button style="color: orange;font-size:16px;border: 3px solid orange" >  + Add New Banner</button> </a>
+        <a href="{{ route('banners.create') }}" ><button style="color: grey;font-size:16px;border: 3px solid black" >  + Add New Banner</button> </a>
             <table id="zero_config" class="table table-striped table-bordered">
                     <thead>
                         <tr>
