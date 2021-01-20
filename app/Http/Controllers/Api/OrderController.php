@@ -32,7 +32,7 @@ class OrderController extends Controller
     public function index()
     {     if(auth()->user()->hasRole('admin')){
         try {
-            $order = Order::with(['books','bookmarks'])->get();
+            $order = Order::with(['books','bookmarks'])->orderBy('id','DESC')->get();
             if($order!=null){
                 return OrderResource::collection($order);
             }
@@ -49,7 +49,7 @@ class OrderController extends Controller
     else{
         try {
            ;
-            $order = Order::with(['books','bookmarks'])->where('user_id',auth()->user()->id)->get();
+            $order = Order::with(['books','bookmarks'])->where('user_id',auth()->user()->id)->orderBy('id','DESC')->get();
             if($order!=null){
                 return OrderResource::collection($order);
             }
