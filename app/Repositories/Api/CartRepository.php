@@ -43,6 +43,7 @@ class CartRepository implements RepositoryInterface {
                 array_push($price1,$i['price']*$i['quantity']);
             }
         }
+
     //    dd($books[0]['product_id']);
         if(count($books) > 0) {
         
@@ -57,12 +58,15 @@ class CartRepository implements RepositoryInterface {
                 //$price->bookmarks()->attach($bookmarks[$i]['quantity']*$bookmarks[$i]['price'] , $books[$i]['product_type']);
             }
         }
-        for($i=0;$i<count($price);$i++){
-            $temp+=$price[$i];
-        }
-        for($i=0;$i<count($price1);$i++){
-            $temp1+=$price[$i];
-        }
+        if(count($price)>0){
+            foreach($price as $p1){
+                $temp+=$p1;
+            }}
+      
+            if(count($price1)>0){
+             foreach($price1 as $p){
+            $temp1+=$p;
+        }}
     $t=$temp+$temp1;
         $arr['total_price'] = $t;
         return $cart;
@@ -113,12 +117,15 @@ class CartRepository implements RepositoryInterface {
                // $model1->bookmarks()->attach($bookmarks[$i]['quantity']*$bookmarks[$i]['price']);
             }
         }
-        for($i=0;$i<count($price);$i++){
-            $temp+=$price[$i];
-        }
-        for($i=0;$i<count($price1);$i++){
-            $temp1+=$price[$i];
-        }
+         if(count($price)>0){
+            foreach($price as $p1){
+                $temp+=$p1;
+            }}
+      
+            if(count($price1)>0){
+             foreach($price1 as $p){
+            $temp1+=$p;
+        }}
     $t=$temp+$temp1;
         $arr['total_price'] = $t;
         $model->update($arr);
