@@ -54,7 +54,7 @@
                 <td>{{$bookmark->arabic_description}}</td>
                 <td>{{($bookmark->product_prices[0])->price}}</td>  
                 <td>{{$bookmark->size }}</td>
-                <td>{{$bookmark->quantity}}</td>
+                <td>{{( $bookmark->quantity == 0 ) ? "out of stock" : $bookmark->quantity}}</td>
                 <td>{{$bookmark->type_of_bookmark}}
                 <td>{{$bookmark->users['first_name']}}</td>  
                 <td class = "{{$bookmark->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookmark->featured == 1 ? "Featured" : "UnFeatured"}}</td>  
