@@ -15,7 +15,14 @@ use App\Address;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
-{
+{    
+    public function __construct()
+    {
+       $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','show']]);
+       $this->middleware('permission:order-create', ['only' => ['create','store']]);
+       $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:order-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +33,8 @@ class OrderController extends Controller
         //
         $order= Order::with('addresses')->get();
         $address= Address::all();
-        return view('orders.index', compact('order','address'));
+        $user=auth()->user();
+        return view('orders.index', compact('order','address','user'));
     }
 
     /**
