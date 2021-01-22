@@ -49,7 +49,7 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.feature')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="featured"  id="status">
-                                <option value="0" {{ ($bookclub->featured == 0 ? "selected":"")}}>Not Featured</option>
+                                <option value="0" {{ ($bookclub->featured == 0? "selected":"")}}>Not Featured</option>
                                 <option value="1" {{ ($bookclub->featured == 1 ? "selected":"")}}>Featured</option>
                              </select>   
                             <span class="text-danger">{{$errors->first('featured')}}</span>
@@ -59,8 +59,9 @@
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.status')</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="status"  id="status">
-                                <option value="0" {{ ($bookclub->status == 0 ? "selected":"")}}>Activate</option>
-                                <option value="1" {{ ($bookclub->status == 1 ? "selected":"")}}>Deactivate</option>
+                            
+                                <option value="0" {{ ($bookclub->status == 0 ? "selected":"")}}>Deactivate</option>
+                                <option value="1" {{ ($bookclub->status == 1 ? "selected":"")}}>Activate</option>
                              </select>   
                             <span class="text-danger">{{$errors->first('status')}}</span>
                         </div>
