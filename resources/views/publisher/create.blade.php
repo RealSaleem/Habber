@@ -39,7 +39,7 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.password')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="password" id="password" placeholder="Password ">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password ">
                             <span class="text-danger">{{$errors->first('password')}}</span>
                         </div>
                     </div>

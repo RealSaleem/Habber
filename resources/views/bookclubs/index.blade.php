@@ -35,8 +35,8 @@
                     <td>{{$bookclub->name}}</td>
                     <td>{{$bookclub->arabic_name}}</td>
                     <td>{{$bookclub->books['title']}}</td> 
-                    <td class = "{{$bookclub->featured == 0 ? 'text-primary' : 'text-danger'}}" >{{$bookclub->featured == 0 ? "Featured" : "UnFeatured"}}</td> 
-                    <td class = "{{$bookclub->status == 0 ? 'text-primary' : 'text-danger'}}" >{{$bookclub->status == 0 ? "Active" : "In Active"}}</td>   
+                    <td class = "{{$bookclub->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$bookclub->featured == 1 ? "Featured" : "UnFeatured"}}</td> 
+                    <td class = "{{$bookclub->status == 1? 'text-primary' : 'text-danger'}}" >{{$bookclub->status == 1 ? "Active" : "In Active"}}</td>   
                     <th>{{$bookclub->created_at}}</th>
                     <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->bookclub_logo) ?  url('storage/'.$bookclub->bookclub_logo) : url('storage/bookclub/default.png') }}" alt=""> </td>
                     <td>
