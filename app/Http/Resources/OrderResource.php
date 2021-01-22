@@ -20,7 +20,7 @@ class OrderResource extends JsonResource
         return [
             'id'     => $this->id,
             //'user'   => auth()->user()->first_name,
-            'total_price' => $this->total_price +  optional($this->addresses->cities)->shipping_charges*auth()->user()->currencies->rate,
+            'total_price' => $this->total_price +  ($this->addresses->cities['shipping_charges'])*auth()->user()->currencies->rate,
             'status' => (
                 ($this->status == 0) ? "Confirmed" :
                  (($this->status == 1) ? "Shipped" :
