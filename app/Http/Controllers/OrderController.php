@@ -33,8 +33,8 @@ class OrderController extends Controller
         //
         $order= Order::with('addresses')->get();
         $address= Address::all();
-        $user=auth()->user();
-        return view('orders.index', compact('order','address','user'));
+        $fromUser=auth()->user();
+        return view('orders.index', compact('order','address','fromUser'));
     }
 
     /**

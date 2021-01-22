@@ -24,7 +24,7 @@
                         <th>Status</th>
                         <th>Payment Type</th>
                         <th class="not">Action</th>
-                        @if($user->hasRole('admin'))
+                        @if($fromUser->hasRole('admin'))
                         <th class="not"></th>
                         @endif
 
@@ -54,7 +54,7 @@
                                              @endif
                              
                         </td>
-                        @if($user->hasRole('admin'))
+                        @if($fromUser->hasRole('admin'))
                         <td>
                                     <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
