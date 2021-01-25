@@ -55,8 +55,10 @@ class ReportController extends Controller
     public function show($id)
     {
         //
-        $order= Order::where('id', $id)->get();
+        $order= Order::where('id',$id)->get();
         return view('reports.detail',compact('order'));
+
+
     }
 
     

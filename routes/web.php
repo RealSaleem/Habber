@@ -73,6 +73,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('country/city/{id}','CountryController@getCity')->name('country.cities');
    Route::resource('permissions','PermissionController');
    Route::resource('ads','AdController');
+   Route::post('ad/enable/{id}','AdController@enableAd');
+   Route::post('ad/disable/{id}','AdController@disableAd');
    Route::resource('roles','RoleController');
    Route::get('user/favourites/{userId}','FavouriteController@index')->name('user.favourites');
    Route::resource('favourites','FavouriteController');

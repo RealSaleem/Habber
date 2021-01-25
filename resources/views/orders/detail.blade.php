@@ -90,8 +90,15 @@
                     <div class="card-body row">
                 <div class="col"> <strong>@lang('messages.order_page.order_status'):</strong> <br> </div>
                     <select class="form-control" name="status" id="">
-                            <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Not Ready</option>
-                            <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Ready</option>
+                            <option value="0" {{($order->order_status == "0" ? 'selected' : '')}}>Not Ready</option>
+                            <option value="1" {{($order->order_status == "1" ? 'selected' : '')}}>Ready</option>
+                     </select>
+                    </div>
+                    <div class="card-body row">
+                <div class="col"> <strong>@lang('messages.book_page.status'):</strong> <br> </div>
+                    <select class="form-control" name="status" id="">
+                            <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Pending</option>
+                            <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Seen</option>
                      </select>
                     </div>
 

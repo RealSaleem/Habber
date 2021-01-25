@@ -18,7 +18,7 @@ class AdController extends Controller
     public function index()
     {
         try {
-        $ads = Ad::inRandomOrder()->where('featured',1)->first();
+        $ads = Ad::inRandomOrder()->where('status',1)->first();
         if(isset($ads)) {
             return (new AdResource($ads));
         }

@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
+                        <th>User ID</th>
                         <th>Registered</th>
                         <th>Publisher Name</th>
                         <th>Payment</th>
@@ -29,6 +30,7 @@
                     <tr>    
 
                         <td>{{$order->id}}</td>
+                        <td>{{$order->users['id']}}
                         <td>{{$order->created_at}} To {{ $dt->format('Y-m-d H:i:s')}}</td>
                         <td>{{($order->users['first_name'] ." ".$order->user['last_name'] )}}</td>
                         <td>{{$order->total_price}}  {{($order->currencies['iso'])}} </td>
