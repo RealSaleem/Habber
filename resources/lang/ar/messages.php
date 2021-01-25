@@ -1673,7 +1673,8 @@ return [
         'picture'=>'صورة',
         'deactivate'=> 'تعطيل',
         'activate'=> 'تفعيل',
-        'favourites'=>'المفضلة'
+        'favourites'=>'المفضلة',
+        'reset_password'=>'كلمه السر',
     ],
     'book_page' => [
         'books' => 'الكتب',

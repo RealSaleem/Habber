@@ -249,12 +249,11 @@ class PublisherController extends Controller
     
         
     }
-
     public function deactivatePublisher($id) {
         $error = false;
         try {
-            $publisher = Publisher::findOrFail($id);
-            $publisherr->status = false;
+            $publisher = User::findOrFail($id);
+            $publisher->status = false;
             $publisher->save();
             return 'true';
         }
@@ -271,9 +270,9 @@ class PublisherController extends Controller
     public function activatePublisher($id) {
         $error = false;
         try {
-            $publisher = Publisher::findOrFail($id);
+            $publisher = User::findOrFail($id);
             $publisher->status = true;
-            $publisherr->save();
+            $publisher->save();
             return 'true';
         }
         catch(\Exception $e) {

@@ -18,7 +18,7 @@ class BookmarkRepository implements RepositoryInterface {
 
     public function all($with)
     {
-        return $this->model->with($with)->where('status',true)->get();
+        return $this->model->with($with)->where('status',1)->get();
     }
 
     // create a new record in the database
