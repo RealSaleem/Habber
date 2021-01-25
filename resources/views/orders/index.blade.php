@@ -21,6 +21,7 @@
                         <th> Last Name </th>
                         <th>Currency</th>
                         <th>Order Total Amount</th>
+                        <th>Status</th>
                         <th>Order Status</th>
                         <th>Order Date & Time</th>
                         <th class="not">Action</th>
@@ -40,10 +41,11 @@
                          <td>{{($order->users['last_name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
-                        <td>{{$order->status == "0" ? "Pending " : "Seen"}}</td> 
+                        <td>{{$order->status == "1" ? "Pending " : "Seen"}}</td> 
+                        <td>{{$order->order_status == "1" ? "Ready " : "Not Ready"}}</td>
                         <td>{{$order->created_at}}
                         <td>
-                                         @if($order->status == 1)
+                                         @if($order->order_status == 1)
                                          <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a>
                                          @else
                                              <a>

@@ -154,7 +154,7 @@ class OrderController extends Controller
         $error = false;
         try {
             $order = Order::findOrFail($id);
-            $order->status = false;
+            $order->order_status = false;
             $order->save();
             return 'true';
         }
@@ -172,7 +172,7 @@ class OrderController extends Controller
         $error = false;
         try {
             $order = Order::findOrFail($id);
-            $order->status = true;
+            $order->order_status = true;
             $order->save();
             return 'true';
         }
