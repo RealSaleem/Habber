@@ -1984,7 +1984,8 @@ return [
            'iso'=>'ايزو',
            'payment_type'=>'نوع الدفع',
            'ready'=>'جاهز',
-           'not_ready'=> 'غير جاهز'
+           'not_ready'=> 'غير جاهز',
+           'cancel_order'=>'الغاء الطلب'
        ],
        'city_page'=> [
         'city'=> 'مدينة' ,

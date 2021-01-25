@@ -17,12 +17,13 @@
                     <tr>
                         <th>Order ID</th>
                         <th>Email</th>
-                        <th>Order BY </th>
+                        <th> First Name </th>
+                        <th> Last Name </th>
                         <th>Currency</th>
+                        <th>Destination Country</th>
                         <th>Order Total Amount</th>
-                        <th>Total Quantity</th>
-                        <th>Status</th>
-                        <th>Payment Type</th>
+                        <th>Order Status</th>
+                        <th>Order Date & Time</th>
                         <th class="not">Action</th>
                         @if($fromUser->hasRole('admin'))
                         <th class="not"></th>
@@ -36,12 +37,13 @@
                     <tr>    
                         <td>{{$order->id}}</td>   
                         <td>{{$order->users['email']}}</td>
-                        <td>{{($order->users['first_name'] ." ". $order->users['last_name'])}}</td>
+                        <td>{{($order->users['first_name'])}}</td>
+                         <td>{{($order->users['last_name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
+                        <td>{{$order->addresses->countries['name']}}
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
-                        <td>{{$order->total_quantity}}</td>
-                        <td>{{$order->status == "0" ? "Not Ready " : "Ready"}}</td> 
-                        <td>{{$order->type == "1" ?  "COD" : "Online"}}</td> 
+                        <td>{{$order->status == "0" ? "Pending " : "Seen"}}</td> 
+                        <td>{{$order->created_at}}
                         <td>
                                          @if($order->status == 1)
                                          <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a>
@@ -59,7 +61,7 @@
                                     <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
                                        @method('GET')
-                                       <button class="btn btn-success" type="submit">@lang('messages.button.order_details') </span></button>
+                                       <button class="btn btn-success" type="submit">@lang('messages.button.order_details')</button>
                                          </form>
                                          </td>
                                          @endif
@@ -67,7 +69,7 @@
                                     <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-ban"></span> </button>
+                                        <button class="btn btn-danger" type="submit">@lang('messages.button.cancel_order') </button>
                                          </form>
                                          </td>
                     </tr>
