@@ -42,7 +42,7 @@ return [
         'edit_book_info'=> 'Edit Book Info',
         'title'=> 'Title',
         'author_name'=> 'Author Name ',
-        'cover_type' => 'Cover Type',
+        'cover_type' => 'Type Of Paper ',
         'description'=> 'Description',
         'book_language'=> 'Book Language ',
         'price'=>'Price',
@@ -374,7 +374,8 @@ return [
         'iso'=>'ISO',
         'payment_type'=>'Payment Type',
         'ready'=>'Ready',
-        'not_ready'=> 'Not Ready'
+        'not_ready'=> 'Not Ready',
+        'canel_order'=>'Cancel Order'
       
     ],
     'city_page'=> [

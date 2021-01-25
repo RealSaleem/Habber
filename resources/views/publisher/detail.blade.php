@@ -64,7 +64,7 @@
                     </div>
                      @if(isset($publisher->image))
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.publisher_page.image'):  </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.user_page.picture'):  </label>
                         <img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$publisher->image)}}" alt="">
                     </div>
                     @endif 

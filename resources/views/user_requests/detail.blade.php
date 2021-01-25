@@ -44,7 +44,7 @@
                     @if(isset($userRequest->image))
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.userrequest_page.image'): </label>
-                        <img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$userRequest->image)}}" alt="">
+                        <img  style=" width: 50px; height: 50px;" src="{{ url('storage/'.$userRequest->image)}}" alt="">
                     </div>
                     @endif
                     <div class="form-group col-6">

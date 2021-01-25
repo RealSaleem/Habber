@@ -58,7 +58,6 @@ class BannerController extends Controller
         
         $validatedData = $request->validate([
             'product_type'=>'required',
-            'language_id' => 'required',
             'banner_url'=>'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
             'bookmarks_id'=>'sometimes|required',
             'bookclubs_id'=>'sometimes|required',
@@ -69,7 +68,6 @@ class BannerController extends Controller
          ]);
         $banner = new Banner();
         $banner->product_type = $request->product_type;
-        $banner->language_id = $request->language_id;
         $banner->banner_url = $request->banner_url;
         $banner->status = $request->status;
         $banner->image = "null"; 
@@ -160,14 +158,12 @@ class BannerController extends Controller
             'bookmarks_id'=>'sometimes|required',
             'bookclubs_id'=>'sometimes|required',
             'books_id'=>'sometimes|required',
-            'language_id' => 'required',
             'banner_url'=> 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
             'status' => 'required',
             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=1000,max_height=450',
         ]);
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;
-        $banner->language_id = $request->language_id;
         $banner->banner_url = $request->banner_url;
         $banner->status = $request->status;
         if($request->has('description'))

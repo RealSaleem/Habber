@@ -64,7 +64,7 @@
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.feature'):  {{ucfirst($book->featured == 1 ? "featured" : "not featured")}} </label>
                     </div>
-                     @if(isset($bookmark->image))
+                     @if(isset($book->image))
                     <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.image'):  </label>
                         <img style=" width: 50px; height: 50px;" src="{{ url('storage/'.$book->image)}}" alt="">
