@@ -17,8 +17,10 @@
                     <thead>
                         <tr>
                         <th>Featured</th>
+                        <th>status</th>
                         <th class="not">Image</th>
                         <th class="not">Action</th>
+                        <th class="not"></th>
                         </tr>
                 </thead>
                 <tbody class="sortable">
@@ -26,7 +28,15 @@
                     <tr class="row1" data-id="{{ $ad->id }}">
 
                         <td class = "{{$ad->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$ad->featured == 1 ? "Featured" : "UnFeatured"}}</td>  
+                        <td class = "{{$ad->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$ad->status == 1 ? "Enable" : "Disable"}}</td>  
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($ad->image) ?  url('storage/'.$ad->image) : url('storage/ads/default.png') }}" alt=""> </td>
+                        <td>
+                                    @if($ad->status == 1)
+                                        <a><button class="btn btn-danger" onclick="disableAd('{{$ad->id}}')">@lang('messages.banner_page.disable')</button></a>
+                                    @else
+                                        <a><button class="btn btn-info" onclick="enableAd('{{$ad->id}}')">@lang('messages.banner_page.enable') </button></a>
+                                    @endif
+                                    </td>
                         <td>
                             <div class="row">
                                 <div class="col-2">
@@ -94,35 +104,35 @@
 
     })
     
-function disablebanner(id) {
+function disableAd(id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "{{ url('admin/banner/disable') }}" + "/" + id,
+        url: "{{ url('admin/ad/disable') }}" + "/" + id,
         type: 'post',
         success: function(result)
         {
-            toastr.error('Banner Disabled');
+            toastr.error('Ad Disabled');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
 }
 
-function enablebanner(id) {
+function enableAd(id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "{{ url('admin/banner/enable') }}" + "/" + id,
+        url: "{{ url('admin/ad/enable') }}" + "/" + id,
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Banner Enabled');
+            toastr.success('Ad Enabled');
             window.setTimeout(function(){location.reload()},2000);
         }
     });

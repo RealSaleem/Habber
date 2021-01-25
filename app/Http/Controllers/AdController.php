@@ -127,4 +127,40 @@ class AdController extends Controller
         $ad->delete();
         return back()->with('success', 'Ad deleted successfully');
     }
+    public function disableAd($id) {
+        $error = false;
+        try {
+            $ad = Ad::findOrFail($id);
+            $ad->status = false;
+            $ad->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function enableAd($id) {
+        $error = false;
+        try {
+            $ad = Ad::findOrFail($id);
+            $ad->status = true;
+            $ad->save();
+            return 'true';
+        }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
 }
