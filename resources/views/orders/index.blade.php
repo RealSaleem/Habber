@@ -20,7 +20,6 @@
                         <th> First Name </th>
                         <th> Last Name </th>
                         <th>Currency</th>
-                        <th>Destination Country</th>
                         <th>Order Total Amount</th>
                         <th>Order Status</th>
                         <th>Order Date & Time</th>
@@ -40,7 +39,6 @@
                         <td>{{($order->users['first_name'])}}</td>
                          <td>{{($order->users['last_name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
-                        <td>{{$order->addresses->countries['name']}}
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->status == "0" ? "Pending " : "Seen"}}</td> 
                         <td>{{$order->created_at}}

@@ -40,15 +40,15 @@
                         <td>{{$publisher->email}}</td>
                         <td>{{$publisher->businesses['product_type']}}</td> 
                         <td>{{$publisher->countries['name']}}</td> 
-                        <td class = "{{$publisher->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$publisher->status == 1 ? "Active" : "In Active"}}</td>  
+                        <td class = "{{$publisher->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$publisher->status == 1 ? "Active" : " In Active"}}</td>  
                         <td>{{$publisher->created_at}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($publisher->profile_pic) ?  url('storage/'.$publisher->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
                         <td>
                                     @if($publisher->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivatePublisher('{{$publisher->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$publisher->id}}')">@lang('messages.user_page.deactivate')</button></a>
                                     @else
                                         <a>
-                                            <button class="btn btn-info" onclick="activatePublisher('{{$publisher->id}}')">
+                                            <button class="btn btn-info" onclick="activateUser('{{$publisher->id}}')">
                                             @lang('messages.user_page.activate')
                                             </button>
                                         </a>
@@ -85,7 +85,7 @@
 @section('scripts')
 
 <script>
-function deactivatePublisher(id) {
+function deactivateUser(id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -102,7 +102,7 @@ function deactivatePublisher(id) {
     });
 }
 
-function activatePublisher(id) {
+function activateUser(id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

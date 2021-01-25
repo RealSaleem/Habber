@@ -18,7 +18,7 @@
                         <th>Product Isbn</th>
                         <th>Title</th>
                         <th>Author Name</th>
-                        <th> Type Of Cover</th>
+                        <th> Type Of Paper</th>
                         <th>Description</th>
                         <th>Book langauge</th>
                         <th>Price</th>

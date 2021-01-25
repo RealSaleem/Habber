@@ -32,7 +32,8 @@ return [
         'picture'=>'Picture',
         'deactivate'=>'Deactivate',
         'activate'=> 'Activate',
-        'favourites'=>'Favourites'
+        'favourites'=>'Favourites',
+        'reset_password'=>'Reset Password',
     ],
     'book_page' => [
         'books' => 'Books',
