@@ -46,10 +46,12 @@ class AdController extends Controller
     {
         $validatedData = $request->validate([
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'featured' => 'required'     
+            'featured' => 'required'     ,
+            'status'=> 'required'
         ]);
         $ad = new Ad();
         $ad->featured = $request->featured;
+        $ad->status = $request->status;
         $ad->image = "null"; 
         $ad->save();
         $updateAd = Ad::find($ad->id);
@@ -96,10 +98,12 @@ class AdController extends Controller
     {
         $validatedData = $request->validate([
              'featured' => 'required',
+             'status'=> 'required',
             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         $ad = Ad::find($id);
         $ad->featured = $request->featured;
+        $ad->status = $request->status;
         if($request->has('image'))
         {   
             Storage::disk('public')->deleteDirectory('ads/'. $id);

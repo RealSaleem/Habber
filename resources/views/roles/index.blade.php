@@ -11,6 +11,7 @@
         <strong>{{Session::get('success')}}</strong>
     </div>
 @endif 
+<a href="{{ route('roles.create') }}" ><button style="color: grey;font-size:16px;border: 3px solid black" >  + Add New Role</button> </a>
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
@@ -36,8 +37,8 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                                     </form>
-                                </div>
-                                <div class="col-1">
+                               
+    
                                     <form action="{{action('RoleController@edit', [$roles->id])}}" method="post">
                                     @csrf
                                     @method('get')

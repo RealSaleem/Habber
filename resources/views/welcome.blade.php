@@ -27,6 +27,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="row">
+                        @if($fromUser->hasRole('admin'))
                             <div class="col-6">
                                 <div class="bg-dark p-10 text-white text-center">
                                     <i class="fa fa-user m-b-5 font-16"></i>
@@ -43,23 +44,24 @@
                             </div>
                             <div class="col-6 m-t-15">
                                 <div class="bg-dark p-10 text-white text-center">
+                                    <i class="fa fa-table m-b-5 font-16"></i>
+                                    <h5 class="m-b-0 m-t-5">{{$bookclubDetail}}</h5>
+                                    <small class="font-light">Total BookClubs</small>
+                                </div>
+                            </div>
+                            <div class="col-6 m-t-15">
+                                <div class="bg-dark p-10 text-white text-center">
                                     <i class="fa fa-cart-plus m-b-5 font-16"></i>
                                     <h5 class="m-b-0 m-t-5">{{ $pendingOrder}}</h5>
                                     <small class="font-light">Pending Orders</small>
                                 </div>
                             </div>
+                            @endif
                                 <div class="col-6 m-t-15">
                                 <div class="bg-dark p-10 text-white text-center">
                                     <i class="fa fa-tag m-b-5 font-16"></i>
                                     <h5 class="m-b-0 m-t-5">{{$totalOrder}}</h5>
                                     <small class="font-light">Total Orders</small>
-                                </div>
-                            </div>
-                            <div class="col-6 m-t-15">
-                                <div class="bg-dark p-10 text-white text-center">
-                                    <i class="fa fa-table m-b-5 font-16"></i>
-                                    <h5 class="m-b-0 m-t-5">{{$bookclubDetail}}</h5>
-                                    <small class="font-light">Total BookClubs</small>
                                 </div>
                             </div>
                             <div class="col-6 m-t-15">
