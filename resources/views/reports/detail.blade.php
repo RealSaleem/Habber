@@ -21,12 +21,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($order as $order)
+                    @foreach($oo as $o)
+                    @if($o!=null)
+                    @for($i=0;$i<count($o);$i++)
                     <tr>    
-
-                        <td>{{$order->id}}</td>
-                        <td>{{$order->total_price}}  {{($order->currencies['iso'])}} </td>
+                        <td>{{$o[$i]['id']}}</td>
+                        <td>{{$o[$i]['total_price']}} {{$o[$i]->currencies['iso']}} </td>
                     </tr>
+                    @endfor
+                    @endif
                     @endforeach
                 </tbody>
             </table>

@@ -29,14 +29,21 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-        $order= Order::with('addresses')->get();
-        $address= Address::all();
+    {if(auth()->user()->hasRole('admin')){
+        $order = Order::with(['addresses'])->get();   
+        $address= Address::all();   
         $fromUser=auth()->user();
         return view('orders.index', compact('order','address','fromUser'));
     }
-
+        else if(auth()->user()->hasRole('publisher')){
+            $order = Order::with(['addresses'])->where('user_id',auth()->user()->id)->get(); 
+            $address= Address::all();   
+            $fromUser=auth()->user();
+            return view('orders.index', compact('order','address','fromUser'));
+        }
+    }
+    
+  
     /**
      * Show the form for creating a new resource.
      *

@@ -17,7 +17,6 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
                         <th>Registered</th>
                         <th>Publisher Name</th>
                         <th>Payment</th>
@@ -26,29 +25,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($order as $order)
+          
+        @foreach($publishers as $publisher)
+        @if(count($publisher->books ) > 0)
+        @foreach($publisher->books as $b)
+        @foreach($b->orders as $k)
                     <tr>    
 
-                        <td>{{$order->id}}</td>
-                        <td>{{$order->users['id']}}
-                        <td>{{$order->created_at}} To {{ $dt->format('Y-m-d H:i:s')}}</td>
-                        <td>{{($order->users['first_name'] ." ".$order->user['last_name'] )}}</td>
-                        <td>{{$order->total_price}}  {{($order->currencies['iso'])}} </td>
+                        <td>{{$k['id']}}</td>
+                        <td>{{$k['created_at']}} to {{ $dt->format('Y-m-d H:i:s')}}</td>
+                        <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
+                        <td>{{$k['total_price']}}  {{($k->currencies['iso'])}} </td>
                         <td>
                         <div class="row">
                                <div>
-                            <a href="{{action('ReportController@show',[$order->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                            <a href="{{action('ReportController@show',[$publisher['id']])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                             </div></td>
+                    </tr>
+                    @endforeach
+                    @endforeach
+                    @endif
+
+            @if(count($publisher->bookmarks ) > 0)
+        @foreach($publisher->bookmarks as $bm)
+        @foreach($bm->orders as $k)
+                    <tr>    
+
+                        <td>{{$k['id']}}</td>
+                        <td>{{$k['created_at']}} to {{ $dt->format('Y-m-d H:i:s')}}  </td>
+                        <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
+                        <td>{{$k['total_price']}}  {{($k->currencies['iso'])}} </td>
+                        <td>
+                        <div class="row">
+                               <div>
+                            <a href="{{action('ReportController@show',[$publisher['id']])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
                              </div></td>
                     </tr>
                    
                     @endforeach
+                    @endforeach
+                    @endif
+                    @endforeach
+                    
                 </tbody>
                 <tfoot>
                     <tr>
                     <td colspan="3" rowspan="1">Grand Total</td>
-                    <td rowspan="1" colspan="1">{{$total_price}}{{($order->currencies['iso'])}}<td>
+                    <td rowspan="1" colspan="1">{{$total_price}}{{($k->currencies['iso'])}}<td>
                     </tr>
                 <tfoot>
+                
             </table>
             <tr>
         </div>   
