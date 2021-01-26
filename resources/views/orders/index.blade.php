@@ -19,6 +19,7 @@
                         <th>Email</th>
                         <th> First Name </th>
                         <th> Last Name </th>
+                        <th>Desination Country </th>
                         <th>Currency</th>
                         <th>Order Total Amount</th>
                         <th>Status</th>
@@ -39,6 +40,7 @@
                         <td>{{$order->users['email']}}</td>
                         <td>{{($order->users['first_name'])}}</td>
                          <td>{{($order->users['last_name'])}}</td>
+                        <td> {{ucfirst($order->addresses->countries['name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->status == "1" ? "Pending " : "Seen"}}</td> 
