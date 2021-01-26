@@ -32,6 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $fromUser=auth()->user();
         $userDetail = User::count();
        $publisherDetail= User::role('publisher')->count();
        $pendingOrder= Order::where('status','pending')->count();
@@ -41,7 +42,7 @@ class HomeController extends Controller
        event(new ShowNotificationEvent());
       // ApiHelper::getData();
                   
-return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder'));
+return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder','fromUser'));
     }
        
     
