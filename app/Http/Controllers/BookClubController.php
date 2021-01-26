@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\BookClub;
 use App\Book;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,7 +63,19 @@ class BookClubController extends Controller
         $bookclub->name = $request->name;
         $bookclub->arabic_name = $request->arabic_name;
         $bookclub->book_id = $request->book;
-        $bookclub->featured =$request->featured;
+        if ($request->has('featured') && $request->featured == "1") {
+            $featuredBookclubs = BookClub::where('featured',1)->count();
+            if($featuredBookclubs == 8) {
+                $bookclub->featured = 0; 
+                Session::flash('featured', 'Bookclub Cannot Be Featured You can only feature 8 bookclubs at a time!'); 
+            }
+            else {
+                $bookclub->featured = $request->featured;
+            }
+        }
+        else {
+            $bookclub->featured = $request->featured;
+        }
         $bookclub->status =$request->status;
         $bookclub->banner_image = "null"; 
         $bookclub->bookclub_logo = "null";
@@ -137,7 +150,19 @@ class BookClubController extends Controller
         $bookclub->name = $request->name;
         $bookclub->arabic_name = $request->arabic_name;
         $bookclub->book_id = $request->book;
-        $bookclub->featured=$request->featured;
+        if ($request->has('featured') && $request->featured == "1") {
+            $featuredBookclubs = BookClub::where('featured',1)->count();
+            if($featuredBookclubs == 8) {
+                $bookclub->featured = 0; 
+                Session::flash('featured', 'Bookclub Cannot Be Featured You can only feature 8 bookclubs at a time!'); 
+            }
+            else {
+                $bookclub->featured = $request->featured;
+            }
+        }
+        else {
+            $bookclub->featured = $request->featured;
+        }
         $bookclub->status =$request->status;
         if($request->has('banner_image')) 
         {   

@@ -237,10 +237,14 @@ class UserController extends Controller
     }
     public function changepassword()
     {
+        $user=User::where('id',auth()->user()->id)->first();
+        $user->password=Hash::make('password');
+        $user->update();
        
         return view('auth.passwords.change');
         
     }
+
     public function deactivateUser($id) {
         $error = false;
         try {

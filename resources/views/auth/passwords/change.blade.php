@@ -37,7 +37,7 @@
                     
                     <div class="border-top">
                        <div class="card-body">
-                            <a href="">
+                            <a href="/">
                             <button type="button" class=" btn btn-danger">
                             @lang('messages.button.back')
                             </button></a>
