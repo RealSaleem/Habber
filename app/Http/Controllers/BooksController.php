@@ -29,9 +29,14 @@ class BooksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {if(auth()->user()->hasRole('admin')){
         $book = Book::with(['book_clubs','users'])->get();      
-        return view('books.index', compact('book'));
+        return view('books.index', compact('book'));}
+        else if(auth()->user()->hasRole('publisher')){
+            $book = Book::with(['book_clubs','users'])->where('user_id',auth()->user()->id)->get(); 
+            return view('books.index', compact('book'));
+        }
+
     }
 
 

@@ -28,11 +28,17 @@ class BookmarksController extends Controller
      */
     public function index()
     {
-        //
-        $bookmark = Bookmark::with('users','product_prices','bookmark_size')->get();
-        return view('bookmarks.index', compact('bookmark'));
+        if(auth()->user()->hasRole('admin')){
+        $bookmark = Bookmark::with('users','product_prices','bookmark_size')->get();   
+        return view('bookmarks.index', compact('bookmark'));}
+        else if(auth()->user()->hasRole('publisher')){
+            $bookmark = Bookmark::with('users','product_prices','bookmark_size')->where('user_id',auth()->user()->id)->get(); 
+            return view('bookmarks.index', compact('bookmark'));
     }
+        }
 
+    
+  
     /**
      * Show the form for creating a new resource.
      *
