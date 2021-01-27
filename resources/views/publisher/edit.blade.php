@@ -47,9 +47,9 @@
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.product_type')</label>
                         <div class="col-sm-9">
                         <select class="form-control" name="product_type"  id="status">
-                                 <option value="both" {{ (($publisher->businesses->product_type == "both") ? "selected":"")}}> Both</option>
-                                <option value="books" {{ (($publisher->businesses->product_type == "books") ? "selected":"")}}>Books</option>
-                                <option value="bookmarks" {{ (($publisher->businesses->product_type == "bookmarks") ? "selected":"")}}> Bookmarks</option>
+                                 <option value="both" {{ (($publisher->businesses['product_type'] == "both") ? "selected":"")}}> Both</option>
+                                <option value="books" {{ (($publisher->businesses['product_type'] == "books") ? "selected":"")}}>Books</option>
+                                <option value="bookmarks" {{ (($publisher->businesses['product_type'] == "bookmarks") ? "selected":"")}}> Bookmarks</option>
                         </select>   
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>

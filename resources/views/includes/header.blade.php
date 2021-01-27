@@ -162,12 +162,16 @@
                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="rounded-circle" width="31"></a>
                 <div class="dropdown-menu dropdown-menu-right user-dd animated">
                 @if(Session::get('users')->hasRole('admin'))
-                    <a  class="dropdown-item" href="{{route('admin.password')}}" ><i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
+                    <a class="dropdown-item"  href="{{route('admin.password',['id'=>0])}}"><i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
                
                     <!-- <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
                     <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>-->
                     <div class="dropdown-divider"></div> 
                     <a class="dropdown-item" href="{{ route('sitesetting.index') }}"><i class="ti-settings m-r-5 m-l-5"></i> @lang('messages.site_setting_page.site_setting')</a>
+                    <div class="dropdown-divider"></div>
+                    @endif
+                    @if(Session::get('users')->hasRole('publisher'))
+                    <a class="dropdown-item" href="{{route('publisher.edit', [Session::get('user')])}}"><i class="ti-user m-r-5 m-l-5"></i> Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     @endif
                     <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
