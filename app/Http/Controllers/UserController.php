@@ -221,11 +221,19 @@ class UserController extends Controller
 
     public function passwordUpdate(UpdatePasswordRequest $request) {
         try{
+            if(auth()->user()->hasRole('admin')){
         $user=User::where('id',auth()->user()->id)->first();
             $user->password=Hash::make($request['password']);
             $user->update();
           //  return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Password Updated Successfully!');
-            return back()->with('success', 'Password Updated Successfully!');
+            return back()->with('success', 'Password Updated Successfully!');}
+            else{
+                $user=User::where('id',$request['id'])->first();
+                $user->password=Hash::make($request['password']);
+                $user->update();
+              //  return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Password Updated Successfully!');
+                return back()->with('success', 'Password Updated Successfully!');  
+            }
        }
         catch (\Exception $e) {
            // return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
@@ -237,9 +245,7 @@ class UserController extends Controller
     }
     public function changepassword()
     {
-        $user=User::where('id',auth()->user()->id)->first();
-        $user->password=Hash::make('password');
-        $user->update();
+       
        
         return view('auth.passwords.change');
         

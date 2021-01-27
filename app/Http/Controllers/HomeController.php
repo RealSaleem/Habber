@@ -33,6 +33,7 @@ class HomeController extends Controller
     public function index()
     {
         $fromUser=auth()->user();
+        Session::put('users',$fromUser);
         $userDetail = User::count();
        $publisherDetail= User::role('publisher')->count();
        $pendingOrder= Order::where('status','pending')->count();
