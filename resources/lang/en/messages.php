@@ -220,6 +220,7 @@ return [
         'disable'=>'Disable',
         'enable'=> 'Enable',
         'link'=>'Banner Link',
+        'sort_order'=> 'Banner Order'
 
     ],
     'size_page' => [

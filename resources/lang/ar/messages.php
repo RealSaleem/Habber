@@ -1835,7 +1835,8 @@ return [
         'image'=>'صورة',
         'disable'=>'تعطيل',
         'enable'=> 'ممكن',
-        'link'=>'حلقة الوصل'
+        'link'=>'حلقة الوصل',
+        'sort_order'=> 'طلب '
     ],
     'language_page'=> [
         'languages'=> 'لغة',

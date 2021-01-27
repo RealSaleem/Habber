@@ -17,6 +17,7 @@
                     <tr>
                         <th>Product Isbn</th>
                         <th>Title</th>
+                        <th> Arabic Title<th>
                         <th>Author Name</th>
                         <th> Type Of Paper</th>
                         <th>Description</th>
@@ -42,6 +43,7 @@
                         <tr>
                              <td>{{$book->isbn}}</td>
                             <td>{{$book->title}}</td>
+                            <td>{{$book->arabic_title}}</td>
                             <td>{{$book->author_name}}</td>
                             <td>{{$book->cover_type}}</td>
                             <td>{{$book->description}}</td>  

@@ -63,6 +63,7 @@ class BannerController extends Controller
             'bookclubs_id'=>'sometimes|required',
             'books_id'=>'sometimes|required',
             'status' => 'required',
+            'sort_order' => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=1000,max_height=450',
              
          ]);
@@ -70,6 +71,7 @@ class BannerController extends Controller
         $banner->product_type = $request->product_type;
         $banner->banner_url = $request->banner_url;
         $banner->status = $request->status;
+        $banner->sort_order = $request->sort_order;
         $banner->image = "null"; 
         if($request->has('description'))
         {   
@@ -160,12 +162,14 @@ class BannerController extends Controller
             'books_id'=>'sometimes|required',
             'banner_url'=> 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
             'status' => 'required',
+            'sort_order'=>'required',
             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=1000,max_height=450',
         ]);
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;
         $banner->banner_url = $request->banner_url;
         $banner->status = $request->status;
+        $banner->sort_order = $request->sort_order;
         if($request->has('description'))
         {   
             $banner->description = $request->description;
