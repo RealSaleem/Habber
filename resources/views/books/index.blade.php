@@ -17,7 +17,7 @@
                     <tr>
                         <th>Product Isbn</th>
                         <th>Title</th>
-                        <th> Arabic Title<th>
+                        <th> Arabic Title</th>
                         <th>Author Name</th>
                         <th> Type Of Paper</th>
                         <th>Description</th>
