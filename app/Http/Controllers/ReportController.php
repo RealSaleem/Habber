@@ -16,36 +16,35 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {if(auth()->user()->hasRole('admin')){
         $dt = new DateTime();
-    //    $order_date = Order::get('created_at');
-    //     $order = Order::get();
-         $total_price = Order::sum('total_price');
-    //     $publisher = User::role('publisher')->get();
-        
+    
+        $total_price = Order::sum('total_price');
+   
+       
 
-        $order = Order::get();
-        $totalOrder = 0;
-        $publishers = User::with('books','bookmarks')->role('publisher')->get();
-        $oo= array();
-    //     foreach($publishers as $publisher){
-    //     if(count($publisher->books ) > 0) {
-            
-    //         foreach($publisher->books as $b) {
-    //             dd($b->orders);
-    //         }
-    //     }
-    // }
-        // if (count($publisher->bookmarks ) > 0) {
-            
-        //     foreach($publisher->bookmarks as $bm) {
-        //        array_push($oo, $bm->orders);
-
-                
-        //     }
-        // }}
-        return view('reports.sales', compact('publishers','total_price','dt'));
-}
+       $order = Order::get();
+       $totalOrder = 0;
+       $publishers = User::with('books','bookmarks')->role('publisher')->get();
+       $oo= array();
+       $fromUser=auth()->user();
+  
+       return view('reports.sales', compact('publishers','total_price','dt','fromUser'));}
+    
+        else if(auth()->user()->hasRole('publisher')){
+            $dt = new DateTime();
+    
+            $total_price = Order::sum('total_price');
+       
+            $order = Order::where('user_id',auth()->user()->id)->get(); 
+            $totalOrder = 0;
+       $publishers = User::with('books','bookmarks')->role('publisher')->get();
+       $oo= array();
+       $fromUser=auth()->user();
+       return view('reports.sales', compact('publishers','total_price','dt','fromUser'));
+        }
+    }
+   
     
 
     /**
