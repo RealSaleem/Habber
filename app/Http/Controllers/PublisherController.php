@@ -26,15 +26,12 @@ class PublisherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() 
-    {
-        if(auth()->user()->hasRole('admin')){
+    
+      {
             $publisher = $user = User::with('businesses')->role('publisher')->get();
-            return view('publisher.index', compact('publisher'));}
-        else if(auth()->user()->hasRole('publisher')){
-            $publisher = $user = User::with('businesses')->role('publisher')->where('user_id',auth()->user()->id)->get(); 
             return view('publisher.index', compact('publisher'));
     }
-        }
+        
     
    
     /**

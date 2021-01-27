@@ -217,7 +217,7 @@ class BooksController extends Controller
         $book->stock_status = $request->stock_status;
         if($request->has('featured') && $request->featured == "1") {
             $featuredBooks = Book::where('featured',1)->count();
-            if($featuredBooks == 8) {
+            if($featuredBooks == 16) {
                 $book->featured = 0; 
                 Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
             }

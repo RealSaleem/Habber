@@ -32,6 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user =auth()->user()->id;
+        Session::put('user',$user);
         $fromUser=auth()->user();
         Session::put('users',$fromUser);
         $userDetail = User::count();
@@ -55,8 +57,7 @@ return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','to
         Session::put('locale', $locale);
         return redirect()->back();
     }
-
-    
+  
    
 
 }

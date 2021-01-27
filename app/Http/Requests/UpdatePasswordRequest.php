@@ -25,6 +25,7 @@ class UpdatePasswordRequest extends FormRequest
     {
         return [
             'password' => ['bail', 'required', 'string', 'min:8', 'confirmed'],
+            'id' => ['bail']
         ];
     }
 }

@@ -221,7 +221,7 @@ class UserController extends Controller
 
     public function passwordUpdate(UpdatePasswordRequest $request) {
         try{
-            if(auth()->user()->hasRole('admin')){
+            if($request['id']==0){
         $user=User::where('id',auth()->user()->id)->first();
             $user->password=Hash::make($request['password']);
             $user->update();

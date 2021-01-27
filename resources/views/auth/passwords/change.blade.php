@@ -19,6 +19,8 @@
             <form action="{{ route('admin.password.change') }}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 <div class="card-body">
+                    <input  type="hidden" name="id" value={{$_GET['id']}}>
+
                     <h4 class="card-title">@lang('messages.password_page.change_password')</h4>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.password_page.password')</label>

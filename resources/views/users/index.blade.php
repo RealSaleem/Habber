@@ -77,7 +77,9 @@
                                     <a href="{{route('user_order',[$user->id])}}"><button class=" btn btn-dark">  @lang('messages.order_page.order')</button></a>
                                     </td>  
                                     <td>
-                                    <a href=""><button class=" btn btn-warning">  @lang('messages.user_page.reset_password')</button></a>
+                                    <a href="{{route('admin.password',['id'=>$user->id])}}"><button class=" btn btn-warning">  @lang('messages.user_page.reset_password')</button></a>
+                                    @csrf
+                                    @method('post')
                                     </td>  
                              <td>
                                     <form action="{{action('UserController@edit', [$user->id])}}" method="post">
