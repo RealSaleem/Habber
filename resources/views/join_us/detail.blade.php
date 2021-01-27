@@ -42,7 +42,7 @@
                         <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.product_type'):  {{($user->businesses->product_type == "both" ) ? "Books, Bookmarks" : $user->businesses->product_type }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.business_page.details') : {{$user->notes}}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.business_page.details') : {{$user->businesses->details }}</label>
                     </div>
                     <div class="form-group col-6">
                         <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_date')  {{$user->created_at}}</label>
