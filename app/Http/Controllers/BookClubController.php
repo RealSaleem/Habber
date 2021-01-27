@@ -150,11 +150,11 @@ class BookClubController extends Controller
         $bookclub->name = $request->name;
         $bookclub->arabic_name = $request->arabic_name;
         $bookclub->book_id = $request->book;
-        if ($request->has('featured') && $request->featured == "1") {
+        if($request->has('featured') && $request->featured == "1") {
             $featuredBookclubs = BookClub::where('featured',1)->count();
             if($featuredBookclubs == 8) {
                 $bookclub->featured = 0; 
-                Session::flash('featured', 'Bookclub Cannot Be Featured You can only feature 8 bookclubs at a time!'); 
+                Session::flash('featured', 'Bookclubs Cannot Be Featured You can only feature 8 bookclubs at a time!'); 
             }
             else {
                 $bookclub->featured = $request->featured;
@@ -246,42 +246,46 @@ class BookClubController extends Controller
     
     }
 
-        public function notfeatureBookclub($id) {
-            $error = false;
-            try {
-                $bookclub = BookClub::findOrFail($id);
-                $bookclub->featured = false;
-                $bookclub->save();
-                return 'true';
-            }
-            catch(\Exception $e) {
-                $error = true;
-                $message = $e->getMessage(); 
-            }
-            if($error) {
-                return $message;
-            }
-    
+    public function notfeatureBookClub($id) {
+        $error = false;
+        try {
+            $bookclub = BookClub::findOrFail($id);
+            $bookclub->featured = false;
+            $bookclub->save();
+            return 'true';
         }
-    
-        public function featureBookclub($id) {
-            $error = false;
-            try {
+        catch(\Exception $e) {
+            $error = true;
+            $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
+
+    }
+
+    public function featureBookClub($id) {
+        $error = false;
+        try {
+            $featuredBookclubs = BookClub::where('featured',1)->count();
+            if($featuredBookclubs == 8 ) {
+                return 'false';
+            }
+            else {
                 $bookclub = BookClub::findOrFail($id);
                 $bookclub->featured = true;
                 $bookclub->save();
                 return 'true';
             }
-            catch(\Exception $e) {
-                $error = true;
-                $message = $e->getMessage(); 
-            }
-            if($error) {
-                return $message;
-            }
-    
-        
-    
+           
         }
-    }
+        catch(\Exception $e) {
+           $error = true;
+           $message = $e->getMessage(); 
+        }
+        if($error) {
+            return $message;
+        }
 
+    }
+}
