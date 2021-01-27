@@ -26,10 +26,7 @@
                         <th>Order Status</th>
                         <th>Order Date & Time</th>
                         <th class="not">Action</th>
-                        @if($fromUser->hasRole('admin'))
                         <th class="not"></th>
-                        @endif
-
                         <th class="not"></th>
                     </tr>
                 </thead>
@@ -58,7 +55,7 @@
                                              @endif
                              
                         </td>
-                        @if($fromUser->hasRole('admin'))
+                      
                         <td>
                                     <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
@@ -66,7 +63,7 @@
                                        <button class="btn btn-success" type="submit">@lang('messages.button.order_details')</button>
                                          </form>
                                          </td>
-                                         @endif
+                                      
                         <td>
                                     <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf

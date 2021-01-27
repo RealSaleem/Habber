@@ -95,7 +95,7 @@
                   </div>
                     <div class="border-top">
                        <div class="card-body">
-                        <a href="{{route('publisher.index')}}">
+                        <a href="/">
                         <button type="button" class=" btn btn-danger">
                         @lang('messages.button.back')
                         </button></a>

@@ -185,7 +185,7 @@ class PublisherController extends Controller
             $publisher->profile_pic =  $filePath;
           
         }
-        $publisher->save();   
+        $publisher->update();   
         if($request->has('product_type'))
         {
             if($request->product_type == "both") {
@@ -200,8 +200,9 @@ class PublisherController extends Controller
             elseif ($request->product_type == "bookmarks") {
                 $publisher->syncPermissions('bookmark-edit','bookmark-create','bookmark-list','bookmark-delete');
             }
+            $publisher1 = User::find($id);
             $business = Business::where('user_id',$id)->first();
-            $business->user_id = $publisher->id;
+            $business->user_id = $publisher1->id;
             $business->product_type= $request->product_type;
             $business->update();
         }
