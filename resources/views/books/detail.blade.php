@@ -29,6 +29,9 @@
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.title'):   {{ucfirst($book->title)}} </label>
                     </div>
                     <div class="form-group col-6">
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_title'):   {{ucfirst($book->arabic_title)}} </label>
+                    </div>
+                    <div class="form-group col-6">
                         <label for="lname" class="text-right control-label col-form-label">@lang('messages.book_page.author_name'):   {{ucfirst($book->author_name)}} </label>
                     </div>
                     <div class="form-group col-6">

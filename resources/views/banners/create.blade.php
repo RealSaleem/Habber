@@ -72,9 +72,16 @@
                             <span class="text-danger">{{$errors->first('banner_url')}}</span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.sort_order')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="sort_order"  value="{{ old('sort_order') }}" id="sort_order"  placeholder="Banner Order">
+                            <span class="text-danger">{{$errors->first('sort_order')}}</span>
+                        </div>
+                    </div>
                     
                        <div class="form-group row">
-                        <label for="image" class="col-sm-3 text-right control-label col-form-label" ">@lang('messages.banner_page.image')
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label" >@lang('messages.banner_page.image')
                         <br> (1000*450)  </label>
                         <div class="col-md-9">
 

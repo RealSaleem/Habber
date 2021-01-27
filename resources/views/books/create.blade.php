@@ -28,8 +28,15 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" id="title"  placeholder="Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
+                        </div>
+                       </div> 
+                        <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_title')</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" dir="rtl" name="arabic_title" value="{{ old('arabic_title') }}" id="arabic_title"  placeholder="Arabic Title">
+                            <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
                       </div>  
                     <div class="form-group row">

@@ -27,9 +27,16 @@ class PublisherController extends Controller
      */
     public function index() 
     {
-        $publisher = $user = User::with('businesses')->role('publisher')->get();
-        return view('publisher.index', compact('publisher'));
+        if(auth()->user()->hasRole('admin')){
+            $publisher = $user = User::with('businesses')->role('publisher')->get();
+            return view('publisher.index', compact('publisher'));}
+        else if(auth()->user()->hasRole('publisher')){
+            $publisher = $user = User::with('businesses')->role('publisher')->where('user_id',auth()->user()->id)->get(); 
+            return view('publisher.index', compact('publisher'));
     }
+        }
+    
+   
     /**
      * Show the form for creating a new resource.
      *

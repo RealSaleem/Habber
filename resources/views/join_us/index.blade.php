@@ -34,9 +34,9 @@
               <td>{{ucfirst($u->first_name .' '.$u->last_name)}}</td>
               <td>{{$u->email}}</td>
               <td>{{$u->phone}}</td>
-              <td>{{$u->businesses->business_type}}</td>
-              <td>{{$u->businesses->product_type == "both" ? 'Books, Bookmarks' : $u->businesses->product_type}}</td>
-              <td>{{$u->notes}}</td>
+              <td>{{$u->businesses['business_type']}}</td>
+              <td>{{$u->businesses['product_type'] == "both" ? 'Books, Bookmarks' : $u->businesses['product_type']}}</td>
+              <td>{{$u->businesses['details']}}</td>
               <td>{{$u->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$u->created_at}}</td>  
               <td>

@@ -163,12 +163,13 @@
                 <div class="dropdown-menu dropdown-menu-right user-dd animated">
                 @if(Session::get('users')->hasRole('admin'))
                     <a  class="dropdown-item" href="{{route('admin.password')}}" ><i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
-                @endif
+               
                     <!-- <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
                     <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>-->
                     <div class="dropdown-divider"></div> 
                     <a class="dropdown-item" href="{{ route('sitesetting.index') }}"><i class="ti-settings m-r-5 m-l-5"></i> @lang('messages.site_setting_page.site_setting')</a>
                     <div class="dropdown-divider"></div>
+                    @endif
                     <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                     <div class="dropdown-divider"></div>
                     <!-- <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div> -->
