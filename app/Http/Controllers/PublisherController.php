@@ -202,7 +202,7 @@ class PublisherController extends Controller
             }
             $publisher1 = User::findOrFail($id);
             $business = Business::where('user_id',$id)->first();
-            dd($publisher1->id);
+            dd($business->user_id);
             $business->user_id = $publisher1->id;
             $business->product_type= $request->product_type;
             $business->update();
