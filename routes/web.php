@@ -86,6 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('payment/{id}','PaymentGatewayController@show');
    Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');
    Route::resource('orders','OrderController');
+   Route::get('order/{orderId}','OrderController@showlist');
    Route::resource('reports','ReportController');
    Route::resource('city','CityController');
    Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');

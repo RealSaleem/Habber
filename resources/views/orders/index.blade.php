@@ -64,6 +64,11 @@
                                        @method('GET')
                                        <button class="btn btn-light" type="submit">@lang('messages.button.order_details')</button>
                                          </form></li>
+                                         <li role="presentation">  <form action="{{ action('OrderController@showlist', [$order->id])}}" method="post">
+                                       @csrf
+                                       @method('GET')
+                                       <button class="btn btn-light" type="submit">Shipping Address</button>
+                                         </form></li>
                                         
                                          <li role="presentation">   <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf
