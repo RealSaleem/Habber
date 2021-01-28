@@ -63,7 +63,7 @@ class BookController extends Controller
     public function arabicBooks()
     {
         try {
-            $books = $this->model->with('genres')->where('status',1)->where('book_language','arabic')->get();
+            $books = $this->model->with('genres')->where('status',1)->where('book_language','arabic')->orderBy('title','ASC')->get();
             if(count($books) != 0) {
                 return (new BookCollection($books));
             }
@@ -79,7 +79,7 @@ class BookController extends Controller
     public function englishBooks()
     {
         try {
-            $books = $this->model->with('genres')->where('status',1)->where('book_language','english')->get();
+            $books = $this->model->with('genres')->where('status',1)->where('book_language','english')->orderBy('title','ASC')->get();
             if(count($books) != 0) {
                 return (new BookCollection($books));
             }
