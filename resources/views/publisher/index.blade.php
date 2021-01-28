@@ -26,9 +26,6 @@
                         <th>Addition Date</th>
                         <th class="not">Image</th>
                         <th class="not">Action</th>
-                        <th class="not"></th>
-                        <th class="not"></th>
-                        <th class="not"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,35 +41,38 @@
                         <td>{{$publisher->created_at}}</td> 
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($publisher->profile_pic) ?  url('storage/'.$publisher->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
                         <td>
-                                    @if($publisher->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$publisher->id}}')">@lang('messages.user_page.deactivate')</button></a>
-                                    @else
-                                        <a>
-                                            <button class="btn btn-info" onclick="activateUser('{{$publisher->id}}')">
+                        <div class="dropdown">
+<button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+  Actions
+    <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+@if($publisher->status == 1)
+<a><button class="btn btn-light" onclick="deactivateUser('{{$publisher->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
+   @else
+  <li role="presentation">   <a>
+                                            <button class="btn btn-light" onclick="activateUser('{{$publisher->id}}')">
                                             @lang('messages.user_page.activate')
                                             </button>
-                                        </a>
-                                    @endif
-                                </td>
-                              <td>
-                                    <a href="{{action('PublisherController@show',[$publisher->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                                </td>
-                                <td>     
-                                    <form action="{{ action('PublisherController@destroy', [$publisher->id])}}" method="post">
+                                        </a></li>
+   @endif
+  <li role="presentation"> <a href="{{action('PublisherController@show',[$publisher->id])}}"><button class=" btn btn-light">Details</button></a</li>
+  <li role="presentation">  <form action="{{ action('PublisherController@destroy', [$publisher->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                    </form>
-                                  </td>  
-                                
-                                <td>
-                                    <form action="{{action('PublisherController@edit', [$publisher->id])}}" method="post">
+                                        <button class="btn btn-light" type="submit">Delete</button>
+                                    </form></li>
+ <li role="presentation">   <form action="{{action('PublisherController@edit', [$publisher->id])}}" method="post">
                                     @csrf
                                     @method('get')
-                                        <button class=" btn btn-success" type="submit">
-                                        <span class="fa fa-edit"></span>
+                                        <button class=" btn btn-light" type="submit">
+                                        Edit
                                         </button>
                                     </form>
+                                    </li>
+</ul>
+</div>
+
                                </td>
                     </tr>
                     @endforeach

@@ -23,9 +23,6 @@
                         <th>Addition Date</th>
                         <th class="not">BookClub Logo</th>
                         <th class="not"> Action</th>  
-                        <th class="not"></th> 
-                        <th class="not"></th> 
-                        <th class="not"></th> 
 
                           </tr>
                </thead>
@@ -40,28 +37,31 @@
                     <th>{{$bookclub->created_at}}</th>
                     <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookclub->bookclub_logo) ?  url('storage/'.$bookclub->bookclub_logo) : url('storage/bookclub/default.png') }}" alt=""> </td>
                     <td>
+
+                    <div class="dropdown">
+                <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+              Actions
+             <span class="caret"></span>
+                </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             @if($bookclub->status == 0)
-                                <a><button class="btn btn-info" onclick="activateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.activate')</button></a>
+                                 <li role="presentation"> <a><button class="btn btn-light" onclick="activateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.activate')</button></a></li>
                             @else
-                                <a><button class="btn btn-danger" onclick="deactivateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                            <li role="presentation">  <a><button class="btn btn-light" onclick="deactivateBookClub('{{$bookclub->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
                             @endif
-                            </td>
-                            <td>
                             @if($bookclub->featured == 0)
-                                <a><button class="btn btn-primary" onclick="featureBookClub('{{$bookclub->id}}')">@lang('messages.book_page.feature')</button></a>
+                            <li role="presentation">   <a><button class="btn btn-light" onclick="featureBookClub('{{$bookclub->id}}')">@lang('messages.book_page.feature')</button></a></li>
                             @else
-                                <a><button class="btn btn-danger" onclick="notfeatureBookClub('{{$bookclub->id}}')">@lang('messages.bookmark_page.not_feature')</button></a>
+                            <li role="presentation">    <a><button class="btn btn-light" onclick="notfeatureBookClub('{{$bookclub->id}}')">@lang('messages.bookmark_page.not_feature')</button></a></li>
                             @endif
-                        </td>
-                                <td>
-                                <form action="{{ action('BookClubController@destroy', [$bookclub->id])}}" method="post">
+                                <li role="presentation">  <form action="{{ action('BookClubController@destroy', [$bookclub->id])}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
+                                    <button class="btn btn-light" type="submit">Delete</button></li>
                             </form>
-                                     </td>
-                                 <td>
-                                <a href="{{ action('BookClubController@edit', [$bookclub->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                 <li role="presentation">   <a href="{{ action('BookClubController@edit', [$bookclub->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+                                 </ul>
+</div>
                                 </td>
                             
                 </tr>

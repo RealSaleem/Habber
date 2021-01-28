@@ -42,7 +42,7 @@
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
                         <td>{{$order->status == "1" ? "Pending " : "Seen"}}</td> 
                         <td>{{$order->order_status == "1" ? "Ready " : "Not Ready"}}</td>
-                        <td>{{$order->created_at}}
+                        <td>{{$order->created_at}}</td>
                         <td>
                                          @if($order->order_status == 1)
                                          <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a>

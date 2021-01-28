@@ -12,6 +12,7 @@ use App\Address;
 
 
 
+
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -32,6 +33,7 @@ class OrderController extends Controller
     {if(auth()->user()->hasRole('admin')){
         $order = Order::with(['addresses'])->get();   
         $address= Address::all();   
+     
         $fromUser=auth()->user();
         return view('orders.index', compact('order','address','fromUser'));
     }

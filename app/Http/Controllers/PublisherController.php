@@ -166,7 +166,7 @@ class PublisherController extends Controller
             'profile_pic' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required'
         ]);
-        $publisher = User::find($id);
+        $publisher = User::findOrFail($id);
         $publisher->first_name = $request->first_name;
         $publisher->last_name = $request->last_name;
         $publisher->email = $request->email;
@@ -200,7 +200,7 @@ class PublisherController extends Controller
             elseif ($request->product_type == "bookmarks") {
                 $publisher->syncPermissions('bookmark-edit','bookmark-create','bookmark-list','bookmark-delete');
             }
-            $publisher1 = User::find($id);
+            $publisher1 = User::findOrFail($id);
             $business = Business::where('user_id',$id)->first();
             $business->user_id = $publisher1->id;
             $business->product_type= $request->product_type;

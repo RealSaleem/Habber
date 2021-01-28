@@ -25,7 +25,9 @@ class OrderResource extends JsonResource
                 ($this->status == 0) ? "Confirmed" :
                  (($this->status == 1) ? "Shipped" :
                   (($this->status == 2) ? "Delivered" : $this->status))),
+                  
             'total_quantity' => $this->total_quantity,
+            'address_name' => $this->addresses['address_name'],
             'currency_iso'=> $this->currencies->iso,
             'payment_type'=>$this->payment_type,
             'payment_success_url'=>URL::to("/").'/payment/success/?id='.$this->id,

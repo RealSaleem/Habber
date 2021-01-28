@@ -26,18 +26,21 @@
                 <td>{{$genre->title}}</td>
                 <td>{{$genre->arabic_title}}</td>
                 <td>
-                  <div class="row">
-                      <div class="col-1">
-                          <form action="{{ action('GenreController@destroy', [$genre->id])}}" method="post">
+                <div class="dropdown">
+<button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+  Actions
+    <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+  <li role="presentation"> <form action="{{ action('GenreController@destroy', [$genre->id])}}" method="post">
                               @csrf
                               @method('DELETE')
-                              <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                          </form>
-                      </div>
-                      <div class="col-1">
-                          <a href="{{ action('GenreController@edit', [$genre->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                      </div>
-                  </div>
+                              <button class="btn btn-light" type="submit">Delete</button>
+                          </form></li>
+  <li role="presentation"> <a href="{{ action('GenreController@edit', [$genre->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+</ul>
+</div>
+
                 </td>
               </tr>
             @endforeach            
