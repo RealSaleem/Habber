@@ -39,7 +39,7 @@
                 <td>{{$sitesetting->instagram_url}}</td>
                 <td>{{$sitesetting->snapchat_url}}</td>
                 <td>
-                  <div class="row">
+               
                  <!-- <div class="col-1">
                          <form action="{{ action('SiteSettingController@destroy', [$sitesetting->id])}}" method="post">
                               @csrf
@@ -47,10 +47,15 @@
                               <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
                           </form>
                       </div>-->
-                      <div class="col-1">
-                          <a href="{{ action('SiteSettingController@edit', [$sitesetting->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                      </div>
-                  </div>
+                      <div class="dropdown">
+            <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+        Actions
+         <span class="caret"></span>
+          </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation">   <a href="{{ action('SiteSettingController@edit', [$sitesetting->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+        </ul>
+</div>
                 </td>
               </tr>
             @endforeach            

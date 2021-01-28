@@ -33,9 +33,6 @@
                         <th>Addition Date</th>
                         <th class="not">Image </th>
                         <th class="not">Action</th>
-                        <th class="not"></th>
-                        <th class="not"></th>
-                        <th class="not"></th>
                     </tr>
                </thead>
                 <tbody>
@@ -70,33 +67,38 @@
                                     No Genres
                                 </td>
                             @endif
+
                             <td class = "{{$book->featured == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->featured == 1 ? "Featured" : " UnFeatured"}}</td>  
                             <td class = "{{$book->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$book->status == 1 ? "Active" : "In Active"}}</td> 
                             <td>{{$book->created_at}}</td>
                             <td><img style=" width: 50px; height: 50px;" src=" {{ isset($book->image) ?  url('storage/'.$book->image) : url('storage/books/default.png') }}" alt=""> </td>
+                            
                             <td>
+                            <div class="dropdown">
+                        <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+                      Actions
+                  <span class="caret"></span>
+                    </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             @if($book->status == 0)
-                                <a><button class="btn btn-info" onclick="activateBook('{{$book->id}}')">@lang('messages.user_page.activate')</button></a>
+                            <li role="presentation"> <a><button class="btn btn-light" onclick="activateBook('{{$book->id}}')">@lang('messages.user_page.activate')</button></a></li>
                             @else
-                                <a><button class="btn btn-danger" onclick="deactivateBook('{{$book->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                            <li role="presentation"> <a><button class="btn btn-light" onclick="deactivateBook('{{$book->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
                             @endif  
-                            </td>
-                           <td>
+                            <li role="presentation">
                             <form action="{{ action('BooksController@show', [$book->id])}}" method="post">
                                 @csrf
                                 @method('GET')
-                                <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
-                            </form>
-                            </td>
-                            <td>
+                                <button class="btn btn-light" type="submit">Details</button>
+                            </form></li>
+                            <li role="presentation">
                             <form action="{{ action('BooksController@destroy', [$book->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                            </form>
-                            </td>
-                            <td>
-                            <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                <button class="btn btn-light" type="submit">Delete</button>
+                            </form></li>
+                            <li role="presentation">
+                            <a href="{{ action('BooksController@edit', [$book->id])}}"><button class=" btn btn-light">Edit</button></a></li>
                              </td>   
                         </tr>
                     @endforeach            

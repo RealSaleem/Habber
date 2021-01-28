@@ -29,12 +29,6 @@
                         <th>Currency</th>
                         <th class="not">Image</th>
                         <th class="not"  >Action</th>
-                        <th class="not"  ></th>
-                        <th class="not"  ></th>
-                        <th class="not" ></th>
-                        <th class="not"  ></th>
-                        <th class="not"  ></th>
-                        <th class="not" ></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,55 +44,44 @@
                         <td>{{$user->languages['name']}}</td>
                         <td>{{$user->currencies['name']}}</td>
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($user->profile_pic) ?  url('storage/'.$user->profile_pic) : url('storage/users/default.png') }}" alt=""> </td>
-                        <td> 
-                                  
-                              
-                                    @if($user->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a>
-                                    @else
-                                        <a>
-                                            <button class="btn btn-info" onclick="activateUser('{{$user->id}}')">
+                       <td> <div class="dropdown">
+<button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+  Actions
+    <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+<li role="presentation">  <a href="{{route('admin.password',['id'=>$user->id])}}"><button class=" btn btn-light">  @lang('messages.user_page.reset_password')</button></a>
+                                    @csrf
+                                    @method('post')</li>
+@if($user->status == 1)
+   <li role="presentation"><a><button class="btn btn-light" onclick="deactivateUser('{{$user->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
+   @else
+  <li role="presentation">  <a>
+                                            <button class="btn btn-light" onclick="activateUser('{{$user->id}}')">
                                             @lang('messages.user_page.activate')
                                             </button>
-                                        </a>
-                                    @endif
-                                   
-                                </td>
-                                 <td>
-                               
-                                    <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light"> @lang('messages.user_page.favourites') </button></a>
-                               
-                                </td>
-                               <td>
-                                    <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-info">  @lang('messages.address_page.address')</button></a>
-                                    </td> 
-                                
-                                <td>
-                                    <a href="{{route('user_order',[$user->id])}}"><button class=" btn btn-dark">  @lang('messages.order_page.order')</button></a>
-                                    </td>  
-                                    <td>
-                                    <a href="{{route('admin.password',['id'=>$user->id])}}"><button class=" btn btn-warning">  @lang('messages.user_page.reset_password')</button></a>
-                                    @csrf
-                                    @method('post')
-                                    </td>  
-                             <td>
-                                    <form action="{{action('UserController@edit', [$user->id])}}" method="post">
+                                        </a></li>
+   @endif
+  <li role="presentation"> <a href="{{route('user.favourites',[$user->id])}}"><button class=" btn btn-light"> @lang('messages.user_page.favourites') </button></a></li>
+  <li role="presentation">  <a href="{{route('user_address',[$user->id])}}"><button class=" btn btn-light">  @lang('messages.address_page.address')</button></a></li>
+  <li role="presentation"> <a href="{{route('user_order',[$user->id])}}"><button class=" btn btn-light">  @lang('messages.order_page.order')</button></a>
+                                    <li role="presentation">  <form action="{{action('UserController@edit', [$user->id])}}" method="post">
                                     @csrf
                                     @method('get')
-                                        <button class=" btn btn-success" type="submit">
-                                        <span class="fa fa-edit"></span>
+                                        <button class=" btn btn-light" type="submit">
+                                       Edit
                                         </button>
-                                    </form>
-                                    </td>
-                                    <td>
-                                    <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
+                                    </form>        
+                                    </li>        
+                                    <li role="presentation"> <form action="{{ action('UserController@destroy', [$user->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                    </form>                               
-                              
-                           
-                        </td>  
+                                        <button class="btn btn-light" type="submit">Delete</button>
+                                    </form>    
+                                    </li>                   
+</ul>
+</div>
+                        </td> 
                     </tr>
                     @endforeach
                 </tbody>

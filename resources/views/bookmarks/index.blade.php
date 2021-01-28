@@ -33,10 +33,6 @@
                         <th>Addition Date</th>
                         <th class="not">Image</th>
                         <th class="not"> Action</th>  
-                        <th class="not"> </th>  
-                        <th class="not"> </th>  
-                        <th class="not"> </th>  
-                        <th class="not"> </th>  
                         
 
                                      
@@ -62,36 +58,37 @@
                  <td>{{$bookmark->created_at}}</td>
                 <td><img style=" width: 50px; height: 50px;" src=" {{ isset($bookmark->image) ?  url('storage/'.$bookmark->image) : url('storage/bookmarks/default.png') }}" alt=""> </td>
                 <td>
+                <div class="dropdown">
+                        <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+                      Actions
+                  <span class="caret"></span>
+                    </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             @if($bookmark->status == 0)
-                                <a><button class="btn btn-info" onclick="activateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.activate')</button></a>
+                            <li role="presentation">  <a><button class="btn btn-light" onclick="activateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.activate')</button></a></li>
                             @else
-                                <a><button class="btn btn-danger" onclick="deactivateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                            <li role="presentation"> <a><button class="btn btn-light" onclick="deactivateBookmark('{{$bookmark->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
                             @endif
-                            </td>
-                       <td>
+                           
                             @if($bookmark->featured == 0)
-                                <a><button class="btn btn-primary" onclick="featureBookmark('{{$bookmark->id}}')">Featured</button></a>
+                            <li role="presentation">  <a><button class="btn btn-light" onclick="featureBookmark('{{$bookmark->id}}')">Featured</button></a></li>
                             @else
-                                <a><button class="btn btn-danger" onclick="notfeatureBookmark('{{$bookmark->id}}')">Unfeatured</button></a>
+                            <li role="presentation"> <a><button class="btn btn-light" onclick="notfeatureBookmark('{{$bookmark->id}}')">Unfeatured</button></a><li>
                             @endif
-                        </td>                        
-                         <td>
-                            <form action="{{ action('BookmarksController@show', [$bookmark->id])}}" method="post">
+                      
+                            <li role="presentation"><form action="{{ action('BookmarksController@show', [$bookmark->id])}}" method="post">
                                 @csrf
                                 @method('GET')
-                                <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
-                            </form>
-                         </td>
-                        <td>
-                            <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
+                                <button class="btn btn-light" type="submit">Details</button>
+                            </form></li>
+                       
+                            <li role="presentation"> <form action="{{ action('BookmarksController@destroy', [$bookmark->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                            </form>
-                       </td>
-                        
-                       <td>
-                            <a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                                <button class="btn btn-light" type="submit">Delete</button>
+                            </form></li>
+                     
+                            <li role="presentation"><a href="{{ action('BookmarksController@edit', [$bookmark->id])}}"><button class=" btn btn-light">Edit</button></a></li>
                             </td>
                       
            </tr>

@@ -83,7 +83,7 @@
                 <tfoot>
                     <tr>
                     <td colspan="2" rowspan="1">Grand Total</td>
-                    <td rowspan="1" colspan="1">{{$total_price}}{{($k->currencies['iso'])}}</td>
+                    <td rowspan="1" colspan="1">{{$total_price *(auth()->user()->currencies->rate) }} {{$k->currencies->iso}} </td>
                     </tr>
                 <tfoot>
                 
