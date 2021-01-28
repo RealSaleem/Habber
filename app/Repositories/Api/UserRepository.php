@@ -53,6 +53,7 @@ class UserRepository implements RepositoryInterface
         $user->last_name = $data['last_name'];
         $user->currency_id = $data['currency_id'];
         $user->language_id = $data['language_id'];
+        $user->email = $data['email'];
         if(isset($data['profile_pic'])) {
             Log::info($data['profile_pic']);
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);
