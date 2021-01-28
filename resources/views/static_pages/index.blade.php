@@ -34,23 +34,26 @@
                         <td>{{$static_page->arabic_description}}</td>
     
                         <td>
-                        <div class="row">
-                        <div class="col-2">
-                                    <form action="{{ action('StaticPagesController@destroy', [$static_page->id])}}" method="post">
+                        <div class="dropdown">
+            <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+             Actions
+             <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"> <form action="{{ action('StaticPagesController@destroy', [$static_page->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                    </form>
-                                </div>
-                                <div class="col-2">
-                                    <form action="{{action('StaticPagesController@edit', [$static_page->url])}}" method="post">
+                                        <button class="btn btn-light" type="submit">Delete</button>
+                                    </form></li>
+                             
+                                    <li role="presentation">  <form action="{{action('StaticPagesController@edit', [$static_page->url])}}" method="post">
                                     @csrf
                                     @method('get')
-                                        <button class=" btn btn-success" type="submit">
-                                        <span class="fa fa-edit"></span>
+                                        <button class=" btn btn-light" type="submit">
+                                      Edit
                                         </button>
-                                    </form>
-                                </div>
+                                    </form></li>
+                                </ul>
                             </div>
                         </td>
                     </tr>

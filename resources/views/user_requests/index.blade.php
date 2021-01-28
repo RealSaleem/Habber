@@ -38,17 +38,20 @@
               <td>{{$userrequest->status == "0" ? "Pending" : "Seen"}}</td>  
               <td>{{$userrequest->created_at}}</td>  
               <td>
-                <div class="row">
-                  <div class="col-3">
-                      <form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
+              <div class="dropdown">
+      <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+         Actions
+          <span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><form action="{{action('UserRequestController@destroy', [$userrequest->id])}}" method="post">
                           @csrf
                           @method('DELETE')
-                          <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                      </form>
-                  </div>
-                  <div class="col-3">
-                    <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                  </div>
+                          <button class="btn btn-light" type="submit">Delete</button>
+                      </form></li>
+                 
+                      <li role="presentation"> <a href="{{route('user_requests.show',[$userrequest->id])}}"><button class=" btn btn -light">Details</button></a></li>
+                  </ul>
                 </div>
               </td>
             </tr>

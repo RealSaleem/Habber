@@ -33,23 +33,25 @@
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
             <td>
-                <div class="row">
-                    <div class="col-2">
-                        <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
+            <div class="dropdown">
+            <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+             Actions
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"> <form action="{{ action('ContactController@show', [$contact->id])}}" method="post">
                         @csrf
                             @method('GET')
-                            <button class="btn btn-success" type="submit"><span class="fa fa-eye"></span></button>
-                        </form>
-                    </div>
-                    <div class="col-2">
-                        <form action="{{ action('ContactController@destroy', [$contact->id])}}" method="post">
+                            <button class="btn btn-light" type="submit">Details</span></button>
+                        </form></li>
+                        <li role="presentation">  <form action="{{ action('ContactController@destroy', [$contact->id])}}" method="post">
                         @csrf
                         @method('Delete')
-                            <button class=" btn btn-danger" type="submit">
-                            <span class="fa fa-trash"></span>
+                            <button class=" btn btn-light" type="submit">
+                          Delete
                             </button>
-                        </form>
-                    </div>
+                        </form></li>
+                    </ul>
                 </div>
             </td>
         </tr>

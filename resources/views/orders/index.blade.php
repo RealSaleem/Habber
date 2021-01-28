@@ -26,8 +26,7 @@
                         <th>Order Status</th>
                         <th>Order Date & Time</th>
                         <th class="not">Action</th>
-                        <th class="not"></th>
-                        <th class="not"></th>
+                      
                     </tr>
                 </thead>
                 <tbody>
@@ -44,32 +43,35 @@
                         <td>{{$order->order_status == "1" ? "Ready " : "Not Ready"}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>
+                        <div class="dropdown">
+                    <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+                     Actions
+                      <span class="caret"></span>
+                     </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                          @if($order->order_status == 1)
-                                         <a><button class="btn btn-danger" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a>
+                                         <li role="presentation">   <a><button class="btn btn-light" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a></li>
                                          @else
-                                             <a>
-                                        <button class="btn btn-info" onclick="readyOrder('{{$order->id}}')">
+                                             
+                                             <li role="presentation"> <a> <button class="btn btn-light" onclick="readyOrder('{{$order->id}}')">
                                         @lang('messages.order_page.ready') 
                                          </button>
-                                             </a>
+                                             </a></li>
                                              @endif
                              
-                        </td>
-                      
-                        <td>
-                                    <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
+                                             <li role="presentation">  <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
                                        @method('GET')
-                                       <button class="btn btn-success" type="submit">@lang('messages.button.order_details')</button>
-                                         </form>
-                                         </td>
-                                      
-                        <td>
-                                    <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
+                                       <button class="btn btn-light" type="submit">@lang('messages.button.order_details')</button>
+                                         </form></li>
+                                        
+                                         <li role="presentation">   <form action="{{ action('OrderController@destroy', [$order->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">@lang('messages.button.cancel_order') </button>
-                                         </form>
+                                        <button class="btn btn-light" type="submit">@lang('messages.button.cancel_order') </button>
+                                         </form></li>
+                                         </ul>
+                                         </div>
                                          </td>
                     </tr>
                     @endforeach

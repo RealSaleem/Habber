@@ -23,8 +23,7 @@
                         <th>Phonecode</th>
                         <th>Status</th>
                         <th> Action</th>      
-                        <th> </th>      
-                        <th> </th>                  
+                               
                     </tr>
                </thead>
                <tbody>
@@ -39,23 +38,29 @@
             <td>{{$country->phonecode}}</td>
             <td>{{$country->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
+            <div class="dropdown">
+        <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+         Actions
+              <span class="caret"></span>
+            </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         @if($country->status == 1)
-                                        <a><button class="btn btn-danger" onclick="deactivateCountry('{{$country->id}}')">@lang('messages.bookmark_page.deactivate')</button></a>
+                                      <li role="presentation">   <a><button class="btn btn-light" onclick="deactivateCountry('{{$country->id}}')">@lang('messages.bookmark_page.deactivate')</button></a></li>
                                     @else
-                                        <a><button class="btn btn-info" onclick="activateCountry('{{$country->id}}')">@lang('messages.bookmark_page.activate') </button></a>
+                                    <li role="presentation"> <a><button class="btn btn-light" onclick="activateCountry('{{$country->id}}')">@lang('messages.bookmark_page.activate') </button></a></li>
                                     @endif
-                        </td>
-            <td>
-                                    <a href="{{action('CountryController@edit', [$country->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                                </td>
-                                <td>
-                                    <form action="{{action('CountryController@destroy', [$country->id])}}" method="post">
+                    
+                                    <li role="presentation">  <a href="{{action('CountryController@edit', [$country->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+                               
+                                    <li role="presentation"> <form action="{{action('CountryController@destroy', [$country->id])}}" method="post">
                                     @csrf
                                     @method('Delete')
-                                        <button class=" btn btn-danger" type="submit">
-                                        <span class="fa fa-trash"></span>
+                                        <button class=" btn btn-light" type="submit">
+                                     Delete
                                         </button>
-                                    </form>
+                                    </form></li>
+                                    </ul>
+                                    </div>
                               </td>
             </tr>
             @endforeach            
