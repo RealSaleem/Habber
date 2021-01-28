@@ -22,13 +22,13 @@ class UserRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
+    {return [
             'first_name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
             'last_name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
             'phone' => ['sometimes','required','string','max:15','min:3'],
             'currency_id' => ['required'],
-            'language_id' => ['required']
+            'language_id' => ['required'],
+           'email' => ['bail', 'required', 'string', 'email', 'max:255','unique:users,email,'.auth()->user()->id]
         ];
     }
 }
