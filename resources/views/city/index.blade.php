@@ -19,9 +19,7 @@
                         <th>Country</th>
                         <th>Shipping Charges</th>
                         <th>Status</th>
-                        <th> Action</th>   
-                        <th> </th>   
-                        <th></th>                  
+                        <th> Action</th>                
                     </tr>
                </thead>
                <tbody>
@@ -33,25 +31,30 @@
             <td>{{$city->shipping_charges}}</td>  
             <td>{{$city->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
+            <div class="dropdown">
+            <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+         Actions
+             <span class="caret"></span>
+            </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                     @if($city->status == 1)
-                        <a><button class="btn btn-danger" onclick="deactivateCity('{{$city->id}}')">@lang('messages.user_page.deactivate')</button></a>
+                    <li role="presentation">    <a><button class="btn btn-light" onclick="deactivateCity('{{$city->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
                     @else
-                        <a>
-                            <button class="btn btn-info" onclick="activateCity('{{$city->id}}')">
+                    <li role="presentation">   <a>
+                            <button class="btn btn-light" onclick="activateCity('{{$city->id}}')">
                             @lang('messages.user_page.activate')
                             </button>
-                        </a>
+                        </a></li>
                     @endif
-            </td>
-            <td>
-                        <form action="{{ action('CityController@destroy', [$city->id])}}" method="post">
+                    <li role="presentation"><form action="{{ action('CityController@destroy', [$city->id])}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                        </form>
-                    </td>
-                  <td>
-                        <a href="{{ action('CityController@edit', [$city->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
+                            <button class="btn btn-light" type="submit">Delete</button>
+                        </form></li>
+                
+                  <li role="presentation"> <a href="{{ action('CityController@edit', [$city->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+                   </ul>
+                   </div>
                    </td>
 
             </tr>

@@ -20,7 +20,7 @@
                         <th>status</th>
                         <th class="not">Image</th>
                         <th class="not">Action</th>
-                        <th class="not"></th>
+                       
                         </tr>
                 </thead>
                 <tbody class="sortable">
@@ -31,27 +31,29 @@
                         <td class = "{{$ad->status == 1 ? 'text-primary' : 'text-danger'}}" >{{$ad->status == 1 ? "Enable" : "Disable"}}</td>  
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($ad->image) ?  url('storage/'.$ad->image) : url('storage/ads/default.png') }}" alt=""> </td>
                         <td>
+                        <div class="dropdown">
+                    <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+                     Actions
+                  <span class="caret"></span>
+                    </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                     @if($ad->status == 1)
-                                        <a><button class="btn btn-danger" onclick="disableAd('{{$ad->id}}')">@lang('messages.banner_page.disable')</button></a>
+                                    <li role="presentation"> <a><button class="btn btn-light" onclick="disableAd('{{$ad->id}}')">@lang('messages.banner_page.disable')</button></a></li>
                                     @else
-                                        <a><button class="btn btn-info" onclick="enableAd('{{$ad->id}}')">@lang('messages.banner_page.enable') </button></a>
+                                    <li role="presentation">  <a><button class="btn btn-light" onclick="enableAd('{{$ad->id}}')">@lang('messages.banner_page.enable') </button></a></li>
                                     @endif
-                                    </td>
-                        <td>
-                            <div class="row">
-                                <div class="col-2">
-                                    <a href="{{action('AdController@edit', [$ad->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                                </div>
-                                <div class="col-2">
-                                    <form action="{{ action('AdController@destroy', [$ad->id])}}" method="post">
+                            
+                                    <li role="presentation"> <a href="{{action('AdController@edit', [$ad->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+                             
+                                    <li role="presentation"> <form action="{{ action('AdController@destroy', [$ad->id])}}" method="post">
                                     @csrf
                                     @method('Delete')
-                                        <button class=" btn btn-danger" type="submit">
-                                        <span class="fa fa-trash"></span>
+                                        <button class=" btn btn-light" type="submit">
+                                        Delete
                                         </button>
-                                    </form>
-                                </div>
-                            </div>
+                                    </form></li>
+                               </ul>
+                               </div>
                         </td>
                     </tr>
                     @endforeach

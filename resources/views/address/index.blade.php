@@ -47,22 +47,24 @@
                     <td>{{($address->users['first_name'] ." ". $address->users['last_name'])}}</td>
                     <td>{{($address->cities['shipping_charges'])}}</td>
                     <td>
-                        <div class="row">
-                            <div class="col-4">
-                                <form action="{{ action('AddressController@destroy', [$address->id])}}" method="post">
+                    <div class="dropdown">
+            <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+             Actions
+             <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"> <form action="{{ action('AddressController@destroy', [$address->id])}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                </form>
-                            </div>
-                            <div class="col-2">
-                                <form action="{{ action('AddressController@edit', [$address->id])}}" method="post">
+                                    <button class="btn btn-light" type="submit">Delete</button>
+                                </form></li>
+                                <li role="presentation"><form action="{{ action('AddressController@edit', [$address->id])}}" method="post">
                                     @csrf
                                     @method('get')
                                     <input type="hidden" name="fromUser" value="{{$fromUser->id ?? null}}">
-                                    <button class="btn btn-success" type="submit"><span class="fa fa-edit"></span></button>
-                                </form>
-                            </div>
+                                    <button class="btn btn-light" type="submit">Edit</button>
+                                </form></li>
+                          </ul>
                         </div>
                     </td>
                 </tr>

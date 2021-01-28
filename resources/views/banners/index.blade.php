@@ -24,8 +24,7 @@
                         <th class="not">Image</th>
                         <th>Banner Order</th>
                         <th class="not">Action</th>
-                        <th class="not"></th>
-                        <th class="not"></th>
+                        
                         </tr>
                 </thead>
                 <tbody class="sortable">
@@ -55,24 +54,28 @@
                         <td><img style=" width: 50px; height: 50px;" src=" {{ isset($banner->image) ?  url('storage/'.$banner->image) : url('storage/banners/default.png') }}" alt=""> </td>
                         <td>{{$banner->sort_order}}</td>
                         <td>
+                        <div class="dropdown">
+                              <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+                             Actions
+                         <span class="caret"></span>
+                          </button>
+                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                     @if($banner->status == 1)
-                                        <a><button class="btn btn-danger" onclick="disablebanner('{{$banner->id}}')">@lang('messages.banner_page.disable')</button></a>
+                                    <li role="presentation"> <a><button class="btn btn-light" onclick="disablebanner('{{$banner->id}}')">@lang('messages.banner_page.disable')</button></a></li>
                                     @else
-                                        <a><button class="btn btn-info" onclick="enablebanner('{{$banner->id}}')">@lang('messages.banner_page.enable') </button></a>
+                                    <li role="presentation">  <a><button class="btn btn-light" onclick="enablebanner('{{$banner->id}}')">@lang('messages.banner_page.enable') </button></a></li>
                                     @endif
-                                    </td>
-                            
-                                    <td>
-                                    <a href="{{action('BannerController@edit', [$banner->id])}}"><button class=" btn btn-success"><span class="fa fa-edit"></span></button></a>
-                                </td>
-                               <td>
-                                    <form action="{{action('BannerController@destroy', [$banner->id])}}" method="post">
+                                  
+                                    <li role="presentation">  <form action="{{action('BannerController@destroy', [$banner->id])}}" method="post">
                                     @csrf
                                     @method('Delete')
-                                        <button class=" btn btn-danger" type="submit">
-                                        <span class="fa fa-trash"></span>
+                                        <button class=" btn btn-light" type="submit">
+                                      Delete
                                         </button>
-                                    </form>
+                                    </form></li>
+                                    <li role="presentation">  <a href="{{action('BannerController@edit', [$banner->id])}}"><button class=" btn btn-light">Edit</button></a></li>
+                                    </ul>
+                                    </div>
                                     </td>
                        
                     </tr>
