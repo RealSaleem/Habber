@@ -90,7 +90,13 @@ class OrderController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
      */
+    public function showlist($id)
+    {
+        $order = Order::with('addresses')->find($id);
+        return view('orders.shipping',compact('order'));
+    }
     public function edit($id)
     {
         //

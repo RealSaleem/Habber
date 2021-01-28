@@ -10,6 +10,7 @@ use App\Country;
 use App\Business;
 use App\Order;
 
+
 class PublisherController extends Controller
 {
 
@@ -233,9 +234,9 @@ class PublisherController extends Controller
             Book::where('id',$userBooks[0] )->update(['user_id'=> $admin->id]);
             $user->delete();
         }
-        // else {
-        //     $user->delete();
-        // }
+         else {
+             $user->delete();
+         }
 
         if(count($userBookmarks) > 1 ) {
             Bookmark::whereIn('id',$userBookmarks )->update(['user_id'=> $admin->id]);
@@ -245,9 +246,9 @@ class PublisherController extends Controller
             Bookmark::where('id',$userBookmarks[0] )->update(['user_id'=> $admin->id]);
             $user->delete();
         }
-        // else {
-        //     $user->delete();
-        // }
+         else {
+             $user->delete();
+         }
         
       
         return back()->with('success', 'User deleted successfully');
