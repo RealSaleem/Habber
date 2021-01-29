@@ -122,16 +122,6 @@
                         </div>
                      </div> 
                      <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.banner_page.status')</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="status"  id="status">
-                                <option value="0" {{ ($book->status == 0 ? "selected":"")}}>Deactivate</option>
-                                <option value="1" {{ ($book->status == 1 ? "selected":"")}}>Activate</option>
-                             </select>   
-                            <span class="text-danger">{{$errors->first('status')}}</span>
-                        </div>
-                     </div> 
-                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.publisher')</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="publisher" id="publisher">
