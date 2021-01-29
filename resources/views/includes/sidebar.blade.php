@@ -4,6 +4,7 @@
     <nav class="sidebar-nav">
         <ul id="sidebarnav" class="p-t-30">
             <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('welcome')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">@lang('messages.header.dashboard')</span></a></li>
+            @if(Session::get('users')->hasRole('admin'))
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.user_page.users')  </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('users.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -17,6 +18,7 @@
                         <li class="sidebar-item"style="background-color: #786e0047;"><a href="{{ route('publisher.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
+                @endif
                 <!-- publisher -->
                 <li class="sidebar-item" > <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.book_page.books') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
@@ -30,6 +32,7 @@
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
+                @if(Session::get('users')->hasRole('admin'))
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.size_page.bookmark_size') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('sizes.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -114,23 +117,25 @@
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('push_notifications.history') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.history') </span></a></li>
                 </ul> 
             </li>
+            @endif
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.order_page.order')</span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('orders.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                 </ul>
             </li>
-
+         
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.reports_page.system_reports') </span></a>
             <!-- {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('book-edit','book-delete','book-create','book-list')) == true ? "" : "hidden"}} -->
+            @if(Session::get('users')->hasRole('admin'))
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.static_page.staticpage') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('static_pages.index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                         <li class="sidebar-item"style="background-color: #786e0047;" ><a href="{{ route('static_pages.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
-                  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a>
-
-    
+                  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a></li>
+                    @endif
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ url('/logout') }}"aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Logout</span></a></li>
        
 
             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
