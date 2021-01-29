@@ -25,7 +25,6 @@ class BannerResource extends JsonResource
             'description'   => $this->description ?? "",
             'banner_image' =>isset($this->image) ? url(Storage::disk('public')->url($this->image)) : "" ,
             'order' => $this->sort_order,
-            'language' => $this->languages->name,
             'banner_link'=>$this->banner_link,
             $this->mergeWhen($this->bookclubs, [
                 'product' => new BookClubResource($this->bookclubs),
