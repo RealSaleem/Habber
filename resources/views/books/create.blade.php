@@ -56,7 +56,7 @@
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" class="form-control" name="description" id="description" placeholder="Description"  maxlength = "160">{{ old('description') }}</textarea>
+                            <textarea type="textarea" class="form-control" name="description" id="description" placeholder="Description"  maxlength = "160">{{ old('description') }}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
