@@ -81,7 +81,6 @@ class BooksController extends Controller
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            'status'=>'required',
             "genre" => 'required|array|min:1|max:3',
             'image'=> 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=280,max_height=470'
             ]);
@@ -112,7 +111,7 @@ class BooksController extends Controller
                 $book->featured = $request->featured;
             }
             $book->book_club_id = $request->bookclub;
-            $book->status =  $request->status;
+            $book->status =  false;
             $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
@@ -197,7 +196,6 @@ class BooksController extends Controller
             'publisher' => 'required',
             'stock_status' => 'required',
             'featured'=>'required',
-            'status'=> 'required',
             'genre' => 'required|array|min:1|max:3',
             'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|dimensions:max_width=280,max_height=470'
         ]);
@@ -228,7 +226,7 @@ class BooksController extends Controller
         else {
             $book->featured = $request->featured;
         }
-        $book->status = $request->status;
+        $book->status =false;
         if($request->has('genre')) {
             if(count($book->genres) + count($request->genre) > 4 ) {
                 $genre_id = $book->genres()->pluck('genre_id');

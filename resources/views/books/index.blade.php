@@ -12,7 +12,7 @@
     <div class="card-body">
     <a href="{{ route('books.create') }}" ><button style="color: gray;font-size:16px;border: 3px solid black" >  + Add New Book</button> </a>
        <div class="table-responsive">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table id="zero_config2" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Product Isbn</th>
@@ -111,7 +111,7 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        $('#zero_config').DataTable({
+        $('#zero_config2').DataTable({
         paging: true,
         dom: 'Bfrtip',
         buttons: [
