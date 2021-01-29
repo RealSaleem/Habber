@@ -39,7 +39,7 @@
                         <td> {{ucfirst($order->addresses->countries['name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
-                        <td>{{$order->status == "1" ? "Pending " : "Seen"}}</td> 
+                        <td>{{$order->status == "1" ? "Seen " : "Pending"}}</td> 
                         <td>{{$order->order_status == "1" ? "Ready " : "Not Ready"}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>
@@ -100,7 +100,7 @@ function readyOrder($id) {
         type: 'post',
         success: function(result)
         {
-            toastr.error('Order Not Ready');
+            toastr.success('Order  Ready');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
@@ -117,7 +117,7 @@ function notreadyOrder($id) {
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Order Ready');
+            toastr.error('Order Not Ready');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
