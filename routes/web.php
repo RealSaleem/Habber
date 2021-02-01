@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-//Route::post('login1','Auth\AuthController@login1');
+Route::post('login1','Auth\AuthController@login1');
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
 Route::get('payment/success','PaymentGatewayController@successPayment')->name('payment.success');
 Route::get('payment/failure','PaymentGatewayController@failurePayment')->name('payment.failure');
