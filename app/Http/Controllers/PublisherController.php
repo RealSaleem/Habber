@@ -176,6 +176,7 @@ class PublisherController extends Controller
             $publisher->password = Hash::make($request->password);
         }
         $publisher->country_id = $request->country;
+        $publisher->status=$request->status;
         if($request->has('profile_pic')) 
         {
             Storage::disk('user_profile')->deleteDirectory('users/' . $id);

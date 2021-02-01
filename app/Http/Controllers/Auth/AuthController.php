@@ -30,10 +30,15 @@ class AuthController extends Controller
             {
                 $user = Auth::user();
                
-                if($user->status == 0 && $user->joining_request == 0) {
+                if($user->status == 1 && $user->joining_request == 0) {
                     $user['token'] = $user->createToken('token')->accessToken;
-                   
-                    return (new AuthResource($user->load('languages')));
+                    return redirect('/');
+                    // echo 'test';
+                    //return (new AuthResource($user->load('languages')));
+                }
+                else{
+                    Auth::logout();
+                    return back()->with('success', 'test');
                 }
             }
             else  {

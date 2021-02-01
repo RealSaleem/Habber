@@ -3,13 +3,19 @@
 @section('content')
 
 <div class="container">
+<div class="container-fluid">
+             @if(Session::has('success'))
+            <div class="alert alert-success text-center" role="alert">
+                {{Session::get('success')}}
+            </div>
+              @endif 
 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ action('Auth\AuthController@login1') }}">
                         @csrf
 
                         <div class="form-group row">
