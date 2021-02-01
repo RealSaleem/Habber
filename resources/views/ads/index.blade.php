@@ -117,7 +117,7 @@ function disableAd(id) {
         type: 'post',
         success: function(result)
         {
-            toastr.error('Ad Disabled');
+            toastr.error('AD Disabled');
             window.setTimeout(function(){location.reload()},2000);
         }
     });
@@ -134,8 +134,16 @@ function enableAd(id) {
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Ad Enabled');
-            window.setTimeout(function(){location.reload()},2000);
+          
+          if(result == 'false') {
+              toastr.error('AD Cannot be Enabled!. You can only enable 1 AD at a time');
+              window.setTimeout(function(){location.reload()},2000);
+          }
+          else {
+                toastr.success('AD Enabled');
+                window.setTimeout(function(){location.reload()},2000);
+            }
+           
         }
     });
 }
