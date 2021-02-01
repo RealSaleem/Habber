@@ -40,12 +40,6 @@
              <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li role="presentation"> <form action="{{ action('StaticPagesController@destroy', [$static_page->id])}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-light" type="submit">Delete</button>
-                                    </form></li>
-                             
                                     <li role="presentation">  <form action="{{action('StaticPagesController@edit', [$static_page->url])}}" method="post">
                                     @csrf
                                     @method('get')
