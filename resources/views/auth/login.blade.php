@@ -1,14 +1,20 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <div class="container">
+
+@if(Session::has('success'))
+    <div class="alert alert-success text-center" role="alert">
+        <strong>{{Session::get('success')}}</strong>
+    </div>
+@endif 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ action('Auth\AuthController@login1') }}">
                         @csrf
 
                         <div class="form-group row">

@@ -22,6 +22,7 @@ class BookResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'arabic_title'=>$this->arabic_title,
             'product_id' => optional($this->pivot)->product_id,
             'cart_quantity' => optional($this->pivot)->quantity,
             'cart_price' => optional($this->pivot)->price,

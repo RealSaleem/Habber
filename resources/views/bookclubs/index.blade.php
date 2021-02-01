@@ -3,7 +3,7 @@
 <h1 class="page-title">@lang('messages.bookclub_page.bookclubs')</h1>
 <div class="ml-auto text-right">
 </div> 
-@if(Session::has('success'))
+@if(Session::has('sucess'))
     <div class="alert alert-success text-center" role="alert">
         <strong>{{Session::get('success')}}</strong>
     </div>
