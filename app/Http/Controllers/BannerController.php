@@ -6,6 +6,7 @@ use App\Book;
 use App\Bookmark;
 use App\BookClub;
 use App\Language;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -70,7 +71,19 @@ class BannerController extends Controller
         $banner = new Banner();
         $banner->product_type = $request->product_type;
         $banner->banner_url = $request->banner_url;
-        $banner->status = $request->status;
+        if ($request->has('status') && $request->status == "1") {
+            $statusBanners = Banner::where('status',1)->count();
+            if(  $statusBanners == 3) {
+                $banner->status = 0; 
+                Session::flash('status', 'Banners Cannot Be Enabled You can only Enable 3 banners at a time!'); 
+            }
+            else {
+                $banner->status = $request->status;
+            }
+        }
+        else {
+            $banner->status = $request->status;
+        }
         $banner->sort_order = $request->sort_order;
         $banner->image = "null"; 
         if($request->has('description'))
@@ -168,7 +181,19 @@ class BannerController extends Controller
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;
         $banner->banner_url = $request->banner_url;
-        $banner->status = $request->status;
+        if ($request->has('status') && $request->status == "1") {
+            $statusBanners = Banner::where('status',1)->count();
+            if(  $statusBanners == 3) {
+                $banner->status = 0; 
+                Session::flash('status', 'Banners Cannot Be Enabled You can only feature 3 banners at a time!'); 
+            }
+            else {
+                $banner->status = $request->status;
+            }
+        }
+        else {
+            $banner->status = $request->status;
+        }
         $banner->sort_order = $request->sort_order;
         if($request->has('description'))
         {   
@@ -236,10 +261,17 @@ class BannerController extends Controller
     public function enableBanner($id) {
         $error = false;
         try {
-            $banner = Banner::findOrFail($id);
-            $banner->status = true;
-            $banner->save();
-            return 'true';
+            $statusBanners = Banner::where('status',1)->count();
+            if($statusBanners == 3 ) {
+                return 'false';
+            }
+            else {
+                $banner = Banner::findOrFail($id);
+                $banner->status = true;
+                $banner->save();
+                return 'true';
+            }
+           
         }
         catch(\Exception $e) {
            $error = true;
@@ -250,6 +282,7 @@ class BannerController extends Controller
         }
 
     }
+    
 
     public function getDropDownList($type)
     {

@@ -157,8 +157,16 @@ function enablebanner(id) {
         type: 'POST',
         success: function(result)
         {
-            toastr.success('Banner Enabled');
-            window.setTimeout(function(){location.reload()},2000);
+          
+          if(result == 'false') {
+              toastr.error('Banner Cannot be Enabled!. You can only enable 3 Banners at a time');
+              window.setTimeout(function(){location.reload()},2000);
+          }
+          else {
+                toastr.success('Banner Enabled');
+                window.setTimeout(function(){location.reload()},2000);
+            }
+           
         }
     });
 }
