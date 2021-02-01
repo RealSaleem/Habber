@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookmarkCollection;
 use App\Http\Resources\BookmarkResource;
+use App\User;
 
 
 class BookmarkController extends Controller
@@ -28,10 +29,17 @@ class BookmarkController extends Controller
     public function index()
     {
         try {
+            $bm=array();
             $bookmarks = $this->model->with('users','product_prices')->where('status',1)->orderBy('id','DESC')->paginate(100);
-            if(count($bookmarks) != 0) {
+            foreach($bookmarks as $bookmark){
+                $user=User::findOrFail($bookmark->user_id);
+                if($user->status==1){
+                    array_push($bm,$bookmark);
+                }
+            }
+            if(count($bm) != 0) {
                
-                return (new BookmarkCollection($bookmarks));
+                return (new BookmarkCollection($bm));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Bookmarks Found");

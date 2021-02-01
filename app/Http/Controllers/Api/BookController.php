@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
+use App\User;
 
 class BookController extends Controller
 {
@@ -63,9 +64,16 @@ class BookController extends Controller
     public function arabicBooks()
     {
         try {
+            $o=array();
             $books = $this->model->with('genres')->where('status',1)->where('book_language','arabic')->orderBy('title','ASC')->get();
-            if(count($books) != 0) {
-                return (new BookCollection($books));
+            foreach($books as $book){
+                $user=User::findOrFail($book->user_id);
+                if($user->status==1){
+                    array_push($o,$book);
+                }
+            }
+            if(count($o) != 0) {
+                return (new BookCollection($o));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Books Found");
@@ -79,9 +87,16 @@ class BookController extends Controller
     public function englishBooks()
     {
         try {
+            $o=array();
             $books = $this->model->with('genres')->where('status',1)->where('book_language','english')->orderBy('title','ASC')->get();
-            if(count($books) != 0) {
-                return (new BookCollection($books));
+            foreach($books as $book){
+                $user=User::findOrFail($book->user_id);
+                if($user->status==1){
+                    array_push($o,$book);
+                }
+            }
+            if(count($o) != 0) {
+                return (new BookCollection($o));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Books Found");

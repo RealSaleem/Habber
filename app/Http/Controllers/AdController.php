@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Ad;
+use Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -51,7 +52,19 @@ class AdController extends Controller
         ]);
         $ad = new Ad();
         $ad->featured = $request->featured;
-        $ad->status = $request->status;
+        if ($request->has('status') && $request->status == "1") {
+            $statusAds = Ad::where('status',1)->count();
+            if(  $statusAds  == 1) {
+                $ad->status = 0; 
+                Session::flash('status', 'ADS Cannot Be Enabled You can only Enable 1 ad at a time!'); 
+            }
+            else {
+                $ad->status = $request->status;
+            }
+        }
+        else {
+            $ad->status = $request->status;
+        }
         $ad->image = "null"; 
         $ad->save();
         $updateAd = Ad::find($ad->id);
@@ -103,7 +116,19 @@ class AdController extends Controller
         ]);
         $ad = Ad::find($id);
         $ad->featured = $request->featured;
-        $ad->status = $request->status;
+        if ($request->has('status') && $request->status == "1") {
+            $statusAds = Ad::where('status',1)->count();
+            if(  $statusAds  == 1) {
+                $ad->status = 0; 
+                Session::flash('status', 'ADs Cannot Be Enabled You can only Enable 1 ad at a time!'); 
+            }
+            else {
+                $ad->status = $request->status;
+            }
+        }
+        else {
+            $ad->status = $request->status;
+        }
         if($request->has('image'))
         {   
             Storage::disk('public')->deleteDirectory('ads/'. $id);
@@ -152,10 +177,17 @@ class AdController extends Controller
     public function enableAd($id) {
         $error = false;
         try {
-            $ad = Ad::findOrFail($id);
-            $ad->status = true;
-            $ad->save();
-            return 'true';
+            $statusAds = Ad::where('status',1)->count();
+            if($statusAds == 1 ) {
+                return 'false';
+            }
+            else {
+                $ad = Ad::findOrFail($id);
+                $ad->status = true;
+                $ad->save();
+                return 'true';
+            }
+           
         }
         catch(\Exception $e) {
            $error = true;
@@ -164,6 +196,7 @@ class AdController extends Controller
         if($error) {
             return $message;
         }
+
 
     }
 
