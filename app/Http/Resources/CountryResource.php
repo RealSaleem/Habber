@@ -24,6 +24,7 @@ class CountryResource extends JsonResource
             'nicename' => $this->nicename,
             'iso3' => $this->iso3,
             'phonecode' => $this->phonecode,
+            'shipping_charges'=>$this->shipping_charges,
         ];
     }
 

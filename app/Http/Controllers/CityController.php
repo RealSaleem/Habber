@@ -40,7 +40,6 @@ class CityController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|unique:cities,name', 
             'country' => 'required', 
-            'shipping_charges' => 'required',
 
             
             
@@ -48,7 +47,6 @@ class CityController extends Controller
         $city = new City();
         $city->name = $request->name;
         $city->country_id = $request->country;
-        $city->shipping_charges = $request->shipping_charges;
         $city->status = true;
         $city->save();   
         return back()->with('success', 'City successfully saved');
@@ -90,13 +88,11 @@ class CityController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|unique:cities,name'.$id, 
             'country' => 'required', 
-            'shipping_charges' => 'required',
             
         ]);
         $city =City::find($id);
         $city->name = $request->name;
         $city->country_id = $request->country;
-        $city->shipping_charges = $request->shipping_charges;
         $city->status = true;
         $city->save();   
         return back()->with('success', 'City updated successfully ');

@@ -63,7 +63,13 @@
                             <span class="text-danger">{{$errors->first('phonecode')}}</span>
                         </div>
                     </div>
-                     </div> 
+                     <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.city_page.shipping_charges')</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="shipping_charges" value="{{$country->shipping_charges}}" id="shipping"  placeholder="Shipping Charges">
+                            <span class="text-danger">{{$errors->first('shipping_charges')}}</span>
+                        </div>
+                    </div>  
                     <div class="border-top">
                       <div class="card-body">
                          <a href="{{route('countries.index')}}">
