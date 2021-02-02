@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use App\User;
+use App\GuestUser;
 
 class SendNotificationListener implements ShouldQueue
 {
@@ -59,7 +60,31 @@ class SendNotificationListener implements ShouldQueue
                             'body'  =>  $event->data['description'],
                             'title' => $event->data['title']
                            );
+                         
+                               
+                             
+                           
                         for($i=0;$i<count($event->data['users']);$i++){
+                            if($event->data['users'][$i]==0){
+                                $user=GuestUser::all();
+                             
+                                for($i=0;$i<count($user);$i++){
+                                 $createPost    =   $database 
+                                 ->getReference('/User/'.$user[$i]['id'].'/Notification/')
+                                 ->set([
+                                     'to' =>  $user[$i]['id'],
+                                     'body'  =>  $event->data['description'],
+                                     'title' => $event->data['title'],
+                                     'read' => 'false'
+                         
+                                 ]);   
+                                          $user1=GuestUser::findOrFail($user[$i]['id']);
+                                          
+                                           $to= $user1->firebase_token;
+                                           
+                                           $this->sendNotif($to,$notif);
+                            }}
+                          else{  
                         $createPost    =   $database
                         ->getReference('/User/'.$event->data['users'][$i].'/Notification/')
                         ->set([
@@ -76,7 +101,7 @@ class SendNotificationListener implements ShouldQueue
                                   $this->sendNotif($to,$notif);
 
 
-                     } }
+                     } }}
                      else if($event->data['option']==0){
                         $user=User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->where('notification',1)->get();
                             $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
@@ -90,7 +115,24 @@ class SendNotificationListener implements ShouldQueue
                                 'body'  =>  $event->data['description'],
                                 'title' => $event->data['title']
                                );
-                            
+                               $user=GuestUser::all();
+                               for($i=0;$i<count($user);$i++){
+                                $createPost    =   $database
+                                ->getReference('/User/'.$user[$i]['id'].'/Notification/')
+                                ->set([
+                                    'to' =>  $user[$i]['id'],
+                                    'body'  =>  $event->data['description'],
+                                    'title' => $event->data['title'],
+                                    'read' => 'false'
+                        
+                                ]);   
+                                         $user1=GuestUser::findOrFail($user[$i]['id']);
+                                         
+                                          $to= $user1->firebase_token;
+                                          
+                                          $this->sendNotif($to,$notif);
+                           }
+
                             for($i=0;$i<$user->count();$i++){
                             $createPost    =   $database
                             ->getReference('/User/'.$user[$i]['id'].'/Notification/')

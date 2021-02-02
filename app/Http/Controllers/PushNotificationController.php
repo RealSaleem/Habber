@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Session;
+use App\GuestUser;
 
 class PushNotificationController extends Controller
 {
@@ -19,7 +20,8 @@ class PushNotificationController extends Controller
     public function index()
     {
  $usersDropDown =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->where('notification',1)->get();
- return view('push_notifications.create', compact('usersDropDown'));
+ $guest = GuestUser::all();
+ return view('push_notifications.create', compact('usersDropDown','guest'));
     }
 
         
