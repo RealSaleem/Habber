@@ -60,10 +60,13 @@
                         <label for="fname" name="la" class="col-sm-3 text-right control-label col-form-label">@lang('messages.push_notifications_page.users')</label>
                             <div class="col-md-9">
                                 <select class="select2 form-control m-t-15" id="users" name="users[]" multiple="multiple" >
+                                <optgroup label="">
+                                <option value=0>Guest User</option>
                                 @if (isset($usersDropDown))   
                                 @foreach($usersDropDown as $u)
-                                    <optgroup label="">
+                                    
                                         <option value="{{$u->id}}">{{$u->full_name}}</option>
+                                       
                                     </optgroup>
                                     @endforeach
                                     @endif
