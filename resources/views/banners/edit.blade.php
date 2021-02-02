@@ -12,8 +12,14 @@
                 <strong>Banner Edited! &nbsp;</strong>{{Session::get('success')}}
             </div>
               @endif 
-            
+              @if(Session::has('status'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('status')}}
+            </div>
+        @endif 
         </div> 
+            
+        
     <div class="col-md-12">
         <div class="card">
             <form action="{{action('BannerController@update',[$banner->id])}}" method="post"  enctype="multipart/form-data" >   

@@ -9,9 +9,15 @@
         <div class="container-fluid">
              @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
-                <strong>Banner Edited! &nbsp;</strong>{{Session::get('success')}}
+                <strong>Ad Edited! &nbsp;</strong>{{Session::get('success')}}
             </div>
               @endif 
+              @if(Session::has('status'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('status')}}
+            </div>
+        @endif 
+        </div> 
             
         </div> 
     <div class="col-md-12">

@@ -11,9 +11,13 @@
             <div class="alert alert-success text-center" role="alert">
                 <strong>Banner Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
-              @endif 
-            
-        </div> 
+              @endif      
+               @if(Session::has('status'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('status')}}
+            </div>
+        @endif 
+        </div>
     <div class="col-md-12">
         <div class="card">
             <form action="{{action('BannerController@store')}}" method="post"  enctype="multipart/form-data" >   
