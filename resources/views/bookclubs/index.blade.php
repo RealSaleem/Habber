@@ -173,8 +173,16 @@ function featureBookClub(id) {
         type: 'POST',
         success: function(result)
         {
-            toastr.success('BookClub Un Featured');
-            window.setTimeout(function(){location.reload()},2000);
+          
+          if(result == 'false') {
+              toastr.error('BookClub Cannot be Featured!. You can only feature 8 BookClubs at a time');
+              window.setTimeout(function(){location.reload()},2000);
+          }
+          else {
+                toastr.success('BookClub Featured');
+                window.setTimeout(function(){location.reload()},2000);
+            }
+           
         }
     });
 }

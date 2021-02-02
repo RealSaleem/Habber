@@ -11,8 +11,13 @@
                <div class="alert alert-success text-center" role="alert">
                 <strong>BookClub Edited! &nbsp;</strong>{{Session::get('success')}}
                </div>
-                @endif   
-            </div> 
+                @endif    
+            @if(Session::has('featured'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
+            </div>
+        @endif 
+        </div>
     <div class="col-md-12">
         <div class="card">
                 <form action="{{ action('BookClubController@update',[$bookclub->id])}}" method="POST"  enctype="multipart/form-data" >   
