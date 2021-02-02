@@ -18,6 +18,7 @@ use App\Http\Resources\CityCollection;
 Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::post('/register','AuthController@register');
     Route::post('/login','AuthController@login');
+    Route::post('guest_user','UserController@guest_user');
     Route::get('countries', function() {
         return (new CountryCollection(App\Country::with('cities')->get()));
     });
