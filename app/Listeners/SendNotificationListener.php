@@ -80,7 +80,7 @@ class SendNotificationListener implements ShouldQueue
                                  ]);   
                                           $user1=GuestUser::findOrFail($user[$i]['id']);
                                           
-                                           $to= $user1->firebase_token;
+                                           $to= $user1->token;
                                            
                                            $this->sendNotif($to,$notif);
                             }}
@@ -128,7 +128,7 @@ class SendNotificationListener implements ShouldQueue
                                 ]);   
                                          $user1=GuestUser::findOrFail($user[$i]['id']);
                                          
-                                          $to= $user1->firebase_token;
+                                          $to= $user1->token;
                                           
                                           $this->sendNotif($to,$notif);
                            }
