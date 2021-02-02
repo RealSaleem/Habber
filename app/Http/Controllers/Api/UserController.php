@@ -7,12 +7,14 @@ use App\Repositories\Api\UserRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
+use App\Http\Requests\Api\GuestUserRequest;
 use App\Http\Requests\Api\ChangePasswordRequest;
 use App\Helpers\ApiHelper;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use Auth;
+use App\GuestUser;
 
 class UserController extends Controller
 {
@@ -122,6 +124,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function guest_user(GuestUserRequest $request){
+       try{
+            $user=new GuestUser;
+                $user->token=$request->token;
+                $user->save();
+                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Guest User Registered Succesfully!');
+        }
+        catch(\Exception $e) {
+            return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
+        }
     }
     
     public function profile() {
