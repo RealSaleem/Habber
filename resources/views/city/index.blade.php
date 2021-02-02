@@ -17,7 +17,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Country</th>
-                        <th>Shipping Charges</th>
                         <th>Status</th>
                         <th> Action</th>                
                     </tr>
@@ -28,7 +27,6 @@
             
             <td>{{$city->name}}</td>
             <td>{{$city->countries['name']}}</td>
-            <td>{{$city->shipping_charges}}</td>  
             <td>{{$city->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
             <div class="dropdown">

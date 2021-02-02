@@ -53,6 +53,7 @@ class CountryController extends Controller
             'iso3' => 'required|unique:countries,iso3', 
             'numcode' => 'required|unique:countries,numcode', 
             'phonecode' => 'required|unique:countries,phonecode', 
+            'shipping_charges'=>'required'
           
             
             
@@ -64,6 +65,7 @@ class CountryController extends Controller
         $country->iso3 = $request->iso3;
         $country->numcode = $request->numcode;
         $country->phonecode = $request->phonecode;
+        $country->shipping_charges = $request->shipping_charges;
         $country->status = true;
         $country->save();   
         return back()->with('success', 'Country successfully saved');
@@ -111,6 +113,7 @@ class CountryController extends Controller
             'iso3' => 'required|unique:countries,iso3,'.$id  ,
             'numcode' => 'required|unique:countries,numcode,'.$id ,
             'phonecode' => 'required|unique:countries,phonecode,'.$id  ,
+            'shipping_charges'=>'required'
             
             
         ]);
@@ -121,6 +124,7 @@ class CountryController extends Controller
         $country->iso3 = $request->iso3;
         $country->numcode = $request->numcode;
         $country->phonecode = $request->phonecode;
+        $country->shipping_charges = $request->shipping_charges;
         $country->status = true;
         $country->save();   
         return back()->with('success', 'Country updated successfully ');

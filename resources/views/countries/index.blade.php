@@ -21,6 +21,7 @@
                         <th>Iso3</th>
                         <th>Numcode</th>
                         <th>Phonecode</th>
+                        <th>Shipping Charges</th>
                         <th>Status</th>
                         <th> Action</th>      
                                
@@ -36,6 +37,7 @@
             <td>{{$country->iso3}}</td>  
             <td>{{$country->numcode}}</td>
             <td>{{$country->phonecode}}</td>
+            <td>{{$country->shipping_charges}}</td>
             <td>{{$country->status == 1 ? 'Active' : 'Disabled'}}</td>  
             <td>
             <div class="dropdown">
