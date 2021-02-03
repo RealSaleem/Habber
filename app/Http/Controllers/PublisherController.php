@@ -43,7 +43,7 @@ class PublisherController extends Controller
     public function create()
     {
         $publisher = User::all();
-        $country = Country::all();
+        $country = Country::orderBy('name','ASC')->get();
         return view('publisher.create',compact('publisher','country'));
     
     }
