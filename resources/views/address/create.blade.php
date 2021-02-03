@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.city')</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.state')</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="city" id="city_id" >
                         </select>
@@ -63,7 +63,7 @@
                     </div>
                 
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.state')</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.address_page.city')</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="state"  value="{{ old('state') }}" id="state"  placeholder="State">
                             <span class="text-danger">{{$errors->first('state')}}</span>
