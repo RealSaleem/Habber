@@ -37,7 +37,7 @@
                         <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.push_notifications_page.description')</label>
                         <div class="col-sm-9">
-                            <textarea type="textarea" class="form-control" name="description" value="{{ old('description') }}" id="description" placeholder="Description"  maxlength = "560"></textarea>
+                        <textarea id="description" class="form-control" name="description" value="{{ old('description') }}" rows="10" cols="50"></textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -87,6 +87,8 @@
 </form>
 @endsection
 @section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/en.js"></script>
 <script>
 $(".select2").select2();
 </script>
@@ -100,6 +102,17 @@ var value1;
 
     return (value1 === "0" ? document.getElementById("users23").style.display ="none" : document.getElementById("users23").style.display ="flex");
 }
+
+ClassicEditor
+    .create( document.querySelector( '#description' ), {
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+
 </script>
 <!--
   var description, users;
