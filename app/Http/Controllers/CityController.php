@@ -25,7 +25,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        $country = Country::all();
+        $country = Country::orderBy('name','ASC')->get();
         return view('city.create', compact('country'));
     }
 

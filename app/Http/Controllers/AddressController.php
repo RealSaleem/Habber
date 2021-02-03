@@ -35,7 +35,7 @@ class AddressController extends Controller
     public function create()
     {
         $user = User::where('id', '!=', 1)->get();
-        $country = Country::all();
+        $country = Country::orderBy('name','ASC')->get();
         return view('address.create',compact('user','country'));
     }
 
