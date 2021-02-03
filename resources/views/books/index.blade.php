@@ -17,7 +17,7 @@
                     <tr>
                         <th>Product Isbn</th>
                         <th>Title</th>
-                        <th> Arabic Title</th>
+                        <th>Arabic Title</th>
                         <th>Author Name</th>
                         <th> Type Of Paper</th>
                         <th>Description</th>
@@ -121,7 +121,7 @@
             {
                 extend: 'pdf', 
                 orientation: 'landscape',   
-                pageSize: 'LEGAL',    
+                pageSize: 'LEGAL',   
                 exportOptions: {
                     columns: ':visible:not(.not)' // indexes of the columns that should be printed,
                 }                      // Exclude indexes that you don't want to print.
