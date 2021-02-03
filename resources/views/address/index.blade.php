@@ -39,8 +39,8 @@
                     <td>{{$address->address_name}}</td>
                     <td>{{$address->address_line1}}</td>
                     <td>{{$address->address_line2}}</td>
-                    <td>{{($address->cities['name'])}}</td>  
                     <td>{{$address->state}}</td>
+                    <td>{{($address->cities['name'])}}</td>  
                     <td>{{($address->countries['name'])}}</td>
                     <td>{{$address->post_code}}</td>
                     <td>{{$address->phone}}</td>

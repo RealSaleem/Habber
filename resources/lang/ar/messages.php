@@ -1990,11 +1990,11 @@ return [
            'cancel_order'=>'الغاء الطلب'
        ],
        'city_page'=> [
-        'city'=> 'مدينة' ,
-        'add_city'=> 'أضف مدينة',
-        'edit_city'=> 'تحرير المدينة',
-        'add_city_info'=> 'إضافة معلومات المدينة',
-        'edit_city_info'=> 'تحرير معلومات المدينة',
+        'state'=> 'حالة' ,
+        'add_city'=> 'أضف حالة',
+        'edit_city'=> 'تحرير حالة',
+        'add_city_info'=> 'إضافة معلومات حالة',
+        'edit_city_info'=> 'تحرير معلومات حالة',
         'name'=> 'اسم',
         'shipping_charges'=> 'رسوم الشحن',
     ],

@@ -381,11 +381,11 @@ return [
       
     ],
     'city_page'=> [
-        'city'=> 'City' ,
-        'add_city'=> 'Add  City',
-        'edit_city'=> 'Edit City',
-        'add_city_info'=> 'Add City Info',
-        'edit_city_info'=> 'Edit City Info',
+        'city'=> 'State' ,
+        'add_city'=> 'Add  State',
+        'edit_city'=> 'Edit State',
+        'add_city_info'=> 'Add State Info',
+        'edit_city_info'=> 'Edit State Info',
         'name'=> 'Name',
         'shipping_charges'=> 'Shipping Charges',
     ],

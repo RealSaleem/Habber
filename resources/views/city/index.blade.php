@@ -10,7 +10,7 @@
 @endif 
 <div class="card">
     <div class="card-body">
-    <a href="{{ route('city.create') }}" ><button style="color: grey;font-size:16px;border: 3px solid black" >  + Add New City</button> </a>
+    <a href="{{ route('city.create') }}" ><button style="color: grey;font-size:16px;border: 3px solid black" >  + Add New State</button> </a>
       <div class="table-responsive">
           <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
