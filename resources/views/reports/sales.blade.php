@@ -28,9 +28,11 @@
                         
                     </tr>
                 </thead>
+
                 <tbody>
           
-        @foreach($publishers as $publisher)
+                @if($fromUser->hasRole('admin'))
+                @foreach($publishers as $publisher)
         @if(count($publisher->books ) > 0)
         @foreach($publisher->books as $b)
         @foreach($b->orders as $k)
@@ -86,6 +88,40 @@
                     <td rowspan="1" colspan="1">{{$total_price }} {{$k->currencies->iso}} </td>
                     </tr>
                 <tfoot>
+                <tbody>
+                @endif
+                @if($fromUser->hasRole('publisher'))
+        @if(count($orders) != 0)
+        @foreach($orders as $k)
+                    <tr>    
+
+                        <td>{{$k['id']}}</td>
+                        <td>{{$k['created_at']}} to {{ $dt->format('Y-m-d H:i:s')}}</td>
+                        @if($fromUser->hasRole('admin'))
+                        <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
+                        @endif
+                        <td>{{$k['total_price']}}  {{($k->currencies['iso'])}} </td>
+                        @if($fromUser->hasRole('admin'))
+                        <td>
+                        <div class="row">
+                               <div>
+                            <a href="{{action('ReportController@show',[$publisher['id']])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
+                             </div></td>
+                             @endif
+                    </tr>
+             
+                  
+                    @endforeach
+                    @endif
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <td colspan="2" rowspan="1">Grand Total</td>
+                    <td rowspan="1" colspan="1">{{$total_price }} {{$currency}} </td>
+                    </tr>
+                </tfoot>
+                @endif
                 
             </table>
             <tr>
