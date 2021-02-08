@@ -140,7 +140,7 @@
                 </li>
                   <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a></li>
                     @endif
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ url('/logout') }}"aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> Logout</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ url('/logout') }}"aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">  @lang('messages.reports_page.logout')</span></a></li>
        
 
             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
