@@ -119,9 +119,7 @@
             // 'csv', 'excel', 'pdf', 'print',
           
             {
-                extend: 'pdf', 
-                orientation: 'landscape',   
-                pageSize: 'LEGAL',   
+                extend: 'pdf',  
                 exportOptions: {
                     columns: ':visible:not(.not)' // indexes of the columns that should be printed,
                 }                      // Exclude indexes that you don't want to print.

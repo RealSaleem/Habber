@@ -2021,7 +2021,8 @@ return [
     'reports_page'=> [
         'sale_reports'=> 'تقرير البيع' ,
         'publisher_reports'=>'تقرير الناشر',
-        'system_reports' => 'تقارير النظام'
+        'system_reports' => 'تقارير النظام',
+        'logout'=> 'تسجيل خروج'
     ],
     'password_page'=> [
         'password'=>'كلمه السر',
