@@ -103,7 +103,7 @@
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('countries.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.city_page.city') </span></a>
+            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.address_page.state') </span></a>
                 <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('city.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('city.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
