@@ -122,7 +122,7 @@
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Publisher</label>
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.publisher')</label>
                         <div class="col-sm-9">
                         <select  class="form-control" name="publisher" id="publisher">
                         @foreach($user as $u)
