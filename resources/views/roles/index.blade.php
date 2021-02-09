@@ -28,26 +28,28 @@
                     <tr>    
                         <td>{{$roles->name}}</td>
                         <td>
-                        <div class="row">
-                               <div>
-                            <a href="{{action('RoleController@show',[$roles->id])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                             </div>
-                                    <form action="{{ action('RoleController@destroy', [$roles->id])}}" method="post">
+                          <div class="dropdown">
+                     <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
+                     Actions
+                     <span class="caret"></span>
+                 </button>
+             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+             <li role="presentation"> <a href="{{action('RoleController@show',[$roles->id])}}"><button class=" btn btn-light">Detail</button></a></li>
+                           
+             <li role="presentation">  <form action="{{ action('RoleController@destroy', [$roles->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-trash"></span></button>
-                                    </form>
+                                        <button class=" btn btn-light">Delete</button>
+                                    </form></li>
                                
     
-                                    <form action="{{action('RoleController@edit', [$roles->id])}}" method="post">
+                                    <li role="presentation"> <form action="{{action('RoleController@edit', [$roles->id])}}" method="post">
                                     @csrf
                                     @method('get')
-                                        <button class=" btn btn-success" type="submit">
-                                        <span class="fa fa-edit"></span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                                    <button class=" btn btn-light">Edit</button>
+                                    </form></li>
+                                    </ul>
+</div>
                         </td>
                     </tr>
                     @endforeach
