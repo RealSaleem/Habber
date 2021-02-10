@@ -55,30 +55,6 @@
                     @endforeach
                     @endforeach
                     @endif
-
-            @if(count($publisher->bookmarks ) > 0)
-        @foreach($publisher->bookmarks as $bm)
-        @foreach($bm->orders as $k)
-                    <tr>    
-
-                        <td>{{$k['id']}}</td>
-                        <td>{{$k['created_at']}} to {{ $dt->format('Y-m-d H:i:s')}}  </td>
-                        @if($fromUser->hasRole('admin'))
-                        <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
-                        @endif
-                        <td>{{$k['total_price']}}  {{($k->currencies['iso'])}} </td>
-                        @if($fromUser->hasRole('admin'))
-                        <td>
-                     
-                            <a href="{{action('ReportController@show',[$publisher['id']])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                             </td>
-                             @endif
-                             
-                    </tr>
-                   
-                    @endforeach
-                    @endforeach
-                    @endif
                     @endforeach
                     
                 </tbody>
