@@ -27,14 +27,14 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name"  value="{{ old('name') }}" id="name"  placeholder="name">
+                            <input type="text" class=" name form-control" name="name"  value="{{ old('name') }}" id="name"  placeholder="name">
                             <span class="text-danger">{{$errors->first('name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookclub_page.arabic_name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="arabic_name" dir="rtl" value="{{ old('arabic_name') }}" id="arabic_name"  placeholder="Arabic Name">
+                            <input type="text" class="arabic_name form-control" name="arabic_name" dir="rtl" value="{{ old('arabic_name') }}" id="arabic_name"  placeholder="Arabic Name">
                             <span class="text-danger">{{$errors->first('arabic_name')}}</span>
                         </div>
                     </div>
@@ -106,3 +106,12 @@
 </div>
                   
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".name").keydown(function(){
+        $(".arabic_name").val($(".name").val());
+    });
+    
+});
+</script>

@@ -36,7 +36,7 @@
                         <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="rtl" name="arabic_title" id="arabic_title" value="{{$book->arabic_title}}" placeholder= "Arabic Title" >
+                            <input type="text" class="form-control" dir="rtl" name="arabic_title" id="arabic_title" value="{{$book->title}}" placeholder= "Arabic Title" >
                             <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
                     </div>
