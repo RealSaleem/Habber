@@ -25,7 +25,7 @@ class ContactUsRequest extends FormRequest
     {
         return [
             'name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
-            'email' => ['bail', 'required', 'string', 'email', 'max:255', 'unique:contact_us'],
+            'email' => ['bail', 'required', 'string', 'email', 'max:255'],
             'message' => ['bail', 'required', 'string'],
         ];
     }
