@@ -18,7 +18,7 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use App\Events\ForgotPasswordApiEvent;
-
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -39,8 +39,9 @@ class AuthController extends Controller
             if($user->status == true && $user->joining_request == false) {
                 $ftoken = User::where('email',request('email'))->first();
                 $user['token'] = $user->createToken('token')->accessToken;
-                $user['firebase_token'] = request('firebase_token');
-               $ftoken->firebase_token = request('firebase_token');
+               
+               $user['firebase_token'] = $this->firebaseTokenConvert(request('firebase_token'));
+               $ftoken->firebase_token = $user['firebase_token'];
                $ftoken->save();
                 return (new AuthResource($user->load('languages')));
             }
@@ -130,5 +131,24 @@ class AuthController extends Controller
         catch(\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
+    }
+    
+    private function firebaseTokenConvert($token) {
+        if (strlen($token) > 0 && strlen($token) < 70) {
+            $apiKey = env('FIREBASE_API_KEY');
+            $url = env('GOOGLE_API_APNS');
+            $build = env('BUILD_NAME');
+            $sandbox = env('FIREBASE_SANDBOX');
+            $response = Http::withToken($apiKey)->post($url, [
+                'apns_tokens' => [$token],
+                'application' => $build,
+                'sandbox' => $sandbox
+            ]);
+            $responseArray = json_decode($response,true);
+            if ($responseArray['results'][0]['status'] == 'OK') {
+                return $responseArray['results'][0]['registration_token'];
+            } 
+        }
+        return $token;
     }
 }
