@@ -3,6 +3,7 @@ namespace App\Repositories\Api;
 use App\Genre;
 use App\Book;
 use App\Bookmark;
+use App\Cart;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -75,6 +76,10 @@ class OrderRepository implements RepositoryInterface {
         }
         for($i = 0; $i < count($bookmarks); $i++) {
             $order->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ]);
+        }
+        if($data['payment_type']=='cod'){
+            $cart=Cart::where('user_id',auth()->user()->id)->first();
+            $cart->delete();
         }
         return $order;
     //    dd($books[0]['product_id']);

@@ -6,6 +6,7 @@ use App\Helpers\ModelBindingHelper;
 use Hesabe\Payment\HesabeCrypt; 
 use App\Order;
 use App\Transaction;
+use App\Cart;
 
 class PaymentGatewayController extends Controller
 {
@@ -29,7 +30,8 @@ class PaymentGatewayController extends Controller
    
 
 public function successPayment() {
-    
+    $cart=Cart::where('user_id',auth()->user()->id)->first();
+    $cart->delete();
     $orderId = $_GET['id'];
     $responseData = $_GET['data'];
     $decryptResponse = $this->hesabeCrypt::decrypt($responseData, $this->secretKey, $this->ivKey);
