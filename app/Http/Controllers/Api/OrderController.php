@@ -84,19 +84,17 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         try {
-            // dd($request->all());
-            // $data['cartProducts'] = $cartProducts;
-            // $data['total_price'] = $request->total_price; 
-            // $data['total_quantity'] = $request->total_quantity; 
-            // $data['address_id'] = $request->address_id;
             $order = $this->model->create($request->all());
             if ($order == false) {
                 return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Order Creation UnSuccessfull! Some Products ran out of stock');
             }
-
-            else {
+             else {
                 $cart=Cart::where('user_id',auth()->user()->id)->first();
+               
                 if($cart==null){return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Can not place order because cart is empty');}
+                if($order['payment_type']=='cod')
+                {$cart=Cart::where('user_id',auth()->user()->id)->first();
+                    $cart->delete();}
            event(new OrderSuccessEvent($order));
                 return (new OrderResource($order));
                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
