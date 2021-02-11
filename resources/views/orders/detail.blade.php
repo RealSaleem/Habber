@@ -23,7 +23,7 @@
                     <div class="col"> <strong>@lang('messages.user_page.email'):</strong> <br>  {{ucfirst($order->users['email'])}} </div>
                     <div class="col"> <strong>@lang('messages.user_page.contact_no'):</strong> <br> {{ucfirst($order->users['phone'])}}</div>
                     <div class="col"> <strong>@lang('messages.order_page.total_quantity') :</strong> <br> {{ucfirst($order->total_quantity)}}</div>
-                    <div class="col"> <strong>@lang('messages.order_page.total_price'):</strong> <br> {{$order->total_price}}{{$order->currencies['iso']}} </div>
+                    <div class="col"> <strong>@lang('messages.order_page.total_price'):</strong> <br> {{($order->total_price)+($order->addresses->countries['shipping_charges'])}} {{$order->currencies['iso']}} </div>
                 </div>
                 <table id="zero_config" class="table table-striped table-bordered">
                 <thead>
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="card-body row">
-                <div class="col"> <strong>@lang('messages.book_page.status'):</strong> <br> </div>
+                <div class="col"> <strong>Shipping Status:</strong> <br> </div>
                     <select class="form-control" name="status" id="status">
                             <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Confirmed</option>
                             <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Shipped</option>
@@ -80,14 +80,14 @@
                      </select>
                     </div>
                     <div class="card-body row">
-                <div class="col"> <strong>@lang('messages.order_page.order_status'):</strong> <br> </div>
+                <div class="col"> <strong>Product Status:</strong> <br> </div>
                     <select class="form-control" name="order_status" id="order_status">
                             <option value="0" {{($order->order_status == "0" ? 'selected' : '')}}>Not Ready</option>
                             <option value="1" {{($order->order_status == "1" ? 'selected' : '')}}>Ready</option>
                      </select>
                     </div>
                     <div class="card-body row">
-                <div class="col"> <strong>@lang('messages.book_page.status'):</strong> <br> </div>
+                <div class="col"> <strong>Status:</strong> <br> </div>
                     <select class="form-control" name="status" id="">
                             <option value="0" {{($order->order_status == "0" ? 'selected' : '')}}>Pending</option>
                             <option value="1" {{($order->order_status == "1" ? 'selected' : '')}}>Seen</option>
