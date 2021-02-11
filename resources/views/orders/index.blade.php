@@ -23,7 +23,7 @@
                         <th>Currency</th>
                         <th>Order Total Amount</th>
                         <th>Status</th>
-                        <th>Order Status</th>
+                        <th>Product Status</th>
                         <th>Order Date & Time</th>
                         <th class="not">Action</th>
                       
