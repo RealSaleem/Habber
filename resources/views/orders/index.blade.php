@@ -39,7 +39,7 @@
                         <td> {{ucfirst($order->addresses->countries['name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
-                        <td>{{$order->status == "1" ? "Seen " : "Pending"}}</td> 
+                        <td>{{$order->order_status == "1" ? "Seen " : "Pending"}}</td> 
                         <td>{{$order->order_status == "1" ? "Ready " : "Not Ready"}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>
