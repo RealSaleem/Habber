@@ -72,28 +72,13 @@
                 </div>
 
                 <div class="card-body row">
-                <div class="col"> <strong>Shipping Status:</strong> <br> </div>
+                <div class="col"> <strong>Status:</strong> <br> </div>
                     <select class="form-control" name="status" id="status">
                             <option value="0" {{($order->status == "0" ? 'selected' : '')}}>Confirmed</option>
                             <option value="1" {{($order->status == "1" ? 'selected' : '')}}>Shipped</option>
                             <option value="2" {{($order->status == "2" ? 'selected' : '')}}>Delivered</option>
                      </select>
                     </div>
-                    <div class="card-body row">
-                <div class="col"> <strong>Product Status:</strong> <br> </div>
-                    <select class="form-control" name="order_status" id="order_status">
-                            <option value="0" {{($order->order_status == "0" ? 'selected' : '')}}>Not Ready</option>
-                            <option value="1" {{($order->order_status == "1" ? 'selected' : '')}}>Ready</option>
-                     </select>
-                    </div>
-                    <div class="card-body row">
-                <div class="col"> <strong>Status:</strong> <br> </div>
-                    <select class="form-control" name="status" id="">
-                            <option value="0" {{($order->order_status == "0" ? 'selected' : '')}}>Pending</option>
-                            <option value="1" {{($order->order_status == "1" ? 'selected' : '')}}>Seen</option>
-                     </select>
-                    </div>
-
                     <div class="card-body">
                     <a href="{{route('orders.index')}}">
                         <button type="button" class=" btn btn-success">
