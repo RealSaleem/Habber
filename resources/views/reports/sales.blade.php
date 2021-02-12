@@ -1,15 +1,13 @@
 @extends('layouts.app')
-@section('content')
-    
+@section('content')    
 <h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1> 
-{{ $dt->format('Y-m-d H:i:s')}}
-<div class="ml-auto text-right">
-</div> 
-@if(Session::has('success'))
-    <div class="alert alert-success text-center" role="alert">
-        <strong>{{Session::get('success')}}</strong>
-    </div>
-@endif 
+<div id="sa" class="sa">
+<label for="from">From</label>
+<input type="date" id="from" name="from" />
+<label for="to">to</label>
+<input type="date" id="to" name="to" />
+</div>
+
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
@@ -17,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>Registered</th>
+                        <th>Order Date</th>
                         @if($fromUser->hasRole('admin'))
                         <th>Publisher Name</th>
                         @endif
@@ -39,7 +37,7 @@
                     <tr>    
 
                         <td>{{$k['id']}}</td>
-                        <td>{{$k['created_at']}} to {{ $dt->format('Y-m-d H:i:s')}}</td>
+                        <td>{{$k['created_at']}}</td>
                         @if($fromUser->hasRole('admin'))
                         <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
                         @endif
@@ -72,7 +70,7 @@
                     <tr>    
 
                         <td>{{$k['id']}}</td>
-                        <td>{{$k['created_at']}} to {{ $dt->format('Y-m-d H:i:s')}}</td>
+                        <td>{{$k['created_at']}} </td>
                         @if($fromUser->hasRole('admin'))
                         <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
                         @endif
@@ -108,44 +106,40 @@
 @section('scripts')
 
 <script>
-
-    $(document).ready(function() {
+$(document).ready(function() {
         $('#zero_config').DataTable({
             paging: true,
+            autoWidth: true,
+            lengthChange: true,
             dom: 'Bfrtip',
-            footer: true,
             buttons: [
                 
                 // 'csv', 'excel', 'pdf', 'print',
              
                 {
-                    extend: 'pdf',    
-                    footer: true,       
+                    extend: 'pdf',           
                     exportOptions: {
-                        column: ':visible:not(.not)' // indexes of the columns that should be printed,
+                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
                     }                      // Exclude indexes that you don't want to print.
                 },
                 {
                     extend: 'csv',
-                    footer: true,
                     exportOptions: {
-                        column: ':visible:not(.not)'
+                        columns: ':visible:not(.not)'
                     }
 
                 },
                 {
                     extend: 'excel',
-                    footer: true,
                     exportOptions: {
-                        column: ':visible:not(.not)'
+                        columns: ':visible:not(.not)'
                     }
 
                 },
                 {
                     extend: 'print',
-                    footer: true,
                     exportOptions: {
-                        column: ':visible:not(.not)'
+                        columns: ':visible:not(.not)'
                     }
                 }         
             ],
@@ -154,4 +148,6 @@
 
     })
 </script>
+
+
 @stop
