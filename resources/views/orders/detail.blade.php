@@ -88,17 +88,17 @@
                 <div class="col"> <strong>@lang('messages.order_page.currency'):</strong> <br> {{ucfirst($order->currencies['name'])}} </div>
                 <div class="col"> <strong>@lang('messages.order_page.iso'):</strong> <br> {{ucfirst($order->currencies['iso'])}} </div>
                 <div class="col"> <strong>@lang('messages.order_page.symbol'):</strong> <br> {{ucfirst($order->currencies['symbol'])}} </div>
+                <div class="col"> <strong>@lang('messages.book_page.status'):</strong> <br> {{ucfirst($order->status)}} </div>
                 </div>
 
                 <div class="card-body row">
                 <div class="col"> <strong> Status:</strong> <br> </div>
                     <select class="form-control" name="status" id="status">
-                             <option value="Pending" {{($order->status == "Pending" ? 'selected' : '')}}>Pending</option>
+                            <option> Select the option </option>
                             <option value="Confirmed" {{($order->status == "Confirmed" ? 'selected' : '')}}>Confirmed</option>
                             <option value="Shipped" {{($order->status == "Shipped" ? 'selected' : '')}}>Shipped</option>
                             <option value="Delivered" {{($order->status == "Delivered" ? 'selected' : '')}}>Delivered</option>
-                            <option value="Cancelled" {{($order->status == "Cancelled" ? 'selected' : '')}}>Cancelled</option>
-                            <option value="Payment Failed" {{($order->status == "Payment Failed" ? 'selected' : '')}}>Payment Failed</option>
+                         
                      </select>
                     </div>
                     <div class="card-body">

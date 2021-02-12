@@ -92,15 +92,13 @@ class OrderController extends Controller
                 $cart=Cart::where('user_id',auth()->user()->id)->first();
                
                 if($cart==null){return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Can not place order because cart is empty');}
-                if($order['payment_type']=='cod')
-                {$cart=Cart::where('user_id',auth()->user()->id)->first();
-                    $cart->delete();}
+                    $cart->delete();
            event(new OrderSuccessEvent($order));
                 return (new OrderResource($order));
                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
-            }
+             }
            
-        }
+            }
         catch (\Exception $e) {
             return ApiHelper::apiResult(false,HttpResponse::HTTP_UNAUTHORIZED, $e->getMessage());
         }
