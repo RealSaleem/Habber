@@ -38,6 +38,7 @@ public function successPayment() {
     $order->payment_status = $decryptedResponse->status;
     $order->payment_message = $decryptedResponse->message;
     $order->save();
+    event(new OrderSuccessEvent($order));
     $trans = new Transaction();
     $trans->order_id = $orderId;
     $trans->code = $decryptedResponse->code;
