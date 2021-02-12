@@ -69,7 +69,7 @@ class BooksController extends Controller
         $validatedData = $request->validate([
         
             'title' => 'required',
-            'arabic_title' => 'required',
+           
             'author_name' => 'required',
             'cover_type' => 'required',
             'description' => 'required',
@@ -86,7 +86,12 @@ class BooksController extends Controller
             ]);
             $book = new Book();
             $book->title = $request->title;
-            $book->arabic_title = $request->arabic_title;
+            if( $request->arabic_title = "") {
+                $book->arabic_title = $request->title;
+            }
+            else {
+                $book->arabic_title = $request->arabic_title;
+            }
             $book->author_name = $request->author_name;
             $book->cover_type= $request->cover_type;
             $book->description= $request->description;
@@ -184,7 +189,6 @@ class BooksController extends Controller
         $genId = Genre::where('title','General')->first();     
         $validatedData = $request->validate([
             'title' => 'required',
-            'arabic_title' => 'required',
             'author_name' => 'required',
             'cover_type' => 'required',
             'description' => 'required',
@@ -202,7 +206,12 @@ class BooksController extends Controller
        
         $book = Book::find($id);
         $book->title = $request->title;
-        $book->arabic_title = $request->arabic_title;
+        if($request->arabic_title = 'null') {
+            $book->arabic_title = $request->title;
+        }
+        else {
+            $book->arabic_title = $request->arabic_title;
+        }
         $book->author_name = $request->author_name;
         $book->cover_type= $request->cover_type;
         $book->description= $request->description;
