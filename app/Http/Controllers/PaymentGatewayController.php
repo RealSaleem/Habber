@@ -68,6 +68,9 @@ public function successPayment() {
 public function failurePayment() {
     
     $orderId = $_GET['id'];
+    $order = Order::find($orderId);
+    $order->status='Payment Failed';
+    $order->update();
     $responseData = $_GET['data'];
     $decryptResponse = $this->hesabeCrypt::decrypt($responseData, $this->secretKey, $this->ivKey);
     $decryptedResponse = $this->getPaymentResponse($responseData);
