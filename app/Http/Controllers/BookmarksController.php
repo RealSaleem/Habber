@@ -64,7 +64,6 @@ class BookmarksController extends Controller
     {  
         $validatedData = $request->validate([
             'title' => 'required',
-            'arabic_title' => 'required',
             'maker_name' => 'required',
             'arabic_maker_name' => 'required',
             'description' => 'required',
@@ -84,7 +83,12 @@ class BookmarksController extends Controller
             $lastBookmark = Bookmark::orderBy('created_at', 'desc')->first();
             $bookmark = new Bookmark();
             $bookmark->title = $request->title;
-            $bookmark->arabic_title = $request->arabic_title;
+            if($request->arabic_title = '') {
+                $bookmark->arabic_title = $request->title;
+            }
+            else {
+                $bookmark->arabic_title = $request->arabic_title;
+            }
             $bookmark->maker_name = $request->maker_name;
             $bookmark->arabic_maker_name = $request->arabic_maker_name;
             $bookmark->description= $request->description;
@@ -177,7 +181,6 @@ class BookmarksController extends Controller
         //  
         $validatedData = $request->validate([
             'title' => 'required',
-            'arabic_title' => 'required',
             'maker_name' => 'required',
             'arabic_maker_name' => 'required',
             'description' => 'required',
@@ -196,7 +199,12 @@ class BookmarksController extends Controller
             ]);
         $bookmark = Bookmark::find($id);
         $bookmark->title = $request->title;
-        $bookmark->arabic_title = $request->arabic_title;
+        if( $request->arabic_title == "") {
+            $bookmark->arabic_title = $request->title;
+        }
+        else {
+            $bookmark->arabic_title = $request->arabic_title;
+        }
         $bookmark->maker_name = $request->maker_name;
         $bookmark->arabic_maker_name = $request->arabic_maker_name;
         $bookmark->description= $request->description;

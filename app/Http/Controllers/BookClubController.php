@@ -51,7 +51,6 @@ class BookClubController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required', 
-            'arabic_name' => 'required', 
             'book'=>'required',
             'status'=>'required',
             'featured'=>'required',
@@ -61,7 +60,12 @@ class BookClubController extends Controller
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
-        $bookclub->arabic_name = $request->arabic_name;
+        if( $request->arabic_name = '') {
+            $bookclub->arabic_name = $request->name;
+        }
+        else {
+            $bookclub->arabic_name = $request->arabic_name;
+        }
         $bookclub->book_id = $request->book;
         if ($request->has('featured') && $request->featured == "1") {
             $featuredBookclubs = BookClub::where('featured',1)->count();
@@ -138,7 +142,6 @@ class BookClubController extends Controller
         //
         $validatedData = $request->validate([
             'name' => 'required', 
-            'arabic_name' => 'required', 
             'book'=>'required',
             'featured'=>'required',
             'status'=>'required',
@@ -148,7 +151,12 @@ class BookClubController extends Controller
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
-        $bookclub->arabic_name = $request->arabic_name;
+        if( $request->arabic_name = "") {
+            $bookclub->arabic_name = $request->name;
+        }
+        else {
+            $bookclub->arabic_name = $request->arabic_name;
+        }
         $bookclub->book_id = $request->book;
         if($request->has('featured') && $request->featured == "1") {
             $featuredBookclubs = BookClub::where('featured',1)->count();
