@@ -15,6 +15,8 @@
                 @method('PUT')
         <div class="card-body">
             <h6>@lang('messages.order_page.order_id'): {{$order->id}}</h6>
+            
+            <input  type="hidden" id='v' name="remember_token" value="{{$order->id}}">
             <article class="card">
                 <div class="card-body row">
                     <div class="col"> <strong>@lang('messages.order_page.order_date'):</strong> <br>{{$order->created_at}} </div>
@@ -49,9 +51,9 @@
                             <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$o->image)  }}" alt=""> </td>
                             <td>
                           <div class="card-body row">
-                          <input  type="hidden" name="id" value="{{$o->id}}">
+                          <input  type="hidden" id="id1" value="{{$o->id}}">
                           
-                    <select class="form-control" name="product_status" id="product_status">
+                    <select class="form-control" name="product_status" id="product_status" onchange="func(this);">
                             <option value="Not Ready" {{($o->product_status == "Not Ready" ? 'selected' : '')}}>Not Ready</option>
                             <option value="Ready" {{($o->product_status == "Ready" ? 'selected' : '')}}>Ready</option>
                      </select>
@@ -69,9 +71,9 @@
                             <td>{{$b['pivot']->quantity}}</td>
                             <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$b->image)  }}" alt=""> </td>
                           <td>
-                         <input  type="hidden" name="id1" value="{{$b->id}}">
+                         <input  type="hidden" id="id2" value="{{$b->id}}">
                           <div class="card-body row">
-                    <select class="form-control" name="product_status1" id="product_status">
+                    <select class="form-control" name="product_status1" id="product_status1" onchange="func1(this);">
                             <option value="Not Ready" {{($b->product_status == "Not Ready" ? 'selected' : '')}}>Not Ready</option>
                             <option value="Ready" {{($b->product_status == "Ready" ? 'selected' : '')}}>Ready</option>
                      </select>
@@ -112,7 +114,48 @@
                 </form>
                 </article>
               
-              
+    
+<script>
+   function func(obj){
+       var s=obj.options[obj.selectedIndex].value;
+       var ss=document.getElementById("id1").value;
+       var sss=document.getElementById("v").value;
+       var token=$('meta[name="csrf-token"]').attr('content');
+       $.ajax({
+        type: "POST", 
+        dataType: "json", 
+        url: "{{ url('admin/update1') }}",
+            data: {
+            o: s,
+            oo: ss,
+            id: sss,
+            _token: token
+        }
+       });
+    }
+      </script>
+      <script>
+        function func1(obj){
+       var s=obj.options[obj.selectedIndex].value;
+       console.log(s);
+       var ss=document.getElementById("id2").value;
+       console.log(ss);
+       var sss=document.getElementById("v").value;
+       var token=$('meta[name="csrf-token"]').attr('content');
+       $.ajax({
+        type: "POST", 
+        dataType: "json", 
+        url: "{{ url('admin/update2') }}",
+            data: {
+            o: s,
+            oo: ss,
+            id: sss,
+            _token: token
+        }
+       });
+    }
+      </script>
+
 
                   
 @endsection

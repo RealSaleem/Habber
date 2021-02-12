@@ -117,14 +117,8 @@ class OrderController extends Controller
         $error = false;
         try{
             $order = Order::with('books','bookmarks')->find($id);
-           $product=OrderProduct::where('order_id',$order->id)->where('product_id',$request->id)->first();
-           $product->product_status=$request->product_status;
-           $product1=OrderProduct::where('order_id',$order->id)->where('product_id',$request->id1)->first();
-           $product1->product_status=$request->product_status1;
             $order->status = $request->status;
             $order->update();
-            $product->update();
-            $product1->update();
            event(new OrderStatusChangedEvent($order));
           return back()->with('success', 'Status Updated Successfully!');
         }
@@ -136,6 +130,21 @@ class OrderController extends Controller
         if($error) {
             return back()->with('success', $message);
         }
+    }
+    public function update1(Request $request){
+        $order = Order::with('books','bookmarks')->find($request->id);
+              
+            $product=OrderProduct::where('order_id',$order->id)->where('product_id',$request->oo)->first();
+           $product->product_status=$request->o;
+            $product->update();
+            return back()->with('success', 'Status Updated Successfully!');
+    }
+    public function update2(Request $request){
+        $order = Order::with('books','bookmarks')->find($request->id);
+           $product1=OrderProduct::where('order_id',$order->id)->where('product_id',$request->oo)->first();
+           $product1->product_status=$request->o;
+            $product1->update();
+            return back()->with('success', 'Status Updated Successfully!');
     }
     
     /**

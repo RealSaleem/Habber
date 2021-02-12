@@ -107,11 +107,4 @@
                   
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $(".name").keydown(function(){
-        $(".arabic_name").val($(".name").val());
-    });
-    
-});
-</script>
+
