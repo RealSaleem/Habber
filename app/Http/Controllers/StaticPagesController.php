@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\StaticPage;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 class StaticPagesController extends Controller
 {
@@ -148,5 +149,26 @@ class StaticPagesController extends Controller
         $static = StaticPage::findOrFail($id);
         $static->delete();
         return back()->with('success', 'Page Deleted Successfully!');
+    }
+
+    public function share() {
+        //Detect special conditions devices
+        $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+        $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+        $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+        $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+        $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+        $redirec_url = $_GET['redirec_url'];
+        $iphone = 'hebber://'.$redirec_url;
+        $android = 'https://hebber.com/'.$redirec_url;
+        //do something with this information
+        if( $iPod || $iPhone || $iPad){
+            return Redirect::to($iphone);
+            //browser reported as an iPhone/iPod touch -- do something here
+        }else if($Android){
+            return Redirect::to($android);
+        }else{
+            exit('not found');
+        }
     }
 }

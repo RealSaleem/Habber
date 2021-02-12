@@ -101,7 +101,6 @@
                             <option value="Payment Failed" {{($order->status == "Payment Failed" ? 'selected' : '')}}>Payment Failed</option>
                      </select>
                     </div>
-                  
                     <div class="card-body">
                     <a href="{{route('orders.index')}}">
                         <button type="button" class=" btn btn-success">
