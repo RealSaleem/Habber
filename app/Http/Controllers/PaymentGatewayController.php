@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Helpers\ModelBindingHelper;
-use Hesabe\Payment\HesabeCrypt; 
+use App\Helpers\ModelBindingHelper; 
+use App\Helpers\HesabeCrypt;
 use App\Order;
 use App\Transaction;
 use App\Cart;
@@ -66,6 +66,9 @@ public function successPayment() {
 public function failurePayment() {
     
     $orderId = $_GET['id'];
+    $order = Order::find($orderId);
+    $order->status='Payment Failed';
+    $order->update();
     $responseData = $_GET['data'];
     $decryptResponse = $this->hesabeCrypt::decrypt($responseData, $this->secretKey, $this->ivKey);
     $decryptedResponse = $this->getPaymentResponse($responseData);
