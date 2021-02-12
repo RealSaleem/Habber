@@ -27,7 +27,9 @@ class Order extends Model
     public function currencies() {
         return $this->belongsTo(Currency::class,'currency_id','id');
     }
-    
+    public function order_product() {
+        return $this->belongsTo(OrderProduct::class);
+    }
   
 
 }

@@ -7,7 +7,7 @@ use App\Events\OrderSuccessEvent;
 use App\Order;
 use App\User;
 use App\Address;
-
+use App\OrderProduct;
 
 
 
@@ -80,7 +80,7 @@ class OrderController extends Controller
     public function show($id)
     {
         //
-        $order = Order::with('books','bookmarks','addresses','users','currencies')->find($id);
+        $order = Order::with('books','bookmarks','addresses','users','currencies','order_product')->find($id);
         return view('orders.detail', compact('order'));
     
     }
@@ -116,10 +116,16 @@ class OrderController extends Controller
     {
         $error = false;
         try{
-            $order = Order::find($id);
+            $order = Order::with('books','bookmarks')->find($id);
+           $product=OrderProduct::where('order_id',$order->id)->where('product_id',$request->id)->first();
+           $product->product_status=$request->product_status;
+           $product1=OrderProduct::where('order_id',$order->id)->where('product_id',$request->id1)->first();
+           $product1->product_status=$request->product_status1;
             $order->status = $request->status;
             $order->update();
-            event(new OrderStatusChangedEvent($order));
+            $product->update();
+            $product1->update();
+           event(new OrderStatusChangedEvent($order));
           return back()->with('success', 'Status Updated Successfully!');
         }
         catch(\Exception $e) {

@@ -23,7 +23,6 @@
                         <th>Currency</th>
                         <th>Order Total Amount</th>
                         <th>Status</th>
-                        <th>Order Status</th>
                         <th>Order Date & Time</th>
                         <th class="not">Action</th>
                       
@@ -39,8 +38,7 @@
                         <td> {{ucfirst($order->addresses->countries['name'])}}</td>
                         <td>{{$order->currencies['iso']}}</td>
                         <td>{{$order->total_price}}{{$order->currencies['symbol']}}</td>
-                        <td>{{$order->order_status == "1" ? "Seen " : "Pending"}}</td> 
-                        <td>{{$order->order_status == "1" ? "Ready " : "Not Ready"}}</td>
+                        <td>{{$order->status}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>
                         <div class="dropdown">
@@ -49,15 +47,6 @@
                       <span class="caret"></span>
                      </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                         @if($order->order_status == 1)
-                                         <li role="presentation">   <a><button class="btn btn-light" onclick="notreadyOrder('{{$order->id}}')">@lang('messages.order_page.not_ready') </button></a></li>
-                                         @else
-                                             
-                                             <li role="presentation"> <a> <button class="btn btn-light" onclick="readyOrder('{{$order->id}}')">
-                                        @lang('messages.order_page.ready') 
-                                         </button>
-                                             </a></li>
-                                             @endif
                              
                                              <li role="presentation">  <form action="{{ action('OrderController@show', [$order->id])}}" method="post">
                                        @csrf
