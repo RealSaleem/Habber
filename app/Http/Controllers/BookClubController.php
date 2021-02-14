@@ -60,7 +60,7 @@ class BookClubController extends Controller
         ]);
         $bookclub = new BookClub();
         $bookclub->name = $request->name;
-        if( $request->arabic_name = '') {
+        if( $request->arabic_name == '') {
             $bookclub->arabic_name = $request->name;
         }
         else {
@@ -151,7 +151,7 @@ class BookClubController extends Controller
         ]);
         $bookclub = BookClub::find($id);
         $bookclub->name = $request->name;
-        if( $request->arabic_name = "") {
+        if( $request->arabic_name == "") {
             $bookclub->arabic_name = $request->name;
         }
         else {

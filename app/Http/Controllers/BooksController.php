@@ -86,7 +86,7 @@ class BooksController extends Controller
             ]);
             $book = new Book();
             $book->title = $request->title;
-            if( $request->arabic_title = "") {
+            if( $request->arabic_title == "") {
                 $book->arabic_title = $request->title;
             }
             else {
@@ -206,7 +206,7 @@ class BooksController extends Controller
        
         $book = Book::find($id);
         $book->title = $request->title;
-        if($request->arabic_title = 'null') {
+        if($request->arabic_title == '') {
             $book->arabic_title = $request->title;
         }
         else {

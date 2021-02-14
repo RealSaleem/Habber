@@ -83,7 +83,7 @@ class BookmarksController extends Controller
             $lastBookmark = Bookmark::orderBy('created_at', 'desc')->first();
             $bookmark = new Bookmark();
             $bookmark->title = $request->title;
-            if($request->arabic_title = '') {
+            if($request->arabic_title == '') {
                 $bookmark->arabic_title = $request->title;
             }
             else {
