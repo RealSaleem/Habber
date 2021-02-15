@@ -116,7 +116,6 @@ class BooksController extends Controller
                 $book->featured = $request->featured;
             }
             $book->book_club_id = $request->bookclub;
-            $book->status =  false;
             $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
