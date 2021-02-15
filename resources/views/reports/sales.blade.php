@@ -4,8 +4,8 @@
 <div id="sa" class="sa">
 <label for="from">From</label>
 <input type="date" id="from" name="from" />
-<label for="to">to</label>
-<input type="date" id="to" name="to" />
+<label for="to">To</label>
+<input type="date" id="to" name="to" onchange="myFunction();"/>
 </div>
 
 <div class="card">
@@ -147,6 +147,26 @@ $(document).ready(function() {
         });
 
     })
+
+    </script>
+    
+    <script>
+   function myFunction(){
+       var s=document.getElementById("from").value;
+       var s1=document.getElementById("to").value;
+       var token=$('meta[name="csrf-token"]').attr('content');
+       $.ajax({
+        type: "POST", 
+        dataType: "json", 
+        url: "{{ url('admin/report1') }}",
+            data: {
+            o: s,
+            oo: s1,
+            _token: token
+        }
+       });
+    }
+
 </script>
 
 

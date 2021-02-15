@@ -38,7 +38,7 @@
                             <input type="text" class="arabic_title form-control" dir="rtl" name="arabic_title" value="{{ old('arabic_title') }}" id="arabic_title"  placeholder="Arabic Title">
                             <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
-                      </div>  s
+                      </div>  
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.author_name')</label>
                         <div class="col-sm-9">
