@@ -116,6 +116,7 @@ class BooksController extends Controller
                 $book->featured = $request->featured;
             }
             $book->book_club_id = $request->bookclub;
+            $book->status =  false;
             $book->image = "null"; 
             $book->save();
             $updatebook = Book::find($book->id);
@@ -234,7 +235,6 @@ class BooksController extends Controller
         else {
             $book->featured = $request->featured;
         }
-        $book->status =false;
         if($request->has('genre')) {
             if(count($book->genres) + count($request->genre) > 4 ) {
                 $genre_id = $book->genres()->pluck('genre_id');
