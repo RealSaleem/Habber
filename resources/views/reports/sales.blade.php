@@ -107,12 +107,40 @@
 
 <script>
 $(document).ready(function() {
+    
+    fill_datatable();
+
+    function fill_datatable(to='',from=''){
         $('#zero_config').DataTable({
             paging: true,
             autoWidth: true,
             lengthChange: true,
             dom: 'Bfrtip',
-            buttons: [
+            processing: true,
+            serverSide: true,
+            ajax:{
+                url: "{{ route('report1') }}",
+                data:{to:to, from:from}
+            },
+            columns: [
+                {
+                    data:'id',
+                    name:'OrderID'
+                },
+                {
+                    data:'created_at',
+                    name:'OrderDate'
+                },
+                {
+                    data:'first_name',
+                    name:'PublisherName'
+                },
+                {
+                    data:'total_price',
+                    name:'Payment'
+                },
+            ],
+             buttons: [
                 
                 // 'csv', 'excel', 'pdf', 'print',
              
@@ -146,7 +174,23 @@ $(document).ready(function() {
             
         });
 
-    })
+    }  });
+
+    $('#to').onchange(function(){
+        var from = $('#from').val();
+        var to = $('#to').val();
+
+        if(from != '' &&  to != '')
+        {
+            $('##zero_config').DataTable().destroy();
+            fill_datatable(from, to);
+        }
+        else
+        {
+            alert('Select Both filter option');
+        }
+    });
+
 </script>
 
 

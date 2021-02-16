@@ -26,10 +26,35 @@ class ReportController extends Controller
        $order = Order::get();
        $totalOrder = 0;
        $publishers = User::with('books','bookmarks')->role('publisher')->get();
-       $oo= array();
+       foreach($publishers as $publisher){
+        if(count($publisher->books ) > 0){
+        foreach($publisher->books as $b){
+        foreach($b->orders as $k){
+            array_push($oo,$k['id']);
+         $total_price1+=$k['total_price'];
+        }
+    }
+}
+if(count($publisher->bookmarks ) > 0){
+    foreach($publisher->bookmarks as $bm){
+    foreach($bm->orders as $kk){
+        array_push($oo,$kk['id']);
+     $total_price2+=$kk['total_price'];
+    
+    }
+}
+}
+$currency=Currency::find($publisher['currency_id']);  }
+$orders=[];
+            $total_price= $total_price2+ $total_price2;
+            $currency=$currency['iso'];
+            foreach(array_unique($oo) as $o){
+                array_push($orders,Order::with('currencies')->find($o));
+            }
+       
        $fromUser=auth()->user();
   
-       return view('reports.sales', compact('publishers','total_price','dt','fromUser'));}
+       return view('reports.sales', compact('dt','fromUser','total_price','orders','currency'));}
     
         else if(auth()->user()->hasRole('publisher')){
             $dt = new DateTime();
@@ -61,18 +86,111 @@ class ReportController extends Controller
     $orders=[];
                     $total_price= $total_price2+ $total_price2;
                     $currency=$currency['iso'];
+                    
                     foreach(array_unique($oo) as $o){
-                        array_push($orders,Order::with('currencies')->find($o));
-                    }
+                        array_push($orders,Order::with('currencies')->find($o));}
                
 
 
        $fromUser=auth()->user();
-    }
-       return view('reports.sales', compact('publishers','dt','fromUser','total_price','orders','currency'));
-        
+    
+       return view('reports.sales', compact('dt','fromUser','total_price','orders','currency'));
+                } 
     }
    
+
+    public function report(Request $request)
+    {if(auth()->user()->hasRole('admin')){
+        $dt = new DateTime();
+    
+        $total_price = Order::sum('total_price');
+   
+       
+
+       $order = Order::get();
+       $totalOrder = 0;
+       $publishers = User::with('books','bookmarks')->role('publisher')->get();
+       foreach($publishers as $publisher){
+        if(count($publisher->books ) > 0){
+        foreach($publisher->books as $b){
+        foreach($b->orders as $k){
+            array_push($oo,$k['id']);
+         $total_price1+=$k['total_price'];
+        }
+    }
+}
+if(count($publisher->bookmarks ) > 0){
+    foreach($publisher->bookmarks as $bm){
+    foreach($bm->orders as $kk){
+        array_push($oo,$kk['id']);
+     $total_price2+=$kk['total_price'];
+    
+    }
+}
+}
+$currency=Currency::find($publisher['currency_id']);  }
+$orders=[];
+            $total_price= $total_price2+ $total_price2;
+            $currency=$currency['iso'];
+            foreach(array_unique($oo) as $o){
+                array_push($orders,Order::with('currencies')->find($o));
+            }
+       
+       $fromUser=auth()->user();
+  
+       return view('reports.sales', compact('dt','fromUser','total_price','orders','currency'));}
+    
+        else if(auth()->user()->hasRole('publisher')){
+            $dt = new DateTime();
+            $oo=array();
+            $total_price1=0;
+       $total_price2=0;
+       $total_price=0;
+       $currency="";
+            $publishers = User::with('books','bookmarks')->role('publisher')->where('id',auth()->user()->id)->get();
+            foreach($publishers as $publisher){
+                if(count($publisher->books ) > 0){
+                foreach($publisher->books as $b){
+                foreach($b->orders as $k){
+                    array_push($oo,$k['id']);
+                 $total_price1+=$k['total_price'];
+                }
+            }
+        }
+        if(count($publisher->bookmarks ) > 0){
+            foreach($publisher->bookmarks as $bm){
+            foreach($bm->orders as $kk){
+                array_push($oo,$kk['id']);
+             $total_price2+=$kk['total_price'];
+            
+            }
+        }
+    }
+    $currency=Currency::find($publisher['currency_id']);  }
+    $orders=[];
+                    $total_price= $total_price2+ $total_price2;
+                    $currency=$currency['iso'];
+                    if(request()->ajax())
+                    {
+                     if(!empty($request->from))
+                     {
+                    foreach(array_unique($oo) as $o){
+                        array_push($orders,Order::with('currencies')->where('created_at','>=',$request->to)->where('created_at','<=',$request->from)->find($o));
+                    }}
+                else{
+                    foreach(array_unique($oo) as $o){
+                        array_push($orders,Order::with('currencies')->find($o));
+                    } 
+                }
+                return datatables()->of($orders)->make(true);}
+               
+
+
+       $fromUser=auth()->user();
+    
+       return view('reports.sales', compact('dt','fromUser','total_price','orders','currency'));
+                } 
+    }
     
 
     /**
