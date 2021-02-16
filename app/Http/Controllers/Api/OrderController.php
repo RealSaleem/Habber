@@ -93,6 +93,7 @@ class OrderController extends Controller
                
                 if($cart==null){return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Can not place order because cart is empty');}
                     $cart->delete();
+                    event(new OrderSuccessEvent($order));
                 return (new OrderResource($order));
                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Created Successfully');
              }
