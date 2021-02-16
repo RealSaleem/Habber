@@ -103,15 +103,7 @@ var value1;
     return (value1 === "0" ? document.getElementById("users23").style.display ="none" : document.getElementById("users23").style.display ="flex");
 }
 
-ClassicEditor
-    .create( document.querySelector( '#description' ), {
-    } )
-    .then( editor => {
-        console.log( editor );
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
+
 
 </script>
 <!--
