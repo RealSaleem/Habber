@@ -25,35 +25,35 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.first_name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="first_name" id="first_name"  placeholder="First Name ">
+                            <input type="text" class="form-control" name="first_name" id="first_name"  value="{{ old('first_name') }}" placeholder="First Name ">
                             <span class="text-danger">{{$errors->first('first_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.last_name')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="last_name" id="second_name" placeholder="Last Name ">
+                            <input type="text" class="form-control" name="last_name" id="second_name" value="{{ old('last_name') }}" placeholder="Last Name ">
                             <span class="text-danger">{{$errors->first('last_name')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.password')</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password ">
+                            <input type="password" class="form-control" name="password" id="password"  value="{{ old('password') }}" placeholder="Password ">
                             <span class="text-danger">{{$errors->first('password')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.email')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Email ">
+                            <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}" placeholder="Email ">
                             <span class="text-danger">{{$errors->first('email')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.contact_no')</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="phone" id="phone" placeholder="Contact No ">
+                            <input type="number" class="form-control" name="phone" id="phone"  value="{{ old('phone') }}" placeholder="Contact No ">
                             <span class="text-danger">{{$errors->first('phone')}}</span>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.role')</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="role" id="roles">
+                            <select class="form-control" name="role"  value="{{ old('role') }}"  id="roles">
                             <option  disabled selected>Select Role</option>
                                 @foreach($roles as $r)
                                     <option value="{{$r}}">{{$r}}</option>
