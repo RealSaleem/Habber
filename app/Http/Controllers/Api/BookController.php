@@ -171,7 +171,7 @@ class BookController extends Controller
             'keyword' => 'required|string'
         ]);
         try {
-            $books = $this->model->bookSearch($request->keyword);
+            $books = $this->model->where('status',1)->bookSearch($request->keyword);
             if(isset($books)) {
                 return (new BookCollection($books));
             }
