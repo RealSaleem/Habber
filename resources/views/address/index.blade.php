@@ -45,7 +45,7 @@
                     <td>{{$address->post_code}}</td>
                     <td>{{$address->phone}}</td>
                     <td>{{($address->users['first_name'] ." ". $address->users['last_name'])}}</td>
-                    <td>{{($address->cities['shipping_charges'])}}</td>
+                    <td>{{($address->countries['shipping_charges'])}}</td>
                     <td>
                     <div class="dropdown">
             <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
