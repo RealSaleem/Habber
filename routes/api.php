@@ -39,7 +39,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
     Route::get('books/english', 'BookController@englishBooks');
     Route::get('books/{isbn}', 'BookController@show');
     Route::get('related/books/{id}', 'BookController@relatedBooks');
-    Route::any('books/search','BookController@searchBook')->name('search_book');
+    Route::post('books/search','BookController@searchBook');
     Route::any('books/filter','BookController@filterBook')->name('filter_book');
     // Bookmarks
     Route::get('bookmarks', 'BookmarkController@index');

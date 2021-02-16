@@ -24,7 +24,7 @@ class ContactUsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
+            'name' => ['bail', 'required', 'string', 'max:255', 'min:0'],
             'email' => ['bail', 'required', 'string', 'email', 'max:255'],
             'message' => ['bail', 'required', 'string'],
         ];

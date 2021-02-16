@@ -82,7 +82,13 @@ class BookRepository implements RepositoryInterface {
     }
 
     public function bookSearch($data) {
-        return $this->model->where('status',1)->orWhere('title', 'like', "%{$data}%")->orWhere('author_name','like',"%{$data}%")->orWhere('description','like',"%{$data}%")->get();
+       
+        return $this->model->where('status', 1)
+                  ->where(function($query) use ($data){
+                   $query->where('title', 'like', "%{$data}%")
+                   ->orWhere('author_name','like',"%{$data}%")
+                  ->orWhere('description','like',"%{$data}%");
+                })->get();
     }
 
     public function filterByGenre($data) {
