@@ -51,8 +51,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
-    {
+    public function store(Request $request) {
+    // { dd($request);
         $validatedData = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -60,8 +60,8 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'phone' => 'required|numeric', 
             'status'=> 'required',
-            'profile_pic' => 'required|image|mimes:jpg,jpeg,png|max:1024',
-            'role' => 'required'
+            'role' => 'required',
+            'profile_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
             
         $user = new User();
@@ -77,13 +77,21 @@ class UserController extends Controller
         $user->save();   
         $user->assignRole($request->input('role'));
         $updateUser = User::find($user->id);
-        $file = $request->profile_pic;
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filePath = "users/".$user->id."/". $fileName . time() . "." . $file->getClientOriginalExtension();
-        $store = Storage::disk('public')->put( $filePath, file_get_contents($file));
-        $updateUser->profile_pic = $filePath;
-        $updateUser->update();
-     
+        if($request->has('profile_pic')) 
+        {
+            $file = $request->profile_pic;
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filePath =  "users/". $fileName . time() . "." . $file->getClientOriginalExtension();
+            $store = Storage::disk('user_profile')->put( $filePath, file_get_contents($file));
+            $user->profile_pic =  $filePath;
+          
+        }
+        else{
+            $filePath='users/219/download1613548109.png';
+            $user->profile_pic =  $filePath;
+            
+        }
+     $user->update();
         return back()->with('success', 'User successfully saved');
 
     }
