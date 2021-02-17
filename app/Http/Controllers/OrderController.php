@@ -117,9 +117,12 @@ class OrderController extends Controller
         $error = false;
         try{
             $order = Order::with('books','bookmarks')->find($id);
+            if($order->status!=$request->status){
             $order->status = $request->status;
             $order->update();
+            
            event(new OrderStatusChangedEvent($order));
+            }
           return back()->with('success', 'Status Updated Successfully!');
         }
         catch(\Exception $e) {
