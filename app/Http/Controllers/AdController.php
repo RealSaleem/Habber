@@ -46,7 +46,7 @@ class AdController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png|dimensions:max_width=800,max_height=1200',
             'featured' => 'required'     ,
             'status'=> 'required'
         ]);
@@ -112,7 +112,7 @@ class AdController extends Controller
         $validatedData = $request->validate([
              'featured' => 'required',
              'status'=> 'required',
-            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048'
+            'image' => 'sometimes|required|image|mimes:jpg,jpeg,png||dimensions:max_width=800,max_height=1200'
         ]);
         $ad = Ad::find($id);
         $ad->featured = $request->featured;

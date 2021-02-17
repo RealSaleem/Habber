@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <h4 class="card-title">@lang('messages.ad_page.add_ad_info')</h4>
                     <div class="form-group row">
-                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.ad_page.image')</label>
+                        <label for="image" class="col-sm-3 text-right control-label col-form-label">@lang('messages.ad_page.image')<br>(800*1200)</label>
                         <div class="col-sm-9">
                         <input id="image" type="file" class="form-control" name="image">
                             <span class="text-danger">{{$errors->first('image')}}</span>
