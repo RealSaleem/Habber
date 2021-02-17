@@ -73,7 +73,7 @@ public function failurePayment() {
     $order->payment_message='Wrong details provided';
     $order->update();
     $responseData = $_GET['data'];
-    return true;
+   
     
 }
 
