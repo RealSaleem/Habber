@@ -9,6 +9,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Session;
 use App\GuestUser;
+use App\Log;
 
 class PushNotificationController extends Controller
 {
@@ -45,29 +46,9 @@ class PushNotificationController extends Controller
                 }
 
                 public function history(){
-                    $users =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
+                   $log=Log::all();
 
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
-                      $firebase = (new Factory)
-                        ->withServiceAccount($serviceAccount)
-                        ->withDatabaseUri('https://hebber-72e2b.firebaseio.com/')
-                        ->create();
-                        $database   =   $firebase->getDatabase();
-                        $value= array();
-                        $us=array();
-                   foreach($users as $user){
-                        
-                     $getData    =   $database
-                        ->getReference('/User/'.$user->id.'/Notification/');
-                        $snapshot = $getData->getSnapshot();
-                        if($snapshot->getValue()!=null){
-                     array_push($value,$snapshot->getValue());}
-                        
-                     }
-                    
-                     foreach($value as $v){
-                     array_push($us,User::findOrFail($v['to']));}
-                     return view('push_notifications.history', compact('value','us'));
+                     return view('push_notifications.history', compact('log'));
 
                 }
 
