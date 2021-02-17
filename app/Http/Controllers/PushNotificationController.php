@@ -33,7 +33,7 @@ class PushNotificationController extends Controller
                 'description' => 'required' ]);
                 $data = array(
                     'option' => $request->option,
-                    'description' => utf8_encode($request->description), 
+                    'description' =>html_entity_decode($request->description,ENT_NOQUOTES,'UTF-8'), 
                     'users' => $request->users,
                     'title' => $request->title,
                 );
@@ -48,7 +48,7 @@ class PushNotificationController extends Controller
                     $users =  User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->get();
 
         $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
-                        $firebase = (new Factory)
+                      $firebase = (new Factory)
                         ->withServiceAccount($serviceAccount)
                         ->withDatabaseUri('https://hebber-72e2b.firebaseio.com/')
                         ->create();
