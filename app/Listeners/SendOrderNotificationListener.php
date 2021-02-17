@@ -41,6 +41,7 @@ class SendOrderNotificationListener
      * @return void
      */
     public function handle(OrderStatusChangedEvent $event)
+    
     {
 
         $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
@@ -50,13 +51,13 @@ class SendOrderNotificationListener
                         ->create();
                 
                         $database   =   $firebase->getDatabase();
-                        if($event->order['status']==0){
+                        if($event->order['status']=='Confirmed'){
                              $description="Confirmed";
                         }
-                        else if($event->order['status']==1){
+                        else if($event->order['status']=='Shipped'){
                             $description="Shipped";
                         }
-                        else if($event->order['status']==2){
+                        else if($event->order['status']=='Delivered'){
                             $description="Delivered";
                         }
                         $notif = array(
@@ -70,7 +71,9 @@ class SendOrderNotificationListener
                             'body'  =>  $description,
                             'read' => 'false'
                 
+                          
                         ]);   
+                        
                                  $user=User::findOrFail($event->order['user_id']);
                                  
                                   $to= $user->firebase_token;
