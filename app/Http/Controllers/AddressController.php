@@ -160,7 +160,8 @@ class AddressController extends Controller
     {
         //
         $address = Address::findOrFail($id);
-        $address->delete();
+    $address->status=0;
+    $address->update();
         return back()->with('success', 'Address deleted successfully');
     }
 }
