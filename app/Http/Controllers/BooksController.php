@@ -103,7 +103,7 @@ class BooksController extends Controller
             $book->added_by =auth()->user()->id;
             $book->stock_status = $request->stock_status;
             if($request->has('featured') && $request->featured == "1") {
-                $featuredBooks = Book::where('featured',1)->count();
+                $featuredBooks = Book::where('featured',1)->where('book_language',$request->book_language)->count();
                 if($featuredBooks == 8) {
                     $book->featured = 0; 
                     Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
@@ -222,9 +222,10 @@ class BooksController extends Controller
         $book->user_id = $request->publisher;
         $book->book_club_id = $request->bookclub;
         $book->stock_status = $request->stock_status;
+        if($book->featured!=$request->featured){
         if($request->has('featured') && $request->featured == "1") {
-            $featuredBooks = Book::where('featured',1)->count();
-            if($featuredBooks == 16) {
+            $featuredBooks = Book::where('featured',1)->where('book_language',$request->book_language)->count();
+            if($featuredBooks == 8 ) {
                 $book->featured = 0; 
                 Session::flash('featured', 'Book Cannot Be Featured You can only feature 8 books at a time!'); 
             }
@@ -234,7 +235,7 @@ class BooksController extends Controller
         }
         else {
             $book->featured = $request->featured;
-        }
+        }}
         if($request->has('genre')) {
             if(count($book->genres) + count($request->genre) > 4 ) {
                 $genre_id = $book->genres()->pluck('genre_id');

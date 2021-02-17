@@ -158,11 +158,14 @@ class BookClubController extends Controller
             $bookclub->arabic_name = $request->arabic_name;
         }
         $bookclub->book_id = $request->book;
+        if($bookclub->featured!=$request->featured){
+            
+        
         if($request->has('featured') && $request->featured == "1") {
             $featuredBookclubs = BookClub::where('featured',1)->count();
             if($featuredBookclubs == 8) {
-                $bookclub->featured = 0; 
-                Session::flash('featured', 'Bookclubs Cannot Be Featured You can only feature 8 bookclubs at a time!'); 
+                //$bookclub->featured = 0; 
+                Session::flash('featured', 'Bookclub Cannot Be Featured You can only feature 8 books at a time!'); 
             }
             else {
                 $bookclub->featured = $request->featured;
@@ -170,7 +173,7 @@ class BookClubController extends Controller
         }
         else {
             $bookclub->featured = $request->featured;
-        }
+        }}
         $bookclub->status =$request->status;
         if($request->has('banner_image')) 
         {   
