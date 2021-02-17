@@ -33,7 +33,7 @@ class PushNotificationController extends Controller
                 'description' => 'required' ]);
                 $data = array(
                     'option' => $request->option,
-                    'description' =>html_entity_decode($request->description,ENT_NOQUOTES,'UTF-8'), 
+                    'description' =>$request->description, 
                     'users' => $request->users,
                     'title' => $request->title,
                 );
