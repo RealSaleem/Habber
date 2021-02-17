@@ -88,6 +88,7 @@ Route::group(['namespace' => 'Api' , 'prefix' => 'v1'], function() {
         // users
         Route::post('user', 'UserController@update');
         Route::post('users/password', 'UserController@updatePassword');
+        Route::post('cancel_payment','OrderController@CancelPayment');
             //static pages
             
             //notification

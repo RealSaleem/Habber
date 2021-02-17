@@ -148,4 +148,15 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function CancelPayment(Request $request) {
+    
+        $orderId = $request->id;
+        $order = Order::find($orderId);
+        $order->status='Payment Failed';
+        $order->payment_status='Failed';
+        $order->payment_message='Incomplete details provided';
+        $order->update();
+        return true;
+    }
 }

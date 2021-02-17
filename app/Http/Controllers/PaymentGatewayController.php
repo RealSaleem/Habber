@@ -69,12 +69,14 @@ public function failurePayment() {
     $orderId = $_GET['id'];
     $order = Order::find($orderId);
     $order->status='Payment Failed';
+    $order->payment_status='Failed';
+    $order->payment_message='Wrong details provided';
     $order->update();
     $responseData = $_GET['data'];
-    $message3 = 'Payment Failed, Please try again.';
-    return view('payment.index', compact('message3'));
+    return true;
     
 }
+
 
 
 public function getPaymentResponse($responseData)
