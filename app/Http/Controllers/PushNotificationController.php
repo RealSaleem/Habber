@@ -33,9 +33,9 @@ class PushNotificationController extends Controller
                 'description' => 'required' ]);
                 $data = array(
                     'option' => $request->option,
-                    'description' =>$request->description, 
+                    'description' => html_entity_decode($request->description,ENT_NOQUOTES,'UTF-8'), 
                     'users' => $request->users,
-                    'title' => $request->title,
+                    'title' => html_entity_decode($request->title,ENT_NOQUOTES,'UTF-8')
                 );
                         
                    event(new SendNotificationEvent($data));
