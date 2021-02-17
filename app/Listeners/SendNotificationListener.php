@@ -12,6 +12,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use App\User;
 use App\GuestUser;
+use App\Log;
 
 class SendNotificationListener implements ShouldQueue
 {
@@ -67,7 +68,11 @@ class SendNotificationListener implements ShouldQueue
                         for($i=0;$i<count($event->data['users']);$i++){
                             if($event->data['users'][$i]==0){
                                 $user=GuestUser::all();
-                             
+                                $log=new log();
+                                $log->user_id='Guest User';
+                                $log->description=$event->data['description'];
+                                $log->title=$event->data['title'];
+                                $log->save();
                                 for($i=0;$i<count($user);$i++){
                                  $createPost    =   $database 
                                  ->getReference('/User/'.$user[$i]['id'].'/Notification/')
@@ -76,8 +81,10 @@ class SendNotificationListener implements ShouldQueue
                                      'body'  =>  $event->data['description'],
                                      'title' => $event->data['title'],
                                      'read' => 'false'
-                         
-                                 ]);   
+                                    
+
+                                 ]); 
+
                                           $user1=GuestUser::findOrFail($user[$i]['id']);
                                           
                                            $to= $user1->token;
@@ -94,6 +101,15 @@ class SendNotificationListener implements ShouldQueue
                             'read' => 'false'
                 
                         ]);   
+                        //$log = Log::create(['to' => $event->data['users'][$i]])(['body' =>$event->data['description']])(['body' =>$event->data['title']]) ;
+                      
+                        $log=new log();
+                        $u=User::findOrFail($event->data['users'][$i]);
+                        $log->user_id=$u->first_name;
+                        $log->description=$event->data['description'];
+                        $log->title=$event->data['title'];
+                        $log->save();
+
                                  $user=User::findOrFail($event->data['users'][$i]);
                                  
                                   $to= $user->firebase_token;
@@ -126,13 +142,18 @@ class SendNotificationListener implements ShouldQueue
                                     'read' => 'false'
                         
                                 ]);   
+
                                          $user1=GuestUser::findOrFail($user[$i]['id']);
                                          
                                           $to= $user1->token;
                                           
                                           $this->sendNotif($to,$notif);
                            }
-
+                           $log=new log();
+                           $log->user_id='To All Users';
+                           $log->description=$event->data['description'];
+                           $log->title=$event->data['title'];
+                           $log->save();
                             for($i=0;$i<$user->count();$i++){
                             $createPost    =   $database
                             ->getReference('/User/'.$user[$i]['id'].'/Notification/')

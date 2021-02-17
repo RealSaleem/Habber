@@ -22,13 +22,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($value!=null)
-                @for($i=0;$i<count($value);$i++)
+                @if($log!=null)
+                @for($i=0;$i<count($log);$i++)
                     <tr>    
 
-                        <td>{{$value[$i]['title']}}</td>
-                        <td>{{$value[$i]['body']}}</td>
-                        <td>{{$us[$i]['first_name']}}</td>
+                        <td>{{$log[$i]['title']}}</td>
+                        <td>{{$log[$i]['description']}}</td>
+                        <td>{{$log[$i]['user_id']}}</td>
                         
                             
                                 
