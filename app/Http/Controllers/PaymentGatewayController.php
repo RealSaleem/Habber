@@ -71,8 +71,6 @@ public function failurePayment() {
     $order->status='Payment Failed';
     $order->update();
     $responseData = $_GET['data'];
-    $message3 = 'Payment Failed, Please try again.';
-    return view('payment.index', compact('message3'));
     
 }
 
