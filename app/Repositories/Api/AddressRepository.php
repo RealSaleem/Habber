@@ -60,7 +60,7 @@ class AddressRepository implements RepositoryInterface {
     // show the record with the given id
     public function userAddresses()
     {
-        return $this->model->with('countries','cities')->where('user_id',Auth::user()->id)->get();
+        return $this->model->with('countries','cities')->where('user_id',Auth::user()->id)->where('status',1)->get();
     }
 
     public function show($id)

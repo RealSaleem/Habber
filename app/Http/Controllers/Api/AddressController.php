@@ -134,7 +134,9 @@ class AddressController extends Controller
     {
         try{
             $address = Address::findOrFail($id);
-            $address->delete();
+            $address->status=0;
+            $address->update();
+
          return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,'Address Deleted Successfully!');
             
         }
