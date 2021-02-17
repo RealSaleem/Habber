@@ -104,6 +104,7 @@ class BookmarksController extends Controller
             $bookmark->type_of_bookmark= $request->type_of_bookmark;
             $bookmark->user_id = $request->publisher;
             $bookmark->stock_status = $request->stock_status;
+            
             if($request->has('featured') && $request->featured == "1") {
                 $featuredBookmarks = Bookmark::where('featured',1)->count();
                 if($featuredBookmarks == 8) {
@@ -214,6 +215,7 @@ class BookmarksController extends Controller
         $bookmark->type_of_bookmark= $request->type_of_bookmark;
         $bookmark->user_id = $request->publisher;
         $bookmark->stock_status = $request->stock_status;
+        if($bookmark->featured!=$request->featured){
         if ($request->has('featured') && $request->featured == "1") {
             $featuredBookmarks = Bookmark::where('featured',1)->count();
             if($featuredBookmarks == 8) {
@@ -226,7 +228,7 @@ class BookmarksController extends Controller
         }
         else {
             $bookmark->featured = $request->featured;
-        }
+        }}
         $bookmark->status = $request->status;
         if($request->has('image')) 
         {
