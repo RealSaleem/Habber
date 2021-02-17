@@ -8,6 +8,6 @@ class Log extends Model
 {
     //
  
-        protected $table="Log";
+        protected $table="log";
         protected $fillable = ['user_id','title','description'];
 }
