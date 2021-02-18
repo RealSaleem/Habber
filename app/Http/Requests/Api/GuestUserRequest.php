@@ -25,7 +25,7 @@ class GuestUserRequest extends FormRequest
     public function rules()
     {
         return [
-         'token' => ['bail','required','string']
+         'token' => ['bail','required','string', 'unique']
         ];
     }
 }
