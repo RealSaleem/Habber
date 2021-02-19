@@ -46,7 +46,7 @@ class PushNotificationController extends Controller
                 }
 
                 public function history(){
-                   $log=Log::all();
+                   $log=Log::orderBy('id','DESC')->get();
 
                      return view('push_notifications.history', compact('log'));
 
