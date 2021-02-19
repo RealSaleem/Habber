@@ -5,100 +5,33 @@
 <label for="from">From</label>
 <input type="date" id="from" name="from" />
 <label for="to">To</label>
-<input type="date" id="to" name="to" onchange="myFunction();"/>
+<input type="date" id="to" name="to"/>
+<button type="button" name="filter" id="filter" class="btn btn-info">Filter</button>
+<button type="button" name="reset" id="reset" class="btn btn-danger">Reset</button>
 </div>
-
+<input id="s" type="hidden" value=" {{$iso}} ">
+<input id="ss" type="hidden" value="{{$rate1}}">
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table id="zero_config" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>Order Date</th>
-                        @if($fromUser->hasRole('admin'))
                         <th>Publisher Name</th>
-                        @endif
-                        <th>Payment</th>
-                        @if($fromUser->hasRole('admin'))
-                        <th class="not">Action</th>
-                        @endif
-                        
+                        <th>Payment</th> 
+                        <th>Currency</th>
                     </tr>
                 </thead>
-
-                <tbody>
-          
-                @if($fromUser->hasRole('admin'))
-                @foreach($publishers as $publisher)
-        @if(count($publisher->books ) > 0)
-        @foreach($publisher->books as $b)
-        @foreach($b->orders as $k)
-                    <tr>    
-
-                        <td>{{$k['id']}}</td>
-                        <td>{{$k['created_at']}}</td>
-                        @if($fromUser->hasRole('admin'))
-                        <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
-                        @endif
-                        <td>{{$k['total_price']}}  {{($k->currencies['iso'])}} </td>
-                        @if($fromUser->hasRole('admin'))
-                        <td>
-                        <div class="row">
-                               <div>
-                            <a href="{{action('ReportController@show',[$publisher['id']])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                             </div></td>
-                             @endif
-                    </tr>
-                    @endforeach
-                    @endforeach
-                    @endif
-                    @endforeach
-                    
-                </tbody>
                 <tfoot>
-                    <tr>
-                    <td colspan="2" rowspan="1">Grand Total</td>
-                    <td rowspan="1" colspan="1">{{$total_price }} {{$k->currencies->iso}} </td>
-                    </tr>
-                <tfoot>
-                <tbody>
-                @endif
-                @if($fromUser->hasRole('publisher'))
-        @if(count($orders) != 0)
-        @foreach($orders as $k)
-                    <tr>    
-
-                        <td>{{$k['id']}}</td>
-                        <td>{{$k['created_at']}} </td>
-                        @if($fromUser->hasRole('admin'))
-                        <td>{{($publisher['first_name'] ." ".$publisher['last_name'] )}}</td>
-                        @endif
-                        <td>{{$k['total_price']}}  {{($k->currencies['iso'])}} </td>
-                        @if($fromUser->hasRole('admin'))
-                        <td>
-                        <div class="row">
-                               <div>
-                            <a href="{{action('ReportController@show',[$publisher['id']])}}"><button class=" btn btn-success"><span class="fa fa-eye"></span></button></a>
-                             </div></td>
-                             @endif
-                    </tr>
-             
-                  
-                    @endforeach
-                    @endif
-                    
-                </tbody>
-                <tfoot>
-                    <tr>
-                    <td colspan="2" rowspan="1">Grand Total</td>
-                    <td rowspan="1" colspan="1">{{$total_price }} {{$currency}} </td>
-                    </tr>
-                </tfoot>
-                @endif
-                
+                <tr>
+<td style="font-weight:bold">Total</td>
+<td></td>
+<td ></td>
+<td id='sum' style="font-weight:bold"></td>
+                </tr>
+        </tfoot>
             </table>
-            <tr>
         </div>   
     </div>    
 </div>
@@ -106,13 +39,42 @@
 @section('scripts')
 
 <script>
-$(document).ready(function() {
-        $('#zero_config').DataTable({
-            paging: true,
-            autoWidth: true,
-            lengthChange: true,
-            dom: 'Bfrtip',
-            buttons: [
+$(document).ready(function(){
+
+
+
+fill_datatable();
+
+function fill_datatable(to='',from=''){
+   var Table=$('#zero_config').DataTable({
+        paging: true,
+        autoWidth: true,
+        lengthChange: true,
+        dom: 'Bfrtip',
+        processing: true,
+        serverSide: true,
+        ajax:{
+            url: "{{ route('reports.index') }}",
+            data:{to:to, from:from}
+        },
+        drawCallback: function(){
+Table.columns(3, {
+page: 'current'
+}).every(function() {
+var sum = this
+.data()
+.reduce(function(a, b) {
+var x = parseFloat(a) || 0;
+var y = parseFloat(b) || 0;
+return x + y;
+}, 0);
+//console.log(sum); alert(sum);
+$(this.footer()).html(sum);
+var total=sum*document.getElementById('ss').value;
+document.getElementById('sum').innerHTML=total+document.getElementById('s').value;
+});
+},
+        buttons: [
                 
                 // 'csv', 'excel', 'pdf', 'print',
              
@@ -143,29 +105,53 @@ $(document).ready(function() {
                     }
                 }         
             ],
-            
-        });
+         columns: [
+                {
+                    data:'order_id',
+                    name:'OrderID'
+                },
+                {
+                    data:'publisher_name',
+                    name:'PublisherName'
+                },
+                {
+                    data:'currency_iso',
+                    name:'Currency'
+                },
+                {
+                    data:'price',
+                    name:'Payment'
+                },
+               
+                
+            ]
+             
+   
+    });
+}
 
-    })
-
-    </script>
-    
-    <script>
-   function myFunction(){
-       var s=document.getElementById("from").value;
-       var s1=document.getElementById("to").value;
-       var token=$('meta[name="csrf-token"]').attr('content');
-       $.ajax({
-        type: "POST", 
-        dataType: "json", 
-        url: "{{ url('admin/report1') }}",
-            data: {
-            o: s,
-            oo: s1,
-            _token: token
+$('#filter').click(function(){
+    var from = $('#from').val();
+        var to = $('#to').val();
+        if(from != '' &&  to != '')
+        {
+            $('#zero_config').DataTable().destroy();
+            fill_datatable(from, to);
         }
-       });
-    }
+        else
+        {
+            alert('Select Both filter option');
+        }
+});
+$('#reset').click(function(){
+        $('#from').val('');
+        $('#to').val('');
+        $('#zero_config').DataTable().destroy();
+        fill_datatable();
+    });
+
+   
+});
 
 </script>
 

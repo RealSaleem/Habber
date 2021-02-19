@@ -49,7 +49,7 @@ class CityController extends Controller
         $city->country_id = $request->country;
         $city->status = true;
         $city->save();   
-        return back()->with('success', 'City successfully saved');
+        return back()->with('success', 'State successfully saved');
     }
 
     /**
@@ -71,7 +71,7 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::all();
+        $country = Country::orderBy('name','ASC')->get();
         $city = City::with('countries')->findOrFail($id);
         return view('city.edit', compact('city','country'));
     }
@@ -86,7 +86,7 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:cities,name'.$id, 
+            'name' => 'required|unique:cities,name,'.$id, 
             'country' => 'required', 
             
         ]);
@@ -95,7 +95,7 @@ class CityController extends Controller
         $city->country_id = $request->country;
         $city->status = true;
         $city->save();   
-        return back()->with('success', 'City updated successfully ');
+        return back()->with('success', 'State updated successfully ');
     }
 
     /**
@@ -108,7 +108,7 @@ class CityController extends Controller
     {
         $city = City::findOrFail($id);
         $city->delete();
-        return back()->with('success', 'City deleted successfully');
+        return back()->with('success', 'State deleted successfully');
     }
 
     public function deactivateCity($id) {
