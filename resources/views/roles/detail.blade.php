@@ -16,13 +16,13 @@
             <table style="text-align:center" id="zero_config" class="table table-striped table-bordered" >
                 <thead>
                     <tr>
-                        <th>Permission Name </th>
+                        <th style="font-weight:bold">Permission Name </th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($permission as $permission)
+                @foreach($permission as $per) 
                     <tr>    
-                        <td>{{$permission->name}}</td>
+                        <td>{{$per}}</td>
                       
                     </tr>
                     @endforeach
