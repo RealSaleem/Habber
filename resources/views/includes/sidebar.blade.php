@@ -18,8 +18,6 @@
                         <li class="sidebar-item"style="background-color: #786e0047;"><a href="{{ route('publisher.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
-                @endif
-                <!-- publisher -->
                 <li class="sidebar-item" > <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.book_page.books') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('books.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -32,6 +30,40 @@
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
+                @endif
+                <!-- publisher -->
+                @if(Session::get('users')->businesses['product_type']=='both')
+                <li class="sidebar-item" > <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.book_page.books') </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('books.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('books.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.bookmark_page.bookmarks') </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
+                    </ul>
+                </li>
+                @endif
+                @if(Session::get('users')->businesses['product_type']=='books')
+                <li class="sidebar-item" > <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.book_page.books') </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('books.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('books.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
+                    </ul>
+                </li>
+                @endif
+                @if(Session::get('users')->businesses['product_type']=='bookmarks')
+                
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.bookmark_page.bookmarks') </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
+                        <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
+                    </ul>
+                </li>
+                @endif
+
                 @if(Session::get('users')->hasRole('admin'))
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.size_page.bookmark_size') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">

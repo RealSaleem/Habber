@@ -408,7 +408,7 @@ return [
         'sale_reports'=> 'Sale Reports',    
         'publisher_reports'=>'Publisher Reports',
         'system_reports' => 'System Reports',
-        'logout'=> 'LogOut'
+        'logout'=> 'Logout'
     ],
     'password_page'=> [
         'password'=>'Password',
