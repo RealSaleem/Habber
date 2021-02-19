@@ -4,6 +4,8 @@ use App\Genre;
 use App\Book;
 use App\Bookmark;
 use App\Cart;
+use App\User;
+use App\Currency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -72,10 +74,16 @@ class OrderRepository implements RepositoryInterface {
         $arr['total_price'] = $total_price;
         $order = $this->model->create($arr);
         for($i = 0; $i < count($books); $i++) {
-            $order->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book' ]);
+            $book=Book::find($books[$i]['product_id']);
+            $user=User::find($book['user_id']);
+            $curr=Currency::find($arr['currency_id']);
+            $order->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book','user_id' => $book['user_id'], 'publisher_name' => $user['first_name'].$user['surname'], 'currency_id'=>$arr['currency_id'],'currency_iso'=>$curr['iso'],'created_at' => date("Y-m-d",time()) ]);
         }
         for($i = 0; $i < count($bookmarks); $i++) {
-            $order->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ]);
+            $bookmark=Bookmark::find($bookmarks[$i]['product_id']);
+            $user=User::find($bookmark['user_id']);
+            $curr=Currency::find($arr['currency_id']);
+            $order->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ,'user_id' => $bookmark['user_id'], 'publisher_name' => $user['first_name'].$user['surname'],'currency_id'=>$arr['currency_id'],'currency_iso'=>$curr['iso'], 'created_at' => date("Y-m-d",time())]);
         }
         return $order;
     //    dd($books[0]['product_id']);

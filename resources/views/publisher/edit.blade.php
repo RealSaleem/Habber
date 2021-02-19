@@ -29,6 +29,7 @@
                             <span class="text-danger">{{$errors->first('last_name')}}</span>
                         </div>
                     </div>
+                    @if(auth()->user()->hasRole('admin'))
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.password')</label>
                         <div class="col-sm-9">
@@ -36,6 +37,7 @@
                             <span class="text-danger">{{$errors->first('password')}}</span>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.user_page.email')</label>
                         <div class="col-sm-9">

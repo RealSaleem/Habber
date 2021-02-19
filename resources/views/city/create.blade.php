@@ -9,7 +9,7 @@
     <div class="container-fluid">
         @if(Session::has('success'))
             <div class="alert alert-success text-center" role="alert">
-                <strong>City Created! &nbsp;</strong>{{Session::get('success')}}
+                <strong>State Created! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
             
