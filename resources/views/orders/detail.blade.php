@@ -51,11 +51,13 @@
                             <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$o->image)  }}" alt=""> </td>
                             <td>
                           <div class="card-body row">
-                          <input  type="hidden" id="id1" value="{{$o->id}}">
-                          
+                          <input  type="hidden" name="book_id" id="id1" value="{{$o->id}}">
+                          <?php 
+                           
+                         $product=App\OrderProduct::where('order_id',$order->id)->where('product_id',$o->id)->first();?>
                     <select class="form-control" name="product_status" id="product_status" onchange="func(this);">
-                            <option value="Not Ready" {{($o->product_status == "Not Ready" ? 'selected' : '')}}>Not Ready</option>
-                            <option value="Ready" {{($o->product_status == "Ready" ? 'selected' : '')}}>Ready</option>
+                            <option value="Not Ready" {{( $product->product_status == "Not Ready" ? 'selected' : '')}}>Not Ready</option>
+                            <option value="Ready" {{( $product->product_status == "Ready" ? 'selected' : '')}}>Ready</option>
                      </select>
                     </div>
                     </td>
@@ -71,11 +73,14 @@
                             <td>{{$b['pivot']->quantity}}</td>
                             <td><img style=" width: 50px; height: 50px;" src=" {{  url('storage/'.$b->image)  }}" alt=""> </td>
                           <td>
-                         <input  type="hidden" id="id2" value="{{$b->id}}">
+                         <input  type="hidden" name="bookmark_id" id="id2" value="{{$b->id}}">
                           <div class="card-body row">
-                    <select class="form-control" name="product_status1" id="product_status1" onchange="func1(this);">
-                            <option value="Not Ready" {{($b->product_status == "Not Ready" ? 'selected' : '')}}>Not Ready</option>
-                            <option value="Ready" {{($b->product_status == "Ready" ? 'selected' : '')}}>Ready</option>
+                          <?php 
+                           
+                           $product=App\OrderProduct::where('order_id',$order->id)->where('product_id',$o->id)->first();?>
+                    <select class="form-control" name="product_status1" id="product_status1">
+                            <option value="Not Ready" {{( $product->product_status == "Not Ready" ? 'selected' : '')}}>Not Ready</option>
+                            <option value="Ready" {{( $product->product_status == "Ready" ? 'selected' : '')}}>Ready</option>
                      </select>
                     </div>
                     </td>
