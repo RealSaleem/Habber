@@ -5,6 +5,7 @@ use App\Book;
 use App\Bookmark;
 use App\Cart;
 use App\User;
+use App\Notification;
 use App\Currency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class OrderRepository implements RepositoryInterface {
 
     // create a new record in the database
     public function create(array $data)
-    {
+    { 
+
         $books =  [];
         $bookmarks = [];
         $arr['user_id'] = auth()->user()->id;
@@ -78,14 +80,24 @@ class OrderRepository implements RepositoryInterface {
             $user=User::find($book['user_id']);
             $curr=Currency::find($arr['currency_id']);
             $order->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book','user_id' => $book['user_id'], 'publisher_name' => $user['first_name'].$user['surname'], 'currency_id'=>$arr['currency_id'],'currency_iso'=>$curr['iso'],'created_at' => date("Y-m-d",time()) ]);
+            $notification=new Notification;
+            $notification->order_id=$order->id;
+            $notification->publisher_id=$book['user_id'];
+            $notification->save();
         }
+       
         for($i = 0; $i < count($bookmarks); $i++) {
             $bookmark=Bookmark::find($bookmarks[$i]['product_id']);
             $user=User::find($bookmark['user_id']);
             $curr=Currency::find($arr['currency_id']);
             $order->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ,'user_id' => $bookmark['user_id'], 'publisher_name' => $user['first_name'].$user['surname'],'currency_id'=>$arr['currency_id'],'currency_iso'=>$curr['iso'], 'created_at' => date("Y-m-d",time())]);
-        }
+            $notification=new Notification;
+            $notification->order_id=$order->id;
+            $notification->publisher_id=$bookmark['user_id'];
+            $notification->save();
+
         return $order;
+        }
     //    dd($books[0]['product_id']);
         // if(count($books) > 0) {
         

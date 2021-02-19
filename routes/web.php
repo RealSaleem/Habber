@@ -88,8 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('payment/{id}','PaymentGatewayController@show');
    Route::post('payment/submit','PaymentGatewayController@submit')->name('payment.submit');
    Route::resource('orders','OrderController');
-   Route::post('update1','OrderController@update1');
-   Route::post('update2','OrderController@update2');
+   Route::put('update1/{id}','OrderController@update1')->name('order.update1');
    Route::get('order/{orderId}','OrderController@showlist');
    Route::resource('reports','ReportController');
    Route::get('report1','ReportController@report');

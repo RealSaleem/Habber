@@ -8,6 +8,8 @@ use App\Order;
 use App\User;
 use App\Address;
 use App\OrderProduct;
+use App\Book;
+use App\Bookmark;
 
 
 
@@ -33,15 +35,13 @@ class OrderController extends Controller
     {if(auth()->user()->hasRole('admin')){
         $order = Order::with(['addresses'])->get();   
         $address= Address::all();   
-     
         $fromUser=auth()->user();
         return view('orders.index', compact('order','address','fromUser'));
     }
         else if(auth()->user()->hasRole('publisher')){
-            $order = Order::with(['addresses'])->where('user_id',auth()->user()->id)->get(); 
-            $address= Address::all();   
+            $order = OrderProduct::where('user_id',auth()->user()->id)->get(); 
             $fromUser=auth()->user();
-            return view('orders.index', compact('order','address','fromUser'));
+            return view('orders.index1', compact('order','fromUser'));
         }
     }
     
@@ -79,9 +79,26 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        if(auth()->user()->hasRole('admin')){
         $order = Order::with('books','bookmarks','addresses','users','currencies','order_product')->find($id);
-        return view('orders.detail', compact('order'));
+        return view('orders.detail', compact('order'));}
+        if(auth()->user()->hasRole('publisher')){
+            $idd=$id;
+            $books=array();
+            $bookmarks=array();
+            $order = OrderProduct::where('order_id',$id)->get();
+            foreach($order as $o){
+                if($o->product_type=='book' && $o->user_id==auth()->user()->id){
+            $book=Book::find($o->product_id);
+            array_push($books,$book);
+                }
+            else if($o->product_type=='bookmark' && $o->user_id==auth()->user()->id){
+                    $bookmark=Bookmark::find($o->product_id);
+                    array_push($bookmarks,$bookmark);
+                        }
+            }
+            return view('orders.detail1', compact('order','books','bookmarks','idd'));
+        }
     
     }
 
@@ -142,21 +159,18 @@ class OrderController extends Controller
             return back()->with('success', $message);
         }
     }
-    public function update1(Request $request){
-        $order = Order::with('books','bookmarks')->find($request->id);
-              
-            $product=OrderProduct::where('order_id',$order->id)->where('product_id',$request->oo)->first();
-           $product->product_status=$request->o;
-            $product->update();
-            return back()->with('success', 'Status Updated Successfully!');
+    public function update1(Request $request,$id){
+        if($request->has('book_id')){
+            $product=OrderProduct::where('order_id',$id)->where('product_id',$request->book_id)->first();
+              $product->product_status=$request->product_status;
+              $product->update();}
+              if($request->has('bookmark_id')){
+               $product1=OrderProduct::where('order_id',$id)->where('product_id',$request->bookmark_id)->first();
+               $product1->product_status=$request->product_status1;
+                $product1->update();}
+             return back()->with('success', 'Status Updated Successfully!');
     }
-    public function update2(Request $request){
-        $order = Order::with('books','bookmarks')->find($request->id);
-           $product1=OrderProduct::where('order_id',$order->id)->where('product_id',$request->oo)->first();
-           $product1->product_status=$request->o;
-            $product1->update();
-            return back()->with('success', 'Status Updated Successfully!');
-    }
+    
     
     /**
      * Remove the specified resource from storage.
