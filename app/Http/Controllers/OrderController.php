@@ -123,6 +123,14 @@ class OrderController extends Controller
             
            event(new OrderStatusChangedEvent($order));
             }
+            if($request->has('book_id')){
+         $product=OrderProduct::where('order_id',$order->id)->where('product_id',$request->book_id)->first();
+           $product->product_status=$request->product_status;
+           $product->update();}
+           if($request->has('bookmark_id')){
+            $product1=OrderProduct::where('order_id',$order->id)->where('product_id',$request->bookmark_id)->first();
+            $product1->product_status=$request->product_status1;
+             $product1->update();}
           return back()->with('success', 'Status Updated Successfully!');
         }
         catch(\Exception $e) {
