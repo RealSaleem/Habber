@@ -49,15 +49,17 @@
             <!-- ============================================================== -->
             <!-- create new -->
             <!-- ============================================================== -->
+             
              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-none d-md-block">Notifications <i class="fa fa-angle-down"></i></span>
+                    <span class="d-none d-md-block">Notifications  <i class="fa fa-angle-down"></i></span>
                     <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                 </a>
+                
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if(Session::get('notification')!=null)
                 @foreach(Session::get('notification') as $no)
-                <a class="dropdown-item" href="#">{{$no['to']}}'s order has been {{$no['body']}}</a>
+                <a class="dropdown-item" href="{{ action('OrderController@show', $no['order_id'])}}">Order {{$no['order_id']}} has been created</a>
                 @endforeach
               @else
               <a class="dropdown-item" href="#"></a>
