@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class RoleController extends Controller
 {
@@ -66,9 +68,12 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
-        $permission = Permission::get();
-        return view('roles.detail',compact('permission'));
+        $permission=array();
+        $role= Role::with('permissions')->find($id);
+        foreach($role->permissions as $per){
+            array_push($permission,$per['name']);
+        }
+        return view('roles.detail',compact('role','permission'));
     }
 
     /**

@@ -35,7 +35,6 @@
                  </button>
              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
              <li role="presentation"> <a href="{{action('RoleController@show',[$roles->id])}}"><button class=" btn btn-light">Detail</button></a></li>
-                           
              <li role="presentation">  <form action="{{ action('RoleController@destroy', [$roles->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')

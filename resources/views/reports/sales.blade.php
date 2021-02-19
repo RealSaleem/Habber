@@ -19,8 +19,8 @@
                     <tr>
                         <th>Order ID</th>
                         <th>Publisher Name</th>
-                        <th>Payment</th> 
                         <th>Currency</th>
+                        <th>Payment</th> 
                     </tr>
                 </thead>
                 <tfoot>
