@@ -16,7 +16,7 @@ class SendOrderCancellationNotificationListener
         $ch = curl_init();
         
             $url=env('FIREBASE_URL');
-            $fields = json_encode(array('to'=>$to, 'notification'=>$notif));
+            $fields = json_encode(array('to'=>$to, 'notification'=>$notif, 'priority' => 'high'));
     
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
