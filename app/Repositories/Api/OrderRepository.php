@@ -95,7 +95,7 @@ class OrderRepository implements RepositoryInterface {
             $notification->order_id=$order->id;
             $notification->publisher_id=$bookmark['user_id'];
             $notification->save();
-
+        }
         return $order;
         }
     //    dd($books[0]['product_id']);
@@ -135,7 +135,7 @@ class OrderRepository implements RepositoryInterface {
         // }
       
 
-    }
+    
     // Insert data in multiple rows
     public function createInArray(array $data, Model $model)
     {
