@@ -162,7 +162,6 @@ class PublisherController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'password' => 'sometimes|min:8',
-            'product_type' => 'required', 
             'country'=> 'required',
             'profile_pic' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required'
@@ -175,6 +174,7 @@ class PublisherController extends Controller
         {
             $publisher->password = Hash::make($request->password);
         }
+
         $publisher->country_id = $request->country;
         $publisher->status=$request->status;
         if($request->has('profile_pic')) 

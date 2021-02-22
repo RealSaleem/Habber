@@ -45,7 +45,9 @@
                             <span class="text-danger">{{$errors->first('email')}}</span>
                         </div>
                     </div>
+                    @if(auth()->user()->hasRole('admin'))
                      <div class="form-group row">
+
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.product_type')</label>
                         <div class="col-sm-9">
                         <select class="form-control" name="product_type"  id="status">
@@ -56,6 +58,7 @@
                             <span class="text-danger">{{$errors->first('product_type')}}</span>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.operating_country')</label>
                         <div class="col-sm-9">

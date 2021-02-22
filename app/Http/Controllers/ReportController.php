@@ -28,13 +28,13 @@ class ReportController extends Controller
             select('order_id', 'publisher_name', 'price','currency_iso')
             ->where('created_at','>=' ,$request->to)
             ->where('created_at','<=' ,$request->from)
-            ->get();
+            ->orderBy('order_id','ASC')->get();
          } 
          else
          {
           $data = OrderProduct::
             select('order_id', 'publisher_name', 'price','currency_iso')
-            ->get();
+            ->orderBy('order_id', 'ASC')->get();
 
          }
          return datatables()->of($data)->make(true);
@@ -46,19 +46,19 @@ class ReportController extends Controller
                     {
                   
                      $data=OrderProduct::
-                       select('order_id', 'publisher_name', 'price','currency_iso')
+                       select('order_id', 'publisher_name','price','currency_iso')
                        ->where('created_at','>=' ,$request->to)
                        ->where('created_at','<=' ,$request->from)
                        ->where('user_id',auth()->user()->id)
-                       ->get();
+                       ->orderBy('order_id','ASC');
                     } 
                     else
                     {
                      $data = OrderProduct::
-                       select('order_id', 'publisher_name', 'price','currency_iso')
+                       select('order_id','publisher_name',  'price','currency_iso')
                        ->where('user_id',auth()->user()->id)
-                       ->get();
-           
+                       ->orderBy('order_id', 'ASC')->get();
+
                     }
                     return datatables()->of($data)->make(true);
                    }}
@@ -75,6 +75,7 @@ class ReportController extends Controller
            
 
     public function report(Request $request)
+    
     {if(auth()->user()->hasRole('admin')){
         $dt = new DateTime();
     
@@ -196,41 +197,33 @@ $orders=[];
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        
-        $publisher = User::with('books','bookmarks')->role('publisher')->where('id',$id)->first();
+    public function show(Request $request)
+    {   $total_price=0;
+ if(request()->ajax())
+        {
+         if(!empty($request->name))
+         {
        
-        $oo= array();
-        $currency=array();
-        if(count($publisher->books ) > 0) {
-            
-            foreach($publisher->books as $b) {
-                array_push($oo, $b->orders);
-                foreach($oo as $o){
-                $currency=Currency::findORfail($o>['currency_id']);}
+          $data=OrderProduct::
+            select('order_id','publisher_name', 'price','currency_iso')
+            ->where('publisher_name',$request->name)
+            ->get();
+         } 
+         else
+         {
+          $data = OrderProduct::
+            select('order_id','publisher_name','price','currency_iso')
+            ->orderBy('order_id','ASC')->get();
 
-            }
+         }
+         return datatables()->of($data)->make(true);
         }
-    
-        if (count($publisher->bookmarks ) > 0) {
-            
-            foreach($publisher->bookmarks as $bm) {
-               array_push($oo, $bm->orders);
-
-                
-            }
-        }
-        
-
-
-
-     
-        return view('reports.detail',compact('oo','publisher'));
+        $curr=auth()->user()->currency_id;
+        $rate=Currency::find($curr);
+        $iso=$rate->iso;
+        $rate1=$rate->rate;
+        return view('reports.detail',compact('rate1','iso'));
     }
-
-    
-
     /**
      * Show the form for editing the specified resource.
      *
