@@ -48,7 +48,7 @@ class BookmarksController extends Controller
     {
         //
         
-        $user = User::role('publisher')->get();
+        $user = User::role('publisher')->where('status',1)->get();
         $size = Size::all();
         return view('bookmarks.create',compact('user','size'));
     
