@@ -27,7 +27,14 @@ class BookController extends Controller
     public function index()
     {
         try {
+            $b=array();
             $books = $this->model->with(['book_clubs','genres','product_prices','users'])->where('status',1)->orderBy('title','ASC')->paginate(100);
+            foreach($books as $book){
+                $user=User::findOrFail($book->user_id);
+                if($user->status==1){
+                    array_push($b,$book);
+                }
+            }
             if(count($books) != 0) {
                 return (new BookCollection($books));
             }
