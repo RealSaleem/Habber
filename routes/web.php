@@ -92,6 +92,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('update2','OrderController@update2');
    Route::get('order/{orderId}','OrderController@showlist');
    Route::resource('reports','ReportController');
+   Route::get('reports1','ReportController@show')->name('reports1.detail');
    Route::get('report1','ReportController@report');
    Route::resource('city','CityController');
    Route::post('city/activate/{id}','CityController@activateCity')->name('activate_city');
