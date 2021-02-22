@@ -47,10 +47,10 @@ class ShowNotificationListener implements ShouldQueue
                        
     //                  Session::put('notification',$value);
     if(auth()->user()->hasRole('admin')){
-    $order=Notification::distinct()->get(['order_id']);
+    $order=Notification::distinct()->orderBy('order_id','DESC')->get(['order_id']);
     Session::put('notification',$order);}
     else if(auth()->user()->hasRole('publisher')){
-        $order=Notification::where('publisher_id',auth()->user()->id)->distinct()->get(['order_id']);
+        $order=Notification::where('publisher_id',auth()->user()->id)->distinct()->orderBy('order_id','DESC')->get(['order_id']);
     Session::put('notification',$order);
     }
      }
