@@ -18,9 +18,7 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        @if(auth()->user()->hasRole('admin'))
                         <th>Publisher Name</th>
-                        @endif
                         <th>Currency</th>
                         <th>Payment</th> 
                     </tr>
@@ -112,12 +110,12 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
                     data:'order_id',
                     name:'OrderID'
                 },
-                @if(auth()->user()->hasRole('admin'))
+               
                 {
                     data:'publisher_name',
                     name:'PublisherName'
                 },
-                @endif
+               
                 {
                     data:'currency_iso',
                     name:'Currency'
