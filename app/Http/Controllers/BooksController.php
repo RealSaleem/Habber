@@ -51,7 +51,7 @@ class BooksController extends Controller
         $bookClubs = BookClub::all();
         $genres = Genre::where('title','!=','General')->get();
         $language = Language::all();
-        $user = User::role('publisher')->get();
+        $user = User::role('publisher')->where('status',1)->get();
         return view('books.create',compact('user','bookClubs','genres','language'));
     }
 
