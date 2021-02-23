@@ -27,16 +27,16 @@ class BookController extends Controller
     public function index()
     {
         try {
-            $b=array();
+            $o=array();
             $books = $this->model->with(['book_clubs','genres','product_prices','users'])->where('status',1)->orderBy('title','ASC')->paginate(100);
             foreach($books as $book){
                 $user=User::findOrFail($book->user_id);
                 if($user->status==1){
-                    array_push($b,$book);
+                    array_push($o,$book);
                 }
             }
-            if(count($books) != 0) {
-                return (new BookCollection($books));
+            if(count($o) != 0) {
+                return (new BookCollection($o));
             }
             else {
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK,"No Books Found");
