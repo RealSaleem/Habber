@@ -7,6 +7,13 @@
             </div>
         @endif 
     </div> 
+    <div class="container-fluid">
+        @if(Session::has('error'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>{{Session::get('error')}} &nbsp;</strong>
+            </div>
+        @endif 
+    </div> 
 
 <div class="container">
     <article class="card">

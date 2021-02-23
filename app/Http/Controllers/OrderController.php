@@ -132,8 +132,10 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $error = false;
+        if($request->status== 'Select the option'){ return back()->with('error', 'Please Select Order  Status !');}
         try{
             $order = Order::with('books','bookmarks')->find($id);
+            //if($request== null){ return back()->with('success', 'Please Select Order  Status !');}
             if($order->status!=$request->status){
             $order->status = $request->status;
             $order->update();
