@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')    
-<h1 class="page-title">Publisher Report</h1> 
+<h1 class="page-title">@lang('messages.reports_page.publisher_reports')</h1> 
 <div id="sa" class="sa">
 <label for="to">Publisher Name</label>
 <input type='text' id="to" name="to"/>

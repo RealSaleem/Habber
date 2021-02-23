@@ -165,7 +165,7 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.reports_page.system_reports') </span></a>
                 </li>
                 @if(Session::get('users')->hasRole('admin'))
-                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports1.detail') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Publisher Report</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports1.detail') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.reports_page.publisher_reports')</span></a></li>
             <!-- {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('book-edit','book-delete','book-create','book-list')) == true ? "" : "hidden"}} -->
            
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.static_page.staticpage') </span></a>
