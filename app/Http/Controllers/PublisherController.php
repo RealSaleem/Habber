@@ -161,7 +161,7 @@ class PublisherController extends Controller
         $validatedData = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'password' => 'sometimes|min:8',
+          
             'country'=> 'required',
             'profile_pic' => 'sometimes|required|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required'
@@ -170,11 +170,6 @@ class PublisherController extends Controller
         $publisher->first_name = $request->first_name;
         $publisher->last_name = $request->last_name;
         $publisher->email = $request->email;
-        if($request->has('password')) 
-        {
-            $publisher->password = Hash::make($request->password);
-        }
-
         $publisher->country_id = $request->country;
         $publisher->status=$request->status;
         if($request->has('profile_pic')) 

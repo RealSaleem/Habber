@@ -47,6 +47,9 @@
     <span class="caret"></span>
 </button>
 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+<li role="presentation">  <a href="{{route('admin.password',['id'=>$publisher->id])}}"><button class=" btn btn-light">  @lang('messages.user_page.reset_password')</button></a>
+                                    @csrf
+                                    @method('post')</li>
 @if($publisher->status == 1)
 <a><button class="btn btn-light" onclick="deactivateUser('{{$publisher->id}}')">@lang('messages.user_page.deactivate')</button></a></li>
    @else
