@@ -6,6 +6,7 @@ use Session;
 use App\User;
 use App\Order;
 use App\BookClub;
+use App\OrderProduct;
 use App\Book;
 use App\Bookmark;
 use App\Events\ShowNotificationEvent;
@@ -42,12 +43,13 @@ class HomeController extends Controller
        $publisherDetail= User::role('publisher')->count();
        $pendingOrder= Order::where('status','pending')->count();
        $totalOrder = Order::count();
+       $orderDetail= OrderProduct::where('user_id',auth()->user()->id)->count();
        $bookclubDetail = BookClub::count(); 
        $totalProduct = Book::count() + Bookmark::count(); 
        event(new ShowNotificationEvent());
       // ApiHelper::getData();
                   
-return view('welcome',compact('userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder','fromUser'));
+return view('welcome',compact('orderDetail','userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder','fromUser'));
     }
        
     

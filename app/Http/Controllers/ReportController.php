@@ -17,7 +17,8 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   $total_price=0;
+    {   
+         $total_price=0;
         if(auth()->user()->hasRole('admin')){
  if(request()->ajax())
         {
@@ -34,7 +35,7 @@ class ReportController extends Controller
          {
           $data = OrderProduct::
             select('order_id', 'publisher_name', 'price','currency_iso')
-            ->orderBy('order_id', 'ASC')->get();
+            ->orderBy('order_id', 'DESC')->get();
 
          }
          return datatables()->of($data)->make(true);
@@ -49,20 +50,19 @@ class ReportController extends Controller
                        select('order_id', 'publisher_name','price','currency_iso')
                        ->where('created_at','>=' ,$request->to)
                        ->where('created_at','<=' ,$request->from)
-                       ->where('user_id',auth()->user()->id)
-                       ->orderBy('order_id','ASC');
+                       ->where('user_id',auth()->user()->id);
+                       
                     } 
                     else
                     {
                      $data = OrderProduct::
                        select('order_id','publisher_name',  'price','currency_iso')
                        ->where('user_id',auth()->user()->id)
-                       ->orderBy('order_id', 'ASC')->get();
+                       ->orderBy('order', 'DESC')->get();
 
                     }
                     return datatables()->of($data)->make(true);
                    }}
-        
         $curr=auth()->user()->currency_id;
         $rate=Currency::find($curr);
         $iso=$rate->iso;
@@ -213,7 +213,7 @@ $orders=[];
          {
           $data = OrderProduct::
             select('order_id','publisher_name','price','currency_iso')
-            ->orderBy('order_id','ASC')->get();
+           ->get();
 
          }
          return datatables()->of($data)->make(true);
