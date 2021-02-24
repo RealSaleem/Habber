@@ -62,11 +62,12 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">@lang('messages.publisher_page.operating_country')</label>
                         <div class="col-sm-9">
-                        <select  class="form-control" name="country" id="country" >
-                            @foreach($country as $c)
-                            <option value="{{$c->id}} {{ ($publisher->country == $c->id ? "selected" : "")}}"  > {{$c->name}}</option>
-                            @endforeach
-                        </select>
+                            <select  class="form-control" name="country" id="country_id" required>
+                            <option value="" disabled selected> select country</option>
+                                @foreach($country as $c )
+                                <option value="{{$c->id}}" {{ ($publisher->country_id == $c->id ? "selected" : "")}}> {{$c->name}}</option>
+                                @endforeach
+                            </select>
                             <span class="text-danger">{{$errors->first('country')}}</span>
                         </div>
                     </div>
