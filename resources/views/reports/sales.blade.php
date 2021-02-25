@@ -110,12 +110,10 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
                     data:'order_id',
                     name:'OrderID'
                 },
-               
                 {
                     data:'publisher_name',
                     name:'PublisherName'
                 },
-               
                 {
                     data:'currency_iso',
                     name:'Currency'
