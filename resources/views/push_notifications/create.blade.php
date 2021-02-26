@@ -14,6 +14,11 @@
                 <strong>Message Sent! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
+        @if(Session::has('error'))
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Message Not Sent! &nbsp;</strong>{{Session::get('error')}}
+            </div>
+        @endif 
         @if(Session::has('featured'))
             <div class="alert alert-danger text-center" role="alert">
                 <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
@@ -90,7 +95,10 @@
 <script>
 $(".select2").select2();
 </script>
-
+<script>
+$(document).ready(function(){
+document.getElementById("users23").style.display ="none";})
+</script>
 
  <script>
 var value1;
