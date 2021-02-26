@@ -196,37 +196,34 @@ $orders=[];
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        
-        $publisher = User::with('books','bookmarks')->role('publisher')->where('id',$id)->first();
+    public function show()
+   
+    {   $total_price=0;
+        if(auth()->user()->hasRole('admin')){
+ if(request()->ajax())
+        {
+         if(!empty($request->to))
+         {
        
-        $oo= array();
-        $currency=array();
-        if(count($publisher->books ) > 0) {
-            
-            foreach($publisher->books as $b) {
-                array_push($oo, $b->orders);
-                foreach($oo as $o){
-                $currency=Currency::findORfail($o>['currency_id']);}
+          $data=OrderProduct::
+            select('order_id', 'publisher_name', 'price','currency_iso')
+            ->where('publisher_name','>=' ,$request->to)
+            ->get();
+         } 
+         else
+         {
+          $data = OrderProduct::
+            select('order_id', 'publisher_name', 'price','currency_iso')
+            ->get();
 
-            }
-        }
-    
-        if (count($publisher->bookmarks ) > 0) {
-            
-            foreach($publisher->bookmarks as $bm) {
-               array_push($oo, $bm->orders);
-
-                
-            }
-        }
-        
-
-
-
-     
-        return view('reports.detail',compact('oo','publisher'));
+         }
+         return datatables()->of($data)->make(true);
+        }}
+        $curr=auth()->user()->currency_id;
+        $rate=Currency::find($curr);
+        $iso=$rate->iso;
+        $rate1=$rate->rate;
+        return view('reports.detail',compact('rate1','iso'));
     }
 
     
