@@ -17,9 +17,9 @@
                         <th>Submission ID</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Whatsapp Number</th>
                         <th>Phone</th>
                         <th>Message</th>
+                        <th>Status</th>
                         <th class="not">Action</th>                  
                     </tr>
                </thead>
@@ -29,9 +29,9 @@
             <td>{{$contact->id}}</td>
           <td>{{$contact->name}}</td>
             <td>{{$contact->email}}</td>
-            <td>{{$contact->phone}}</td>
             <td>{{$contact->phone}}</td>  
             <td>{{$contact->message}}</td>
+            <td>{{$contact->status == 1 ? "Seen" : "Pending"}}</td>  
             <td>
             <div class="dropdown">
             <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
