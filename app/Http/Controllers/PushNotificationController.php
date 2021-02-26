@@ -27,6 +27,9 @@ class PushNotificationController extends Controller
 
         
      public function sendNotification(Request $request){ 
+         if($request->users==null){
+            return back()->with('error', 'Please Select Users!');
+         }
             $validatedData = $request->validate([
                 'users' => 'sometimes|required',    
                 'option' => 'required',
