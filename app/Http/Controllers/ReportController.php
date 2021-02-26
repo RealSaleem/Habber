@@ -196,18 +196,17 @@ $orders=[];
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
    
-    {   $total_price=0;
-        if(auth()->user()->hasRole('admin')){
+    {    $total_price=0;
  if(request()->ajax())
         {
-         if(!empty($request->to))
+         if(!empty($request->name))
          {
-       
+           
           $data=OrderProduct::
             select('order_id', 'publisher_name', 'price','currency_iso')
-            ->where('publisher_name','>=' ,$request->to)
+            ->where('publisher_name',$request->name)
             ->get();
          } 
          else
@@ -218,7 +217,7 @@ $orders=[];
 
          }
          return datatables()->of($data)->make(true);
-        }}
+        }
         $curr=auth()->user()->currency_id;
         $rate=Currency::find($curr);
         $iso=$rate->iso;
