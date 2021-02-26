@@ -46,10 +46,11 @@ class HomeController extends Controller
        $orderDetail= OrderProduct::where('user_id',auth()->user()->id)->count();
        $bookclubDetail = BookClub::count(); 
        $totalProduct = Book::count() + Bookmark::count(); 
+       $totalProducts = Book::where('user_id',auth()->user()->id)->count() + Bookmark::where('user_id',auth()->user()->id)->count(); 
        event(new ShowNotificationEvent());
       // ApiHelper::getData();
                   
-return view('welcome',compact('orderDetail','userDetail','totalProduct', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder','fromUser'));
+return view('welcome',compact('orderDetail','userDetail','totalProduct','totalProducts', 'publisherDetail','totalOrder','bookclubDetail','pendingOrder','fromUser'));
     }
        
     

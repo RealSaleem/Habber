@@ -63,6 +63,13 @@
                                     <small class="font-light">Total Orders</small>
                                 </div>
                             </div>
+                            <div class="col-6 m-t-15">
+                                <div class="bg-dark p-10 text-white text-center">
+                                    <i class="fa fa-globe m-b-5 font-16"></i>
+                                    <h5 class="m-b-0 m-t-5">  {{$totalProduct}}</h5>
+                                    <small class="font-light">Total Products</small>
+                                </div>
+                            </div>
                             @endif
                             @if($fromUser->hasRole('publisher'))
                             <div class="col-6 m-t-15">
@@ -72,14 +79,15 @@
                                     <small class="font-light">Total Orders</small>
                                 </div>
                             </div>
-                            @endif
+                           
                             <div class="col-6 m-t-15">
                                 <div class="bg-dark p-10 text-white text-center">
                                     <i class="fa fa-globe m-b-5 font-16"></i>
-                                    <h5 class="m-b-0 m-t-5">  {{$totalProduct}}</h5>
+                                    <h5 class="m-b-0 m-t-5">  {{$totalProducts}}</h5>
                                     <small class="font-light">Total Products</small>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <!-- column -->
