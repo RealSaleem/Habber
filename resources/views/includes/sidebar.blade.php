@@ -161,10 +161,14 @@
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('orders.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                 </ul>
             </li>
-         
+            @if(Session::get('users')->hasRole('publisher'))
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.publisher') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.reports_page.system_reports') </span></a>
+                </li>
+                @endif
+                @if(Session::get('users')->hasRole('admin'))
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.reports_page.system_reports') </span></a>
                 </li>
-                @if(Session::get('users')->hasRole('admin'))
+               
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports1.detail') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.reports_page.publisher_reports')</span></a></li>
             <!-- {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('book-edit','book-delete','book-create','book-list')) == true ? "" : "hidden"}} -->
            
