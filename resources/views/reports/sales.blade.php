@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')    
 <h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1> 
+<a href="reports1" ><button style="color: grey;font-size:22px;border: 3px solid black" > + Publisher Report</button> </a>
 <div id="sa" class="sa">
 <label for="from">From</label>
 <input type="date" id="from" name="from" />
