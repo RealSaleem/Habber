@@ -116,6 +116,7 @@ class AdController extends Controller
         ]);
         $ad = Ad::find($id);
         $ad->featured = $request->featured;
+        if($ad->status!=$request->status){
         if ($request->has('status') && $request->status == "1") {
             $statusAds = Ad::where('status',1)->count();
             if(  $statusAds  == 1) {
@@ -128,7 +129,7 @@ class AdController extends Controller
         }
         else {
             $ad->status = $request->status;
-        }
+        }}
         if($request->has('image'))
         {   
             Storage::disk('public')->deleteDirectory('ads/'. $id);

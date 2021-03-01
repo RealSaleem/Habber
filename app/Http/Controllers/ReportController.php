@@ -33,7 +33,7 @@ class ReportController extends Controller
          {
           $data = OrderProduct::
             select('order_id', 'publisher_name', 'price','currency_iso')
-            ->get();
+            ->orderBy('user_id','ASC')->get();
 
          }
          return datatables()->of($data)->make(true);
@@ -51,98 +51,7 @@ class ReportController extends Controller
        
            
 
-    public function report(Request $request)
-    {if(auth()->user()->hasRole('admin')){
-        $dt = new DateTime();
-    
-        $total_price = Order::sum('total_price');
    
-       
-
-       $order = Order::get();
-       $totalOrder = 0;
-       $publishers = User::with('books','bookmarks')->role('publisher')->get();
-       foreach($publishers as $publisher){
-        if(count($publisher->books ) > 0){
-        foreach($publisher->books as $b){
-        foreach($b->orders as $k){
-            array_push($oo,$k['id']);
-         $total_price1+=$k['total_price'];
-        }
-    }
-}
-if(count($publisher->bookmarks ) > 0){
-    foreach($publisher->bookmarks as $bm){
-    foreach($bm->orders as $kk){
-        array_push($oo,$kk['id']);
-     $total_price2+=$kk['total_price'];
-    
-    }
-}
-}
-$currency=Currency::find($publisher['currency_id']);  }
-$orders=[];
-            $total_price= $total_price2+ $total_price2;
-            $currency=$currency['iso'];
-            foreach(array_unique($oo) as $o){
-                array_push($orders,Order::with('currencies')->find($o));
-            }
-       
-       $fromUser=auth()->user();
-  
-       return view('reports.sales', compact('dt','fromUser','total_price','orders','currency'));}
-    
-        else if(auth()->user()->hasRole('publisher')){
-            $dt = new DateTime();
-            $oo=array();
-            $total_price1=0;
-       $total_price2=0;
-       $total_price=0;
-       $currency="";
-            $publishers = User::with('books','bookmarks')->role('publisher')->where('id',auth()->user()->id)->get();
-            foreach($publishers as $publisher){
-                if(count($publisher->books ) > 0){
-                foreach($publisher->books as $b){
-                foreach($b->orders as $k){
-                    array_push($oo,$k['id']);
-                 $total_price1+=$k['total_price'];
-                }
-            }
-        }
-        if(count($publisher->bookmarks ) > 0){
-            foreach($publisher->bookmarks as $bm){
-            foreach($bm->orders as $kk){
-                array_push($oo,$kk['id']);
-             $total_price2+=$kk['total_price'];
-            
-            }
-        }
-    }
-    $currency=Currency::find($publisher['currency_id']);  }
-    $orders=[];
-                    $total_price= $total_price2+ $total_price2;
-                    $currency=$currency['iso'];
-                    if(request()->ajax())
-                    {
-                     if(!empty($request->from))
-                     {
-                    foreach(array_unique($oo) as $o){
-                        array_push($orders,Order::with('currencies')->where('created_at','>=',$request->to)->where('created_at','<=',$request->from)->find($o));
-                    }}
-                else{
-                    foreach(array_unique($oo) as $o){
-                        array_push($orders,Order::with('currencies')->find($o));
-                    } 
-                }
-                return datatables()->of($orders)->make(true);}
-               
-
-
-       $fromUser=auth()->user();
-    
-       return view('reports.sales', compact('dt','fromUser','total_price','orders','currency'));
-                } 
-    }
     
           
 
@@ -167,6 +76,7 @@ $orders=[];
         //
         {    $total_price=0;
             if(auth()->user()->hasRole('publisher')){
+           {
                 if(request()->ajax())
                        {
                         if(!empty($request->to))
@@ -184,7 +94,7 @@ $orders=[];
                          $data = OrderProduct::
                            select('order_id', 'price','currency_iso')
                            ->where('user_id',auth()->user()->id)
-                           ->get();
+                           ->orderBy('user_id','ASC')->get();
                
                         }
                         return datatables()->of($data)->make(true);
@@ -196,7 +106,7 @@ $orders=[];
             $rate1=$rate->rate;
             return view('reports.publisher',compact('rate1','iso'));
         }
-    }
+    }}
     /**
      * Display the specified resource.
      *
