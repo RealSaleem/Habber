@@ -181,6 +181,7 @@ class BannerController extends Controller
         $banner = Banner::find($id);
         $banner->product_type = $request->product_type;
         $banner->banner_url = $request->banner_url;
+        if($banner->status!=$request->status){
         if ($request->has('status') && $request->status == "1") {
             $statusBanners = Banner::where('status',1)->count();
             if(  $statusBanners == 3) {
@@ -193,7 +194,7 @@ class BannerController extends Controller
         }
         else {
             $banner->status = $request->status;
-        }
+        }}
         $banner->sort_order = $request->sort_order;
         if($request->has('description'))
         {   
