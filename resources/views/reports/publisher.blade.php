@@ -52,7 +52,7 @@ function fill_datatable(to='',from=''){
         processing: true,
         serverSide: true,
         ajax:{
-            url: "{{ route('reports.index') }}",
+            url: "{{ route('reports.publisher') }}",
             data:{to:to, from:from}
         },
         drawCallback: function(){
