@@ -18,7 +18,6 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {   $total_price=0;
-        if(auth()->user()->hasRole('admin')){
  if(request()->ajax())
         {
          if(!empty($request->to))
@@ -38,30 +37,8 @@ class ReportController extends Controller
 
          }
          return datatables()->of($data)->make(true);
-        }}
-      else if(auth()->user()->hasRole('publisher')){
-            if(request()->ajax())
-                   {
-                    if(!empty($request->to))
-                    {
-                  
-                     $data=OrderProduct::
-                       select('order_id', 'publisher_name', 'price','currency_iso')
-                       ->where('created_at','>=' ,$request->to)
-                       ->where('created_at','<=' ,$request->from)
-                       ->where('user_id',auth()->user()->id)
-                       ->get();
-                    } 
-                    else
-                    {
-                     $data = OrderProduct::
-                       select('order_id', 'publisher_name', 'price','currency_iso')
-                       ->where('user_id',auth()->user()->id)
-                       ->get();
-           
-                    }
-                    return datatables()->of($data)->make(true);
-                   }}
+        }
+     
         
         $curr=auth()->user()->currency_id;
         $rate=Currency::find($curr);
@@ -185,11 +162,41 @@ $orders=[];
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function index1(Request $request)
     {
         //
+        {    $total_price=0;
+            if(auth()->user()->hasRole('publisher')){
+                if(request()->ajax())
+                       {
+                        if(!empty($request->to))
+                        {
+                      
+                         $data=OrderProduct::
+                           select('order_id', 'price','currency_iso')
+                           ->where('created_at','>=' ,$request->to)
+                           ->where('created_at','<=' ,$request->from)
+                           ->where('user_id',auth()->user()->id)
+                           ->get();
+                        } 
+                        else
+                        {
+                         $data = OrderProduct::
+                           select('order_id', 'price','currency_iso')
+                           ->where('user_id',auth()->user()->id)
+                           ->get();
+               
+                        }
+                        return datatables()->of($data)->make(true);
+                       }}
+            
+            $curr=auth()->user()->currency_id;
+            $rate=Currency::find($curr);
+            $iso=$rate->iso;
+            $rate1=$rate->rate;
+            return view('reports.publisher',compact('rate1','iso'));
+        }
     }
-
     /**
      * Display the specified resource.
      *
