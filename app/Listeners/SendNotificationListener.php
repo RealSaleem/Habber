@@ -131,21 +131,21 @@ class SendNotificationListener implements ShouldQueue
                                 'body'  =>  $event->data['description'],
                                 'title' => $event->data['title']
                                );
-                               $user=GuestUser::all();
-                               for($i=0;$i<count($user);$i++){
+                               $guest_user=GuestUser::all();
+                               for($i=0;$i<count($guest_user);$i++){
                                 $createPost    =   $database
-                                ->getReference('/User/'.$user[$i]['id'].'/Notification/')
+                                ->getReference('/User/'.$guest_user[$i]['id'].'/Notification/')
                                 ->set([
-                                    'to' =>  $user[$i]['id'],
+                                    'to' =>  $guest_user[$i]['id'],
                                     'body'  =>  $event->data['description'],
                                     'title' => $event->data['title'],
                                     'read' => 'false'
                         
                                 ]);   
 
-                                         $user1=GuestUser::findOrFail($user[$i]['id']);
                                          
-                                          $to= $user1->token;
+                                         
+                                          $to= $guest_user[$i]['token'];
                                           
                                           $this->sendNotif($to,$notif);
                            }
