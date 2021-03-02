@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SendNotificationEvent implements ShouldQueue
+class SendNotificationEvent
 {
     
     use Dispatchable, InteractsWithSockets, SerializesModels;
