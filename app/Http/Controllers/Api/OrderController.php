@@ -84,15 +84,15 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         try {
-            $order = $this->model->userCart(auth()->user()->id);
+            //$order = $this->model->userCart(auth()->user()->id);
            // dd($order);
-            if(isset($order)) {
-                $order = Order::where('status','Payment Failed')->first();
-               if($order!=null){
-                $order = $this->model->update($request->all(),$order);
-                return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Updated Successfully');
-            }
-        }
+        //     if(isset($order)) {
+        //         $order = Order::where('status','Payment Failed')->first();
+        //        if($order!=null){
+        //         $order = $this->model->update($request->all(),$order);
+        //         return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Order Updated Successfully');
+        //     }
+        // }
             $order = $this->model->create($request->all());
             if ($order == false) {
                 return ApiHelper::apiResult(false,HttpResponse::HTTP_OK, 'Order Creation UnSuccessfull! Some Products ran out of stock');
