@@ -32,7 +32,7 @@ class OrderResource extends JsonResource
             'phone' => $this->addresses['phone'],
             'currency_iso'=> $this->currencies->iso,
             'payment_type'=>$this->payment_type,
-            'payment_success_url'=>URL::to("/").'/payment/success/?id='.$this->id,
+            'payment_success_url'=>URL::to("/").'/payment/success/?id='.$this->id.'&user_id='.auth()->user()->id,
             'payment_failure_url'=>URL::to("/").'/payment/failure/?id='.$this->id,
             'navigation' => $this->payment_type == 'online' ? 1 : 0,
             'shipping_charges'=>  $this->addresses->countries['shipping_charges']*auth()->user()->currencies->rate,
