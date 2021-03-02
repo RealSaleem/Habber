@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Api;
 use App\Repositories\Api\CartRepository;
 use App\Helpers\ApiHelper;
 use App\Cart;
+use App\Book;
+use App\Bookmark;
+use App\CartProduct;
 use App\Http\Requests\Api\CartRequest;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\BookmarkCollection;
 use App\Http\Resources\CartResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,9 +31,32 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {$book_price=0;
+        $bookmark_price=0;
+        $total_price=0;
+
         try {
             $cart = $this->model->all(['books','bookmarks']);
+            if($cart->books!=null){
+              foreach($cart->books as $b){
+                  $bb=Book::find($b->id);
+            if($bb->quantity==0){
+                $product=CartProduct::where('cart_id',$cart->id)->where('product_id',$b->id)->where('product_type','book')->first();
+               $book_price+=$product['quantity']*$product->price;
+                $cart->books()->detach($bb->id);
+            }}}
+            if($cart->bookmarks!=null){
+                foreach($cart->bookmarks as $bm){
+                    $bbm=Bookmark::find($bm->id);
+            if($bbm->quantity==0){
+                $product=CartProduct::where('cart_id',$cart->id)->where('product_id',$bm->id)->where('product_type','bookmark')->first();
+                $book_price+=$product['quantity']*$product->price;
+                $cart->bookmarks()->detach($bbm->id);
+            }
+        }}
+        $total_price=$book_price+$bookmark_price;
+        $cart->total_price=$cart->total_price-$total_price;
+        $cart->update();
             if(isset($cart)) {
                 return new CartResource($cart);
             }
@@ -71,6 +98,7 @@ class CartController extends Controller
                 $cart = $this->model->update($request->all(),$userCart);
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Cart Updated Successfully');
             }
+          
             else {
                 $cart = $this->model->create($request->all());
                 return ApiHelper::apiResult(true,HttpResponse::HTTP_OK, 'Cart Created Successfully');
