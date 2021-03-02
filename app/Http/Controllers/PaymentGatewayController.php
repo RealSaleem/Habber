@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\ModelBindingHelper; 
 use Hesabe\Payment\HesabeCrypt;
+use App\Events\OrderSuccessEvent;
 use App\Order;
 use App\Transaction;
 use App\Cart;
@@ -32,6 +33,10 @@ class PaymentGatewayController extends Controller
 public function successPayment() {
     $orderId = $_GET['id'];
     $responseData = $_GET['data'];
+    $cart=Cart::where('user_id',$_GET['user_id'])->first();
+    if($cart!=null){
+    $cart->delete();
+    }
     $decryptResponse = $this->hesabeCrypt::decrypt($responseData, $this->secretKey, $this->ivKey);
     $decryptedResponse = $this->getPaymentResponse($responseData);
     $order = Order::find($orderId);
@@ -39,8 +44,6 @@ public function successPayment() {
     $order->payment_message = $decryptedResponse->message;
     $order->save();
     event(new OrderSuccessEvent($order));
-    $cart=Cart::where('user_id',$_GET['user_id'])->first();
-    $cart->delete();
     $trans = new Transaction();
     $trans->order_id = $orderId;
     $trans->code = $decryptedResponse->code;
