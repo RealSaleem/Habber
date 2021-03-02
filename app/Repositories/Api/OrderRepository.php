@@ -194,6 +194,7 @@ class OrderRepository implements RepositoryInterface {
     // update record in the database
     public function update(array $data, Model $model)
     {
+        $currr=$data['currency_id'];
         // dd($model);
         $books =  [];
         $bookmarks = [];
@@ -212,12 +213,26 @@ class OrderRepository implements RepositoryInterface {
         if(count($books) > 0) {
         
             for($i = 0; $i < count($books); $i++) {
-                $model->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' => $books[$i]['product_type'] ]);
-            }
+                $book=Book::find($books[$i]['product_id']);
+                $user=User::find($book['user_id']);
+                $curr=Currency::find($currr);
+                $model->books()->attach($books[$i]['product_id'], ['quantity' => $books[$i]['quantity'] , 'price' => $books[$i]['price'],'product_type' =>'book','user_id' => $book['user_id'], 'publisher_name' => $user['first_name'].$user['surname'], 'currency_id'=>$currr,'currency_iso'=>$curr['iso'],'created_at' => date("Y-m-d",time()) ]);
+                $notification=new Notification;
+                $notification->order_id=$model->id;
+                $notification->publisher_id=$book['user_id'];
+                $notification->save();
+            } 
         }
         if(count($bookmarks) > 0) {
             for($i = 0; $i < count($bookmarks); $i++) {
-                $model->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => $bookmarks[$i]['product_type'] ]);
+                $bookmark=Bookmark::find($bookmarks[$i]['product_id']);
+                $user=User::find($bookmark['user_id']);
+                $curr=Currency::find($currr);
+                $model->bookmarks()->attach($bookmarks[$i]['product_id'],['quantity' => $bookmarks[$i]['quantity'] , 'price' => $bookmarks[$i]['price'],'product_type' => 'bookmark' ,'user_id' => $bookmark['user_id'], 'publisher_name' => $user['first_name'].$user['surname'],'currency_id'=>$currr,'currency_iso'=>$curr['iso'], 'created_at' => date("Y-m-d",time())]);
+                $notification=new Notification;
+                $notification->order_id=$model->id;
+                $notification->publisher_id=$bookmark['user_id'];
+                $notification->save();
             }
         }
         return $model;
