@@ -131,6 +131,7 @@ class SendNotificationJob implements ShouldQueue
 
          } }}
          else if($this->data['option']==0){
+             $tkn=array();
             $user=User::role(['user','publisher'])->where('status',1)->where('joining_request',0)->where('notification',1)->get();
                 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/Firebase.json');
                 $firebase = (new Factory)
@@ -158,8 +159,8 @@ class SendNotificationJob implements ShouldQueue
                              $user1=GuestUser::findOrFail($user[$i]['id']);
                              
                               $to= $user1->token;
-                              
-                              $this->sendNotif($to,$notif);
+                              array_push($tkn,$to);
+                            //  $this->sendNotif($to,$notif);
                }
                $log=new log();
                $log->user_id='To All Users';
@@ -178,8 +179,14 @@ class SendNotificationJob implements ShouldQueue
                 ]);   
                        
                          $to= $user[$i]['firebase_token'];
-                        $this->sendNotif($to,$notif);
-         }
+                         array_push($tkn,$to);
+                       // $this->sendNotif($to,$notif);
+         }              
+                        $token=array_unique($tkn);
+                    for($i=0;$i<=count($token);$i++){
+                        $this->sendNotif($token[$i],$notif);
+                    }
+       
         }
     }
 }
