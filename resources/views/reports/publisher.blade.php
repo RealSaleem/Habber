@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')   
+
 <h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1> 
 <div id="sa" class="sa">
 <label for="from">From</label>
@@ -55,6 +56,10 @@ function fill_datatable(to='',from=''){
             url: "{{ route('reports.publisher') }}",
             data:{to:to, from:from}
         },
+        columnDefs: [{
+                    targets: "_all",
+                    orderable: false
+                 }],
         drawCallback: function(){
 Table.columns(2, {
 page: 'current'
