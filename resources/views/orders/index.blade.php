@@ -113,6 +113,7 @@ function notreadyOrder($id) {
 }
     $(document).ready(function() {
         $('#zero_config').DataTable({
+            "order": [[ 0, "desc" ]],
             paging: true,
             dom: 'Bfrtip',
             buttons: [
