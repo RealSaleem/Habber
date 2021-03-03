@@ -55,6 +55,10 @@ function fill_datatable(to=''){
             url: "{{ route('reports1.detail') }}",
             data:{name:to,}
         },
+        columnDefs: [{
+                    targets: "_all",
+                    orderable: false
+                 }],
         drawCallback: function(){
 Table.columns(3, {
 page: 'current'

@@ -41,6 +41,8 @@
 
 <script>
 $(document).ready(function(){
+  
+        
 
 
 
@@ -48,18 +50,26 @@ fill_datatable();
 
 function fill_datatable(to='',from=''){
    var Table=$('#zero_config').DataTable({
+ 
         paging: true,
         autoWidth: true,
         lengthChange: true,
         dom: 'Bfrtip',
         processing: true,
         serverSide: true,
+      
         ajax:{
             url: "{{ route('reports.index') }}",
             data:{to:to, from:from}
         },
+                columnDefs: [{
+                    targets: "_all",
+                    orderable: false
+                 }],
         drawCallback: function(){
+
 Table.columns(3, {
+   
 page: 'current'
 }).every(function() {
 var sum = this
