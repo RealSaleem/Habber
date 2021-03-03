@@ -183,9 +183,10 @@ class SendNotificationJob implements ShouldQueue
                        // $this->sendNotif($to,$notif);
          }              
                         $token=array_unique($tkn);
-                    for($i=0;$i<=count($token);$i++){
-                        $this->sendNotif($token[$i],$notif);
-                    }
+                        foreach($token as $t) {
+                            $this->sendNotif($t,$notif);
+                        }
+                    
        
         }
     }
