@@ -60,6 +60,12 @@ function fill_datatable(to='',from=''){
                     targets: "_all",
                     orderable: false
                  }],
+                 "aoColumns": [
+              { mData: 'order_id' } ,
+              { mData: 'currency_iso' },
+              { mData: 'price' }
+
+            ],
         drawCallback: function(){
 Table.columns(2, {
 page: 'current'

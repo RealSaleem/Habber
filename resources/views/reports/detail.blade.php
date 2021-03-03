@@ -59,6 +59,13 @@ function fill_datatable(to=''){
                     targets: "_all",
                     orderable: false
                  }],
+                 "aoColumns": [
+              { mData: 'order_id' } ,
+              { mData: 'publisher_name' },
+              { mData: 'currency_iso' },
+              { mData: 'price' }
+
+            ],
         drawCallback: function(){
 Table.columns(3, {
 page: 'current'
