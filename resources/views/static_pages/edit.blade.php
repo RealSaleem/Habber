@@ -70,19 +70,37 @@
                    
 @endsection
 @section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/ar.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/en.js"></script>
 
-<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
-
-
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/froala_editor.pkgd.min.js'></script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/languages/ar.js'></script>
 <script>
 
-    new FroalaEditor('#ar-description', {toolbarInline: false,language: 'ar'})
+ClassicEditor
+    .create( document.querySelector( '#ar-description' ), {
+        language: 'ar'
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+
 </script>
 
 <script>
-new FroalaEditor('#en-description', {toolbarInline: false})
+
+ClassicEditor
+    .create( document.querySelector( '#en-description' ), {
+        language: 'en'
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
 
 </script>
 @stop
