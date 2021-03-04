@@ -60,7 +60,6 @@
                 @foreach(Session::get('notification') as $no)
                 <a class="dropdown-item" href="{{ action('OrderController@show', $no['order_id'])}}">Order {{$no['order_id']}} has been created</a>
                 @endforeach
-              @else
               <a class="dropdown-item" href="#"></a>
               @endif
                 </div>
