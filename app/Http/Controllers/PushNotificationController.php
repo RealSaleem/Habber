@@ -10,6 +10,7 @@ use Kreait\Firebase\ServiceAccount;
 use Session;
 use App\GuestUser;
 use App\Log;
+use App\Jobs\SendNotificationJob;
 
 class PushNotificationController extends Controller
 {
@@ -43,8 +44,8 @@ class PushNotificationController extends Controller
                     'users' => $request->users,
                     'title' => html_entity_decode($request->title,ENT_NOQUOTES,'UTF-8')
                 );
-                        
-                   event(new SendNotificationEvent($data));
+                    dispatch(new SendNotificationJob($data));    
+                 //  event(new SendNotificationEvent($data));
                    return back()->with('success', 'Notification Sent Successfully!');
             
                     
