@@ -58,7 +58,7 @@ function fill_datatable(to='',from=''){
         },
         columnDefs: [{
                     targets: "_all",
-                    orderable: false
+                    orderable: true
                  }],
                  "aoColumns": [
               { mData: 'order_id' } ,
@@ -133,6 +133,18 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
              
    
     });
+    $('#zero_config th').each(function(index, th) {
+  $(th).unbind('click');
+  $(th).append('<button class="sort-btn btn-asc">&#9650;</button>');
+  $(th).append('<button class="sort-btn btn-desc">&#9660;</button>');
+
+  $(th).find('.btn-asc').click(function() {
+     Table.column(index).order('asc').draw();
+  }); 
+  $(th).find('.btn-desc').click(function() {
+     Table.column(index).order('desc').draw();      
+  }); 
+});    
 }
 
 $('#filter').click(function(){
