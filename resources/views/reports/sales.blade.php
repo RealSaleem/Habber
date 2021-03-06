@@ -22,6 +22,7 @@
                         <th>Publisher Name</th>
                         <th>Currency</th>
                         <th>Payment</th> 
+                        
                     </tr>
                 </thead>
                 <tfoot>
@@ -62,15 +63,16 @@ function fill_datatable(to='',from=''){
             url: "{{ route('reports.index') }}",
             data:{to:to, from:from}
         },
-                columnDefs: [{
+        columnDefs: [{
                     targets: "_all",
-                    orderable: false
+                    orderable: true
                  }],
                  "aoColumns": [
               { mData: 'order_id' } ,
               { mData: 'publisher_name' },
               { mData: 'currency_iso' },
               { mData: 'price' }
+
 
             ],
         drawCallback: function(){
@@ -140,6 +142,7 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
                     data:'price',
                     name:'Payment'
                 },
+               
                
                 
             ]

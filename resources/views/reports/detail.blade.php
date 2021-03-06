@@ -57,7 +57,7 @@ function fill_datatable(to=''){
         },
         columnDefs: [{
                     targets: "_all",
-                    orderable: false
+                    orderable: true
                  }],
                  "aoColumns": [
               { mData: 'order_id' } ,

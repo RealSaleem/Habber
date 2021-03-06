@@ -58,7 +58,7 @@ function fill_datatable(to='',from=''){
         },
         columnDefs: [{
                     targets: "_all",
-                    orderable: false
+                    orderable: true
                  }],
                  "aoColumns": [
               { mData: 'order_id' } ,
@@ -133,6 +133,7 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
              
    
     });
+   
 }
 
 $('#filter').click(function(){
