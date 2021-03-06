@@ -144,19 +144,19 @@ class SendNotificationJob implements ShouldQueue
                     'body'  =>  $this->data['description'],
                     'title' => $this->data['title']
                    );
-                   $user=GuestUser::all();
-                   for($i=0;$i<count($user);$i++){
+                   $guest_user=GuestUser::all();
+                   for($i=0;$i<count($guest_user);$i++){
                     $createPost    =   $database
-                    ->getReference('/User/'.$user[$i]['id'].'/Notification/')
+                    ->getReference('/User/'.$guest_user[$i]['id'].'/Notification/')
                     ->set([
-                        'to' =>  $user[$i]['id'],
+                        'to' =>  $guest_user[$i]['id'],
                         'body'  =>  $this->data['description'],
                         'title' => $this->data['title'],
                         'read' => 'false'
             
                     ]);   
 
-                             $user1=GuestUser::findOrFail($user[$i]['id']);
+                             $user1=GuestUser::findOrFail($guest_user[$i]['id']);
                              
                               $to= $user1->token;
                               array_push($tkn,$to);
