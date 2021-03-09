@@ -1899,6 +1899,11 @@ return [
         'update_status'=>'تحديث الحالة',
         'cancel_order'=>'الغاء الطلب',
         'order_details'=> 'تفاصيل الطلب',
+        'logout'=> 'تسجيل خروج',
+        'notification'=> 'تنبيه',
+       'merchant'=>'تاجر',
+       'edit_profile'=>'تعديل الملف الشخصي ',
+       'change_password'=>'تغيير كلمة المرور'
     ],
 
     'permission_page' => [

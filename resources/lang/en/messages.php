@@ -296,7 +296,11 @@ return [
         'update_status'=> 'Update Status',
         'cancel_order' => 'Cancel Order',
         'order_details'=> 'Order Details',
-        
+        'logout'=> 'Logout',
+        'notification'=> 'Notifications',
+       'merchant'=>'Merchant ',
+       'edit_profile'=>'Edit Profile',
+       'change_password'=>'Change Password'
     ],
 
     'permission_page' => [
