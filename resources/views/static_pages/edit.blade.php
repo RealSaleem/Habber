@@ -43,7 +43,7 @@
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
                         
-                    <textarea class="form-control editor1" id="summary-ckeditor" name="summary-ckeditor" value="{{ old('description') }}" rows="10" cols="50">{!! $static_page->description !!}</textarea>
+                    <textarea class="form-control editor1" id="en-description" name="en-description" value="{{ old('description') }}" rows="10" cols="50">{!! $static_page->description !!}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                     </div>
                         
