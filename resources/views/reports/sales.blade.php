@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')    
 <h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1> 
-<a href="reports1" ><button style="color: grey;font-size:22px;border: 3px solid black" > + Publisher Report</button> </a>
 <div id="sa" class="sa">
 <label for="from">From</label>
 <input type="date" id="from" name="from" />
@@ -22,7 +21,12 @@
                         <th>Publisher Name</th>
                         <th>Currency</th>
                         <th>Payment</th> 
+                        <th>Action</th>
+                        
                     </tr>
+                    </thead>
+        <tbody>
+        </tbody>
                 </thead>
                 <tfoot>
                 <tr>
@@ -62,15 +66,17 @@ function fill_datatable(to='',from=''){
             url: "{{ route('reports.index') }}",
             data:{to:to, from:from}
         },
-                columnDefs: [{
+        columnDefs: [{
                     targets: "_all",
-                    orderable: false
+                    orderable: true
                  }],
                  "aoColumns": [
               { mData: 'order_id' } ,
               { mData: 'publisher_name' },
               { mData: 'currency_iso' },
-              { mData: 'price' }
+              { mData: 'price' },
+              {data: 'action', name: 'action', orderable: false, searchable: false},
+
 
             ],
         drawCallback: function(){
@@ -140,6 +146,7 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
                     data:'price',
                     name:'Payment'
                 },
+               
                
                 
             ]

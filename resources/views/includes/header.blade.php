@@ -52,11 +52,10 @@
              
              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-none d-md-block">Notifications  <i class="fa fa-angle-down"></i></span>
+                    <span class="d-none d-md-block">@lang('messages.button.notification')  <i class="fa fa-angle-down"></i></span>
                     <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                 </a>
-                
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if(Session::get('notification')!=null)
                 @foreach(Session::get('notification') as $no)
                 <a class="dropdown-item" href="{{ action('OrderController@show', $no['order_id'])}}">Order {{$no['order_id']}} has been created</a>
@@ -65,12 +64,11 @@
               <a class="dropdown-item" href="#"></a>
               @endif
                 </div>
-                
-            </li> 
+         </li> 
             <!-- ============================================================== -->
             <!-- Search -->
             <!-- ============================================================== -->
-             <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="https://hesabe.com/merchant">Merchant</a>
+             <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="https://hesabe.com/merchant">@lang('messages.button.merchant')</a>
             </li> 
         </ul>
         <!-- ============================================================== -->
@@ -164,7 +162,7 @@
                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="rounded-circle" width="31"></a>
                 <div class="dropdown-menu dropdown-menu-right user-dd animated">
                 @if(Session::get('users')->hasRole('admin'))
-                    <a class="dropdown-item"  href="{{route('admin.password',['id'=>0])}}"><i class="ti-user m-r-5 m-l-5"></i> Change Password</a>
+                    <a class="dropdown-item"  href="{{route('admin.password',['id'=>0])}}"><i class="ti-user m-r-5 m-l-5"></i> @lang('messages.button.change_password')</a>
                
                     <!-- <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
                     <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>-->
@@ -173,10 +171,10 @@
                     <div class="dropdown-divider"></div>
                     @endif
                     @if(Session::get('users')->hasRole('publisher'))
-                    <a class="dropdown-item" href="{{route('publisher.edit', [Session::get('user')])}}"><i class="ti-user m-r-5 m-l-5"></i> Edit Profile</a>
+                    <a class="dropdown-item" href="{{route('publisher.edit', [Session::get('user')])}}"><i class="ti-user m-r-5 m-l-5"></i>  @lang('messages.button.edit_profile')</a>
                     <div class="dropdown-divider"></div>
                     @endif
-                    <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                    <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-power-off m-r-5 m-l-5"></i>@lang('messages.button.logout')</a>
                     <div class="dropdown-divider"></div>
                     <!-- <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div> -->
                 </div>

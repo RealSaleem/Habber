@@ -8,6 +8,7 @@ use App\OrderProduct;
 use App\User;
 use App\Currency;
 use DB;
+use DataTables;
 
 class ReportController extends Controller
 {
@@ -36,7 +37,17 @@ class ReportController extends Controller
             ->orderBy('user_id','ASC')->get();
 
          }
-         return datatables()->of($data)->make(true);
+         return  Datatables::of($data)
+         ->addIndexColumn()
+         ->addColumn('action', function($row){
+
+                $btn = '<a href="reports1"  data-toggle="tooltip"  data-id="'.$row->id.'" class="edit btn btn-info btn-sm">View</a>';
+
+                 return $btn;
+         })
+         ->rawColumns(['action'])
+         ->make(true);
+
         }
      
         
