@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                    <textarea id="en-description" class="form-control" name="en-description" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
+                    <textareaclass="form-control" id="summary-ckeditor" name="summary-ckeditor" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -70,21 +70,16 @@
                    
 @endsection
 @section('scripts')
-
-<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
-
-
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/froala_editor.pkgd.min.js'></script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/languages/ar.js'></script>
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
-
-    new FroalaEditor('#ar-description', {toolbarInline: false,language: 'ar'})
+CKEDITOR.replace( 'summary-ckeditor' );
+</script>
+<script src="{{ asset('ckeditor1/ckeditor.js') }}"></script>
+<script>
+CKEDITOR.replace( 'ar-description' );
 </script>
 
-<script>
-new FroalaEditor('#en-description', {toolbarInline: false})
 
-</script>
 @stop
 
 
