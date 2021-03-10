@@ -28,34 +28,34 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.title')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{{ $static_page->title}}" id="title"  placeholder="English Title">
+                            <input type="text" class="form-control" dir="{{ session()->get('locale') == 'ar' ? 'rtl' : ''}}" name="title" value="{!! $static_page->title !!}" id="title"  placeholder="English Title">
                             <span class="text-danger">{{$errors->first('title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.static_page.arabictitle')</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="arabic_title" dir="rtl" value="{{$static_page->arabic_title}}" id="arabic_title"  placeholder="Arabic Title">
+                            <input type="text" class="form-control" name="arabic_title" dir="rtl" value="{!! $static_page->arabic_title !!}" id="arabic_title"  placeholder="Arabic Title">
                             <span class="text-danger">{{$errors->first('arabic_title')}}</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                        <div class="editor1">
-                    <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
+                        
+                    <textarea class="form-control editor1" id="summary-ckeditor" name="summary-ckeditor" value="{{ old('description') }}" rows="10" cols="50">{!! $static_page->description !!}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                     </div>
-                        </div>
+                        
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                        <div class="editor">
-                    <textarea id="ar-description" class="form-control" dir="rtl" name="ar-description" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->arabic_description}}</textarea>
+                        
+                    <textarea id="ar-description" class="form-control editor" dir="rtl" name="ar-description" value="{{ old('description') }}" rows="10" cols="50">{!! $static_page->arabic_description !!}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                     </div>
-                        </div>
+                        
                     </div>
                     <div class="border-top">
                       <div class="card-body">
@@ -112,7 +112,21 @@
 						'imageStyle:full',
 						'imageStyle:side'
 					]
-				},
+                },
+                fontSize: {
+            options: [
+                9,
+                11,
+                13,
+                'default',
+                17,
+                19,
+                21,
+                23,
+                25,
+                27
+            ]
+        },
 				table: {
 					contentToolbar: [
 						'tableColumn',
@@ -178,7 +192,21 @@
 						'imageStyle:full',
 						'imageStyle:side'
 					]
-				},
+                },
+                fontSize: {
+            options: [
+                9,
+                11,
+                13,
+                'default',
+                17,
+                19,
+                21,
+                23,
+                25,
+                27
+            ]
+        },
 				table: {
 					contentToolbar: [
 						'tableColumn',
