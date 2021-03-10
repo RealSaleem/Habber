@@ -75,6 +75,7 @@ class BusinessController extends Controller
     public function show($id)
     {
         //
+     
     }
 
     /**
@@ -133,4 +134,32 @@ class BusinessController extends Controller
         return back()->with('success', 'Business deleted successfully');
     
     }
+    public function allJoinUsRequest()
+    {
+        $business = Business::get();
+        return view('join_us.index',compact('business'));
+    }
+
+    public function showJoinUsRequest($id)
+    {
+        $business = Business::find($id);
+        return view('join_us.detail',compact('business'));
+    }
+    public function destroyRequest($id)
+    {
+        $business = Business::findOrFail($id);
+        $business->delete();
+        return back()->with('success', 'User Request deleted successfully');
+        
+    }
+
+    public function updateRequest(Request $request,$id)
+    {
+        $business = Business::findOrFail($id);
+        $business->status = $request->status;
+        $business->update();
+        return back()->with('success', 'User Request Updated successfully');
+        
+    }
+   
 }

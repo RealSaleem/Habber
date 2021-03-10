@@ -59,10 +59,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('user/address/create/{userId}','AddressController@createUserAddress');
    Route::resource('contactus','ContactController');
    Route::resource('user_requests','UserRequestController');
-   Route::get('joinus','UserController@allJoinUsRequest')->name('joinus');
-   Route::get('joinus/{id}','UserController@showJoinUsRequest');
-   Route::delete('delete/joinus/{id}','UserController@destroyRequest');
-   Route::put('joinus/{id}','UserController@updateRequest')->name('joinus.update');
+   Route::get('joinus','BusinessController@allJoinUsRequest')->name('joinus');
+   Route::get('joinus/{id}','BusinessController@showJoinUsRequest');
+   Route::delete('delete/joinus/{id}','BusinessController@destroyRequest');
+   Route::put('joinus/{id}','BusinessController@updateRequest')->name('joinus.update');
    Route::resource('banners','BannerController');
    Route::post('banner/enable/{id}','BannerController@enableBanner')->name('enable_banner');
    Route::post('banner/disable/{id}','BannerController@disableBanner')->name('disable_banner');

@@ -17,35 +17,35 @@
     </div> 
     <div class="col-md-12">
         <div class="card">
-            <form action="{{ route('joinus.update',['id'=> $user->id])}}" method="post"  enctype="multipart/form-data" >   
+            <form action="{{ route('joinus.update',['id'=> $business->id])}}" method="post"  enctype="multipart/form-data" >   
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="card-body row" style="font-size: 18px;">
                     <h4 class="card-title col-12">@lang('messages.joinusrequest_page.userjoinusrequest')</h4>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_id')   {{$user->id}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_id')   {{$business->id}} </label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.requested_by'):  {{ucfirst($user->first_name ." ".$user->last_name )}}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.requested_by'):  {{$business->name  }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.email'):  {{ucfirst($user->email )}}</label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.email'):  {{ucfirst($business->email )}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.phone_number'):   {{ucfirst($user->phone )}} </label>
+                        <label for="lname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.phone_number'):   {{ucfirst($business->phone )}} </label>
                     </div>
                   
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.business_type')  {{ucfirst($user->businesses->business_type )}}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.business_type')  {{ucfirst($business->business_type )}}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.product_type'):  {{($user->businesses->product_type == "both" ) ? "Books, Bookmarks" : $user->businesses->product_type }}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.product_type'):  {{($business->product_type == "both" ) ? "Books, Bookmarks" : $business->product_type }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.business_page.details') : {{$user->businesses->details }}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.business_page.details') : {{$business->details }}</label>
                     </div>
                     <div class="form-group col-6">
-                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_date')  {{$user->created_at}}</label>
+                        <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.submission_date')  {{$business->created_at}}</label>
                     </div>
                    
                     <!-- @if(isset($userRequest->image))
@@ -57,8 +57,8 @@
                     <div class="form-group col-6">
                         <label for="fname" class="text-right control-label col-form-label">@lang('messages.joinusrequest_page.status'): </label>
                         <select class="form-control" name="status" id="">
-                            <option value="0" {{($user->status == "0" ? 'selected' : '')}}>Pending</option>
-                            <option value="1" {{($user->status == "1" ? 'selected' : '')}}>Seen</option>
+                            <option value="0" {{($business->status == "0" ? 'selected' : '')}}>Pending</option>
+                            <option value="1" {{($business->status == "1" ? 'selected' : '')}}>Seen</option>
                         </select>
                     </div>
                 </div>

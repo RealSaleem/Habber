@@ -113,21 +113,17 @@ class RegisterRepository implements RepositoryInterface
     }
 
     public function createJoinRequest(array $data)
-    {
-        $this->model->first_name = $data['name'];
-        $this->model->email = $data['email'];
-        $this->model->status =  false;  
-        $this->model->phone = $data['phone'];
-        $this->model->joining_request = 1;
-        if($this->model->save()) {
+    { 
             $business = new Business();
-            $business->user_id = $this->model->id;
+            $business->user_id = 0;
+            $business->email = $data['email'];
             $business->name = $data['name'];
             $business->business_type = $data['business_type'];
             $business->product_type = $data['product_type'];
             $business->details = $data['details'];
+            $business->phone = $data['phone'];
             $business->save(); 
-        }
+        
         return $this->model;
     }
 }
