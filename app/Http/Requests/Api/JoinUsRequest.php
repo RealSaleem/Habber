@@ -25,7 +25,7 @@ class JoinUsRequest extends FormRequest
     {
         return [
             'name' => ['bail', 'required', 'string', 'max:255', 'min:3'],
-            'email' => ['bail', 'required', 'string', 'email', 'max:255' ],
+            'email' => ['bail', 'required', 'string', 'email', 'max:255','unique:users' ],
             'phone' => ['bail', 'required', 'string','max:15'],
             'business_type' => ['bail', 'required', 'string'],
             'details' => ['bail', 'required', 'string'],
