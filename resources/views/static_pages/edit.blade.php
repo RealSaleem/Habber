@@ -36,8 +36,10 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                    <textarea id="en-description" class="form-control" name="en-description" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
+                        <div class="editor1">
+                    <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
+                    </div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -45,6 +47,7 @@
                         <div class="col-sm-9">
                     <textarea id="ar-description" class="form-control" dir="rtl" name="ar-description" value="{{ old('arabic_description') }}" rows="10" cols="50">{{$static_page->arabic_description}}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
+                    </div>
                         </div>
                     </div>
                     <div class="border-top">
@@ -65,20 +68,141 @@
 @endsection
 @section('scripts')
 
-<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+<script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
+<script>ClassicEditor
+			.create( document.querySelector( '.editor1' ), {
+				
+				toolbar: {
+					items: [
+						'heading',
+						'|',
+						'fontFamily',
+						'fontSize',
+						'fontColor',
+						'bold',
+						'italic',
+						'highlight',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'|',
+						'outdent',
+						'indent',
+						'|',
+						'imageUpload',
+						'blockQuote',
+						'insertTable',
+						'mediaEmbed',
+						'undo',
+						'redo',
+						'htmlEmbed'
+					]
+				},
+				language: 'en',
+				image: {
+					toolbar: [
+						'imageTextAlternative',
+						'imageStyle:full',
+						'imageStyle:side'
+					]
+				},
+				table: {
+					contentToolbar: [
+						'tableColumn',
+						'tableRow',
+						'mergeTableCells'
+					]
+				},
+				licenseKey: '',
+				
+				
+			} )
+			.then( editor => {
+				window.editor = editor;
+		
+				
+				
+				
+		
+				
+				
+				
+			} )
+			.catch( error => {
+				console.error( 'Oops, something went wrong!' );
+				console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+				console.warn( 'Build id: 74l6wn495io0-em6ekhfgffpz' );
+				console.error( error );
+			} );
+	</script>
+<script>ClassicEditor
+			.create( document.querySelector( '.editor' ), {
+				
+				toolbar: {
+					items: [
+						'heading',
+						'|',
+						'fontFamily',
+						'fontSize',
+						'fontColor',
+						'bold',
+						'italic',
+						'highlight',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'|',
+						'outdent',
+						'indent',
+						'|',
+						'imageUpload',
+						'blockQuote',
+						'insertTable',
+						'mediaEmbed',
+						'undo',
+						'redo',
+						'htmlEmbed'
+					]
+				},
+				language: 'ar',
+				image: {
+					toolbar: [
+						'imageTextAlternative',
+						'imageStyle:full',
+						'imageStyle:side'
+					]
+				},
+				table: {
+					contentToolbar: [
+						'tableColumn',
+						'tableRow',
+						'mergeTableCells'
+					]
+				},
+				licenseKey: '',
+				
+				
+			} )
+			.then( editor => {
+				window.editor = editor;
+		
+				
+				
+				
+		
+				
+				
+				
+			} )
+			.catch( error => {
+				console.error( 'Oops, something went wrong!' );
+				console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+				console.warn( 'Build id: 74l6wn495io0-em6ekhfgffpz' );
+				console.error( error );
+			} );
+	</script>
 
 
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/froala_editor.pkgd.min.js'></script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/languages/ar.js'></script>
-<script>
-
-    new FroalaEditor('#ar-description', {toolbarInline: false,language: 'ar'})
-</script>
-
-<script>
-new FroalaEditor('#en-description', {toolbarInline: false})
-
-</script>
 @stop
 
 
