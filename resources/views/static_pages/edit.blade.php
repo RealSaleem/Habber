@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
                         <div class="col-sm-9">
-                    <textarea id="en-description" class="form-control" name="en-description" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
+                    <textareaclass="form-control" id="summary-ckeditor" name="summary-ckeditor" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->description}}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -70,39 +70,16 @@
                    
 @endsection
 @section('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/ar.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/translations/en.js"></script>
-
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
-
-ClassicEditor
-    .create( document.querySelector( '#ar-description' ), {
-        language: 'ar'
-    } )
-    .then( editor => {
-        console.log( editor );
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
-
+CKEDITOR.replace( 'summary-ckeditor' );
+</script>
+<script src="{{ asset('ckeditor1/ckeditor.js') }}"></script>
+<script>
+CKEDITOR.replace( 'ar-description' );
 </script>
 
-<script>
 
-ClassicEditor
-    .create( document.querySelector( '#en-description' ), {
-        language: 'en'
-    } )
-    .then( editor => {
-        console.log( editor );
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
-
-</script>
 @stop
 
 
