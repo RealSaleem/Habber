@@ -106,18 +106,7 @@ class UserController extends Controller
 
     }
     
-    public function allJoinUsRequest()
-    {
-        $user = User::with('businesses')->where('joining_request',1)->get();
-        return view('join_us.index',compact('user'));
-    }
-
-    public function showJoinUsRequest($id)
-    {
-        $user = User::with('businesses')->find($id);
-        return view('join_us.detail',compact('user'));
-    }
-
+   
     /**
      * Show the form for editing the specified resource.
      *
@@ -210,22 +199,7 @@ class UserController extends Controller
     } 
     
 
-    public function destroyRequest($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return back()->with('success', 'User Request deleted successfully');
-        
-    }
-
-    public function updateRequest(Request $request,$id)
-    {
-        $user = User::findOrFail($id);
-        $user->status = $request->status;
-        $user->update();
-        return back()->with('success', 'User Request Updated successfully');
-        
-    }
+   
 
     public function passwordUpdate(UpdatePasswordRequest $request) {
         try{

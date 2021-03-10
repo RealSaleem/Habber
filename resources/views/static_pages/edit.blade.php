@@ -12,12 +12,6 @@
                 <strong>Page Updated! &nbsp;</strong>{{Session::get('success')}}
             </div>
         @endif 
-
-        @if(Session::has('featured'))
-            <div class="alert alert-danger text-center" role="alert">
-                <strong>Limit Exceded! &nbsp;</strong>{{Session::get('featured')}}
-            </div>
-        @endif 
         <div class="col-md-12">
         <div class="card">
         <form  action="{{ action('StaticPagesController@update',[$static_page->url])}}" method="post" enctype="multipart/form-data" >   
@@ -47,9 +41,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.book_page.description')</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">@lang('messages.bookmark_page.arabic_description')</label>
                         <div class="col-sm-9">
-                    <textarea id="ar-description" class="form-control" dir="rtl" name="ar-description" value="{{ old('description') }}" rows="10" cols="50">{{$static_page->arabic_description}}</textarea>
+                    <textarea id="ar-description" class="form-control" dir="rtl" name="ar-description" value="{{ old('arabic_description') }}" rows="10" cols="50">{{$static_page->arabic_description}}</textarea>
                     <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>

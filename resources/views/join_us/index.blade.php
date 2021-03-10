@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-<h1 class="page-title">User Request </h1>
+<h1 class="page-title"> Join Us Request </h1>
 <div class="ml-auto text-right">
 </div> 
 @if(Session::has('success'))
@@ -28,17 +28,17 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($user as $u)
+          @foreach($business as $b)
             <tr>
-              <td>{{$u->id}}</td>
-              <td>{{ucfirst($u->first_name .' '.$u->last_name)}}</td>
-              <td>{{$u->email}}</td>
-              <td>{{$u->phone}}</td>
-              <td>{{$u->businesses['business_type']}}</td>
-              <td>{{$u->businesses['product_type'] == "both" ? 'Books, Bookmarks' : $u->businesses['product_type']}}</td>
-              <td>{{$u->businesses['details']}}</td>
-              <td>{{$u->status == "0" ? "Pending" : "Seen"}}</td>  
-              <td>{{$u->created_at}}</td>  
+              <td>{{$b->id}}</td>
+              <td>{{$b->name}}</td>
+              <td>{{$b->email}}</td>
+              <td>{{$b->phone}}</td>
+              <td>{{$b->business_type}}</td>
+              <td>{{$b->product_type == "both" ? 'Books, Bookmarks' : $b->product_type}}</td>
+              <td>{{$b->details}}</td>
+              <td>{{$b->status == "0" ? "Pending" : "Seen"}}  </td>  
+              <td>{{$b->created_at}}</td>  
               <td>
               <div class="dropdown">
         <button class="btn btn-flat btn-info dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown">
@@ -47,12 +47,12 @@
       </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 
-                  <li role="presentation">  <form action="{{action('UserController@destroyRequest', [$u->id])}}" method="post">
+                  <li role="presentation">  <form action="{{action('BusinessController@destroyRequest', [$b->id])}}" method="post">
                           @csrf
                           @method('DELETE')
                           <button class="btn btn-light" type="submit">Delete</button>
                       </form></li>
-                  <li role="presentation">  <a href="{{action('UserController@showJoinUsRequest', [$u->id])}}"><button class=" btn btn-light">Details</button></a></li>
+                  <li role="presentation">  <a href="{{action('BusinessController@showJoinUsRequest', [$b->id])}}"><button class=" btn btn-light">Details</button></a></li>
                  </ul>
                 </div>
               </td>
