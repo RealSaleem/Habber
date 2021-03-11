@@ -29,11 +29,11 @@ Route::get('/',function() {
    return view('welcome');
 })->middleware('auth')->name('welcome');
 Route::get('/','HomeController@index')->middleware('auth')->name('welcome');
-// Route::get('/',function() {	
-//    return view('welcome');	
+// Route::get('/',function() {
+//    return view('welcome');
 // })->middleware('auth')->name('welcome');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-   
+
    Route::get('welcome','HomeController@index')->name('welcome');
    Route::get('language/{locale}', 'HomeController@setLanguage')->name('set_language');
    Route::resource('users','UserController');
@@ -48,11 +48,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::post('bookmark/deactivate/{id}','BookmarksController@deactivateBookmark');
    Route::post('bookmark/feature/{id}','BookmarksController@featureBookmark');
    Route::post('bookmark/notfeature/{id}','BookmarksController@notfeatureBookmark');
-   Route::resource('bookclubs','BookClubController');   
+   Route::resource('bookclubs','BookClubController');
    Route::post('bookclub/activate/{id}','BookClubController@activateBookClub');
    Route::post('bookclub/deactivate/{id}','BookClubController@deactivateBookClub');
    Route::post('bookclub/feature/{id}','BookClubController@featureBookClub');
-   Route::post('bookclub/notfeature/{id}','BookClubController@notfeatureBookClub');  
+   Route::post('bookclub/notfeature/{id}','BookClubController@notfeatureBookClub');
    Route::resource('genres','GenreController');
    Route::resource('address','AddressController');
    Route::get('user/address/{userId}','AddressController@getUserAddressList')->name('user_address');
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::put('update1/{id}','OrderController@update1')->name('order.update1');
    Route::get('order/{orderId}','OrderController@showlist');
    Route::resource('reports','ReportController');
-   Route::get('reports1','ReportController@show')->name('reports1.detail');
+       Route::get('reports1/{pubName}','ReportController@show')->name('reports1.detail');
    Route::get('report1','ReportController@report');
    Route::get('publisher_report','ReportController@index1')->name('reports.publisher');
    Route::resource('city','CityController');
@@ -107,10 +107,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    Route::get('admin_change','UserController@changepassword')->name('admin.password');
    Route::post('admin_password','UserController@passwordUpdate')->name('admin.password.change');
 
-   
 
 
-   
+
+
 
 });
 

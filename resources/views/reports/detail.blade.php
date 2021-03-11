@@ -1,8 +1,10 @@
 @extends('layouts.app')
-@section('content')    
-<h1 class="page-title">@lang('messages.reports_page.publisher_reports')</h1> 
+@section('content')
+
+<h1 class="page-title">@lang('messages.reports_page.publisher_reports')</h1>
 <div id="sa" class="sa">
-<label for="to">Publisher Name</label>
+<label for="to">Publisher Name  </label>
+
 <input type='text' id="to" name="to"/>
 <button type="button" name="filter" id="filter" class="btn btn-info">Filter</button>
 <button type="button" name="reset" id="reset" class="btn btn-danger">Reset</button>
@@ -14,154 +16,74 @@
         <div class="table-responsive">
             <table id="zero_config" class="table table-bordered table-striped">
                 <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Publisher Name</th>
-                        <th>Currency</th>
-                        <th>Payment</th> 
-                    </tr>
-                </thead>
-                <tfoot>
                 <tr>
-<td style="font-weight:bold">Total</td>
-<td></td>
-<td></td>
-<td id='sum' style="font-weight:bold"></td>
+                    <th>Order ID</th>
+                    <th>Currency</th>
+                    <th>Payment</th>
                 </tr>
-        </tfoot>
+                </thead>
+                <tbody>
+                @foreach($data  as $report)
+                    <tr>
+                        <td>{{$report->order_id}}</td>
+                        <td>{{$report->currency_iso}}</td>
+                        <td>{{$report->price}}</td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td style="font-weight:bolder;  font-size: 21px;">Total</td>
+                    <td></td>
+                    <td id='sum' style="font-weight:bold;  font-size: 21px;">{{$sum}} {{$iso}}</td>
+                </tr>
+                </tbody>
             </table>
-        </div>   
-    </div>    
+        </div>
+    </div>
 </div>
 @endsection
+
 @section('scripts')
+    <script type="text/javascript">
 
-<script>
-$(document).ready(function(){
+        $(document).ready(function () {
+            var Table = $('#zero_config').DataTable({
 
+                paging: true,
+                autoWidth: false,
+                lengthChange: true,
+                dom: 'Bfrtip',
+                processing: true,
 
+                buttons: [
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':visible:not(.not)' // indexes of the columns that should be printed,
+                        }                      // Exclude indexes that you don't want to print.
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: ':visible:not(.not)'
+                        }
 
-fill_datatable();
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':visible:not(.not)'
+                        }
 
-function fill_datatable(to=''){
-   var Table=$('#zero_config').DataTable({
-        paging: true,
-        autoWidth: true,
-        lengthChange: true,
-        dom: 'Bfrtip',
-        processing: true,
-        serverSide: true,
-        ajax:{
-            url: "{{ route('reports1.detail') }}",
-            data:{name:to,}
-        },
-        columnDefs: [{
-                    targets: "_all",
-                    orderable: true
-                 }],
-                 "aoColumns": [
-              { mData: 'order_id' } ,
-              { mData: 'publisher_name' },
-              { mData: 'currency_iso' },
-              { mData: 'price' }
-
-            ],
-        drawCallback: function(){
-Table.columns(3, {
-page: 'current'
-}).every(function() {
-var sum = this
-.data()
-.reduce(function(a, b) {
-var x = parseFloat(a) || 0;
-var y = parseFloat(b) || 0;
-return x + y;
-}, 0);
-//console.log(sum); alert(sum);
-$(this.footer()).html(sum);
-var total=sum*document.getElementById('ss').value;
-document.getElementById('sum').innerHTML=total+document.getElementById('s').value;
-});
-},
-        buttons: [
-                
-                // 'csv', 'excel', 'pdf', 'print',
-             
-                {
-                    extend: 'pdf',           
-                    exportOptions: {
-                        columns: ':visible:not(.not)' // indexes of the columns that should be printed,
-                    }                      // Exclude indexes that you don't want to print.
-                },
-                {
-                    extend: 'csv',
-                    exportOptions: {
-                        columns: ':visible:not(.not)'
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':visible:not(.not)'
+                        }
                     }
+                ],
 
-                },
-                {
-                    extend: 'excel',
-                    exportOptions: {
-                        columns: ':visible:not(.not)'
-                    }
-
-                },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns: ':visible:not(.not)'
-                    }
-                }         
-            ],
-         columns: [
-                {
-                    data:'order_id',
-                    name:'OrderID'
-                },
-                {
-                    data:'publisher_name',
-                    name:'PublisherName'
-                },
-               
-                {
-                    data:'currency_iso',
-                    name:'Currency'
-                },
-                {
-                    data:'price',
-                    name:'Payment'
-                },
-               
-                
-            ]
-             
-   
-    });
-}
-
-$('#filter').click(function(){
-        var to = $('#to').val();
-        if(to != '')
-        {
-            $('#zero_config').DataTable().destroy();
-            fill_datatable(to);
-        }
-        else
-        {
-            alert("Please fill the field first");
-        }
-});
-$('#reset').click(function(){
-        $('#to').val('');
-        $('#zero_config').DataTable().destroy();
-        fill_datatable();
-    });
-
-   
-});
-
-</script>
-
-
-@stop
+            });
+        });
+    </script>
+@endsection

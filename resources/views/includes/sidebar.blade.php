@@ -11,7 +11,7 @@
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('users.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     </ul>
                 </li>
-               
+
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.publisher_page.publisher')  </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('publisher.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -55,7 +55,7 @@
                 </li>
                 @endif
                 @if(Session::get('users')->businesses['product_type']=='bookmarks')
-                
+
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.bookmark_page.bookmarks') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('bookmarks.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -141,9 +141,9 @@
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('city.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                 </ul>
             </li>
-           
-           
-          
+
+
+
                 <!-- <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item"><a href="{{ route('sitesetting.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
                     <li class="sidebar-item"><a href="{{ route('sitesetting.create') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
@@ -153,7 +153,7 @@
                <ul aria-expanded="false" class="collapse  first-level">
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('push_notifications.index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.create') </span></a></li>
                     <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('push_notifications.history') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> @lang('messages.sidebar.history') </span></a></li>
-                </ul> 
+                </ul>
             </li>
             @endif
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.order_page.order')</span></a>
@@ -168,10 +168,10 @@
                 @if(Session::get('users')->hasRole('admin'))
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('reports.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.reports_page.system_reports') </span></a>
                 </li>
-               
-               
+
+
             <!-- {{ (auth()->user()->hasAnyRole('Admin') ||  auth()->user()->hasAnyDirectPermission('book-edit','book-delete','book-create','book-list')) == true ? "" : "hidden"}} -->
-           
+
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">@lang('messages.static_page.staticpage') </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item" style="background-color: #786e0047;"><a href="{{ route('static_pages.index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> @lang('messages.sidebar.list') </span></a></li>
@@ -180,7 +180,7 @@
                   <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ route('sitesetting.index') }}" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu"> @lang('messages.site_setting_page.site_setting') </span></a></li>
                     @endif
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark"  href="{{ url('/logout') }}"aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">  @lang('messages.reports_page.logout')</span></a></li>
-       
+
 
             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>

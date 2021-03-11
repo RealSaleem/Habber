@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('content')    
-<h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1> 
+@section('content')
+<h1 class="page-title">@lang('messages.reports_page.sale_reports')</h1>
 <div id="sa" class="sa">
 <label for="from">From</label>
 <input type="date" id="from" name="from" />
@@ -20,33 +20,33 @@
                         <th>Order ID</th>
                         <th>Publisher Name</th>
                         <th>Currency</th>
-                        <th>Payment</th> 
-                        <th>Action</th>
-                        
+                        <th>Payment</th>
+                        <th style="width: 116px;">Action</th>
+
                     </tr>
                     </thead>
-        <tbody>
-        </tbody>
-                </thead>
+
+
                 <tfoot>
                 <tr>
-<td style="font-weight:bold">Total</td>
+<td style="font-weight:bold;  font-size: 21px;">Total</td>
 <td></td>
 <td ></td>
-<td id='sum' style="font-weight:bold"></td>
+<td id='sum' style="font-weight:bold; font-size: 21px; "></td>
+                    <td ></td>
                 </tr>
         </tfoot>
             </table>
-        </div>   
-    </div>    
+        </div>
+    </div>
 </div>
 @endsection
 @section('scripts')
 
 <script>
 $(document).ready(function(){
-  
-        
+
+
 
 
 
@@ -54,56 +54,19 @@ fill_datatable();
 
 function fill_datatable(to='',from=''){
    var Table=$('#zero_config').DataTable({
- 
+
         paging: true,
         autoWidth: true,
         lengthChange: true,
         dom: 'Bfrtip',
         processing: true,
         serverSide: true,
-      
-        ajax:{
-            url: "{{ route('reports.index') }}",
-            data:{to:to, from:from}
-        },
-        columnDefs: [{
-                    targets: "_all",
-                    orderable: true
-                 }],
-                 "aoColumns": [
-              { mData: 'order_id' } ,
-              { mData: 'publisher_name' },
-              { mData: 'currency_iso' },
-              { mData: 'price' },
-              {data: 'action', name: 'action', orderable: false, searchable: false},
 
 
-            ],
-        drawCallback: function(){
 
-Table.columns(3, {
-   
-page: 'current'
-}).every(function() {
-var sum = this
-.data()
-.reduce(function(a, b) {
-var x = parseFloat(a) || 0;
-var y = parseFloat(b) || 0;
-return x + y;
-}, 0);
-//console.log(sum); alert(sum);
-$(this.footer()).html(sum);
-var total=sum*document.getElementById('ss').value;
-document.getElementById('sum').innerHTML=total+document.getElementById('s').value;
-});
-},
         buttons: [
-                
-                // 'csv', 'excel', 'pdf', 'print',
-             
                 {
-                    extend: 'pdf',           
+                    extend: 'pdf',
                     exportOptions: {
                         columns: ':visible:not(.not)' // indexes of the columns that should be printed,
                     }                      // Exclude indexes that you don't want to print.
@@ -127,7 +90,7 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
                     exportOptions: {
                         columns: ':visible:not(.not)'
                     }
-                }         
+                }
             ],
          columns: [
                 {
@@ -146,12 +109,44 @@ document.getElementById('sum').innerHTML=total+document.getElementById('s').valu
                     data:'price',
                     name:'Payment'
                 },
-               
-               
-                
-            ]
-             
-   
+            ],
+       ajax:{
+           url: "{{ route('reports.index') }}",
+           data:{to:to, from:from}
+       },
+       columnDefs: [{
+           targets: "_all",
+           orderable: true
+       }],
+       "aoColumns": [
+           { mData: 'order_id' } ,
+           { mData: 'publisher_name' },
+           { mData: 'currency_iso' },
+           { mData: 'price' },
+           {data: 'action', name: 'action', orderable: false, searchable: false},
+
+
+       ],
+       drawCallback: function(){
+
+           Table.columns(3, {
+
+               page: 'current'
+           }).every(function() {
+               var sum = this
+                   .data()
+                   .reduce(function(a, b) {
+                       var x = parseFloat(a) || 0;
+                       var y = parseFloat(b) || 0;
+                       return x + y;
+                   }, 0);
+//console.log(sum); alert(sum);
+               $(this.footer()).html(sum);
+               var total=sum*document.getElementById('ss').value;
+               document.getElementById('sum').innerHTML=total+document.getElementById('s').value;
+           });
+       },
+
     });
 }
 
@@ -175,7 +170,7 @@ $('#reset').click(function(){
         fill_datatable();
     });
 
-   
+
 });
 
 </script>
